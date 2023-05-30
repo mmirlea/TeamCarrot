@@ -20,6 +20,8 @@ public class BoardController {
 	@GetMapping("/read")
 	public String read(Integer b_num, Integer page, Integer pageSize, Model m) {
 
+		System.out.println("test!!");
+
 //		try {
 //			BoardDTO boardDTO = service.read(b_num);
 //
