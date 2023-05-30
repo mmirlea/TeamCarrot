@@ -1,0 +1,213 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css?family=Jua:400');
+
+/*#region 전체 적용 속성*/ 
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    color: #333;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+img {
+    vertical-align: top;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+i {
+    color: #FF7E36;
+}
+
+
+/*#region 헤더시작*/
+.header {
+    background-color: white;
+    height: 140px;
+    border-bottom: 1px solid #999;
+    box-shadow: 0 3px 3px -3px #999;
+    position: sticky;
+    top: 0px;
+    z-index: 99;
+}
+
+.header .headerIn {
+    background-color: #fff;
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*#region hTop 매뉴와 관리*/
+
+.hTop {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.divLogo {
+    font-family: 'jua', serif;
+    margin-top: 20px;
+    width: 150px;
+    margin-right: 20px;
+}
+
+.divLogo a {
+    color: #FF7E36;
+    font-size: 28px;
+    font-weight: 600;
+    height: 40px;
+    display: flex;
+}
+
+.divLogo img {
+    width: 40px;
+}
+
+.divLogo p {
+    align-self: center;
+}
+
+.gnb {
+    margin-top: 20px;
+}
+
+.gnb ul {
+    display: flex;
+    width: 200px;
+    justify-content: space-between;
+    font-weight: 600;
+}
+
+.gnb li a {
+    font-size: 20px;
+}
+
+.gnb a:hover {
+    color: #777;
+}
+
+.gnb a:active {
+    color: #FF7E36;
+}
+
+.member {
+    width: 850px;
+}
+
+.member ul {
+    display: flex;
+    justify-content: space-between;
+    float: right;
+}
+
+.member li {
+    margin-left: 10px;
+}
+
+.member li a {
+    font-size: 13px;
+}
+
+/*#endregion hTop*/
+
+/*#region hBottom 정보검색과 위치정보*/
+
+.hBottom {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    display: flex;
+}
+
+.d {
+    width: 30%;
+}
+
+.searchLocal {
+    width: 40%;
+}
+
+.searchLocal .search {
+    width: 100%;
+    height: 28px;
+    justify-items: center;
+    background-color: white;
+    border: 2px solid #FF7E36;
+    margin: auto;
+    border-radius: 15px;
+    display: flex;
+}
+
+.search .txtSearch {
+    width: 90%;
+    border: 0px;
+    margin-left: 15px;
+    font-size: 16px;
+    background-color: transparent;
+}
+
+.search .btnSearch {
+    background-color: transparent;
+    border: 0px;
+    float: right;
+    margin-right: 5px;
+}
+
+.search i {
+    background-color: transparent;
+    margin-top: 2px;
+    border: 0px;
+    font-size: 24px;
+}
+
+.divChat {
+    width: 5%;
+}
+
+.divChat .btnChat {
+    background-color: transparent;
+    margin-left: 50%;
+    border: 0px;
+}
+
+.divChat i {
+    background-color: transparent;
+    margin-top: 2px;
+    border: 0px;
+
+    font-size: 24px;
+}
+
+.divSetLocal {
+    width: 30%;
+}
+
+.divSetLocal select {
+    width: 150px;
+    height: 30px;
+    border: 1px solid #FF7E36;
+    border-radius: 15px;
+    color: #333;
+    margin-right: 10px;
+}
+
+/*#endregion hBottom*/
+
+/*#endregion 헤더끝*/
+
+/*#endregion 전체 적용 속성 끝*/

@@ -1,0 +1,532 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css?family=Jua:400');
+
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+a{
+    color: #333;
+    text-decoration: none;
+}
+
+body{
+    font-size: 20px;
+    line-height: 25px;
+    color: #333;
+}
+
+img{
+    vertical-align: top;
+}
+
+.wrap{
+    width: 100%;
+    min-width: 1240px;
+}
+
+.container{
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.myProfile{
+    width: 1100px;
+    height: 200px;
+    margin: 20px 20px 0;
+    padding: 20px 0;
+    display: flex;
+    border: 5px solid #e2c3c3;
+    border-radius: 40px;
+    position: relative;
+    box-shadow: 0 0 5px #fcb4b4;
+}
+
+.profileLeft{
+    width: 200px;
+    padding: 0 40px;
+}
+
+.myProfileImg{
+    border-radius: 50%;
+    width: 140px;
+    margin: 10px 0 0 12px;
+}
+
+.nameTitle{
+    display: flex;
+    margin-top: 15px;
+    font-size: 23px;
+}
+
+.nicknameTag{
+    color: #bbb;
+    font-size: 20px;
+    margin-left: 5px;
+}
+
+.mpInfo{
+    font-size: 13px;
+    position: absolute;
+    top: 80px;
+    left: 230px;
+}
+
+.myState{
+    display: flex;
+    font-size: 18px;
+    margin-top: 140px;
+    margin-left: 280px;
+}
+
+.myState .state{
+    font-size: 13px;
+    color: #aaa;
+}
+
+.myState .re-dealing{
+    margin-right: 30px;
+}
+
+.mpMannerOndo{
+    position: absolute;
+    right: 40px;
+    top: 40px;
+}
+
+.mpOndoTitle{
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.mpMyOndo{
+    color: #326DA4;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 50px;
+    text-align: right;
+    margin-bottom: 5px;
+}
+
+.mpMyOndo img{
+    width: 50px;
+}
+.mpOndoImg{
+    width: 60px;
+}
+
+.mpOndoBar{
+    position: relative;
+}
+
+.mpOndoBar1{
+    background-color: #ddd;
+    width: 500px;
+    height: 10px;
+    border-radius: 10px;
+}
+
+.mpOndoBar2{
+    background-color: #176FBF;
+    width: 280px;
+    height: 10px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.ModifyProfileBtn{
+    width: 100px;
+    height: 40px;
+    border-radius: 10px;
+    position: absolute;
+    bottom: 22px;
+    left: 220px;
+    border: none;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.ModifyProfileBtn:hover{
+    background-color: #ff8544;
+    color: white;
+}
+
+.MyPageMenu{
+    display: flex;
+}
+
+.mpMenu{
+    width: 200px;
+    height: 500px;
+    margin: 40px 20px 20px;
+    /* border: 3px solid #bbb; */
+    border-radius: 40px;
+    padding: 20px 0;
+}
+
+.mpMenuList li{
+    padding: 5px 0px 5px 5px;
+    margin: 10px 0;
+    border-bottom: 1px solid #e0e0e0;
+    margin: 10px;
+    font-size: 17px;
+}
+
+.mpMenu li:last-child{
+    border-bottom: 0px;
+}
+
+.mpMenuList li:hover{
+    text-decoration: underline;
+}
+
+.mpMenuList .mpMenuCategory:hover{
+    text-decoration: none;
+}
+
+.mpMenuList .mpMenuCategory{
+    /* color: #FF7E36; */
+    font-weight: bold;
+    font-size: 21px;
+}
+
+.mpMenuScreen{
+    width: 860px;
+    margin: 70px 20px 20px;
+}
+
+h3{
+    text-align: center;
+    /* font-family: 'jua', serif; */
+    font-size: 27px;
+    margin-bottom: 30px;
+}
+.mpItemList{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 860px;
+    margin: 0 auto;
+}
+
+.mpItemList li{
+    width: 220px;
+    margin-bottom: 40px;
+}
+
+.mpItemImg{
+    width: 180x;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 20px;
+    margin-bottom: 16px;
+}
+.mpItemImg img{
+    width: 100%;
+    height: 100%;
+}
+.mpItemName{
+    font-size: 16px;
+    line-height: 20px;
+    margin-bottom: 9px;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}
+.mpItemPrice{
+    font-size: 17px;
+    line-height: 18px;
+    font-weight: bold;
+    margin-bottom: 9px;
+}
+.mpItemAddress{
+    font-size: 14px;
+    line-height: 18px;
+    margin-bottom: 6px;
+}
+.mpItemCountUp{
+    color: rgb(134,142,150);
+    font-size: 13px;
+    line-height: 16px;
+}
+
+.xi-heart{
+    color:#FF7E36;
+    margin-left: 90px;
+}
+
+.pagination{
+    text-align: center;
+}
+
+.saleSmallList button{
+    background-color: white;
+    border: none;
+    border-bottom: 2px solid #aaa;
+    width: 280px;
+    height: 40px;
+    margin-bottom: 20px;
+    font-size: 15px;
+    
+}
+
+.saleProduct li{
+    border-bottom: 3px solid #e0e0e0;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.saleProduct .product{
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.product img{
+    width: 130px;
+    margin-right: 30px;
+    border-radius: 20px;
+}
+
+.productInfo{
+    width: 700px;
+}
+.saleProduct .xi-ellipsis-v{
+    color: #bbb;
+    position: absolute;
+    top: 0px;
+    right: 10px;
+}
+.productName{
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.productData{
+    font-size: 17px;
+    color: rgb(134,142,150);
+    margin-bottom: 13px;
+}
+
+.productPrice{
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.productCountUp{
+    color: rgb(134,142,150);
+    font-size: 17px;
+    line-height: 16px;
+    text-align: right;
+    margin-right: 20px;
+}
+
+.productBtn{
+    border-top: 3px solid #e0e0e0;
+}
+
+.productBtn button{
+    width: 270px;
+    height: 40px;
+    background-color: white;
+    border: none;
+    font-size: 17px;
+}
+
+.productBtn .Btn2{
+    border-left: 3px solid #e0e0e0;
+    border-right: 3px solid #e0e0e0;
+    
+}
+
+.saleFinish li{
+    border-bottom: 3px solid #e0e0e0;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.saleFinish .xi-ellipsis-v{
+    color: #bbb;
+    position: absolute;
+    top: 0px;
+    right: 10px;
+}
+
+.saleFinish .product{
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.saleFinish .buyFin{
+    display: flex;
+}
+
+.saleFinish .deal {
+    margin-right: 10px;
+    background-color: #333;
+    color: #eee;
+    font-size: 15px;
+    padding: 2px 4px;
+    border-radius: 5px;
+}
+
+.saleFinish .sendingRev{
+    text-align: center;
+    border-top: 1px solid #e0e0e0;
+}
+
+.saleFinish .reviewBtn{
+    background-color: white;
+    border: none;
+    font-size: 17px;
+    padding: 10px 0;
+}
+
+.saleHide li{
+    border-bottom: 3px solid #e0e0e0;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.saleHide .xi-ellipsis-v{
+    color: #bbb;
+    position: absolute;
+    top: 0px;
+    right: 10px;
+}
+
+.saleHide .product{
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.saleHide .buyFin{
+    display: flex;
+}
+
+.saleHide .sendingRev{
+    text-align: center;
+    border-top: 1px solid #e0e0e0;
+}
+
+.saleHide .unhideBtn{
+    background-color: white;
+    border: none;
+    font-size: 17px;
+    padding: 10px 0;
+}
+
+.buyProduct li{
+    border-bottom: 3px solid #e0e0e0;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.buyProduct .xi-ellipsis-v{
+    color: #bbb;
+    position: absolute;
+    top: 0px;
+    right: 10px;
+}
+
+.buyProduct .product{
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.buyProduct .buyFin{
+    display: flex;
+}
+
+.buyProduct .deal {
+    margin-right: 10px;
+    background-color: #333;
+    color: #eee;
+    font-size: 15px;
+    padding: 2px 4px;
+    border-radius: 5px;
+}
+
+.buyProduct .sendingRev{
+    text-align: center;
+    border-top: 1px solid #e0e0e0;
+}
+
+.buyProduct .reviewBtn{
+    background-color: white;
+    border: none;
+    font-size: 17px;
+    padding: 10px 0;
+}
+
+.myPostList li{
+    border-bottom: 3px solid #e0e0e0;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.postCategory{
+    font-size: 13px;
+    background-color: #e0e0e0;
+    width: 60px;
+    text-align: center;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.postContent{
+    margin-bottom: 20px;
+    display: flex;
+}
+
+.postContent img{
+    width: 150px;
+    margin-left: 20px;
+    border-radius: 20px;
+}
+
+.postInfo{
+    display: flex;
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+.xi-thumbs-up{
+    color: #fc9e6c;
+    margin-left: 7px;
+}
+
+.myCommentList li{
+    border-bottom: 3px solid #e0e0e0;
+    margin-bottom: 20px;
+    font-size: 18px;
+    position: relative;
+}
+
+.myCommentList .xi-ellipsis-v{
+    color: #bbb;
+    position: absolute;
+    top: 0px;
+    right: 10px;
+}
+
+.commentContent{
+    margin-bottom: 10px;
+}
+
+.commentInfo{
+    font-size: 13px;
+    color: #aaa;
+    margin-bottom: 10px;
+}
+
+.xi-ellipsis-v:hover{
+    color: #333;
+}

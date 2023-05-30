@@ -1,0 +1,160 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css?family=Jua:400');
+
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+a{
+    color: #333;
+    text-decoration: none;
+}
+
+body{
+    font-size: 20px;
+    line-height: 25px;
+    color: #333;
+}
+
+img{
+    vertical-align: top;
+}
+
+input::-webkit-search-decoration,
+input::-webkit-search-cancel-button,
+input::-webkit-search-results-button,
+input::-webkit-search-results-decoration{
+    /* 검색창 x표시 삭제 */
+	display:none;
+}
+
+.wrap{
+    width: 100%;
+    min-width: 1240px;
+}
+.popularSearch{
+   text-align: center;
+   width: 1000px;
+   margin: 10px auto 20px auto;
+   font-size: 15px;
+   background-color: #faf9f9;
+   border-radius: 20px;
+   padding: 10px;
+}
+.popularSearch p{
+    font-size: 16px;
+    margin-bottom: 15px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+.popularList{
+    display: flex;
+    justify-content: space-around;
+}
+.popularList a:hover{
+    text-decoration: underline;
+}
+
+.swiper {
+    width: 100%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ }
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.swiper-pagination-bullet {
+    background-color: #777 !important;
+}
+.swiper-button-next:after, .swiper-button-prev:after {
+    color: #777;
+}
+.popularItem{
+    margin-bottom: 56px;
+    background-color: rgb(250, 250, 252);
+    padding: 60px 0;
+}
+.popularItem h1{
+    font-size: 40px;
+    line-height: 48px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 60px;
+}
+.pItemList{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 1100px;
+    margin: 0 auto;
+}
+.pItemList li{
+    width: 240px;
+    margin-bottom: 40px;
+}
+
+.pItemImg{
+    width: 200x;
+    height: 220px;
+    overflow: hidden;
+    border-radius: 20px;
+    margin-bottom: 16px;
+}
+.pItemImg img{
+    width: 100%;
+    height: 100%;
+}
+.pItemName{
+    font-size: 18px;
+    line-height: 20px;
+    margin-bottom: 9px;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}
+.pItemPrice{
+    font-size: 17px;
+    line-height: 18px;
+    font-weight: bold;
+    margin-bottom: 9px;
+}
+.pItemAddress{
+    font-size: 14px;
+    line-height: 18px;
+    margin-bottom: 6px;
+}
+.pItemCountUp{
+    color: rgb(134,142,150);
+    font-size: 13px;
+    line-height: 16px;
+}
+.seeMore{
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.qrCode{
+    width: 1200px;
+    height: 200px;
+    margin: 0 auto;
+}
