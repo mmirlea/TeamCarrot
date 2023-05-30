@@ -37,6 +37,7 @@ public class BoardController {
 
 	// 로그인 여부 확인
 	private boolean loginCheck(HttpServletRequest request) {
+		System.out.println("test22");
 		HttpSession session = request.getSession();
 		return session.getAttribute("id") != null;
 	}
