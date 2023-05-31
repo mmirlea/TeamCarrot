@@ -18,7 +18,7 @@ public class BoardDTO {
 	private String b_likeyEmail;
 	private Integer b_comm;
 	private Integer b_viewCnt;
-	
+		
 	public BoardDTO() {}
 
 	public BoardDTO(String b_cate, String b_emial, String b_title, String b_content) {

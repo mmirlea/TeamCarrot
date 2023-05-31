@@ -146,6 +146,10 @@ i {
     line-height: 20px;
     margin-bottom: 8px;
 }
+.productList .itemAddress>span{
+	margin-right: 6px;
+}
+
 .productList .itemCountUp{
     color: rgb(134,142,150);
     font-size: 16px;

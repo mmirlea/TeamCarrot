@@ -1,21 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
-<link rel="stylesheet" href="./resource/css/junggoStyle.css">
+<link href="<c:url value='/resources/css/junggoStyle.css'/>" rel="stylesheet" />
 </head>
 <body>
+<script>
+	let msg="${msg}"
+    if(msg=="LIST_ERR")  alert("게시물 목록을 가져오는데 실패했습니다. 다시 시도해 주세요.");
+</script>
+
 	<div class="wrap">
 	
 		<%@ include file ="./header.jsp" %>
 		
         <div class="container">
             <div class="mainBanner">
-                <a href="#"><img src="./resource/img/중고거래 배너.png" alt="동네 이웃과 안전한 중고거래..."></a>
+                <a href="#"><img src="../resources/img/중고거래 배너.png" alt="동네 이웃과 안전한 중고거래..."></a>
             </div><!--mainBanner-->
             <div class="category-wrap">
                 <ul>
@@ -76,214 +82,232 @@
             <div class="productList">
                 <h1>중고거래 매물</h1>
                 <ul>
-                    <li>
+                	<c:forEach var="productDTO" items="${list}">
+                		<li>
+                			<a href="junggoDetail.jsp">
+                            <div class="itemImg"><img src="../resources/img/전동드릴 공구 셋트1.jpg" alt="전동드릴 공구 셋트1"></div>
+                            <div class="itemName">${productDTO.p_title}</div>
+                            <div class="itemPrice">${productDTO.p_price}</div>
+                            <div class="itemAddress">
+                            	<span>${productDTO.userDTO.m_addr1}</span>
+                            	<span>${productDTO.userDTO.m_addr2}</span>
+                            </div>
+                            <div class="itemCountUp">
+                                <span class="itemAttention">관심 ${productDTO.p_likey}</span>
+                                &nbsp;•&nbsp;
+                                <span class="itemChat">댓글 ${productDTO.p_comm}</span>
+                            </div>
+                        </a>    
+                		</li>
+                	</c:forEach>
+                    <!-- <li>
                         <a href="junggoDetail.jsp">
-                            <div class="itemImg"><img src="./resource/img/전동드릴 공구 셋트1.jpg" alt="전동드릴 공구 셋트1"></div>
+                            <div class="itemImg"><img src="./resources/img/전동드릴 공구 셋트1.jpg" alt="전동드릴 공구 셋트1"></div>
                             <div class="itemName">전동드릴 공구 셋트</div>
                             <div class="itemPrice">10,000원</div>
                             <div class="itemAddress">서울 마포구 동교동</div>
                             <div class="itemCountUp">
                                 <span class="itemAttention">관심 25</span>
                                 &nbsp;•&nbsp;
-                                <span class="itemChat">채팅 65</span>
+                                <span class="itemChat">댓글 65</span>
                             </div>
                         </a>    
                     </li>
                     <li>
                         <a href="">
-                            <div class="itemImg"><img src="./resource/img/LG 43인치 UHDtv1.jpg" alt="LG 43인치 UHDtv1"></div>
+                            <div class="itemImg"><img src="./resources/img/LG 43인치 UHDtv1.jpg" alt="LG 43인치 UHDtv1"></div>
                             <div class="itemName">LG 43인치 UHDtv1 팝니다.</div>
                             <div class="itemPrice">250,000원</div>
                             <div class="itemAddress">경기도 안양시 만안구 안양동</div>
                             <div class="itemCountUp">
                                 <span class="itemAttention">관심 28</span>
                                 &nbsp;•&nbsp;
-                                <span class="itemChat">채팅 63</span>
+                                <span class="itemChat">댓글 63</span>
                         </div>
                         </a>
                     </li>
                     <li>
                         <a href="junggoDetail.jsp">
-                            <div class="itemImg"><img src="./resource/img/이사가느라 가전 팔아요1.jpg" alt="이사가느라 가전 팔아요1"></div>
+                            <div class="itemImg"><img src="./resources/img/이사가느라 가전 팔아요1.jpg" alt="이사가느라 가전 팔아요1"></div>
                             <div class="itemName">이사가느라 가전 팔아요~!골라가세요~!</div>
                             <div class="itemPrice">99원</div>
                             <div class="itemAddress">광주 북구 신용동</div>
                             <div class="itemCountUp">
                                 <span class="itemAttention">관심 26</span>
                                 &nbsp;•&nbsp;
-                                <span class="itemChat">채팅 27</span>
+                                <span class="itemChat">댓글 27</span>
                             </div>
                         </a>
                     </li>
                     <li>
                         <a href="#">
-                            <div class="itemImg"><img src="./resource/img/발뮤다 더 토스터1.jpg" alt="발뮤다 더 토스터1"></div>
+                            <div class="itemImg"><img src="./resources/img/발뮤다 더 토스터1.jpg" alt="발뮤다 더 토스터1"></div>
                             <div class="itemName">발뮤다 더 토스터,더 오븐레인지,더 팟 팝니다.</div>
                             <div class="itemPrice">100,000원</div>
                             <div class="itemAddress">경기도 성남시 분당구 이매동</div>
                             <div class="itemCountUp">
                                 <span class="itemAttention">관심 30</span>
                                 &nbsp;•&nbsp;
-                                <span class="itemChat">채팅 31</span>
+                                <span class="itemChat">댓글 31</span>
                             </div>
                         </a>
                     </li>
                     <li>
                         <a href="#">
-                            <div class="itemImg"><img src="./resource/img/전동드릴 공구 셋트1.jpg" alt="전동드릴 공구 셋트1"></div>
+                            <div class="itemImg"><img src="./resources/img/전동드릴 공구 셋트1.jpg" alt="전동드릴 공구 셋트1"></div>
                             <div class="itemName">전동드릴 공구 셋트</div>
                             <div class="itemPrice">10,000원</div>
                             <div class="itemAddress">서울 마포구 동교동</div>
                             <div class="itemCountUp">
                                 <span class="itemAttention">관심 25</span>
                                 &nbsp;•&nbsp;
-                                <span class="itemChat">채팅 65</span>
+                                <span class="itemChat">댓글 65</span>
                             </div>
                         </a>    
                     </li>
                     <li>
                         <a href="#">
-                            <div class="itemImg"><img src="./resource/img/LG 43인치 UHDtv1.jpg" alt="LG 43인치 UHDtv1"></div>
+                            <div class="itemImg"><img src="./resources/img/LG 43인치 UHDtv1.jpg" alt="LG 43인치 UHDtv1"></div>
                             <div class="itemName">LG 43인치 UHDtv1 팝니다.</div>
                             <div class="itemPrice">250,000원</div>
                             <div class="itemAddress">경기도 안양시 만안구 안양동</div>
                             <div class="itemCountUp">
                                 <span class="itemAttention">관심 28</span>
                                 &nbsp;•&nbsp;
-                                <span class="itemChat">채팅 63</span>
+                                <span class="itemChat">댓글 63</span>
                         </div>
                         </a>
                     </li>
                     <li>
                         <a href="#">
-                            <div class="itemImg"><img src="./resource/img/이사가느라 가전 팔아요1.jpg" alt="이사가느라 가전 팔아요1"></div>
+                            <div class="itemImg"><img src="./resources/img/이사가느라 가전 팔아요1.jpg" alt="이사가느라 가전 팔아요1"></div>
                             <div class="itemName">이사가느라 가전 팔아요~!골라가세요~!</div>
                             <div class="itemPrice">99원</div>
                             <div class="itemAddress">광주 북구 신용동</div>
                             <div class="itemCountUp">
                                 <span class="itemAttention">관심 26</span>
                                 &nbsp;•&nbsp;
-                                <span class="itemChat">채팅 27</span>
+                                <span class="itemChat">댓글 27</span>
                             </div>
                         </a>
                     </li>
                     <li>
                         <a href="#">
-                            <div class="itemImg"><img src="./resource/img/발뮤다 더 토스터1.jpg" alt="발뮤다 더 토스터1"></div>
+                            <div class="itemImg"><img src="./resources/img/발뮤다 더 토스터1.jpg" alt="발뮤다 더 토스터1"></div>
                             <div class="itemName">발뮤다 더 토스터,더 오븐레인지,더 팟 팝니다.</div>
                             <div class="itemPrice">100,000원</div>
                             <div class="itemAddress">경기도 성남시 분당구 이매동</div>
                             <div class="itemCountUp">
                                 <span class="itemAttention">관심 30</span>
                                 &nbsp;•&nbsp;
-                                <span class="itemChat">채팅 31</span>
+                                <span class="itemChat">댓글 31</span>
                             </div>
                         </a>
                     </li>
                     <li>
                         <a href="#">
-                            <div class="itemImg"><img src="./resource/img/전동드릴 공구 셋트1.jpg" alt="전동드릴 공구 셋트1"></div>
+                            <div class="itemImg"><img src="./resources/img/전동드릴 공구 셋트1.jpg" alt="전동드릴 공구 셋트1"></div>
                             <div class="itemName">전동드릴 공구 셋트</div>
                             <div class="itemPrice">10,000원</div>
                             <div class="itemAddress">서울 마포구 동교동</div>
                             <div class="itemCountUp">
                                 <span class="itemAttention">관심 25</span>
                                 &nbsp;•&nbsp;
-                                <span class="itemChat">채팅 65</span>
+                                <span class="itemChat">댓글 65</span>
                             </div>
                         </a>    
                     </li>
                     <li>
                         <a href="#">
-                            <div class="itemImg"><img src="./resource/img/LG 43인치 UHDtv1.jpg" alt="LG 43인치 UHDtv1"></div>
+                            <div class="itemImg"><img src="./resources/img/LG 43인치 UHDtv1.jpg" alt="LG 43인치 UHDtv1"></div>
                             <div class="itemName">LG 43인치 UHDtv1 팝니다.</div>
                             <div class="itemPrice">250,000원</div>
                             <div class="itemAddress">경기도 안양시 만안구 안양동</div>
                             <div class="itemCountUp">
                                 <span class="itemAttention">관심 28</span>
                                 &nbsp;•&nbsp;
-                                <span class="itemChat">채팅 63</span>
+                                <span class="itemChat">댓글 63</span>
                         </div>
                         </a>
                     </li>
                     <li>
                         <a href="#">
-                            <div class="itemImg"><img src="./resource/img/이사가느라 가전 팔아요1.jpg" alt="이사가느라 가전 팔아요1"></div>
+                            <div class="itemImg"><img src="./resources/img/이사가느라 가전 팔아요1.jpg" alt="이사가느라 가전 팔아요1"></div>
                             <div class="itemName">이사가느라 가전 팔아요~!골라가세요~!</div>
                             <div class="itemPrice">99원</div>
                             <div class="itemAddress">광주 북구 신용동</div>
                             <div class="itemCountUp">
                                 <span class="itemAttention">관심 26</span>
                                 &nbsp;•&nbsp;
-                                <span class="itemChat">채팅 27</span>
+                                <span class="itemChat">댓글 27</span>
                             </div>
                         </a>
                     </li>
                     <li>
                         <a href="#">
-                            <div class="itemImg"><img src="./resource/img/발뮤다 더 토스터1.jpg" alt="발뮤다 더 토스터1"></div>
+                            <div class="itemImg"><img src="./resources/img/발뮤다 더 토스터1.jpg" alt="발뮤다 더 토스터1"></div>
                             <div class="itemName">발뮤다 더 토스터,더 오븐레인지,더 팟 팝니다.</div>
                             <div class="itemPrice">100,000원</div>
                             <div class="itemAddress">경기도 성남시 분당구 이매동</div>
                             <div class="itemCountUp">
                                 <span class="itemAttention">관심 30</span>
                                 &nbsp;•&nbsp;
-                                <span class="itemChat">채팅 31</span>
+                                <span class="itemChat">댓글 31</span>
                             </div>
                         </a>
                     </li>
                     <li>
                         <a href="#">
-                            <div class="itemImg"><img src="./resource/img/전동드릴 공구 셋트1.jpg" alt="전동드릴 공구 셋트1"></div>
+                            <div class="itemImg"><img src="./resources/img/전동드릴 공구 셋트1.jpg" alt="전동드릴 공구 셋트1"></div>
                             <div class="itemName">전동드릴 공구 셋트</div>
                             <div class="itemPrice">10,000원</div>
                             <div class="itemAddress">서울 마포구 동교동</div>
                             <div class="itemCountUp">
                                 <span class="itemAttention">관심 25</span>
                                 &nbsp;•&nbsp;
-                                <span class="itemChat">채팅 65</span>
+                                <span class="itemChat">댓글 65</span>
                             </div>
                         </a>    
                     </li>
                     <li>
                         <a href="#">
-                            <div class="itemImg"><img src="./resource/img/LG 43인치 UHDtv1.jpg" alt="LG 43인치 UHDtv1"></div>
+                            <div class="itemImg"><img src="./resources/img/LG 43인치 UHDtv1.jpg" alt="LG 43인치 UHDtv1"></div>
                             <div class="itemName">LG 43인치 UHDtv1 팝니다.</div>
                             <div class="itemPrice">250,000원</div>
                             <div class="itemAddress">경기도 안양시 만안구 안양동</div>
                             <div class="itemCountUp">
                                 <span class="itemAttention">관심 28</span>
                                 &nbsp;•&nbsp;
-                                <span class="itemChat">채팅 63</span>
+                                <span class="itemChat">댓글 63</span>
                         </div>
                         </a>
                     </li>
                     <li>
                         <a href="#">
-                            <div class="itemImg"><img src="./resource/img/이사가느라 가전 팔아요1.jpg" alt="이사가느라 가전 팔아요1"></div>
+                            <div class="itemImg"><img src="./resources/img/이사가느라 가전 팔아요1.jpg" alt="이사가느라 가전 팔아요1"></div>
                             <div class="itemName">이사가느라 가전 팔아요~!골라가세요~!</div>
                             <div class="itemPrice">99원</div>
                             <div class="itemAddress">광주 북구 신용동</div>
                             <div class="itemCountUp">
                                 <span class="itemAttention">관심 26</span>
                                 &nbsp;•&nbsp;
-                                <span class="itemChat">채팅 27</span>
+                                <span class="itemChat">댓글 27</span>
                             </div>
                         </a>
                     </li>
                     <li>
                         <a href="#">
-                            <div class="itemImg"><img src="./resource/img/발뮤다 더 토스터1.jpg" alt="발뮤다 더 토스터1"></div>
+                            <div class="itemImg"><img src="./resources/img/발뮤다 더 토스터1.jpg" alt="발뮤다 더 토스터1"></div>
                             <div class="itemName">발뮤다 더 토스터,더 오븐레인지,더 팟 팝니다.</div>
                             <div class="itemPrice">100,000원</div>
                             <div class="itemAddress">경기도 성남시 분당구 이매동</div>
                             <div class="itemCountUp">
                                 <span class="itemAttention">관심 30</span>
                                 &nbsp;•&nbsp;
-                                <span class="itemChat">채팅 31</span>
+                                <span class="itemChat">댓글 31</span>
                             </div>
                         </a>
-                    </li>
+                    </li> -->
                 </ul>
             </div><!--productList-->
             <div class="paging">
