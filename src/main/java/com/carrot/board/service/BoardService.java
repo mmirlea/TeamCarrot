@@ -1,11 +1,10 @@
 package com.carrot.board.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.carrot.board.domain.BoardDTO;
-import org.springframework.stereotype.Service;
 
-@Service
 public interface BoardService {
 
 	int getCount() throws Exception;
@@ -23,4 +22,11 @@ public interface BoardService {
 	// 읽을 때 조회되도록 한번에 묶어서 사용
 	BoardDTO read(int bno) throws Exception;
 
+	List<BoardDTO> getPage(Map map) throws Exception;
+
+//	List<BoardDTO> getSearchSelectPage(SearchCondition sc) throws Exception;
+//
+//	int getSearchResultCnt(SearchCondition sc) throws Exception;
+
+//	int updateCommentsCnt(int cnt, Integer b_num) throws Exception;
 }

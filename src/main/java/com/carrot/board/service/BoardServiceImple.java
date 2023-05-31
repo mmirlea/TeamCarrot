@@ -1,12 +1,15 @@
 package com.carrot.board.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.carrot.board.dao.BoardDAO;
 import com.carrot.board.domain.BoardDTO;
 
+@Service
 public class BoardServiceImple implements BoardService {
 
 	@Autowired
@@ -51,15 +54,19 @@ public class BoardServiceImple implements BoardService {
 	}
 
 	// 페이징 처리
-	/*
-	 * public List<BoardDTO> getPage(Map map) throws Exception { return
-	 * boardDAO.selectPage(map); }
-	 * 
-	 * public List<BoardDTO> getSearchSelectPage(SearchCondition sc) throws
-	 * Exception { return boardDAO.searchSelectPage(sc); }
-	 * 
-	 * public int getSearchResultCnt(SearchCondition sc) throws Exception { return
-	 * boardDAO.searchResultCnt(sc); }
-	 */
+	@Override
+	public List<BoardDTO> getPage(Map map) throws Exception {
+		return boardDAO.selectPage(map);
+	}
+
+//	@Override
+//	public List<BoardDTO> getSearchSelectPage(SearchCondition sc) throws Exception {
+//		return boardDAO.searchSelectPage(sc);
+//	}
+//
+//	@Override
+//	public int getSearchResultCnt(SearchCondition sc) throws Exception {
+//		return boardDAO.searchResultCnt(sc);
+//	}
 
 }
