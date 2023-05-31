@@ -1,19 +1,17 @@
 package com.carrot.user.domain;
 
-import oracle.sql.BLOB;
-
 public class UserDTO {
 	private String m_email;
 	private String m_pw; 
 	private String m_num;
 	private String m_nicknm;
-	private BLOB m_proimg;
+	private String m_proimg;
 	private String m_addr1;
 	private String m_addr2;
 	
 	public UserDTO() {}
 
-	public UserDTO(String m_email, String m_pw, String m_num, String m_nicknm, BLOB m_proimg, String m_addr1,
+	public UserDTO(String m_email, String m_pw, String m_num, String m_nicknm, String m_proimg, String m_addr1,
 			String m_addr2) {
 		super();
 		this.m_email = m_email;
@@ -57,11 +55,11 @@ public class UserDTO {
 		this.m_nicknm = m_nicknm;
 	}
 
-	public BLOB getM_proimg() {
+	public String getM_proimg() {
 		return m_proimg;
 	}
 
-	public void setM_proimg(BLOB m_proimg) {
+	public void setM_proimg(String m_proimg) {
 		this.m_proimg = m_proimg;
 	}
 

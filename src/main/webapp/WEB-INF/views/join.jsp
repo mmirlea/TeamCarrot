@@ -33,7 +33,8 @@
                         <div class="profileImg">
                             <img src="./resources/img/memberImg.png" alt="프로필이미지">
                         </div>
-                        <button type="submit" class="uploadImgBtn" >사진 올리기</button>
+                        <!-- <button type="submit" class="uploadImgBtn" >사진 올리기</button> -->
+                        <div class="uploadImgBtn"> <label for="imgUpload">사진 올리기</label><input type="file" id="imgUpload"></div>
                     </td>
                 </tr>
                 <tr>
@@ -136,7 +137,7 @@
     					setMessage("이메일을 입력하세요.", $("#email"))
     				else if (data == 0){
     					$("#emailOverlap").attr("value","Y")
-    					setMessage("사용가능한 아이디입니다.", $("#pw"))
+    					setMessage("사용가능한 이메일입니다.", $("#email"))
     				}
     				else if (date == 1)
     					setMessage("중복된 이메일입니다.", $("#email"))

@@ -79,7 +79,7 @@ table{
     object-fit: cover;
 }
 .uploadImgBtn{
-    width: 126px;
+    width: 156px;
     height: 36px;
     font-size: 18px;
     font-weight: bold;
@@ -89,7 +89,9 @@ table{
     border-radius: 4px;
     cursor: pointer;
     margin-bottom: 16px;
-}
+} 
+
+
 .tdText{
     width: 140px;
     height: 80px;
