@@ -23,8 +23,9 @@ import com.carrot.board.service.BoardService;
 @RequestMapping("/board")
 public class BoardController {
 
-	@Autowired
-	BoardService service;
+	/*
+	 * @Autowired BoardService service;
+	 */
 
 	@GetMapping("/list")
 //	public String list(Integer page, Integer pageSize, Model m, HttpServletRequest request) {
@@ -33,24 +34,24 @@ public class BoardController {
 //		if (!loginCheck(request))
 //			return "redirect:/login/login?toURL=" + request.getRequestURL();
 
-		try {
-			int totalCnt = service.getCount();
-			PageHandler pageHandler = new PageHandler(totalCnt, sc);
-
-			List<BoardDTO> list = service.getSearchSelectPage(sc);
-
-			m.addAttribute("list", list);
-			m.addAttribute("ph", pageHandler);
-
-			Instant startOfToday = LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant();
-			m.addAttribute("startOfToday", startOfToday.toEpochMilli());
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			m.addAttribute("msg", "LIST_ERR");
-			m.addAttribute("totalCnt", 0);
-		}
-		
+//		try {
+//			int totalCnt = service.getCount();
+//			PageHandler pageHandler = new PageHandler(totalCnt, sc);
+//
+//			List<BoardDTO> list = service.getSearchSelectPage(sc);
+//
+//			m.addAttribute("list", list);
+//			m.addAttribute("ph", pageHandler);
+//
+//			Instant startOfToday = LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant();
+//			m.addAttribute("startOfToday", startOfToday.toEpochMilli());
+//
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			m.addAttribute("msg", "LIST_ERR");
+//			m.addAttribute("totalCnt", 0);
+//		}
+//		
 //		try {
 //			int totalCnt = service.getCount();
 //			
