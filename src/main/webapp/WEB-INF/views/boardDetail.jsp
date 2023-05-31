@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-<link href="./resource/css/boardDetailStyle.css" rel="stylesheet" />
+<link href="<c:url value='/resources/css/boardDetailStyle.css'/>" rel="stylesheet" />
 </head>
 <body>
 	 <div class="wrap">
@@ -14,7 +15,7 @@
         <div class="header">
             <div class="headerIn">
                 <div class="divBorad">
-                    <a class="aTitle" href="BoardMain.jsp">
+                    <a class="aTitle" href="<c:url value='/board/list'/>">
                         <button class="btnBoard">
                             <i class="fa-solid fa-circle-xmark"></i>
                         </button>

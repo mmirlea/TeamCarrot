@@ -61,7 +61,11 @@
 	</delete>
 
 	<!-- 관리자의 경우 삭제하도록 -->
-
+<!-- 	<delete id="deleteForAdmin" parameterType="int">
+		DELETE BOARD
+		 WHERE B_MENU = '2'
+		   AND B_NUM = #{b_num}
+	</delete> -->
 
 	<!-- 게시글 전체 삭제 -->
 	<delete id="deleteAll">
@@ -96,49 +100,49 @@
 		 WHERE RUNM BETWEEN ((NVL(#{page}, 0)-1) * #{pageSize} +1) AND (NVL(#{page}, 0) * #{pageSize})
 	</select>
 
-<!--	<sql id="searchCondition">-->
-<!--		<choose>-->
-<!--			<when test='option =="T"'>-->
-<!--				AND B_TITLE LIKE '%'||#{keyword}||'%'-->
-<!--			</when>-->
-<!--			<when test='option =="W"'>-->
-<!--				AND B_EMAIL LIKE '%'||#{keyword}||'%'-->
-<!--			</when>-->
-<!--			<otherwise>-->
-<!--				AND (B_TITLE LIKE '%'||#{keyword}||'%' OR B_CONTENT LIKE '%'||#{keyword}||'%')-->
-<!--			</otherwise>-->
-<!--		</choose>-->
-<!--	</sql>-->
+	<sql id="searchCondition">
+		<choose>
+			<when test='option =="T"'>
+				AND B_TITLE LIKE '%'||#{keyword}||'%'
+			</when>
+			<when test='option =="W"'>
+				AND B_EMAIL LIKE '%'||#{keyword}||'%'
+			</when>
+			<otherwise>
+				AND (B_TITLE LIKE '%'||#{keyword}||'%' OR B_CONTENT LIKE '%'||#{keyword}||'%')
+			</otherwise>
+		</choose>
+	</sql>
 
-<!--	&lt;!&ndash; 게시글 검색하기, 검색 후 페이징 처리 되어야 하기 때문에 &ndash;&gt;-->
-<!--	&lt;!&ndash; SearchCondition 어떤 패키지에 포함되어있는지 원래는 표기해야함 -> 등록하면 안해도됨 &ndash;&gt;-->
-<!--	<select id="searchSelectPage" parameterType="SearchCondition" resultType="BoardDTO">-->
-<!--		SELECT *-->
-<!--		  FROM (SELECT ROWNUM RUNM, A.*-->
-<!--				  FROM (SELECT B_NUM, B_CATE, B_EMAIL, B_TITLE, B_CONTENT, B_CRDATE, B_LIKEY, B_COMM-->
-<!--					      FROM BOARD-->
-<!--					     WHERE 1 = 1-->
-<!--					       AND B_MENU = '2'-->
-<!--					    <include refid="searchCondition"></include>-->
-<!--						ORDER BY REG_DATE DESC, BNO DESC) A)-->
-<!--		 WHERE RUNM BETWEEN ((NVL(#{page}, 0)-1) * #{pageSize} +1) AND (NVL(#{page}, 0) * #{pageSize})-->
-<!--	</select>-->
+	<!-- 게시글 검색하기, 검색 후 페이징 처리 되어야 하기 때문에 --> 
+	<!-- SearchCondition 어떤 패키지에 포함되어있는지 원래는 표기해야함 -> 등록하면 안해도됨  -->
+<!-- 	<select id="searchSelectPage" parameterType="SearchCondition" resultType="BoardDTO">
+		SELECT *
+		  FROM (SELECT ROWNUM RUNM, A.*
+				  FROM (SELECT B_NUM, B_CATE, B_EMAIL, B_TITLE, B_CONTENT, B_CRDATE, B_LIKEY, B_COMM
+					      FROM BOARD
+					     WHERE 1 = 1
+					       AND B_MENU = '2'
+					    <include refid="searchCondition"></include>
+						ORDER BY REG_DATE DESC, BNO DESC) A)
+		 WHERE RUNM BETWEEN ((NVL(#{page}, 0)-1) * #{pageSize} +1) AND (NVL(#{page}, 0) * #{pageSize})
+	</select> -->
 
-<!--	&lt;!&ndash; 검색했을 때 게시글 개수 &ndash;&gt;-->
-<!--	<select id="searchResultCnt" parameterType="SearchCondition" resultType="int">-->
-<!--		SELECT COUNT(*)-->
-<!--	      FROM BOARD-->
-<!--	     WHERE 1 = 1-->
-<!--	       AND B_MENU = '2'-->
-<!--	    <include refid="searchCondition"></include>-->
-<!--	</select>-->
+	<!-- 검색했을 때 게시글 개수 -->
+<!-- 	<select id="searchResultCnt" parameterType="SearchCondition" resultType="int">
+		SELECT COUNT(*)
+	      FROM BOARD
+	     WHERE 1 = 1
+	       AND B_MENU = '2'
+	    <include refid="searchCondition"></include>
+	</select> -->
 
-<!--	&lt;!&ndash; 댓글 추가 삭제 시 board의 comments_cnt의 값이 달라져야함 &ndash;&gt;-->
-<!--	<update id="updateCommentsCnt" parameterType="map">-->
-<!--		UPDATE BOARD-->
-<!--		   SET B_COMM = B_COMM + #{cnt}-->
-<!--		   WHERE B_MENU = '2'-->
-<!--		     AND B_NUM = #{b_num}-->
-<!--	</update>-->
+	<!-- 댓글 추가 삭제 시 board의 comments_cnt의 값이 달라져야함 -->
+<!-- 	<update id="updateCommentsCnt" parameterType="map">
+		UPDATE BOARD
+		   SET B_COMM = B_COMM + #{cnt}
+		   WHERE B_MENU = '2'
+		     AND B_NUM = #{b_num}
+	</update> -->
 
 </mapper>
