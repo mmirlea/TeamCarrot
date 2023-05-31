@@ -11,5 +11,6 @@
 	<!-- 별칭 -->
 	<typeAliases>
 			<typeAlias alias="BoardDTO" type="com.carrot.board.domain.BoardDTO" />
+			<typeAlias alias="SearchCondition" type="com.carrot.board.domain.SearchCondition" />
 	</typeAliases>
 </configuration>
