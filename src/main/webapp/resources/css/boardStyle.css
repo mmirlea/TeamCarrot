@@ -1,350 +1,303 @@
 @charset "UTF-8";
 
-/*#region 전체 적용 속성*/ 
-
+/*#region 전체 적용 속성*/
 * {
-    margin: 0;
-    padding: 0;
+	margin: 0;
+	padding: 0;
 }
 
 body {
-    font-family: 'Noto Sans KR', sans-serif;
-    color: #333;
+	font-family: 'Noto Sans KR', sans-serif;
+	color: #333;
 }
 
-ul,
-ol {
-    list-style: none;
+ul, ol {
+	list-style: none;
 }
 
 img {
-    vertical-align: top;
+	vertical-align: top;
 }
 
 a {
-    text-decoration: none;
-    color: black;
+	text-decoration: none;
+	color: black;
 }
 
 i {
-    color: #FF7E36;
+	color: #FF7E36;
 }
 
 /*#endregion 전체 적용 속성*/
 
 /* 디자인 적용 */
 .wrap {
-    width: 100%;
-    min-width: 1240px;
+	width: 100%;
+	min-width: 1240px;
 }
 
-/*#region divTab*/ 
-.divTab {
-    /* background-color: #dce6c0; */
-    float: right;
-    width: 35px;
-    height: 245px;
-    position: sticky;
-    top: 40%;
-    right: 0px;
-    z-index: 98;
-    box-shadow: 0px 0px 5px #fab692;
-    background-color: rgba(255,126,54,.1);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.divTabBtn{
-    width: 100%;
-    height: 35px;
-}
-
-.divTab a{
-    width: 100%;
-    height: 100%;
-}
-
-.divTab .divTabBtn i{
-    font-size: 28px;
-    margin: 1px;
-    margin-left: 2px;
-    color:rgba(255,126,54,.71);
-    /* border: solid 1px rgba(255,126,54,.18);
-    background-color: rgba(255,126,54,.1); */
-}
-/*#endregion divTab*/
-
-/*#region 본문시작*/ 
-
+/*#region 본문시작*/
 .container {
-    width: 1200px;
-    margin-top: 30px;
-    margin-left: auto;
-    margin-right: auto;
+	width: 1200px;
+	margin-top: 30px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 /* 배너이미지 */
 .mainBanner {
-    width: 100%;
-    height: 275px;
-    margin-bottom: 30px;
-    background-image: url(../img/동네소식.png);
+	width: 100%;
+	height: 275px;
+	margin-bottom: 30px;
+	background-image: url(../img/동네소식.png);
 }
 
 /* .mainBanner img {
     width: 100%;
 } */
 
-/*#region 게시글*/ 
+/*#region 게시글*/
 .board {
-    width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 30px;
+	width: 1200px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 30px;
 }
 
-/*#region boardMenu*/ 
+/*#region boardMenu*/
 .board .boardMenu {
-    width: 100%;
-    margin-bottom: 30px;
-
-    display: flex;
-    /* position: relative; */
+	width: 100%;
+	margin-bottom: 30px;
+	display: flex;
+	/* position: relative; */
 }
 
 .boardMenu h1 {
-    width: 1000px;
-    margin-left: 200px;
-    font-size: 50px;
-    line-height: 50px;
-    /* font-weight: 500px; */
-    text-align: center;
+	width: 1000px;
+	margin-left: 200px;
+	font-size: 50px;
+	line-height: 50px;
+	/* font-weight: 500px; */
+	text-align: center;
 }
 
-.boardMenu .divA{
-    width: 200px;
-    display: flex;
+.boardMenu .divA {
+	width: 200px;
+	display: flex;
 }
 
-.boardMenu .divSelect{
-    align-self: center;
-
+.boardMenu .divSelect {
+	align-self: center;
 }
 
 .boardMenu .boardCategory {
-    width: 150px;
-    height: 32px;
-    border: 1px solid #FF7E36;
-    border-radius: 15px;
-    color: #333;
-    margin-right: 10px;
+	width: 150px;
+	height: 32px;
+	border: 1px solid #FF7E36;
+	border-radius: 15px;
+	color: #333;
+	margin-right: 10px;
 }
 
 .boardMenu .divWrite {
-    align-self: center;
+	align-self: center;
 }
 
-.divWrite a{
-    display: inline-block;
+.divWrite a {
+	display: inline-block;
 }
 
 .boardMenu .btnWrite {
-    background-color: transparent;
-    width: 40px;
-    height: 32px;
-    border: none;
-    font-size: 32px;
-    line-height: 32px;
-    text-align: center;
+	background-color: transparent;
+	width: 40px;
+	height: 32px;
+	border: none;
+	font-size: 32px;
+	line-height: 32px;
+	text-align: center;
 }
 
 /*#endregion boardMenu*/
 
-
-/*#region boradList*/ 
+/*#region boradList*/
 .board .boradList {
-    width: 100%;
-
+	width: 100%;
 }
 
 .boradList ul {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
 }
 
 .boradList li {
-    width: 260px;
-    margin-bottom: 40px;
+	width: 260px;
+	margin-bottom: 40px;
 }
 
 .boradList a {
-    color: black;
+	color: black;
 }
 
 .boradList .areaThumb {
-    width: 260px;
-    height: 260px;
-    overflow: hidden;
-    /* border-radius: 20px; */
-    margin-bottom: 16px;
+	width: 260px;
+	height: 260px;
+	overflow: hidden;
+	/* border-radius: 20px; */
+	margin-bottom: 16px;
 }
 
-
 .areaThumb .pLine {
-    background-color: #666;
-    width: auto;
-    height: 10px;
-    border-radius: 5px;
+	background-color: #666;
+	width: auto;
+	height: 10px;
+	border-radius: 5px;
 }
 
 .boradList .areaThumb img {
-    width: 100%;
-    height: 100%;
-    border-radius: 20px;
+	width: 100%;
+	height: 100%;
+	border-radius: 20px;
 }
 
 .boradList .areaText {
-    width: 260px;
+	width: 260px;
 }
 
 .areaText i {
-    color: #333;
+	color: #333;
 }
 
 .areaText .category {
-    font-size: 16px;
-    line-height: 20px;
-    font-weight: bold;
-    margin-bottom: 8px;
-    color: #666;
+	font-size: 16px;
+	line-height: 20px;
+	font-weight: bold;
+	margin-bottom: 8px;
+	color: #666;
 }
 
 .areaText .titleEll {
-    width: 100%;
-    font-size: 20px;
-    line-height: 24px;
-    margin-bottom: 8px;
-    display: block;
-    /* display 속성이 있으면 strong 말줄임 적용 안됨 */
-    white-space: nowrap;
-    /* 자동 줄바꿈 방지 */
-    overflow: hidden;
-    /* 해당 영역을 벗어나는 텍스트 숨김 */
-    text-overflow: ellipsis;
-    /* 말줄임 적용 */
+	width: 100%;
+	font-size: 20px;
+	line-height: 24px;
+	margin-bottom: 8px;
+	display: block;
+	/* display 속성이 있으면 strong 말줄임 적용 안됨 */
+	white-space: nowrap;
+	/* 자동 줄바꿈 방지 */
+	overflow: hidden;
+	/* 해당 영역을 벗어나는 텍스트 숨김 */
+	text-overflow: ellipsis;
+	/* 말줄임 적용 */
 }
 
 .areaText .content {
-    font-size: 16px;
-    line-height: 20px;
-    margin-bottom: 8px;
-    color: #666;
-    overflow: hidden;
-    /* 해당 영역을 벗어나는 텍스트 숨김 */
-    text-overflow: ellipsis;
-    /* 말줄임 적용 */
-    word-break: break-word;
-    /* 두 줄이상 보이기 */
-    display: -webkit-box;
-    /* display 속성 값을 -webkit-box이나 -webkit-inline-box 으로 하고 -webkit-box-orient 속성 값을 vertical로 반드시 설정 */
-    -webkit-line-clamp: 2;
-    /* 원하는 라인 수 */
-    -webkit-box-orient: vertical
-        /*  */
+	font-size: 16px;
+	line-height: 20px;
+	margin-bottom: 8px;
+	color: #666;
+	overflow: hidden;
+	/* 해당 영역을 벗어나는 텍스트 숨김 */
+	text-overflow: ellipsis;
+	/* 말줄임 적용 */
+	word-break: break-word;
+	/* 두 줄이상 보이기 */
+	display: -webkit-box;
+	/* display 속성 값을 -webkit-box이나 -webkit-inline-box 으로 하고 -webkit-box-orient 속성 값을 vertical로 반드시 설정 */
+	-webkit-line-clamp: 2;
+	/* 원하는 라인 수 */
+	-webkit-box-orient: vertical /*  */
 }
 
 .areaText .textInfo {
-    color: #aaa;
-    font-size: 12px;
-    line-height: 14px;
+	color: #aaa;
+	font-size: 12px;
+	line-height: 14px;
+	display: flex;
+	/* position: relative; */
+}
 
-    display: flex;
-    /* position: relative; */
+.textInfo .divInfo {
+	display: flex;
+    margin-right: 5px;
 }
 
 .textInfo .Atten {
-    /* position: absolute; */
-    right: 0px;
-    display: flex;
+	/* position: absolute; */
+	right: 0px;
+	display: flex;
 }
 
 .textInfo .Atten i {
-    background-color: transparent;
-    color: #FF7E36;
-    font-size: 16px;
+	background-color: transparent;
+	color: #FF7E36;
+	font-size: 16px;
 }
 
 .container .boardCount {
-    text-align: center;
+	text-align: center;
 }
 /*#endregion boradList*/
 
 /*#endregion 게시글*/
 
-
-/*#region boardPage*/ 
-
+/*#region boardPage*/
 .boardPage {
-    width: 1200px;
+	width: 1200px;
 }
 
 .boardPage ul {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 36px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 36px;
 }
 
 .boardPage li {
-    text-align: center;
-    margin-left: 10px;
-    margin-right: 10px;
+	text-align: center;
+	margin-left: 10px;
+	margin-right: 10px;
 }
 
 .boardPage li a {
-    color: #333;
+	color: #333;
 }
 
 .boardPage .num a {
-    color: #FF7E36;
+	color: #FF7E36;
 }
 
-.boardPage .num p {
-    width: 48px;
-    font-size: 16px;
-    line-height: 16px;
-    border: 2px solid #FF7E36;
-    border-radius: 100%;
-    padding-top: 16px;
-    padding-bottom: 16px;
+.boardPage .num {
+	width: 48px;
+	font-size: 16px;
+	line-height: 16px;
+	border: 2px solid #FF7E36;
+	border-radius: 100%;
+	padding-top: 16px;
+	padding-bottom: 16px;
 }
 
 .boardPage .num a:hover {
-    color: #FFF;
+	color: #FFF;
 }
 
-.boardPage .num p:hover {
-    background-color: #FF7E36;
+.boardPage .num:hover {
+	background-color: #FF7E36;
 }
 
-.firstPage,
-.prevPage,
-.nextPage,
-.lastPage {
-    width: 120px;
-    background-color: #eee;
-    border-radius: 12px;
-    padding-top: 8px;
-    padding-bottom: 8px;
+.firstPage, .prevPage, .nextPage, .lastPage {
+	width: 120px;
+	background-color: #eee;
+	border-radius: 12px;
+	padding-top: 8px;
+	padding-bottom: 8px;
 }
 
 .boardPage hr {
-    background-color: #ccc;
-    height: 1px;
-    border: 0;
+	background-color: #ccc;
+	height: 1px;
+	border: 0;
 }
 /*#endregion boardPage*/
 
 /*#endregion 본문끝*/
-

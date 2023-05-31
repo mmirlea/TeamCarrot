@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.carrot.board.domain.BoardDTO;
+import com.carrot.board.domain.SearchCondition;
 
 public interface BoardDAO {
 
@@ -25,9 +26,9 @@ public interface BoardDAO {
 
 	List<BoardDTO> selectPage(Map map) throws Exception;
 
-//	List<BoardDTO> searchSelectPage(SearchCondition sc) throws Exception;
-//
-//	int searchResultCnt(SearchCondition sc) throws Exception;
+	List<BoardDTO> searchSelectPage(SearchCondition sc) throws Exception;
+
+	int searchResultCnt(SearchCondition sc) throws Exception;
 
 //	int updateCommentsCnt(int cnt, Integer b_num) throws Exception;
 }

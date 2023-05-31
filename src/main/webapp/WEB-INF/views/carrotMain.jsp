@@ -17,7 +17,7 @@
  <div class="wrap">
  
       <%@ include file ="./header.jsp" %>
-      
+      <%@ include file ="./tabRigth.jsp" %>
         <div class="container">
             <div class="popularSearch">
                 <p><a href="">중고거래 인기검색어</a></p>
