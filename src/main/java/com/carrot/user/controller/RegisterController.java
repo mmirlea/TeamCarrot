@@ -23,6 +23,7 @@ public class RegisterController {
 	}
 	
 	//회원가입처리
+	@PostMapping("/register/save")
 	public String save(UserDTO dto, Model m) throws Exception{
 		//유효성 검사
 		if(!isValid(dto)) {
@@ -44,7 +45,7 @@ public class RegisterController {
 		m.addAttribute("msg", "회원가입이 완료되었습니다.");
 		m.addAttribute("url", "/carrot");
 		
-		return "alertPring";
+		return "alertPrint";
 	}
 	
 	//이메일 중복
