@@ -9,6 +9,8 @@
 <link href="<c:url value='/resources/css/headerStyle.css'/>" rel="stylesheet" />
 </head>
 <body>
+<c:set var="loginOutLink" value="${sessionScope.id==null ? '/login/login' : '/login/logout'}" />
+<c:set var="loginOut" value="${sessionScope.id==null ? '로그인/회원가입' : '로그아웃'}" />
 	 <div class="header">
             <div class="headerIn ">
                 <div class="hTop">
@@ -26,7 +28,7 @@
                     </div>
                     <div class="member">
                         <ul>
-                            <li><a href="Login.jsp" class="meMenu">로그인/회원가입</a></li>
+                            <li><a href="<c:url value='${loginOutLink}'/>" class="meMenu">${loginOut}</a></li>
                             <li><a href="MyPage.jsp" class="meMenu">마이페이지</a></li>
                         </ul>
                     </div>

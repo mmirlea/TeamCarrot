@@ -78,6 +78,7 @@ table{
     width: 100%;
     object-fit: cover;
 }
+
 .uploadImgBtn{
     width: 156px;
     height: 36px;
@@ -89,8 +90,13 @@ table{
     border-radius: 4px;
     cursor: pointer;
     margin-bottom: 16px;
+    line-height: 35px;
+    margin-left: 172px;
 } 
 
+#imgUpload{
+	display: none;
+}
 
 .tdText{
     width: 140px;
@@ -129,6 +135,7 @@ table{
     background-color: #fff;
     cursor: pointer;
     margin-top: 36px;
+    margin-bottom: 100px;
 }
 .warning{
     text-align: left;
