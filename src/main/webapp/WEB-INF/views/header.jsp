@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +14,7 @@
             <div class="headerIn ">
                 <div class="hTop">
                     <div class="divLogo">
-                        <a href="CarrotMain.jsp">
+                        <a href="<c:url value='/'/>">
                             <img src="./resources/img/DaangnMarket_logo.png" lt="당근마켓로고"/>
                             <p>당근마켓</p>
                         </a>
@@ -21,7 +22,7 @@
                     <div class="gnb">
                         <ul>
                             <li><a href="JunggoMain.jsp" class="gnbMenu">중고거래</a></li>
-                            <li><a href="BoardMain.jsp" class="gnbMenu">동네소식</a></li>
+                            <li><a href="<c:url value='/board/list'/>" class="gnbMenu">동네소식</a></li>
                         </ul>
                     </div>
                     <div class="member">

@@ -38,7 +38,7 @@
                         </div>
 
                         <div class="divWrite">
-                            <a href="BoardDetail.jsp">
+                            <a href="<c:url value='/board/write'/>">
                                 <button class="btnWrite">
                                     <i class="fas fa-circle-plus"></i>
                                 </button>
@@ -51,7 +51,7 @@
                     <ul>
                         <!-- 첫째줄 -->
                         <li class="item">
-                            <a href="">
+                            <a href="<c:url value='/board/read'/>">
                                 <div class="areaThumb">
                                     <!-- <i class="fa-thin fa-rectangle-xmark"></i> -->
                                     <!-- <p class="pLine"></p> -->
