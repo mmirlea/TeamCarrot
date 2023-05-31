@@ -137,5 +137,4 @@ public class PageHandler {
 		}
 		System.out.println(showNext ? "${next}" : "");
 	}
-
 }
