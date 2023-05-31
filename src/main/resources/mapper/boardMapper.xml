@@ -61,11 +61,7 @@
 	</delete>
 
 	<!-- 관리자의 경우 삭제하도록 -->
-	<delete id="deleteForAdmin" parameterType="int">
-		DELETE BOARD
-		 WHERE B_MENU = '2'
-		   AND B_NUM = #{b_num}
-	</delete>
+
 
 	<!-- 게시글 전체 삭제 -->
 	<delete id="deleteAll">

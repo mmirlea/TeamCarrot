@@ -14,8 +14,8 @@ import com.carrot.board.service.BoardService;
 @Controller
 public class BoardController {
 
-	@Autowired
-	BoardService service;
+//	@Autowired
+//	BoardService service;
 
 	@GetMapping("/read")
 	public String read(Integer b_num, Integer page, Integer pageSize, Model m) {
