@@ -23,9 +23,8 @@ import com.carrot.board.service.BoardService;
 @RequestMapping("/board")
 public class BoardController {
 
-	/*
-	 * @Autowired BoardService service;
-	 */
+@Autowired
+BoardService service;
 
 	@GetMapping("/list")
 //	public String list(Integer page, Integer pageSize, Model m, HttpServletRequest request) {

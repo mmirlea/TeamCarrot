@@ -10,10 +10,14 @@ public class UserDTO {
 	private String m_addr2;
 	
 	public UserDTO() {}
+	
+	public UserDTO(String m_email, String m_pw) {
+		this.m_email = m_email;
+		this.m_pw = m_pw;
+	}
 
 	public UserDTO(String m_email, String m_pw, String m_num, String m_nicknm, String m_proimg, String m_addr1,
 			String m_addr2) {
-		super();
 		this.m_email = m_email;
 		this.m_pw = m_pw;
 		this.m_num = m_num;
@@ -145,7 +149,4 @@ public class UserDTO {
 			return false;
 		return true;
 	}
-	
-	
-	
 }
