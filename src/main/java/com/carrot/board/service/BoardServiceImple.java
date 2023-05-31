@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.carrot.board.dao.BoardDAO;
 import com.carrot.board.domain.BoardDTO;
+import com.carrot.board.domain.SearchCondition;
 
 @Service
 public class BoardServiceImple implements BoardService {
@@ -59,14 +60,14 @@ public class BoardServiceImple implements BoardService {
 		return boardDAO.selectPage(map);
 	}
 
-//	@Override
-//	public List<BoardDTO> getSearchSelectPage(SearchCondition sc) throws Exception {
-//		return boardDAO.searchSelectPage(sc);
-//	}
-//
-//	@Override
-//	public int getSearchResultCnt(SearchCondition sc) throws Exception {
-//		return boardDAO.searchResultCnt(sc);
-//	}
+	@Override
+	public List<BoardDTO> getSearchSelectPage(SearchCondition sc) throws Exception {
+		return boardDAO.searchSelectPage(sc);
+	}
+
+	@Override
+	public int getSearchResultCnt(SearchCondition sc) throws Exception {
+		return boardDAO.searchResultCnt(sc);
+	}
 
 }

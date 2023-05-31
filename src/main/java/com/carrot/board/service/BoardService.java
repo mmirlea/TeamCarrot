@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.carrot.board.domain.BoardDTO;
+import com.carrot.board.domain.SearchCondition;
 
 public interface BoardService {
 
@@ -24,9 +25,9 @@ public interface BoardService {
 
 	List<BoardDTO> getPage(Map map) throws Exception;
 
-//	List<BoardDTO> getSearchSelectPage(SearchCondition sc) throws Exception;
-//
-//	int getSearchResultCnt(SearchCondition sc) throws Exception;
+	List<BoardDTO> getSearchSelectPage(SearchCondition sc) throws Exception;
+
+	int getSearchResultCnt(SearchCondition sc) throws Exception;
 
 //	int updateCommentsCnt(int cnt, Integer b_num) throws Exception;
 }
