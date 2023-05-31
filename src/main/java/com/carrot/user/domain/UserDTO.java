@@ -1,108 +1,101 @@
 package com.carrot.user.domain;
 
-import oracle.sql.BLOB;
-
 public class UserDTO {
-	private String mEmail;
-	private String mPw; 
-	private String mNum;
-	private String mNicknm;
-	private BLOB mProimg;
-	private Number mOndo;
-	private String mAddr1;
-	private String mAddr2;
+	private String m_email;
+	private String m_pw; 
+	private String m_num;
+	private String m_nicknm;
+	private String m_proimg;
+	private String m_addr1;
+	private String m_addr2;
 	
 	public UserDTO() {}
 
-	public UserDTO(String mEmail, String mPw, String mNum, String mNicknm, BLOB mProimg, Number mOndo, String mAddr1,
-			String mAddr2) {
+	public UserDTO(String m_email, String m_pw, String m_num, String m_nicknm, String m_proimg, String m_addr1,
+			String m_addr2) {
 		super();
-		this.mEmail = mEmail;
-		this.mPw = mPw;
-		this.mNum = mNum;
-		this.mNicknm = mNicknm;
-		this.mProimg = mProimg;
-		this.mOndo = mOndo;
-		this.mAddr1 = mAddr1;
-		this.mAddr2 = mAddr2;
+		this.m_email = m_email;
+		this.m_pw = m_pw;
+		this.m_num = m_num;
+		this.m_nicknm = m_nicknm;
+		this.m_proimg = m_proimg;
+		this.m_addr1 = m_addr1;
+		this.m_addr2 = m_addr2;
 	}
 
-	public String getmEmail() {
-		return mEmail;
+	public String getM_email() {
+		return m_email;
 	}
 
-	public void setmEmail(String mEmail) {
-		this.mEmail = mEmail;
+	public void setM_email(String m_email) {
+		this.m_email = m_email;
 	}
 
-	public String getmPw() {
-		return mPw;
+	public String getM_pw() {
+		return m_pw;
 	}
 
-	public void setmPw(String mPw) {
-		this.mPw = mPw;
+	public void setM_pw(String m_pw) {
+		this.m_pw = m_pw;
 	}
 
-	public String getmNum() {
-		return mNum;
+	public String getM_num() {
+		return m_num;
 	}
 
-	public void setmNum(String mNum) {
-		this.mNum = mNum;
+	public void setM_num(String m_num) {
+		this.m_num = m_num;
 	}
 
-	public String getmNicknm() {
-		return mNicknm;
+	public String getM_nicknm() {
+		return m_nicknm;
 	}
 
-	public void setmNicknm(String mNicknm) {
-		this.mNicknm = mNicknm;
+	public void setM_nicknm(String m_nicknm) {
+		this.m_nicknm = m_nicknm;
 	}
 
-	public BLOB getmProimg() {
-		return mProimg;
+	public String getM_proimg() {
+		return m_proimg;
 	}
 
-	public void setmProimg(BLOB mProimg) {
-		this.mProimg = mProimg;
+	public void setM_proimg(String m_proimg) {
+		this.m_proimg = m_proimg;
 	}
 
-	public Number getmOndo() {
-		return mOndo;
+	public String getM_addr1() {
+		return m_addr1;
 	}
 
-	public void setmOndo(Number mOndo) {
-		this.mOndo = mOndo;
+	public void setM_addr1(String m_addr1) {
+		this.m_addr1 = m_addr1;
 	}
 
-	public String getmAddr1() {
-		return mAddr1;
+	public String getM_addr2() {
+		return m_addr2;
 	}
 
-	public void setmAddr1(String mAddr1) {
-		this.mAddr1 = mAddr1;
+	public void setM_addr2(String m_addr2) {
+		this.m_addr2 = m_addr2;
 	}
 
-	public String getmAddr2() {
-		return mAddr2;
-	}
-
-	public void setmAddr2(String mAddr2) {
-		this.mAddr2 = mAddr2;
+	@Override
+	public String toString() {
+		return "UserDTO [m_email=" + m_email + ", m_pw=" + m_pw + ", m_num=" + m_num + ", m_nicknm=" + m_nicknm
+				+ ", m_proimg=" + m_proimg + ", m_addr1=" + m_addr1 + ", m_addr2=" + m_addr2 + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((mAddr1 == null) ? 0 : mAddr1.hashCode());
-		result = prime * result + ((mAddr2 == null) ? 0 : mAddr2.hashCode());
-		result = prime * result + ((mEmail == null) ? 0 : mEmail.hashCode());
-		result = prime * result + ((mNicknm == null) ? 0 : mNicknm.hashCode());
-		result = prime * result + ((mNum == null) ? 0 : mNum.hashCode());
-		result = prime * result + ((mOndo == null) ? 0 : mOndo.hashCode());
-		result = prime * result + ((mProimg == null) ? 0 : mProimg.hashCode());
-		result = prime * result + ((mPw == null) ? 0 : mPw.hashCode());
+		result = prime * result + ((m_addr1 == null) ? 0 : m_addr1.hashCode());
+		result = prime * result + ((m_addr2 == null) ? 0 : m_addr2.hashCode());
+		result = prime * result + ((m_email == null) ? 0 : m_email.hashCode());
+		result = prime * result + ((m_nicknm == null) ? 0 : m_nicknm.hashCode());
+		result = prime * result + ((m_num == null) ? 0 : m_num.hashCode());
+		result = prime * result + ((m_proimg == null) ? 0 : m_proimg.hashCode());
+		result = prime * result + ((m_pw == null) ? 0 : m_pw.hashCode());
 		return result;
 	}
 
@@ -115,46 +108,44 @@ public class UserDTO {
 		if (getClass() != obj.getClass())
 			return false;
 		UserDTO other = (UserDTO) obj;
-		if (mAddr1 == null) {
-			if (other.mAddr1 != null)
+		if (m_addr1 == null) {
+			if (other.m_addr1 != null)
 				return false;
-		} else if (!mAddr1.equals(other.mAddr1))
+		} else if (!m_addr1.equals(other.m_addr1))
 			return false;
-		if (mAddr2 == null) {
-			if (other.mAddr2 != null)
+		if (m_addr2 == null) {
+			if (other.m_addr2 != null)
 				return false;
-		} else if (!mAddr2.equals(other.mAddr2))
+		} else if (!m_addr2.equals(other.m_addr2))
 			return false;
-		if (mEmail == null) {
-			if (other.mEmail != null)
+		if (m_email == null) {
+			if (other.m_email != null)
 				return false;
-		} else if (!mEmail.equals(other.mEmail))
+		} else if (!m_email.equals(other.m_email))
 			return false;
-		if (mNicknm == null) {
-			if (other.mNicknm != null)
+		if (m_nicknm == null) {
+			if (other.m_nicknm != null)
 				return false;
-		} else if (!mNicknm.equals(other.mNicknm))
+		} else if (!m_nicknm.equals(other.m_nicknm))
 			return false;
-		if (mNum == null) {
-			if (other.mNum != null)
+		if (m_num == null) {
+			if (other.m_num != null)
 				return false;
-		} else if (!mNum.equals(other.mNum))
+		} else if (!m_num.equals(other.m_num))
 			return false;
-		if (mOndo == null) {
-			if (other.mOndo != null)
+		if (m_proimg == null) {
+			if (other.m_proimg != null)
 				return false;
-		} else if (!mOndo.equals(other.mOndo))
+		} else if (!m_proimg.equals(other.m_proimg))
 			return false;
-		if (mProimg == null) {
-			if (other.mProimg != null)
+		if (m_pw == null) {
+			if (other.m_pw != null)
 				return false;
-		} else if (!mProimg.equals(other.mProimg))
-			return false;
-		if (mPw == null) {
-			if (other.mPw != null)
-				return false;
-		} else if (!mPw.equals(other.mPw))
+		} else if (!m_pw.equals(other.m_pw))
 			return false;
 		return true;
 	}
+	
+	
+	
 }
