@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.carrot.board.domain.BoardDTO;
+import com.carrot.board.domain.SearchCondition;
 
 @Repository
 public class BoardDAOImpl implements BoardDAO {
@@ -66,16 +67,22 @@ public class BoardDAOImpl implements BoardDAO {
 		return session.selectList(namespace + "selectPage", map);
 	}
 
-	/*
-	 * public List<BoardDTO> searchSelectPage(SearchCondition sc) throws Exception {
-	 * return session.selectList(namespace + "searchSelectPage", sc); }
-	 * 
-	 * public int searchResultCnt(SearchCondition sc) throws Exception { return
-	 * session.selectOne(namespace + "searchResultCnt", sc); }
-	 * 
-	 * public int updateCommentsCnt(int cnt, Integer b_num) throws Exception { Map
-	 * map = new HashMap(); map.put("cnt", cnt); map.put("b_num", b_num); return
-	 * session.update(namespace + "updateCommentsCnt", map); }
-	 */
+	@Override
+	public List<BoardDTO> searchSelectPage(SearchCondition sc) throws Exception {
+		return session.selectList(namespace + "searchSelectPage", sc);
+	}
+
+	@Override
+	public int searchResultCnt(SearchCondition sc) throws Exception {
+		return session.selectOne(namespace + "searchResultCnt", sc);
+	}
+
+//	@Override
+//	public int updateCommentsCnt(int cnt, Integer b_num) throws Exception {
+//		Map map = new HashMap();
+//		map.put("cnt", cnt);
+//		map.put("b_num", b_num);
+//		return session.update(namespace + "updateCommentsCnt", map);
+//	}
 
 }

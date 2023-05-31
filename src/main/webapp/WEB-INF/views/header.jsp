@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,24 +10,26 @@
 <link href="<c:url value='/resources/css/headerStyle.css'/>" rel="stylesheet" />
 </head>
 <body>
+<c:set var="loginOutLink" value="${sessionScope.id==null ? '/login/login' : '/login/logout'}" />
+<c:set var="loginOut" value="${sessionScope.id==null ? '로그인/회원가입' : '로그아웃'}" />
 	 <div class="header">
             <div class="headerIn ">
                 <div class="hTop">
                     <div class="divLogo">
-                        <a href="CarrotMain.jsp">
-                            <img src="./resources/img/DaangnMarket_logo.png" lt="당근마켓로고"/>
+                            <a href="<c:url value='/'/>">
+                            <img src="../resources/img/DaangnMarket_logo.png" alt="당근마켓로고"/>
                             <p>당근마켓</p>
                         </a>
                     </div>
                     <div class="gnb">
                         <ul>
                             <li><a href="JunggoMain.jsp" class="gnbMenu">중고거래</a></li>
-                            <li><a href="BoardMain.jsp" class="gnbMenu">동네소식</a></li>
+                            <li><a href="<c:url value='/board/list'/>" class="gnbMenu">동네소식</a></li>
                         </ul>
                     </div>
                     <div class="member">
                         <ul>
-                            <li><a href="Login.jsp" class="meMenu">로그인/회원가입</a></li>
+                            <li><a href="<c:url value='${loginOutLink}'/>" class="meMenu">${loginOut}</a></li>
                             <li><a href="MyPage.jsp" class="meMenu">마이페이지</a></li>
                         </ul>
                     </div>
