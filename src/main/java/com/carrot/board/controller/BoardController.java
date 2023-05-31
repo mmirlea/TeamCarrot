@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.carrot.board.domain.BoardDTO;
 import com.carrot.board.service.BoardService;
 
 @Controller
