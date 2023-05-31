@@ -10,7 +10,7 @@ public class UserDTO {
 	private String m_addr2;
 	
 	public UserDTO() {}
-	
+
 	public UserDTO(String m_email, String m_pw) {
 		this.m_email = m_email;
 		this.m_pw = m_pw;
