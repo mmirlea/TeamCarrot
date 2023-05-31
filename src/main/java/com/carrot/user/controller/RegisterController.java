@@ -43,7 +43,7 @@ public class RegisterController {
 		service.register(dto);
 		
 		m.addAttribute("msg", "회원가입이 완료되었습니다.");
-		m.addAttribute("url", "/carrot");
+		m.addAttribute("url", "/carrot/login/login");
 		
 		return "alertPrint";
 	}
