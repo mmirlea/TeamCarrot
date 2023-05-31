@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +13,7 @@
 <body>
 	<div class="wrap">
 		<%@ include file ="./header.jsp" %>
+		<%@ include file ="./tabRigth.jsp" %>
 		<div class="container">
 			<div class="mainBanner">
                 <!-- <a href="#"><img src="./resource/img/동네소식.png" alt="게시판"></a> -->
@@ -50,75 +52,96 @@
                 <div class="boradList">
                     <ul>
                         <!-- 첫째줄 -->
-                        <li class="item">
-                            <a href="<c:url value='/board/read'/>">
-                                <div class="areaThumb">
-                                    <!-- <i class="fa-thin fa-rectangle-xmark"></i> -->
-                                    <!-- <p class="pLine"></p> -->
-                                    <img src="./resource/img/notice.png" alt="" class="thumb">
-                                </div> <!--.areaThumb, 리스트 이미지-->
-
-                                <div class="areaText">
-                                    <!-- <i class="fa-brands fa-horizontal-rule"></i> 이미지 없으면 선 -->
-                                    <strong class="category">생활정보</strong> <!-- 카테고리 -->
-                                    <br>
-                                    <strong class="titleEll">쇼파옮기기..</strong> <!-- 제목 -->
-                                    <p class="content">쇼파하나를 구매하려는데 쇼파하나만 용달하려면 얼마쯤 들까요?</p> <!-- 본문내용 -->
-                                    <div class="textInfo">
-                                        <div class="divInfo">
-                                            <p class="local">삼산동</p> <!-- 위치 -->
-                                            &nbsp;•&nbsp;
-                                            <p class="time">23분전</p> <!-- 시간 -->
-                                            &nbsp;•&nbsp;
-                                            <p class="look">조회20</p> <!-- 조회 -->
-                                        </div>
-                                        <div class="Atten">
-                                            <p class="heart">
-                                                <!-- <i class="far fa-heart"></i> -->
-                                                <i class="fas fa-heart"></i>
-                                                &nbsp; 1
-                                            </p> <!-- 관심 -->
-                                            &nbsp;&nbsp;&nbsp;
-                                            <p class="chat">
-                                                <!-- <i class="far fa-comment"></i> -->
-                                                <i class="fas fa-comment"></i>
-                                                &nbsp; 1
-                                            </p> <!-- 댓글 -->
-                                        </div>
-                                    </div>
-                                </div> <!--.areaText, 리스트 제목-->
-                            </a>
-                        </li>
-
-                        <!-- 둘째줄 -->
-
-                        <!-- 셋째줄 -->
-
-                        <!-- 넷째줄 -->
-
+                        <c:forEach var="boardDTO" items="${list}">
+	                        <li class="item">
+	                            <a href="<c:url value='/board/read'/>">
+	                                <div class="areaThumb">
+	                                    <!-- <i class="fa-thin fa-rectangle-xmark"></i> -->
+	                                    <!-- <p class="pLine"></p> -->
+	                                    <img src="./resources/img/notice.png" alt="" class="thumb">
+	                                   <!--  <img src="./resource/img/notice.png" alt="" class="thumb"> -->
+	                                </div> <!--.areaThumb, 리스트 이미지-->
+	
+	                                <div class="areaText">
+	                                    <!-- <i class="fa-brands fa-horizontal-rule"></i> 이미지 없으면 선 -->
+	                                    <strong class="category" value="${boardDTO.b_cate }"></strong> <!-- 카테고리 -->
+	                                    <br>
+	                                    <strong class="titleEll" value="${boardDTO.b_title}"></strong> <!-- 제목 -->
+	                                    <p class="content"><c:out value='${boardDTO.b_content }'/></p> <!-- 본문내용 -->
+	                                    <div class="textInfo">
+	                                        <div class="divInfo">
+	                                            <p class="local">삼산동</p> <!-- 위치 -->
+	                                            &nbsp;•&nbsp;
+	                                            <p class="time" value="${boardDTO.b_crDate}"></p> <!-- 시간 -->
+	                                            &nbsp;•&nbsp;
+	                                            <p class="look" value="${boardDTO.b_viewCnt}"></p> <!-- 조회 -->
+	                                        </div>
+	                                        <div class="Atten">
+	                                            <p class="heart">
+	                                                <!-- <i class="far fa-heart"></i> -->
+	                                                <i class="fas fa-heart"></i>
+	                                                <p value="${boardDTO.b_likey}"></p>
+	                                            </p> <!-- 관심 -->
+	                                            &nbsp;&nbsp;&nbsp;
+	                                            <p class="chat">
+	                                                <!-- <i class="far fa-comment"></i> -->
+	                                                <i class="fas fa-comment"></i>
+	                                                <p value="${boardDTO.b_comm}"></p>
+	                                            </p> <!-- 댓글 -->
+	                                        </div>
+	                                    </div>
+	                                </div> <!--.areaText, 리스트 제목-->
+	                            </a>
+	                        </li>
+						</c:forEach>
                     </ul>
 
                 </div> <!--.boradList-->
             </div> <!--.board-->
 
+		<div>
+			<c:if test="${ph.showPrev}">
+	       		<a href="<c:url value='/board/list${ph.sc.getQueryString(1)}'/>"> &lt;&lt;</a>   
+	       	</c:if>
+	       	
+	       	<c:if test="${ph.showPrev}">
+	       		<a href="<c:url value='/board/list${ph.sc.getQueryString(ph.beginPage-1)}'/>"> &lt;</a>   
+	       	</c:if>
+	       	
+	       	<c:forEach var="i" begin="${ph.frPage}" end="${ph.endPage}">
+	       		<a class="num" href="<c:url value='/board/list${ph.sc.getQueryString(i)}'/>"> ${i}</a>
+	       	</c:forEach>
+	       	
+	       	<c:if test="${ph.showNext}">
+	       		<a href="<c:url value='/board/list${ph.sc.getQueryString(ph.endPage+1)}'/>"> &gt;</a>   
+	       	</c:if>
+	       	<c:if test="${ph.showNext}">
+	       		<a href="<c:url value='/board/list${ph.sc.getQueryString(ph.totalPage)}'/>"> &gt;&gt;</a>   
+	       	</c:if>
+	     </div>
+     
             <div class="boardPage">
                 <div class="pageList">
                     <ul>
                         <li class="firstPage"><a href="#">
                                 <p>첫 페이지</p>
                             </a></li>
-                        <li class="prevPage"><a href="#">
+                        <!-- <li class="prevPage"><a href="#">
                                 <p>이전 페이지</p>
-                            </a></li>
+                            </a></li> -->
+                        <li class="prevPage">
+                        	<c:if test="${ph.showPrev}">
+								<a href="<c:url value='/board/list${ph.sc.getQueryString(ph.beginPage-1)}'/>"> &lt;</a>   
+	       					</c:if>
+						</li>
                         <li class="num"><a href="#">
                                 <p>1</p>
                             </a></li>
-                        <li class="num"><a href="#">
-                                <p>2</p>
-                            </a></li>
-                        <li class="num"><a href="#">
-                                <p>3</p>
-                            </a></li>
+                        <li class="num">
+							<c:forEach var="i" begin="${ph.frPage}" end="${ph.endPage}">
+	       						<a href="<c:url value='/board/list${ph.sc.getQueryString(i)}'/>"> ${i}</a>
+	       					</c:forEach>
+                        </li>
                         <li class="nextPage"><a href="#">
                                 <p>다음 페이지</p>
                             </a></li>
