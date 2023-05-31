@@ -11,7 +11,7 @@
 	</insert>
 	
 	<!-- 이메일 중복 체크 -->
-	<select id="emailOverlap" resultType="ing">
+	<select id="emailOverlap" resultType="int">
 		SELECT COUNT(*)
 		FROM MEMBER
 		WHERE M_EMAIL = #{m_email}

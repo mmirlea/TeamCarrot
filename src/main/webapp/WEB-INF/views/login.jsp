@@ -20,11 +20,11 @@
         </div><!--.headerIn-->
     </div><!--.header-->
     <div class="container">
-        <form action=""></form>
+        <form action="">
             <table>
                 <tr>
                     <td class="inputInfo">
-                        <input type="eamil" id="loginEmail" class="loginEmail" placeholder="이메일">
+                        <input type="email" id="loginEmail" class="loginEmail" placeholder="이메일">
                     </td>
                 </tr>
                 <tr>
@@ -41,7 +41,7 @@
                     <td class="tdBtn2">
                         <button type="button" class="searchEmailBtn helpBtn">아이디 찾기</button>
                         <button type="button" class="searchPwBtn helpBtn">비밀번호 찾기</button>
-                        <button type="button" class="joinBtn helpBtn" onclick="location.href='Join.jsp'">회원가입</button>
+                        <button type="button" class="joinBtn helpBtn" onclick="/register/add">회원가입</button>
                     </td>        
                 </tr>       
             </table>
