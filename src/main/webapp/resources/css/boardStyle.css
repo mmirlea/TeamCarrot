@@ -125,9 +125,9 @@ i {
 }
 
 .boradList ul {
-	display: flex;
-	justify-content: space-between;
-	flex-wrap: wrap;
+	display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
 }
 
 .boradList li {
@@ -242,61 +242,59 @@ i {
 /*#endregion 게시글*/
 
 /*#region boardPage*/
-.boardPage {
-	width: 1200px;
+.paging{
+    width: 1200px;
+}
+.paging ul{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin-bottom: 36px;
+}
+.paging li{
+    text-align: center;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.paging li a{
+    color:#333;
 }
 
-.boardPage ul {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin-bottom: 36px;
+.paging .num{
+display: flex;
 }
 
-.boardPage li {
-	text-align: center;
-	margin-left: 10px;
-	margin-right: 10px;
+.paging .num a{ 
+    color:#FF7E36;
+    margin-left: 10px;
+    margin-right: 10px;
 }
-
-.boardPage li a {
-	color: #333;
+.paging .num p{
+    width: 48px;
+    font-size: 16px;
+    line-height: 16px;
+    border: 2px solid #FF7E36;
+    border-radius: 100%;
+    padding-top: 16px;
+    padding-bottom: 16px;
 }
-
-.boardPage .num a {
-	color: #FF7E36;
+.paging .num a:hover{
+    color: #fff;
 }
-
-.boardPage .num {
-	width: 48px;
-	font-size: 16px;
-	line-height: 16px;
-	border: 2px solid #FF7E36;
-	border-radius: 100%;
-	padding-top: 16px;
-	padding-bottom: 16px;
+.paging .num p:hover{
+    background-color: #FF7E36;
 }
-
-.boardPage .num a:hover {
-	color: #FFF;
+.firstPage, .prevPage, .nextPage, .lastPage{
+    width: 20px;
+    background-color: #eee;
+    border-radius: 12px;
+    padding-top: 8px;
+    padding-bottom: 8px;
 }
-
-.boardPage .num:hover {
-	background-color: #FF7E36;
-}
-
-.firstPage, .prevPage, .nextPage, .lastPage {
-	width: 120px;
-	background-color: #eee;
-	border-radius: 12px;
-	padding-top: 8px;
-	padding-bottom: 8px;
-}
-
-.boardPage hr {
-	background-color: #ccc;
-	height: 1px;
-	border: 0;
+.paging hr{
+    background-color:#e9ecef;
+    height: 1px;
+    border: 0;
 }
 /*#endregion boardPage*/
 

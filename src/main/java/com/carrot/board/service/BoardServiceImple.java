@@ -25,6 +25,11 @@ public class BoardServiceImple implements BoardService {
 	public int write(BoardDTO boardDTO) throws Exception {
 		return boardDAO.insert(boardDTO);
 	}
+	
+	@Override
+	public int save(BoardDTO boardDTO) throws Exception {
+		return boardDAO.save(boardDTO);
+	}
 
 	@Override
 	public int modify(BoardDTO boardDTO) throws Exception {
@@ -32,8 +37,8 @@ public class BoardServiceImple implements BoardService {
 	}
 
 	@Override
-	public int remove(Integer bno, String writer) throws Exception {
-		return boardDAO.delete(bno, writer);
+	public int remove(Integer b_num, String b_email) throws Exception {
+		return boardDAO.delete(b_num, b_email);
 	}
 
 	@Override
@@ -48,9 +53,9 @@ public class BoardServiceImple implements BoardService {
 
 	// 읽을 때 조회되도록 한번에 묶어서 사용
 	@Override
-	public BoardDTO read(int bno) throws Exception {
-		BoardDTO boardDTO = boardDAO.select(bno);
-		boardDAO.increaseViewCnt(bno);
+	public BoardDTO read(int b_num) throws Exception {
+		BoardDTO boardDTO = boardDAO.select(b_num);
+		boardDAO.increaseViewCnt(b_num);
 		return boardDTO;
 	}
 
