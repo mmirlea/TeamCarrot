@@ -7,6 +7,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="<c:url value='/resources/css/junggoDetailStyle.css'/>" rel="stylesheet" />
+<!-- swiper cdn -->
+<link  rel="stylesheet"  href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+<script src="https://kit.fontawesome.com/c0e3b26a7d.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 </head>
 <body>
 	<div class="wrap">
@@ -17,9 +22,9 @@
             <div class="swiper-modify">
                 <div class="swiper mySwiper">
                     <div class="swiper-wrapper">
-                    <div class="swiper-slide"><a href="#"><img src="./resource/img/이사가느라 가전 팔아요1.jpg" alt="이사가느라 가전 팔아요1"></a></div>
-                    <div class="swiper-slide"><a href="#"><img src="./resource/img/이사가느라 가전 팔아요2.jpg" alt="이사가느라 가전 팔아요2"></a></div>
-                    <div class="swiper-slide"><a href="#"><img src="./resource/img/이사가느라 가전 팔아요3.jpg" alt="이사가느라 가전 팔아요3"></a></div>
+                    <div class="swiper-slide"><a href="#"><img src="../resources/img/이사가느라 가전 팔아요1.jpg" alt="이사가느라 가전 팔아요1"></a></div>
+                    <div class="swiper-slide"><a href="#"><img src="../resources/img/이사가느라 가전 팔아요2.jpg" alt="이사가느라 가전 팔아요2"></a></div>
+                    <div class="swiper-slide"><a href="#"><img src="../resources/img/이사가느라 가전 팔아요3.jpg" alt="이사가느라 가전 팔아요3"></a></div>
                     </div><!--swiper-wrapper-->
                     <div class="swiper-pagination"></div>
                 </div><!--swiper mySwiper-->  
@@ -29,16 +34,19 @@
             <div class="memberAll">
                 <div class="member-wrap">
                     <div class="memberInfo-wrap">
-                        <div class="memberInfo-Img"><img src="./resource/img/memberImg.png" alt="회원이미지"></div>
+                        <div class="memberInfo-Img"><img src="../resources/img/memberImg.png" alt="회원이미지"></div>
                         <div class="memberInfo-Text">
-                            <div class="nickname">밍띠</div>
-                            <div class="memberAddress">북구 신용동</div>
+                            <div class="nickname">${productDTO.userDTO.m_nicknm}</div>
+                            <div class="memberAddress">
+                            	<span>${productDTO.userDTO.m_addr1}</span>
+                            	<span>${productDTO.userDTO.m_addr2}</span>
+                            </div>
                         </div><!--memberInfo-Text-->
                     </div><!--memberInfo-wrap-->
                     <div class="memberOndo-wrap">
                         <div class="memberOndo-Text">
                             <div class="ondo">
-                                <span class="ondoNum">37.8</span>
+                                <span class="ondoNum">${productDTO.userDTO.m_ondo }</span>
                                 <span class="celsius">°C</span>
                             </div><!--ondo-->
                             <div class="ondoBar"></div>
@@ -52,27 +60,23 @@
                 <hr>
             </div><!--memberAll-->  
             <div class="content-wrap">
-                <h1 class="contentTitle">이사가느라 가전 팔아요~!골라가세요~!</h1><!--.contentTitle-->
+                <h1 class="contentTitle"><c:out value="${productDTO.p_title }"/></h1><!--.contentTitle-->
                 <div class="contentInfo">
-                    <span class="categry">가구/인테리어</span>
+                    <span class="categry">${productDTO.p_cate }</span>
                     &nbsp•&nbsp
                     <span class="pullUp">끌올</span>
                     &nbsp;
                     <span class="ctime">1일전<span>
                 </div><!--contentInfo-->
                 <div class="content">
-                    1. 건조기&#40;LG RH16VTN&#41;16KG
-                    <br>
-                    21년6월 출고 제품, 사용한지 1년 됐습니다.
-                    <br>
-                    입주할때 삿어요	&#126;&#33; 외관 이상 무&#33;
+                   <c:out value="${productDTO.p_content}"/>
                 </div><!--content-->
                 <div class="countUp">
-                    <span class="itemAttention">관심 26</span>
+                    <span class="itemAttention">관심 ${productDTO.p_likey}</span>
                     &nbsp•&nbsp
-                    <span class="itemChat">채팅 27</span>
+                    <span class="itemChat">채팅 3</span>
                     &nbsp•&nbsp
-                    <span class="itemCheck">조회 3794</span>
+                    <span class="itemCheck">조회 ${productDTO.p_viewcnt}</span>
                 </div><!--.countUp-->
                 <hr>
             </div><!--.content-wrap-->
@@ -82,7 +86,7 @@
                         <i class="xi-heart-o xi-4x"></i>  
                      </div><!--heartBtn-->
                     <div class="priceInfo">
-                        <div class="price">10,000원</div>
+                        <div class="price"><c:out value="${productDTO.p_price }"/>원</div>
                         <div class="priceNego">가격 제안 가능</div>
                     </div><!--priceInfo-->
                     <button type="button" class="chatBtn">채팅하기</button>
@@ -96,7 +100,7 @@
                             <i class="xi-speech-o xi-2x"></i>
                          </div>
                         <div class="daetgeul">댓글</div>
-                        <div class="commentsNum">9</div>
+                        <div class="commentsNum">${productDTO.p_comm}</div>
                     </div><!--commentsCnt-->
                     
                     <div class="commentsFilter">
@@ -113,11 +117,12 @@
                 <div class="comments-area">
                     <ul>
                         <li class="comments-list">
-                            <div class="commentsProfile-Img"><img src="./resource/img/memberImg.png" alt="회원이미지"></div>
+                            <div class="commentsProfile-Img"><img src="../resources/img/memberImg.png" alt="회원이미지"></div>
                             <div class="comments-box">
                                     <div class="commentsProfile-Text">
-                                        <span class="commentsNickname">그린</span>
-                                        <span class="commentsAddress">남구 삼산동</span>
+                                        <span class="commentsNickname">블루</span>
+                                        <span>주소1 </span>
+                                        <span>주소2</span>
                                     </div>
                                     <div class="comments-textbox">
                                         안녕하세요 여기는 댓글입니다.
@@ -135,7 +140,7 @@
                             </div><!--comments-box-->
                         </li>
                         <li class="comments-list reply">
-                            <div class="commentsProfile-Img"><img src="./resource/img/memberImg.png" alt="회원이미지"></div>
+                            <div class="commentsProfile-Img"><img src="../resources/img/memberImg.png" alt="회원이미지"></div>
                             <div class="comments-box">
                                     <div class="commentsProfile-Text">
                                         <span class="commentsNickname">레드</span>
@@ -173,5 +178,6 @@
             </div><!--.comments-wrap-->
         </div><!--.container-->
     </div><!--.wrap-->
+    
 </body>
 </html>

@@ -6,7 +6,7 @@ public class PageHandler {
 //	private int pageSize;
 
 	private int totalCnt; // 총 게시물 개수
-	private int naviSize = 10; // 페이지 네비게이션의 크기
+	private int naviSize = 16; // 페이지 네비게이션의 크기
 	private int totalPage; // 전체 페이지 개수
 	private int frPage; // 시작 페이지
 	private int endPage; // 마지막 페이지

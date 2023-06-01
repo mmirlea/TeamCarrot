@@ -3,7 +3,7 @@ package com.carrot.board.domain;
 public class PageHandlerP {
 
 	private int totalCnt; 	// 총 게시물 갯수
-	private int naviSize=10; 	//페이지 네비게이션의 크기
+	private int naviSize=16; 	//페이지 네비게이션의 크기
 	private int totalPage; 	//전체 페이지의 개수
 	private int beginPage; 	//페이지 네비게이션의 첫번째 페이지
 	private int endPage; 	//페이지 네비게이션의 마지막 페이지
