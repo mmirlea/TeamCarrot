@@ -35,7 +35,7 @@
             	</tr>
                 <tr>
                     <td class="inputInfo">
-                        <input type="email" id="m_email" class="loginEmail" name="m_email" placeholder="이메일">
+                        <input type="email" id="m_email" class="loginEmail" name="m_email" value="${cookie.m_email.value}" placeholder="이메일">
                     </td>
                 </tr>
                 <tr>
@@ -43,6 +43,11 @@
                         <input type="password" id="m_pw" class="loginPw" name="m_pw"placeholder="비밀번호">
                         <input type="hidden" class="toURL" value="${param.toURL}">                        
                     </td>
+                </tr>
+                <tr>
+                	<td>
+                		<label><input type="checkbox" name="rememberId" ${empty cookie.m_email.value? "" :"checked"}> 아이디 기억</label> |
+                	</td>
                 </tr>
                 <tr>
                     <td class="tdBtn1">
