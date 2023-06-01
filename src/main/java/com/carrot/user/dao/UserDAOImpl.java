@@ -37,4 +37,14 @@ public class UserDAOImpl implements UserDAO {
 	public int modify(UserDTO dto) throws Exception {
 		return session.update(namespace+"modify", dto);
 	}
+
+	@Override
+	public int modifyPw(UserDTO dto) throws Exception {
+		return session.update(namespace+"modifyPw", dto);
+	}
+
+	@Override
+	public int modifyAddr(UserDTO dto) throws Exception {
+		return session.update(namespace+"modifyAddr", dto);
+	}
 }

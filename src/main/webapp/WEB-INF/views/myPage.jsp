@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="https://fonts.googleapis.com/css?family=Jua:400" rel="stylesheet">
-    <link href="<c:url value='/resources/css/myPageStyle.css?Ab'/>" rel="stylesheet" />
+    <link href="<c:url value='/resources/css/myPageStyle.css?ba'/>" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
@@ -444,7 +444,10 @@
                                     <div class="postInfo">
                                         <div class="mpComment">댓글 11</div>
                                         <div>
-                                            <i class="xi-thumbs-up"></i>2
+                                            <i class="xi-thumbs-up">2</i>
+                                        </div>
+                                        <div class="modAndDel">
+                                        	<button>수정</button> <button>삭제</button>
                                         </div>
                                     </div>
                                 </a>
@@ -460,7 +463,10 @@
                                     <div class="postInfo">
                                         <div class="mpComment">댓글 18</div>
                                         <div>
-                                            <i class="xi-thumbs-up"></i>5
+                                            <i class="xi-thumbs-up">5</i>
+                                        </div>
+                                        <div class="modAndDel">
+                                        	<button>수정</button> <button>삭제</button>
                                         </div>
                                     </div>
                                 </a>
@@ -475,7 +481,10 @@
                                     <div class="postInfo">
                                         <div class="mpComment">댓글 25</div>
                                         <div>
-                                            <i class="xi-thumbs-up"></i>13
+                                            <i class="xi-thumbs-up">13</i>
+                                        </div>
+                                        <div class="modAndDel">
+                                        	<button>수정</button> <button>삭제</button>
                                         </div>
                                     </div>
                                 </a>
