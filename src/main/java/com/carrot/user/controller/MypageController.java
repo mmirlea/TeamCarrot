@@ -88,6 +88,52 @@ public class MypageController {
 		}
 	}
 	
+	@PostMapping("/modify/pw")
+	public String modifyPw(UserDTO dto, RedirectAttributes rattr, HttpSession session, Model m) {
+		String m_email = (String) session.getAttribute("m_email");
+		
+		dto.setM_email(m_email);
+		
+		try {
+			if(service.modifyPw(dto) != 1)
+				throw new Exception("Modify failed");
+			
+			rattr.addFlashAttribute("msg", "프로필 수정 실패");
+			
+			return "redirect:/mypage/myprofile";
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+			m.addAttribute("dto", dto);
+			m.addAttribute("msg", "프로필 수정 완료");
+			
+			return "myProfile";
+		}
+	}
+	
+	@PostMapping("/modify/addr")
+	public String modifyAddr(UserDTO dto, RedirectAttributes rattr, HttpSession session, Model m) {
+		String m_email = (String) session.getAttribute("m_email");
+		
+		dto.setM_email(m_email);
+		
+		try {
+			if(service.modifyAddr(dto) != 1)
+				throw new Exception("Modify failed");
+			
+			rattr.addFlashAttribute("msg", "프로필 수정 실패");
+			
+			return "redirect:/mypage/myprofile";
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+			m.addAttribute("dto", dto);
+			m.addAttribute("msg", "프로필 수정 완료");
+			
+			return "myProfile";
+		}
+	}
+	
 	//로그인 여부 확인
 	private boolean loginCheck(HttpServletRequest request) {
 			 

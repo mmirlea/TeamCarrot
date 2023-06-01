@@ -37,4 +37,18 @@
 		SET M_NICKNM=#{m_nicknm}
 		WHERE M_EMAIL=#{m_email}
 	</update>
+	
+	<!-- 비밀번호 변경 -->
+	<update id="modifyPw" parameterType="UserDTO">
+		UPDATE MEMBER
+		SET M_PW=#{m_pw}
+		WHERE M_EMAIL=#{m_email}
+	</update>
+	
+	<!-- 주소 변경 -->
+	<update id="modifyAddr" parameterType="UserDTO">
+		UPDATE MEMBER
+		SET M_ADDR1=#{m_addr1}, M_ADDR2=#{m_addr2}
+		WHERE M_EMAIL=#{m_email}
+	</update>
 </mapper>
