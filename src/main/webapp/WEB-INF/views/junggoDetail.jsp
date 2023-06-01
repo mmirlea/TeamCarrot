@@ -12,7 +12,7 @@
 	<div class="wrap">
 	
 		<%@ include file ="./header.jsp" %>
-	
+		<%@ include file ="./tabRigth.jsp" %>
         <div class="container">
             <div class="swiper-modify">
                 <div class="swiper mySwiper">

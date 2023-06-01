@@ -14,6 +14,21 @@
 	<div class="wrap">
 		<%@ include file ="./header.jsp" %>
 		<%@ include file ="./tabRigth.jsp" %>
+		
+		<script>
+			let msg = "${msg}";
+			if (msg == "DEL_OK")
+				alert("게시글이 삭제되었습니다.");
+			if (msg == "DEL_ERR")
+				alert("게시글 삭제에 실패하였습니다.");
+			if (msg == "LIST_ERR")
+				alert("게시물 목록을 가져오는데 실패했습니다. 다시 시도해 주세요.");
+			if (msg == "WRT_OK")
+				alert("성공적으로 등록되었습니다.");
+			if (msg == "MOD_OK")
+				alert("게시글 수정을 성공하였습니다.");
+		</script>
+	
 		<div class="container">
 			<div class="mainBanner">
                 <!-- <a href="#"><img src="./resource/img/동네소식.png" alt="게시판"></a> -->
@@ -54,7 +69,9 @@
                         <!-- 첫째줄 -->
                         <c:forEach var="boardDTO" items="${list}">
 	                        <li class="item">
-	                            <a href="<c:url value='/board/read'/>">
+	                        	<input type="hidden" value="${boardDTO.b_num} " name="b_num">
+	                            <a href="<c:url value='/board/read?b_num=${boardDTO.b_num}'/>">
+	                            <!-- ${ph.sc.getQueryString() } -->
 	                                <div class="areaThumb">
 	                                    <!-- <i class="fa-thin fa-rectangle-xmark"></i> -->
 	                                    <!-- <p class="pLine"></p> -->
@@ -64,17 +81,17 @@
 	
 	                                <div class="areaText">
 	                                    <!-- <i class="fa-brands fa-horizontal-rule"></i> 이미지 없으면 선 -->
-	                                    <strong class="category" value="${boardDTO.b_cate }"></strong> <!-- 카테고리 -->
+	                                    <strong class="category" >${boardDTO.b_cate }</strong> <!-- 카테고리 -->
 	                                    <br>
-	                                    <strong class="titleEll" value="${boardDTO.b_title}"></strong> <!-- 제목 -->
-	                                    <p class="content"><c:out value='${boardDTO.b_content }'/></p> <!-- 본문내용 -->
+	                                    <strong class="titleEll">${boardDTO.b_title}</strong> <!-- 제목 -->
+	                                    <p class="content"><c:out value='${boardDTO.b_content }'/>/p> <!-- 본문내용 -->
 	                                    <div class="textInfo">
 	                                        <div class="divInfo">
-	                                            <p class="local">삼산동</p> <!-- 위치 -->
+	                                            <p class="local">${boardDTO.userDTO.m_addr1}</p> <!-- 위치 -->
 	                                            &nbsp;•&nbsp;
-	                                            <p class="time" value="${boardDTO.b_crDate}"></p> <!-- 시간 -->
+	                                            <p class="time"></p>${boardDTO.b_crDate} <!-- 시간 -->
 	                                            &nbsp;•&nbsp;
-	                                            <p class="look" value="${boardDTO.b_viewCnt}"></p> <!-- 조회 -->
+	                                            <p class="look" >${boardDTO.b_viewCnt}</p> <!-- 조회 -->
 	                                        </div>
 	                                        <div class="Atten">
 	                                            <p class="heart">
