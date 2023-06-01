@@ -35,6 +35,91 @@ input::-webkit-search-results-decoration{
     width: 100%;
     min-width: 1240px;
 }
+.header{
+    height: 90px;
+    margin-bottom: 20px;
+}
+.headIn{
+    background-color: #fff;
+    width: 1200px;
+    height: 90px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    
+}
+.logo{
+    position: absolute;
+    left: 10px;
+    bottom: 0px;
+}
+.logo img{
+    width: 40px;
+}
+.logo a{
+    font-family: 'jua', serif;
+    color: #FF7E36;
+    font-size: 27px;
+    font-weight: 600;
+    line-height: 45px;
+}
+.nav ul{
+    display: flex;
+    position: absolute;
+    bottom: 10px;
+    left: 180px;
+    width: 250px;
+    justify-content: space-between;
+    font-weight: 600;
+}
+
+.nav a:hover{
+    color: #777;
+}
+
+.nav a:active{
+    color: #FF7E36;
+}
+
+.member ul{
+    display: flex;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    width: 200px;
+    justify-content: space-between;
+    font-size: 13px;
+}     
+.member li:hover{
+    font-weight: bold;
+}
+.searchChat{
+    position: absolute;
+    right: 20px;
+    bottom: 0;
+}
+.search{
+    width: 264px;
+    height: inherit;
+    padding: 12px;
+    border: none;
+    background-color: #f5f5f5;
+    font-size: 16px;
+    border-radius: 10px;
+    outline: none;
+}
+.chat{
+    width: 100px;
+    height: 40px;
+    border: 0.8px solid #bbb;
+    background-color: #fff;
+    margin-left: 10px;
+    padding: 8px 16px;
+    font-size: 16px;
+    color: #212124;
+    font-weight: bold;
+    border-radius: 10px;
+}
 .popularSearch{
    text-align: center;
    width: 1000px;
@@ -157,4 +242,117 @@ input::-webkit-search-results-decoration{
     width: 1200px;
     height: 200px;
     margin: 0 auto;
+}
+
+.footerIn{
+    width: 900px;
+    margin: 0 auto;
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 100px;
+    position: relative;
+}
+.fLine{
+    height: 1.5px;
+    background-color: #f3f2f2;
+    margin: 0 0 30px 0;
+}
+
+.footMenu1{
+    display: flex;
+    margin: 50px 0;
+    position: relative;
+}
+.footMenu1 ul{
+    margin-right: 30px;
+    font-size: 15px;
+}
+.footMenu1 li{
+    margin-bottom: 30px;
+}
+
+.footMenu1 a:hover{
+    text-decoration: underline;
+}
+
+.appDownload{
+    position: absolute;
+    right: 0px;
+    top: 0;
+    color: #222;
+    font-size: 16px;
+}
+.appDownload p{
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.appDownload button{
+    border: none;
+    width: 160px;
+    height: 50px;
+    border-radius: 10px;
+    line-height: 20px;
+    font-size: 17px;
+    font-weight: bold;
+    text-align: left;
+    padding-left: 15px;
+    margin-right: 10px;
+}
+.appDownload .apple{
+    margin-right: 8px;
+}
+
+.appDownload img{
+    width: 20px;
+
+}
+
+.fMenu2 ul{
+    display: flex;
+    margin-top: 20px;
+    width: 700px;
+}
+
+.fMenu2 li{
+    margin-right: 20px;
+}
+
+.fMenu2 a{
+    color: #666;
+    font-size: 13px;
+}
+
+.fMenu2 a:hover{
+    text-decoration: underline;
+}
+
+.snsNation{
+    /* background-color: lavender; */
+    display: flex;
+    width: 250px;
+    position: absolute;
+    top: 330px;
+    right: 10px;
+    vertical-align: bottom;
+}
+
+.snsNation img{
+    width: 30px;
+    vertical-align : middle;
+}
+.nation img{
+    width: 27px;
+    height: 20px;
+    margin-top: 8px;
+}
+.nation label{
+    /* background-color: violet; */
+    display: flex;
+    margin-top: 15px;
+}
+
+#label-select-nation{
+    margin-top: 10px;
+    border: none;
+    margin-bottom: 10px;
 }

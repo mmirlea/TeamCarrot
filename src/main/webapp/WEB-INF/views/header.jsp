@@ -10,8 +10,8 @@
 <link href="<c:url value='/resources/css/headerStyle.css'/>" rel="stylesheet" />
 </head>
 <body>
-<c:set var="loginOutLink" value="${sessionScope.id==null ? '/login/login' : '/login/logout'}" />
-<c:set var="loginOut" value="${sessionScope.id==null ? '로그인/회원가입' : '로그아웃'}" />
+<c:set var="loginOutLink" value="${sessionScope.m_email==null ? '/login/login' : '/login/logout'}" />
+<c:set var="loginOut" value="${sessionScope.m_email==null ? '로그인/회원가입' : '로그아웃'}" />
 	 <div class="header">
             <div class="headerIn ">
                 <div class="hTop">
@@ -30,7 +30,7 @@
                     <div class="member">
                         <ul>
                             <li><a href="<c:url value='${loginOutLink}'/>" class="meMenu">${loginOut}</a></li>
-                            <li><a href="MyPage.jsp" class="meMenu">마이페이지</a></li>
+                            <li><a href="/carrot/mypage/home" class="meMenu">마이페이지</a></li>
                         </ul>
                     </div>
                 </div> <!--.hTop-->

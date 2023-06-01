@@ -24,4 +24,17 @@
 		WHERE M_EMAIL=#{m_email} AND M_PW=#{m_pw}
 	</select>
 	
+	<!-- 마이페이지 -->
+	<select id="mypageInfo" parameterType="String"  resultType="UserDTO">
+		SELECT *
+		FROM MEMBER
+		WHERE M_EMAIL=#{m_email}
+	</select>
+	
+	<!-- 내프로필 수정 -->
+	<update id="modify" parameterType="UserDTO">
+		UPDATE MEMBER
+		SET M_NICKNM=#{m_nicknm}
+		WHERE M_EMAIL=#{m_email}
+	</update>
 </mapper>
