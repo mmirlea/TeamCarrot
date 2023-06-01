@@ -26,7 +26,7 @@
             <div class="headerIn">
                 <div class="divBorad">
                     <a class="aTitle" href="<c:url value='/board/list'/>">
-                        <button class="btnBoard">
+                        <button type="button" class="btnBoard" id="btnBoard">
                             <i class="fa-solid fa-circle-xmark"></i>
                         </button>
                     </a>
@@ -41,42 +41,41 @@
 
                 <div class="gnb">
                     <div class="gnbItem">
-                        <button class="btnPic"><i class="fa-solid fa-image"></i></button>
+                        <button type="button" class="btnPic" ><i class="fa-solid fa-image"></i></button>
                     </div>
                     <div class="gnbItem">
-                        <button type="submit" class="btnTempSace" id="btnSave">저장</button>
+                        <button type="button" class="btnTempSace" id="btnSave">저장</button>
                     </div>
                     <div class="gnbItem">
-                        <button type="submit" class="btnWrite"  id="btnWrite">완료</button>
+                        <button type="button" class="btnWrite" id="btnWrite">완료</button>
                     </div>
                 </div> <!--gnb-->
             </div> <!--.headeIn-->
         </div> <!--.header-->
 
         <div class="container">
-
             <div class="divTitle" id="divTitle">
                 <!-- <h1 class="spanTitle">제목</h1> -->
                 <div class="hTitle">
-					<input type="text" name="title" class="spanTitle"
+					<input type="text" name="${menu == 'board' ? 'b_title' : 'p_title'}" class="spanTitle"
 						placeholder="제목을 입력하세요"
-						value="<c:out value='${menu == "board" ? boardDTO.b_title : productDTO.p_title }'/>">
+						value="<c:out value='${menu == "board" ? boardDTO.b_title : productDTO.p_title }'/>  ">
 				</div>
                 
                 <c:if test="${menu == 'board' }">
                 	<!-- 동네 -->
-	                <div class="divCategory">
-	                    <select name="boardCategory" class="boardCategory">
-	                        <option value="opDefault">주제선택</option>
-	                        <option value="opAccident">동네사건사고</option>
-	                        <option value="opRestaurant">동네맛집</option>
-	                        <option value="opNews">동네소식</option>
-	                        <option value="opLifeInfo">생활정보</option>
-	                        <option value="opHobby">취미생활</option>
-	                        <option value="opDaily">일상</option>
-	                        <option value="opLost">분실/실종센터</option>
-	                        <option value="opPlease">해주세요</option>
-	                        <option value="opPhoto">동네사진전</option>
+	                <div class="divCategory"  >
+	                    <select name="${menu == 'board' ? 'b_cate' : 'p_cate'}" class="boardCategory">
+	                    	<option value="주제선택">주제선택</option>
+	                        <option value="동네사건사고">동네사건사고</option>
+	                        <option value="동네맛집">동네맛집</option>
+	                        <option value="동네소식">동네소식</option>
+	                        <option value="생활정보">생활정보</option>
+	                        <option value="취미생활">취미생활</option>
+	                        <option value="일상">일상</option>
+	                        <option value="분실/실종센터">분실/실종센터</option>
+	                        <option value="해주세요">해주세요</option>
+	                        <option value="동네사진전">동네사진전</option>
 	                    </select>
 	                </div>
                 </c:if>
@@ -85,7 +84,8 @@
                 	<!-- 중고 -->
 	                <div class="divPrice">
 	                    <span class="spPrice">
-	                        <i class="fa-solid fa-won-sign"></i> &nbsp; 가격
+	                        <i class="fa-solid fa-won-sign"></i> &nbsp; 
+	                        <input type="text" placeholder="가격">	                        
 	                        &nbsp;
 	                        <input type="checkbox" name="chkShare" id="chkShare">
 	                        <label for="chkShare">나눔</label>
@@ -101,30 +101,38 @@
                 <p class="pLine"></p>
             </div>
 
-            <!-- id="editor" contenteditable="true" -->
-            <div class="divContent" >
-                <!-- <span class="spContent" >
-                    가까이 사는 동네 이웃들에게 궁금한 것을 물어보세요!
-                    <br>
-                    <b class="bTown">우리동네</b> 근처 이웃이 친절하게 진짜 동네 정보를 알려줄 거예요
-                </span> -->
+            <div class="divContent" >				
                 <!-- 가까이 사는 동네 이웃들에게 궁금한 것을 물어보세요! &#10; 우리동네 근처 이웃이 친절하게 진짜 동네 정보를 알려줄 거예요 -->
-                <textarea class="spContent" >
-                <c:out value='${menu == "board" ? boardDTO.b_content : productDTO.p_content }'/>
+                <textarea class="spContent"  name="${menu == 'board' ? 'b_content' : 'p_content'}">
+                	<c:out value='${menu == "board" ? boardDTO.b_content : productDTO.p_content }'/>
                 </textarea>
             </div>
         </div> <!--.container-->
     </form>
-    
-    <script type="text/javascript">
+
+	<script type="text/javascript">
 		$(document).ready(function() {
-    		$("#btnWrite").on("click", function() {
-    			
-    			let form = $('#form');
-    			form.attr("action", "<c:url value='/board/write'/>");
-    			form.attr("method", "post");
-    			
-    			form.submit();
+			$("#btnBoard").on("click", function() {
+				location.href="<c:url value='/board/list?page=${page}&pageSize=${pageSize}'/>";
+			})
+			
+			$("#btnWrite").on("click", function() {
+
+				let form = $('#form');
+				form.attr("action", "<c:url value='/board/write'/>");
+				form.attr("method", "post");
+
+				form.submit();
+			})
+
+			//임시저장
+			$("#btnSave").on("click", function() {
+
+				let form = $('#form');
+				form.attr("action", "<c:url value='/board/save'/>");
+				form.attr("method", "post");
+
+				form.submit();
 			})
 		})
 	</script>

@@ -10,20 +10,20 @@
 <link href="<c:url value='/resources/css/headerStyle.css'/>" rel="stylesheet" />
 </head>
 <body>
-<c:set var="loginOutLink" value="${sessionScope.id==null ? '/login/login' : '/login/logout'}" />
-<c:set var="loginOut" value="${sessionScope.id==null ? '로그인/회원가입' : '로그아웃'}" />
+<c:set var="loginOutLink" value="${sessionScope.email==null ? '/login/login' : '/login/logout'}" />
+<c:set var="loginOut" value="${sessionScope.email==null ? '로그인/회원가입' : '로그아웃'}" />
 	 <div class="header">
             <div class="headerIn ">
                 <div class="hTop">
                     <div class="divLogo">
                             <a href="<c:url value='/'/>">
-                            <img src="../resources/img/DaangnMarket_logo.png" alt="당근마켓로고"/>
+                            <img src="/resources/img/DaangnMarket_logo.png" alt="당근마켓로고"/>
                             <p>당근마켓</p>
                         </a>
                     </div>
                     <div class="gnb">
                         <ul>
-                            <li><a href="JunggoMain.jsp" class="gnbMenu">중고거래</a></li>
+                            <li><a href="<c:url value='/carrot/junggoMain'/>" class="gnbMenu">중고거래</a></li>
                             <li><a href="<c:url value='/board/list'/>" class="gnbMenu">동네소식</a></li>
                         </ul>
                     </div>

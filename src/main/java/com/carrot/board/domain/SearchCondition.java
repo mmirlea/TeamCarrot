@@ -5,7 +5,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class SearchCondition {
 
 	private Integer page = 1;
-	private Integer pageSize = 10;
+	private Integer pageSize = 16;
 	private String option = "";
 	private String keyword = "";
 
