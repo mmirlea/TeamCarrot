@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.carrot.board.domain.ProductDTO;
+import com.carrot.board.domain.SearchConditionM;
 import com.carrot.board.domain.SearchConditionP;
 
 @Repository
@@ -62,8 +63,8 @@ public class ProductDAOImpl implements ProductDAO {
 		return session.update(namespace + "increaseViewCnt", p_num);
 	}
 	
-	public List<ProductDTO> selectPage (Map map) throws Exception{
-		return session.selectList(namespace + "selectPage", map);
+	public List<ProductDTO> selectPage (SearchConditionP scp) throws Exception{
+		return session.selectList(namespace + "selectPage", scp);
 	}
 
 	public List<ProductDTO> searchSelectPage(SearchConditionP scp) throws Exception{

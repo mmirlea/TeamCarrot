@@ -12,8 +12,10 @@
 <link  rel="stylesheet"  href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 <script src="https://kit.fontawesome.com/c0e3b26a7d.js" crossorigin="anonymous"></script>
+
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
 </head>
 <body>
 	<form class="wrap" id="form">
@@ -64,6 +66,11 @@
                 <hr>
             </div><!--memberAll-->  
             <div class="content-wrap">
+
+
+
+            	<h1 class="contentTitle">"${menu == "board" ? boardDTO.b_title : productDTO.p_title}"</h1><!--.contentTitle-->
+
             	<div class="content-top">
 	            	<h1 class="contentTitle">${menu == 'board' ? boardDTO.b_title : productDTO.b_title}</h1><!--.contentTitle-->
 					<div class="crud-wrap">
@@ -72,8 +79,9 @@
 	                    	<button type="button" class="btnDel" id="btnDel">삭제</button>
 	                </div>
             	</div>
+
                 <div class="contentInfo">
-                    <span class="categry">${menu == "board" ? boardDTO.b_cate : productDTO.b_cate}</span>
+                    <span class="categry">${menu == "board" ? boardDTO.b_cate : productDTO.p_cate}</span>
                     &nbsp;•&nbsp;
 
                     <span class="pullUp">끌올</span>
@@ -89,7 +97,7 @@
                     &nbsp;•&nbsp;
                     <span class="itemChat">채팅 ${menu == "board" ? boardDTO.b_comm : productDTO.p_comm}</span>
                     &nbsp;•&nbsp;
-                    <span class="itemCheck">조회 ${menu == "board" ? boardDTO.b_viewCnt : productDTO.p_viewCnt}</span>
+                    <span class="itemCheck">조회 ${menu == "board" ? boardDTO.b_viewCnt : productDTO.p_viewcnt}</span>
                 </div><!--.countUp-->
                 <hr>
             </div><!--.content-wrap-->
@@ -100,7 +108,7 @@
 	                        <i class="xi-heart-o xi-4x"></i>  
 	                     </div><!--heartBtn-->
 	                    <div class="priceInfo">
-	                        <div class="price">10,000원</div>
+	                        <div class="price">${productDTO.p_price } 원</div>
 	                        <div class="priceNego">가격 제안 가능</div>
 	                    </div><!--priceInfo-->
 	                    <button type="button" class="chatBtn">채팅하기</button>

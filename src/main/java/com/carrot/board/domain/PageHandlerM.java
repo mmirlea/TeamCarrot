@@ -1,6 +1,6 @@
 package com.carrot.board.domain;
 
-public class PageHandlerP {
+public class PageHandlerM {
 
 	private int totalCnt; 	// 총 게시물 갯수
 	private int naviSize=3; 	//페이지 네비게이션의 크기
@@ -9,23 +9,23 @@ public class PageHandlerP {
 	private int endPage; 	//페이지 네비게이션의 마지막 페이지
 	private boolean showPrev; //이전 페이지로 이동하는 버튼 표시 여부
 	private boolean showNext; //다음 페이지로 이동하는 버튼 표시 여부
-	private SearchConditionP sc;
+	private SearchConditionM scm;
 	
 	
-	public PageHandlerP(int totalCnt, SearchConditionP sc) {
+	public PageHandlerM(int totalCnt, SearchConditionM scm) {
 		this.totalCnt = totalCnt;
-		this.sc = sc;
+		this.scm = scm;
 		
-		doPaging(totalCnt, sc);
+		doPaging(totalCnt, scm);
 	}
-	public void doPaging(int totalCnt, SearchConditionP sc) {
+	public void doPaging(int totalCnt, SearchConditionM scm) {
 		this.totalCnt = totalCnt;
 				
 		//전체 페이지 개수 계산하기
-		totalPage = (int) Math.ceil(totalCnt / (double) sc.getPageSize());
+		totalPage = (int) Math.ceil(totalCnt / (double) scm.getPageSize());
 		
 		//시작페이지
-		beginPage = (sc.getPage()-1)/naviSize * naviSize + 1;
+		beginPage = (scm.getPage()-1)/naviSize * naviSize + 1;
 				
 		//마지막 페이지
 		endPage = Math.min( beginPage + naviSize - 1, totalPage);
@@ -36,7 +36,7 @@ public class PageHandlerP {
 	}
 			
 	void print() {
-		System.out.println("page : " + sc.getPage());
+		System.out.println("page : " + scm.getPage());
 				
 		System.out.print(showPrev ? "[prev]" : "");
 		
@@ -101,18 +101,18 @@ public class PageHandlerP {
 	public void setShowNext(boolean showNext) {
 		this.showNext = showNext;
 	}
-	public SearchConditionP getSc() {
-		return sc;
+	public SearchConditionM getscm() {
+		return scm;
 	}
 
-	public void setSc(SearchConditionP sc) {
-		this.sc = sc;
+	public void setscm(SearchConditionM scm) {
+		this.scm = scm;
 	}
 	@Override
 	public String toString() {
-		return "PageHandlerP [totalCnt=" + totalCnt + ", naviSize=" + naviSize + ", totalPage=" + totalPage
+		return "PageHandlerM [totalCnt=" + totalCnt + ", naviSize=" + naviSize + ", totalPage=" + totalPage
 				+ ", beginPage=" + beginPage + ", endPage=" + endPage + ", showPrev=" + showPrev + ", showNext="
-				+ showNext + ", sc=" + sc + "]";
+				+ showNext + ", scm=" + scm + "]";
 	}
 	
 	

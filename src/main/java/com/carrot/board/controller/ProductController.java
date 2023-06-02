@@ -31,7 +31,7 @@ public class ProductController {
 			
 			System.out.println("getCount:" + totalCnt);
 			PageHandlerP pageHandlerP = new PageHandlerP(totalCnt, scp);
-			System.out.println("pageHandlerP" + pageHandlerP);
+			System.out.println(pageHandlerP);
 			
 			List<ProductDTO> list = service.getSearchSelectPage(scp);
 			System.out.println("list" + list);
@@ -49,7 +49,8 @@ public class ProductController {
 		
 		return "junggoMain";
 	}
-	
+
+		
 	//중고물풀 게시글 읽기
 	@GetMapping("/read")
 	public String read(Integer p_num, Model m) {
@@ -57,6 +58,7 @@ public class ProductController {
 			ProductDTO productDTO = service.read(p_num);
 			
 			m.addAttribute(productDTO);
+			m.addAttribute("menu", "product");
 		}catch(Exception e) {
 			e.printStackTrace();
 			m.addAttribute("msg", "READ_ERR");
