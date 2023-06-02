@@ -33,6 +33,14 @@ public class BoardDTO {
 		this.b_content = b_content;
 	}
 
+	public BoardDTO(String b_cate, String b_email, String b_title, String b_content, String b_tempSaveYn) {
+		this.b_cate = b_cate;
+		this.b_email = b_email;
+		this.b_title = b_title;
+		this.b_content = b_content;
+		this.b_tempSaveYn = b_tempSaveYn;
+	}
+
 	public UserDTO getUserDTO() {
 		return userDTO;
 	}
@@ -155,7 +163,7 @@ public class BoardDTO {
 
 	@Override
 	public String toString() {
-		return "BoardDTO [b_menu=" + b_menu + ", b_num=" + b_num + ", b_cate=" + b_cate + ", b_emial=" + b_email
+		return "BoardDTO [b_menu=" + b_menu + ", b_num=" + b_num + ", b_cate=" + b_cate + ", b_email=" + b_email
 				+ ", b_title=" + b_title + ", b_content=" + b_content + ", b_img=" + b_img + ", b_crDate=" + b_crDate
 				+ ", b_upDate=" + b_upDate + ", b_tempSaveYn=" + b_tempSaveYn + ", b_likey=" + b_likey
 				+ ", b_likeyEmail=" + b_likeyEmail + ", b_comm=" + b_comm + ", b_viewCnt=" + b_viewCnt + ", userDTO="

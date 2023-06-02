@@ -9,31 +9,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="https://fonts.googleapis.com/css?family=Jua:400" rel="stylesheet">
+
     <link href="<c:url value='/resources/css/myPageStyle.css?bfda'/>" rel="stylesheet" />
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 </head>
 <body>
+
 <script>
 	let msg="${msg}"
     if(msg=="LIST_ERR") alert("게시물 목록을 가져오는데 실패했습니다. 다시 시도해 주세요.");
 	if(msg=="READ_ERR") alert("게시물을 읽어들이는데 실패했습니다.")
 </script>
-   <%--  <%@ include file ="./header.jsp" %> --%>
+
+
+   <%@ include file ="./header.jsp" %>
+
     <div class="wrap">
         <div class="container">
             <div class="myProfile">
                 <div class="profileLeft">
-                    <div><img src="../resources/img/carrotimg/profilimg.png" alt="나의 프로필 이미지" class="myProfileImg"></div>
+                    <div class="proImg">
+                    	<c:choose>
+		                  	<c:when test="${dto.m_proimg eq null}">
+		                    	<img src="../resources/img/carrotimg/profilimg.png" alt="나의 프로필 이미지" class="myProfileImg">
+		                    </c:when>
+		                    <c:otherwise> <img src="/proimg/${dto.m_proimg}" lt="프로필 사진" class="myProfileImg"></c:otherwise>
+	                   </c:choose>
+                    </div>
                     <div class="nameTitle">
                         <p class="nickname">${dto.m_nicknm}</p>
                         <p class="nicknameTag">#${dto.m_num}</p>
                     </div>    
                 </div><!--.profileLeft-->
                 <div class="mpInfo">
-                    <div><i class="xi-gps-none">${dto.m_addr2} <b> 4회</b> 인증</i></div>
-                    <div><i class="xi-clock-o">최근 3일 이내 활동 (2022년 4월 2일 가입)</i></div>
+                    <div><i class="xi-gps-none"></i>${dto.m_addr2} <b> 4회</b> 인증</div>
+                    <div><i class="xi-clock-o"></i>최근 3일 이내 활동 (2022년 4월 2일 가입)</div>
                 </div>
                 <div class="myState">
                     <div class="re-dealing">

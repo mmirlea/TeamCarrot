@@ -49,6 +49,11 @@ public class UserServiceImpl implements UserService {
 	public int modifyAddr(UserDTO dto) throws Exception {
 		return dao.modifyAddr(dto);
 	}
+
+	@Override
+	public int modNoImg(UserDTO dto) throws Exception {
+		return dao.modNoImg(dto);
+	}
 	
 	@Override
 	public int getCount() throws Exception {

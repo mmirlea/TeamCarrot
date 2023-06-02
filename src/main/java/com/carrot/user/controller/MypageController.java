@@ -1,6 +1,10 @@
 package com.carrot.user.controller;
 
+
 import java.util.List;
+import java.io.File;
+import java.io.IOException;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -8,9 +12,15 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import org.springframework.web.bind.annotation.ModelAttribute;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.carrot.board.domain.PageHandlerM;
@@ -85,27 +95,52 @@ public class MypageController {
 	
 	//프로필 수정
 	@PostMapping("/modify")
-	public String modify(UserDTO dto, RedirectAttributes rattr, HttpSession session, Model m) {
+	public String modify(@ModelAttribute UserDTO dto, @RequestParam("imageFile") MultipartFile imageFile, HttpSession session, Model m) {
+		
 		String m_email = (String) session.getAttribute("m_email");
 		
 		dto.setM_email(m_email);
 		
 		try {
-			if(service.modify(dto) != 1)
-				throw new Exception("Modify failed");
-			
-			rattr.addFlashAttribute("msg", "프로필 수정 실패");
-			
-			return "redirect:/mypage/myprofile";
+		    if (imageFile != null && !imageFile.isEmpty()) {
+		        String fileName = saveImageToServer(imageFile);
+		        dto.setM_proimg(fileName);
+		        if (service.modify(dto) != 1) {
+		            throw new Exception("Modify failed");
+		        }
+		    } else {
+		        if (service.modNoImg(dto) != 1) {
+		            throw new Exception("Modify failed");
+		        }
+		    }
+
+		    return "redirect:/mypage/myprofile";
 		} catch (Exception e) {
-			e.printStackTrace();
-			
-			m.addAttribute("dto", dto);
-			m.addAttribute("msg", "프로필 수정 완료");
-			
-			return "myProfile";
+		    e.printStackTrace();
+		    m.addAttribute("dto", dto);
+		    m.addAttribute("msg", "프로필 수정 완료");
+		    return "myProfile";
 		}
+	   
+//		try {
+//			if(service.modify(dto) != 1)
+//				throw new Exception("Modify failed");
+//			
+//			return "redirect:/mypage/myprofile";
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			
+//			m.addAttribute("dto", dto);
+//			m.addAttribute("msg", "프로필 수정 완료");
+//			
+//			return "myProfile";
+//		}
+		
+		
+		
 	}
+	
+	
 	
 	@PostMapping("/modify/pw")
 	public String modifyPw(UserDTO dto, RedirectAttributes rattr, HttpSession session, Model m) {
@@ -164,31 +199,26 @@ public class MypageController {
 
 		}
 	
-//	//마이페이지 - 중고물품 게시글 목록 출력
-//	@GetMapping("/home")
-//	public String myList(Model m, SearchConditionP scp) {
-//		try {
-//			int totalCnt = serviceP.getCount();
-//			
-//			System.out.println("getCount:" + totalCnt);
-//			PageHandlerP pageHandlerP = new PageHandlerP(totalCnt, scp);
-//			System.out.println("pageHandlerP" + pageHandlerP);
-//			
-//			List<ProductDTO> list = serviceP.getPage(scp);
-//			System.out.println("list" + list);
-//			
-//			/* List<ProductDTO> list = service.selectAll(); */
-//			
-//			m.addAttribute("list", list);
-//			m.addAttribute("ph", pageHandlerP);
-//			
-//		}catch(Exception e) {
-//			e.printStackTrace();
-//			m.addAttribute("msg", "LIST_ERR");
-//			m.addAttribute("totalCnt", 0);
-//		}
-//		
-//		return "myPage";
-//	}
-	
+
+	public static String saveImageToServer(MultipartFile file) throws IOException {
+        String uploadDir = "D:/01-STUDY/proimg/";
+        //String uploadDir = "src/main/resources/static/images/";
+        
+        // 디렉토리가 존재하지 않으면 생성
+        File directory = new File(uploadDir);
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+
+        String originalFilename = StringUtils.cleanPath(file.getOriginalFilename());
+        String fileName = System.currentTimeMillis() + "_" + originalFilename;
+        String filePath = uploadDir + fileName;
+
+        // 파일 저장
+        File dest = new File(filePath);
+        file.transferTo(dest);
+
+        return fileName;
+    }
+
 }

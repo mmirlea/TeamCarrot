@@ -1,14 +1,20 @@
 package com.carrot.user.domain;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class UserDTO {
 	private String m_email;
-	private String m_pw; 
+	private String m_pw;
 	private String m_num;
 	private String m_nicknm;
 	private String m_proimg;
 	private String m_ondo;
 	private String m_addr1;
 	private String m_addr2;
+
+
+
+	private MultipartFile imageFile;
 
 	
 	public UserDTO() {}
@@ -78,7 +84,7 @@ public class UserDTO {
 	public void setM_ondo(String m_ondo) {
 		this.m_ondo = m_ondo;
 	}
-	
+
 	public String getM_addr1() {
 		return m_addr1;
 	}
@@ -162,5 +168,12 @@ public class UserDTO {
 		return true;
 	}
 
+	public MultipartFile getImageFile() {
+		return imageFile;
+	}
+
+	public void setImageFile(MultipartFile imageFile) {
+		this.imageFile = imageFile;
+	}
 
 }
