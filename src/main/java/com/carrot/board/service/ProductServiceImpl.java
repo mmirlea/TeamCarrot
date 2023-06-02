@@ -1,12 +1,14 @@
 package com.carrot.board.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.carrot.board.dao.ProductDAO;
 import com.carrot.board.domain.ProductDTO;
+import com.carrot.board.domain.SearchConditionP;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -49,5 +51,16 @@ public class ProductServiceImpl implements ProductService {
 	public List<ProductDTO> selectAll() throws Exception {
 		return productDAO.selectAll();
 	}
-
+	
+	public List<ProductDTO> getPage(Map map) throws Exception{
+		return productDAO.selectPage(map);
+	}
+	
+	public List<ProductDTO> getSearchSelectPage(SearchConditionP scp) throws Exception{
+		return productDAO.searchSelectPage(scp);
+	}
+	
+	public int getSearchResultCnt(SearchConditionP scp) throws Exception{
+		return productDAO.searchResultCnt(scp);
+	}
 }

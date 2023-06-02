@@ -44,10 +44,17 @@
                         <button type="button" class="btnPic" ><i class="fa-solid fa-image"></i></button>
                     </div>
                     <div class="gnbItem">
-                        <button type="button" class="btnTempSace" id="btnSave">저장</button>
+                   	 	<input type="hidden" id ="txtSave" name="b_tempSaveYn" value="N">
+                        <button type="button" class="btnSave" id="btnSave">저장</button>
                     </div>
                     <div class="gnbItem">
-                        <button type="button" class="btnWrite" id="btnWrite">완료</button>
+                    	<c:if test="${mode == 'new' }">
+	                        <button type="button" class="btnWrite" id="btnWrite">완료</button>
+                    	</c:if>
+                    	<c:if test="${mode != 'new' }">
+                    		<input type="hidden" value="${boardDTO.b_num} " name="b_num">
+	                        <button type="button" class="btnModify" id="btnModify">수정</button>
+                    	</c:if>
                     </div>
                 </div> <!--gnb-->
             </div> <!--.headeIn-->
@@ -65,17 +72,17 @@
                 <c:if test="${menu == 'board' }">
                 	<!-- 동네 -->
 	                <div class="divCategory"  >
-	                    <select name="${menu == 'board' ? 'b_cate' : 'p_cate'}" class="boardCategory">
-	                    	<option value="주제선택">주제선택</option>
-	                        <option value="동네사건사고">동네사건사고</option>
-	                        <option value="동네맛집">동네맛집</option>
-	                        <option value="동네소식">동네소식</option>
-	                        <option value="생활정보">생활정보</option>
-	                        <option value="취미생활">취미생활</option>
-	                        <option value="일상">일상</option>
-	                        <option value="분실/실종센터">분실/실종센터</option>
-	                        <option value="해주세요">해주세요</option>
-	                        <option value="동네사진전">동네사진전</option>
+	                    <select name="b_cate" value="${boardDTO.b_cate}" class="boardCategory">
+	                    	<option value="주제선택" ${boardDTO.b_cate == '주제선택' ? "selected" : ""}>주제선택</option>
+	                        <option value="동네사건사고" ${boardDTO.b_cate == '동네사건사고' ? "selected" : ""}>동네사건사고</option>
+	                        <option value="동네맛집" ${boardDTO.b_cate == '동네맛집' ? "selected" : ""}>동네맛집</option>
+	                        <option value="동네소식" ${boardDTO.b_cate == '동네소식' ? "selected" : ""}>동네소식</option>
+	                        <option value="생활정보" ${boardDTO.b_cate == '생활정보' ? "selected" : ""}>생활정보</option>
+	                        <option value="취미생활" ${boardDTO.b_cate == '취미생활' ? "selected" : ""}>취미생활</option>
+	                        <option value="일상" ${boardDTO.b_cate == '일상' ? "selected" : ""}>일상</option>
+	                        <option value="분실/실종센터" ${boardDTO.b_cate == '분실/실종센터' ? "selected" : ""}>분실/실종센터</option>
+	                        <option value="해주세요" ${boardDTO.b_cate == '해주세요' ? "selected" : ""}>해주세요</option>
+	                        <option value="동네사진전" ${boardDTO.b_cate == '동네사진전' ? "selected" : ""}>동네사진전</option>
 	                    </select>
 	                </div>
                 </c:if>
@@ -103,25 +110,40 @@
 
             <div class="divContent" >				
                 <!-- 가까이 사는 동네 이웃들에게 궁금한 것을 물어보세요! &#10; 우리동네 근처 이웃이 친절하게 진짜 동네 정보를 알려줄 거예요 -->
-                <textarea class="spContent"  name="${menu == 'board' ? 'b_content' : 'p_content'}">
-                	<c:out value='${menu == "board" ? boardDTO.b_content : productDTO.p_content }'/>
+				<textarea class="spContent"
+					name="${menu == 'board' ? 'b_content' : 'p_content'}">
+                	<c:out
+						value='${menu == "board" ? boardDTO.b_content : productDTO.p_content }' />
                 </textarea>
-            </div>
+			</div>
         </div> <!--.container-->
     </form>
+    
+   
 
 	<script type="text/javascript">
 		$(document).ready(function() {
+			
 			$("#btnBoard").on("click", function() {
 				location.href="<c:url value='/board/list?page=${page}&pageSize=${pageSize}'/>";
 			})
 			
-			$("#btnWrite").on("click", function() {
-
+			$("#btnModify").on("click", function() {
 				let form = $('#form');
+	
+				form.attr("action", "<c:url value='/board/modify'/>");
+				form.attr("method", "post");
+	
+				form.submit();
+			})
+			
+			$("#btnWrite").on("click", function() {
+				let form = $('#form');
+	
+				debugger;
 				form.attr("action", "<c:url value='/board/write'/>");
 				form.attr("method", "post");
-
+	
 				form.submit();
 			})
 
@@ -129,12 +151,38 @@
 			$("#btnSave").on("click", function() {
 
 				let form = $('#form');
+				
+				if($("#txtSave").val() == null || $("#txtSave").val() == "" || $("#txtSave").val() == "N"){
+					$("#txtSave").attr("value", "Y");
+				}
+				
 				form.attr("action", "<c:url value='/board/save'/>");
 				form.attr("method", "post");
-
+				
 				form.submit();
 			})
 		})
+		
+		
+		//
+		/* function formCheck(form) {
+			console.log(form);
+			debugger;
+			
+    		if(frm.m_title.value ==""){
+    			setMessage('제목을 입력하세요.', frm.m_title);
+    			return false;
+    		}
+    		
+    		return true;
+    	}
+		
+		function setMessage(msg, element) {
+			alert(${'${msg}'});'
+			if (element) {
+				element.select();
+			}
+		} */
 	</script>
 </body>
 </html>

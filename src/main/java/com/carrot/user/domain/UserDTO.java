@@ -4,7 +4,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class UserDTO {
 	private String m_email;
-	private String m_pw; 
+	private String m_pw;
 	private String m_num;
 	private String m_nicknm;
 	private String m_proimg;
@@ -21,7 +21,7 @@ public class UserDTO {
 	}
 
 	public UserDTO(String m_email, String m_pw, String m_num, String m_nicknm, String m_proimg, String m_addr1,
-			String m_addr2) {
+			String m_addr2, String m_ondo) {
 		this.m_email = m_email;
 		this.m_pw = m_pw;
 		this.m_num = m_num;
@@ -29,6 +29,7 @@ public class UserDTO {
 		this.m_proimg = m_proimg;
 		this.m_addr1 = m_addr1;
 		this.m_addr2 = m_addr2;
+		this.m_ondo = m_ondo;
 	}
 	
 
@@ -79,7 +80,7 @@ public class UserDTO {
 	public void setM_ondo(String m_ondo) {
 		this.m_ondo = m_ondo;
 	}
-	
+
 	public String getM_addr1() {
 		return m_addr1;
 	}
@@ -170,6 +171,5 @@ public class UserDTO {
 	public void setImageFile(MultipartFile imageFile) {
 		this.imageFile = imageFile;
 	}
-
 
 }

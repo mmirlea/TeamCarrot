@@ -10,7 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.carrot.board.domain.PageHandler;
+import com.carrot.board.domain.PageHandlerP;
 import com.carrot.board.domain.ProductDTO;
+import com.carrot.board.domain.SearchConditionP;
 import com.carrot.board.service.ProductService;
 
 @Controller
@@ -20,21 +23,54 @@ public class ProductController {
 	@Autowired
 	ProductService service;
 	
-	//중고물품 목록 출력
+	//중고물품 게시글 목록 출력
 	@GetMapping("/junggoMain")
-	public String list(Model m, HttpServletRequest request) {
+	public String list(Model m, SearchConditionP scp) {
 		try {
+			int totalCnt = service.getCount();
 			
-			List<ProductDTO> list = service.selectAll();
+			System.out.println("getCount:" + totalCnt);
+			PageHandlerP pageHandlerP = new PageHandlerP(totalCnt, scp);
+			System.out.println("pageHandlerP" + pageHandlerP);
+			
+			List<ProductDTO> list = service.getSearchSelectPage(scp);
+			System.out.println("list" + list);
+			
+			/* List<ProductDTO> list = service.selectAll(); */
+			
 			m.addAttribute("list", list);
+			m.addAttribute("ph", pageHandlerP);
 			
 		}catch(Exception e) {
 			e.printStackTrace();
 			m.addAttribute("msg", "LIST_ERR");
+			m.addAttribute("totalCnt", 0);
 		}
 		
 		return "junggoMain";
 	}
 	
+	//중고물풀 게시글 읽기
+	@GetMapping("/read")
+	public String read(Integer p_num, Model m) {
+		try {
+			ProductDTO productDTO = service.read(p_num);
+			
+			m.addAttribute(productDTO);
+		}catch(Exception e) {
+			e.printStackTrace();
+			m.addAttribute("msg", "READ_ERR");
+		}
+		
+		return "junggoDetail";
+	}
+	
+	@GetMapping("/write")
+	public String write(Model m) {
+		
+		m.addAttribute("mode", "new_product");
+		
+		return "JunggoDetail";
+	}
 	
 }

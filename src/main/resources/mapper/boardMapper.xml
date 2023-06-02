@@ -8,8 +8,8 @@
 
 	<!-- 게시글 읽어오기 -->
 	<select id="select" parameterType="int" resultType="BoardDTO">
-		SELECT B_MENU,   B_NUM,    B_CATE,  B_TITLE, B_CONTENT, 
-			   B_CRDATE, B_UPDATE, B_LIKEY, B_COMM,  B_VIEWCNT, 
+		SELECT B_MENU,    B_NUM,    B_CATE,   B_EMAIL, B_TITLE, 
+			   B_CONTENT, B_CRDATE, B_UPDATE, B_LIKEY, B_COMM,  B_VIEWCNT, 
 			   M_NICKNM, M_ADDR1
 		  FROM BOARD LEFT OUTER JOIN MEMBER
 		    ON B_EMAIL = M_EMAIL
@@ -33,6 +33,7 @@
 	<select id="count" resultType="int">
 		SELECT COUNT(*)
 		  FROM BOARD
+		 WHERE B_TEMPSAVEYN = 'N'
 	     <!-- WHERE B_MENU = '2' -->
 	</select>
 
@@ -53,10 +54,24 @@
 		UPDATE BOARD
 		   SET B_TITLE = #{b_title},
 		       B_CONTENT = #{b_content},
+		       B_CATE = #{b_cate},
 		       B_UPDATE = SYSDATE
 		 WHERE B_MENU = '2'
 		   AND B_NUM = #{b_num}
 		   AND B_EMAIL = #{b_email}
+	</update>
+	
+	<!-- 임시저장 작성하기 -->
+	<update id="tempUpdate" parameterType="BoardDTO">
+		UPDATE BOARD
+		   SET B_TITLE = #{b_title},
+		       B_CONTENT = #{b_content},
+		       AND B_TEMPSAVEYN = 'N'
+		       B_UPDATE = SYSDATE
+		 WHERE B_MENU = '2'
+		   AND B_NUM = #{b_num}
+		   AND B_EMAIL = #{b_email}
+		   AND B_TEMPSAVEYN = 'Y'
 	</update>
 
 	<!-- 글 삭제하기(게시글 번호와 작성자가 일치하는 경우에만 삭제 가능) -->
@@ -107,6 +122,7 @@
 				  FROM (SELECT B_NUM, B_CATE, B_EMAIL, B_TITLE, B_CONTENT, B_CRDATE, B_LIKEY, B_COMM
 					      FROM BOARD
 					     WHERE B_MENU = '2'
+					       AND B_TEMPSAVEYN = 'N'
 						 ORDER BY B_CRDATE DESC, B_NUM DESC) A)
 		 WHERE RUNM BETWEEN ((NVL(#{page}, 0)-1) * #{pageSize} +1) AND (NVL(#{page}, 0) * #{pageSize})
 	</select>
@@ -134,6 +150,7 @@
 					      FROM BOARD
 					     WHERE 1 = 1
 					       AND B_MENU = '2'
+					       AND B_TEMPSAVEYN = 'N'
 					    <include refid="searchCondition"></include>
 						ORDER BY B_CRDATE DESC, B_NUM DESC) A)
 		 WHERE RUNM BETWEEN ((NVL(#{page}, 0)-1) * #{pageSize} +1) AND (NVL(#{page}, 0) * #{pageSize})
