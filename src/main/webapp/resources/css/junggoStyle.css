@@ -104,12 +104,14 @@ i {
 }
 .productList ul{
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
 }
 .productList li{
     width: 260px;
+    margin-right: 20px;
+    margin-left: 20px;
     margin-bottom: 40px;
+
 }
 .productList a{
     color: #333;
