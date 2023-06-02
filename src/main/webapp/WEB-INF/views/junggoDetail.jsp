@@ -13,9 +13,10 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 <script src="https://kit.fontawesome.com/c0e3b26a7d.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 </head>
 <body>
-	<div class="wrap">
+	<form class="wrap" id="form">
 	
 		<%@ include file ="./header.jsp" %>
 		<%@ include file ="./tabRigth.jsp" %>
@@ -45,7 +46,7 @@
                             </div>
 
                         </div><!--memberInfo-Text-->
-                    </div><!--memberInfo-wrap-->
+                    </div><!--memberInfo-wrap-->                    
                     <div class="memberOndo-wrap">
                         <div class="memberOndo-Text">
                             <div class="ondo">
@@ -63,16 +64,21 @@
                 <hr>
             </div><!--memberAll-->  
             <div class="content-wrap">
-
-
-            	<h1 class="contentTitle">${menu == 'board' ? boardDTO.b_title : productDTO.b_title}</h1><!--.contentTitle-->
+            	<div class="content-top">
+	            	<h1 class="contentTitle">${menu == 'board' ? boardDTO.b_title : productDTO.b_title}</h1><!--.contentTitle-->
+					<div class="crud-wrap">
+	                    	<input type="hidden" value="${boardDTO.b_num} " name="b_num">
+	                    	<button type="button" class="btnModify" id="btnModify">수정</button>
+	                    	<button type="button" class="btnDel" id="btnDel">삭제</button>
+	                </div>
+            	</div>
                 <div class="contentInfo">
                     <span class="categry">${menu == "board" ? boardDTO.b_cate : productDTO.b_cate}</span>
                     &nbsp;•&nbsp;
 
                     <span class="pullUp">끌올</span>
                     &nbsp;
-                    <span class="ctime">1${menu == "board" ? boardDTO.b_upDate : productDTO.p_update}<span>
+                    <span class="ctime">1${menu == "board" ? boardDTO.b_upDate : productDTO.p_update}</span>
                 </div><!--contentInfo-->
                 <div class="content">
 
@@ -102,92 +108,120 @@
 	                <hr>
 	            </div><!--.heartBar-wrap-->
             </c:if>
-
-            <div class="comments-wrap">
-                <div class="commentsHeader">
-                    <div class="commentsCnt">
-                        <div class="iconComments">
-                            <i class="xi-speech-o xi-2x"></i>
-                         </div>
-                        <div class="daetgeul">댓글</div>
-                        <div class="commentsNum">${productDTO.p_comm}</div>
-                    </div><!--commentsCnt-->
-                    
-                    <div class="commentsFilter">
-                        <label for="firstComments">
-                            <input type="radio" id="firstComments" name="orderBtn" value="firstComments" checked="checked"><span>등록순</span></input>
-                        </label>
-                        <label for="lastComments">
-                            <input type="radio" id="lastComments" name="orderBtn" value="lastComments"><span>최신순</span></input>
-                        </label>
-                    </div><!--.commentsFilter-->
-                </div><!--commentsHeader-->
-                
-                
-                <div class="comments-area">
-                    <ul>
-                        <li class="comments-list">
-                            <div class="commentsProfile-Img"><img src="../resources/img/memberImg.png" alt="회원이미지"></div>
-                            <div class="comments-box">
-                                    <div class="commentsProfile-Text">
-                                        <span class="commentsNickname">블루</span>
-                                        <span>주소1 </span>
-                                        <span>주소2</span>
-                                    </div>
-                                    <div class="comments-textbox">
-                                        안녕하세요 여기는 댓글입니다.
-                                        <br>
-                                        안녕하세요 여기는 댓글입니다.
-                                        <br>
-                                        안녕하세요 여기는 댓글입니다.
-                                    </div>
-                                    <div class="commentsInfo">
-                                        <span class="commentsInfo-date">2023-04-05 12:12:12</span>
-                                        <span class="commentsInfo-replyBtn">
-                                            <button type="button" class="replyBtn">답글쓰기</button>
-                                        </span>
-                                    </div>
-                            </div><!--comments-box-->
-                        </li>
-                        <li class="comments-list reply">
-                            <div class="commentsProfile-Img"><img src="../resources/img/memberImg.png" alt="회원이미지"></div>
-                            <div class="comments-box">
-                                    <div class="commentsProfile-Text">
-                                        <span class="commentsNickname">레드</span>
-                                        <span class="commentsAddress">남구 달동</span>
-                                    </div>
-                                    <div class="comments-textbox">
-                                        안녕하세요 여기는 대댓글입니다.
-                                    </div>
-                                    <div class="commentsInfo">
-                                        <span class="commentsInfo-date">2023-04-06 15:15:15</span>
-                                        <span class="commentsInfo-replyBtn">
-                                            <button type="button" class="replyBtn">답글쓰기</button>
-                                        </span>
-                                    </div>
-                            </div><!--comments-box-->
-                        </li>
-                        <li class="comments-list">
-                            <div class="commentsWrite-box">
-                                <div class="commentsProfile-Text">
-                                    <span class="commentsNickname">블루</span>
-                                    <span class="commentsAddress">남구 옥동</span>
-                                </div>                     
-                                <div class="div-textarea">
-                                    <textarea rows="1" placeholder="댓글을 남겨보세요" class="commentsWrite-textarea"></textarea>
-                                </div>
-                                <div class="commentsWrite-writeBtn">
-                                    <button type="button" class="writeBtn"><i class="fa-solid fa-circle-up"></i></button>
-                                </div>
-                            </div><!--.commentsWrite-box-->
-                        </li>
-                    </ul>
-                    
-                </div><!--comments-area-->
-            
-            </div><!--.comments-wrap-->
-        </div><!--.container-->
-    </div><!--.wrap-->
+    	</div> <!-- .container -->
+    </form><!--.wrap-->
     
+    <form class="wrap" id="commFrm">
+		<div class="comments-wrap">
+		    <div class="commentsHeader">
+		        <div class="commentsCnt">
+		            <div class="iconComments">
+		                <i class="xi-speech-o xi-2x"></i>
+		             </div>
+		            <div class="daetgeul">댓글</div>
+		            <div class="commentsNum">${productDTO.p_comm}</div>
+		        </div><!--commentsCnt-->
+		        
+		        <div class="commentsFilter">
+		            <label for="firstComments">
+		                <input type="radio" id="firstComments" name="orderBtn" value="firstComments" checked="checked"><span>등록순</span>
+		            </label>
+		            <label for="lastComments">
+		                <input type="radio" id="lastComments" name="orderBtn" value="lastComments"><span>최신순</span>
+		            </label>
+		        </div><!--.commentsFilter-->
+		    </div><!--commentsHeader-->
+                
+			<div class="comments-area">
+			    <ul>
+			        <li class="comments-list">
+			            <div class="commentsProfile-Img"><img src="../resources/img/memberImg.png" alt="회원이미지"></div>
+			            <div class="comments-box">
+			                    <div class="commentsProfile-Text">
+			                        <span class="commentsNickname">블루</span>
+			                        <span>주소1 </span>
+			                        <span>주소2</span>
+			                    </div>
+			                    <div class="comments-textbox">
+			                        안녕하세요 여기는 댓글입니다.
+			                        <br>
+			                        안녕하세요 여기는 댓글입니다.
+			                        <br>
+			                        안녕하세요 여기는 댓글입니다.
+			                    </div>
+			                    <div class="commentsInfo">
+			                        <span class="commentsInfo-date">2023-04-05 12:12:12</span>
+			                        <span class="commentsInfo-replyBtn">
+			                            <button type="button" class="replyBtn">답글쓰기</button>
+			                        </span>
+			                    </div>
+			            </div><!--comments-box-->
+			        </li>
+			        <li class="comments-list reply">
+			            <div class="commentsProfile-Img"><img src="../resources/img/memberImg.png" alt="회원이미지"></div>
+			            <div class="comments-box">
+			                    <div class="commentsProfile-Text">
+			                        <span class="commentsNickname">레드</span>
+			                        <span class="commentsAddress">남구 달동</span>
+			                    </div>
+			                    <div class="comments-textbox">
+			                        안녕하세요 여기는 대댓글입니다.
+			                    </div>
+			                    <div class="commentsInfo">
+			                        <span class="commentsInfo-date">2023-04-06 15:15:15</span>
+			                        <span class="commentsInfo-replyBtn">
+			                            <button type="button" class="replyBtn">답글쓰기</button>
+			                        </span>
+			                    </div>
+			            </div><!--comments-box-->
+			        </li>
+			        <li class="comments-list">
+			            <div class="commentsWrite-box">
+			                <div class="commentsProfile-Text">
+			                    <span class="commentsNickname">블루</span>
+			                    <span class="commentsAddress">남구 옥동</span>
+			                </div>                     
+			                <div class="div-textarea">
+			                    <textarea rows="1" placeholder="댓글을 남겨보세요" class="commentsWrite-textarea"></textarea>
+			                </div>
+			                <div class="commentsWrite-writeBtn">
+			                    <button type="button" class="writeBtn"><i class="fa-solid fa-circle-up"></i></button>
+			                </div>
+			            </div><!--.commentsWrite-box-->
+			        </li>
+			    </ul>
+			    
+			</div><!--comments-area-->
+		</div><!--.comments-wrap-->
+    </form>
+    
+    <script type="text/javascript">
+    $(document).ready(function() {
+			
+		$("#btnDel").on("click", function(){
+			
+			if(!confirm("정말로 삭제하시겠습니까?")) return;
+			
+			debugger;
+			let form = $('#form');
+			form.attr("action", "<c:url value='/board/remove?page=${page}&pageSize=${pageSize}'/>");
+			form.attr("method", "post");
+			form.append("<input type='hidden' name='b_num' value='${boardDTO.b_num}'>");
+			
+			form.submit();
+		})
+		
+		$("#btnModify").on("click", function() {
+			let form = $('#form');
+			
+			form.attr("action", "<c:url value='/board/select?b_num=${b_num}'/>");
+			form.attr("method", "get");
+			form.append("<input type='hidden' name='b_num' value='${boardDTO.b_num}'>");
+			form.submit();
+		})
+		
+	})
+    	
+    </script>
 </body>
 </html>
