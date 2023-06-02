@@ -118,10 +118,14 @@
 			</div>
         </div> <!--.container-->
     </form>
-    
-   
 
 	<script type="text/javascript">
+	
+		let b_title = document.getElementById("b_title");
+		let b_cate = document.getElementById("b_cate");
+		let b_content = document.getElementById("b_content");
+		let form = document.getElementById("form");
+	
 		$(document).ready(function() {
 			
 			$("#btnBoard").on("click", function() {
@@ -138,6 +142,9 @@
 			})
 			
 			$("#btnWrite").on("click", function() {
+				
+				formCheck()
+				
 				let form = $('#form');
 	
 				debugger;
@@ -163,26 +170,59 @@
 			})
 		})
 		
-		
-		//
-		/* function formCheck(form) {
-			console.log(form);
-			debugger;
-			
-    		if(frm.m_title.value ==""){
-    			setMessage('제목을 입력하세요.', frm.m_title);
-    			return false;
-    		}
-    		
-    		return true;
-    	}
-		
 		function setMessage(msg, element) {
-			alert(${'${msg}'});'
+	
+			//document.getElementById("msg").innerHTML = `<i class="fa fa-exclamation-circle"> ${'${msg}'}</i>`;
+			alert(${'${msg}'});
+	
 			if (element) {
 				element.select();
 			}
-		} */
+		}
+	
+		function formCheck() {
+			
+			alert("알림!!!");
+			
+			var msg = '';
+	
+			if (form.b_title.value == "") {
+				setMessage('제목을 입력하세요', form.b_title);
+				return false;
+			}
+			
+			if (form.b_cate.value == "" || form.b_cate.value == "주제선택") {
+				setMessage('카테고리를 선택하세요', form.b_cate);
+				return false;
+			}
+			
+			if (form.b_content.value == "") {
+				setMessage('내용을 입력하세요', form.b_content);
+				return false;
+			}
+	
+			return true;
+		}
+		
+		function fn_idOverlap() {
+			$.ajax({
+				url : "/board/register/idOverlap",
+				type : "post",
+				dataType : "json",
+				data : {"id" : $("#id").val()},
+				success : function(data) {
+					if($("#id").val() == null || $("#id").val() == ""){
+						setMessage("id를 입력하세요", $("#id"));
+					} else if (data == 0){
+						setMessage("사용 가능한 아이디 입니다.", $("#pwd"));
+						$("idOverlap").attr("value", "Y");
+					} else if (data == 1) {
+						setMessage("중복된아이디 입니다", $("#id"));
+					}
+						
+				}
+			})
+		}
 	</script>
 </body>
 </html>
