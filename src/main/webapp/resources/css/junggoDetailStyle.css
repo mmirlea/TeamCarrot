@@ -166,6 +166,22 @@ a{
     border: 0;
 }
 
+.crud-wrap{
+	display: flex;
+}
+
+.crud-wrap .btnSave,.btnDel{
+    font-size: 14px;
+    line-height: 14px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #FF7E36;
+    border: none;
+    width: 45px;
+    height: 30px;
+    border-radius: 8px;
+}
+
 /* .container .content-wrap */
 .content-wrap{
     width: 800px;

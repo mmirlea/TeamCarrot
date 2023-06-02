@@ -27,7 +27,78 @@ public class BoardController {
 
 	@Autowired
 	BoardService service;
+	
+	@PostMapping("/remove")
+	public String remove(Integer b_num, Integer page, Integer pageSize, RedirectAttributes rattr, Model m,
+			HttpSession session) {
+		String b_email = (String) session.getAttribute("m_email");
 
+		try {
+			m.addAttribute("page", page);
+			m.addAttribute("pageSize", pageSize);
+
+			int rowCnt = service.remove(b_num, b_email);
+
+			if (rowCnt != 1) {
+				throw new Exception("remove error");
+			}
+
+			rattr.addFlashAttribute("msg", "DEL_OK");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			rattr.addFlashAttribute("msg", "DEL_ERR");
+		}
+
+		return "redirect:/board/list";
+	}
+
+	@PostMapping("/modify")
+	public String modify(BoardDTO boardDTO, RedirectAttributes rattr, Model m, HttpSession session) {
+		String b_email = (String) session.getAttribute("m_email");
+		boardDTO.setB_email(b_email);
+
+		System.out.println("modify -> email : " + b_email);
+		System.out.println("modify -> boardDTO : " + boardDTO);
+		try {
+			if (service.modify(boardDTO) != 1)
+				throw new Exception("Modify failed");
+
+			rattr.addFlashAttribute("msg", "MOD_OK");
+
+			return "redirect:/board/list";
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+			//m.addAttribute("mode", "new"); 
+			m.addAttribute("menu", "board");
+			m.addAttribute("boardDto", boardDTO); 
+			m.addAttribute("msg", "MOD_ERR"); 
+
+			return "boardDetail"; 
+		}
+	}
+	
+	@GetMapping("/select")
+	public String select(BoardDTO boardDTO, RedirectAttributes rattr, Model m, HttpSession session) {
+		String b_email = (String) session.getAttribute("m_email");
+		boardDTO.setB_email(b_email);
+		try {
+			System.out.println("select -> boardDTO : " + boardDTO);
+			boardDTO = service.select(boardDTO.getB_num());
+
+			m.addAttribute("boardDTO", boardDTO);
+			m.addAttribute("menu", "board");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			m.addAttribute("msg", "LIST_ERR");
+		}
+
+		return "boardDetail";
+	}
+	
 	@GetMapping("/save")
 	public String save(Model m) {
 		m.addAttribute("mode", "new");
@@ -37,11 +108,12 @@ public class BoardController {
 
 	@PostMapping("/save")
 	public String save(BoardDTO boardDTO, RedirectAttributes rattr, Model m, HttpSession session) {
-		String b_email = (String) session.getAttribute("email");
+		String b_email = (String) session.getAttribute("m_email");
 		boardDTO.setB_email(b_email);
-
+		boardDTO.setB_tempSaveYn("Y");
+		
 		try {
-			if (service.write(boardDTO) != 1)
+			if (service.save(boardDTO) != 1)
 				throw new Exception("Write failed");
 
 			rattr.addFlashAttribute("msg", "WRT_OK");
@@ -71,7 +143,7 @@ public class BoardController {
 		if (!loginCheck(request))
 			return "redirect:/login/login?toURL=" + request.getRequestURL();
 
-		String b_email = (String) session.getAttribute("email");
+		String b_email = (String) session.getAttribute("m_email");
 		boardDTO.setB_email(b_email);
 
 		try {
@@ -93,11 +165,7 @@ public class BoardController {
 
 	@GetMapping("/read")
 	public String read(Integer b_num, Integer page, Integer pageSize, Model m) {
-
-		System.out.println("b_num : " + b_num);
-		System.out.println("page : " + page);
-		System.out.println("pageSize : " + pageSize);
-
+		
 		try {
 			BoardDTO boardDTO = service.read(b_num);
 			m.addAttribute("boardDTO", boardDTO);
@@ -113,7 +181,6 @@ public class BoardController {
 	}
 
 	@GetMapping("/list")
-//	public String list(Integer page, Integer pageSize, Model m, HttpServletRequest request) {
 	public String list(SearchCondition sc, Model m) {
 		try {
 			int totalCnt = service.getCount();
@@ -138,7 +205,7 @@ public class BoardController {
 
 	private boolean loginCheck(HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		return session.getAttribute("email") != null;
+		return session.getAttribute("m_email") != null;
 	}
 
 }
