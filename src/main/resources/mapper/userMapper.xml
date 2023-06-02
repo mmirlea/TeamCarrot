@@ -57,4 +57,10 @@
 		SET M_ADDR1=#{m_addr1}, M_ADDR2=#{m_addr2}
 		WHERE M_EMAIL=#{m_email}
 	</update>
+	
+	<!-- 계정 삭제 -->
+	<update id="delUser" parameterType="UserDTO">
+		DELETE FROM MEMBER
+		WHERE M_EMAIL=#{m_email}
+	</update>
 </mapper>

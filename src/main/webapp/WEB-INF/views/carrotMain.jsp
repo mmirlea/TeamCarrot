@@ -6,9 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="<c:url value='/resources/css/carrotStyle.css'/>" rel="stylesheet" />
+<link href="<c:url value='/resources/css/carrotStyle.css?1d3a'/>" rel="stylesheet" />
 <link href="<c:url value='/resources/css/footerStyle.css'/>" rel="stylesheet" />
-<link href="<c:url value='/resources/css/headerStyle.css'/>" rel="stylesheet" />
 <link
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
@@ -18,7 +17,7 @@
 <body>
  <div class="wrap">
  
-     <c:set var="loginOutLink" value="${sessionScope.m_email==null ? '/login/login' : '/login/logout'}" />
+    <c:set var="loginOutLink" value="${sessionScope.m_email==null ? '/login/login' : '/login/logout'}" />
 	<c:set var="loginOut" value="${sessionScope.m_email==null ? '로그인/회원가입' : '로그아웃'}" />
 
 	 <div class="header">

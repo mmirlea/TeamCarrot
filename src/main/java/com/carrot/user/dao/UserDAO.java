@@ -19,4 +19,6 @@ public interface UserDAO {
 	int modifyPw(UserDTO dto) throws Exception;
 	
 	int modifyAddr(UserDTO dto) throws Exception;
+	
+	int delUser(UserDTO dto) throws Exception;
 }

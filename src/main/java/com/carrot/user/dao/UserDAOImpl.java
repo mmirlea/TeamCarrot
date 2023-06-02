@@ -52,4 +52,9 @@ public class UserDAOImpl implements UserDAO {
 	public int modNoImg(UserDTO dto) throws Exception {
 		return session.update(namespace+"modNoImg", dto);
 	}
+
+	@Override
+	public int delUser(UserDTO dto) throws Exception {
+		return session.delete(namespace+"delUser", dto);
+	}
 }
