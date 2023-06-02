@@ -6,6 +6,7 @@ public class UserDTO {
 	private String m_num;
 	private String m_nicknm;
 	private String m_proimg;
+	private String m_ondo;
 	private String m_addr1;
 	private String m_addr2;
 	private float m_ondo;
@@ -77,6 +78,14 @@ public class UserDTO {
 		this.m_proimg = m_proimg;
 	}
 
+	public String getM_ondo() {
+		return m_ondo;
+	}
+
+	public void setM_ondo(String m_ondo) {
+		this.m_ondo = m_ondo;
+	}
+	
 	public String getM_addr1() {
 		return m_addr1;
 	}
@@ -159,4 +168,6 @@ public class UserDTO {
 			return false;
 		return true;
 	}
+
+
 }

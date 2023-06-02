@@ -10,4 +10,11 @@ public interface UserService {
 
 	UserDTO login(UserDTO dto) throws Exception;
 
+	UserDTO mypageInfo(String m_email) throws Exception;
+	
+	int modify(UserDTO dto) throws Exception;
+	
+	int modifyPw(UserDTO dto) throws Exception;
+
+	int modifyAddr(UserDTO dto) throws Exception;
 }

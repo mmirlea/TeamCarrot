@@ -25,5 +25,27 @@ public class UserServiceImpl implements UserService {
 	public UserDTO login(UserDTO dto) throws Exception{
 		return dao.login(dto);
 	}
+
+	@Override
+	public UserDTO mypageInfo(String m_email) throws Exception {
+		return dao.mypageInfo(m_email);
+	}
+
+	@Override
+	public int modify(UserDTO dto) throws Exception {
+		return dao.modify(dto);
+	}
+
+	@Override
+	public int modifyPw(UserDTO dto) throws Exception {
+		return dao.modifyPw(dto);
+	}
+
+	@Override
+	public int modifyAddr(UserDTO dto) throws Exception {
+		return dao.modifyAddr(dto);
+	}
+	
+	
 	
 }

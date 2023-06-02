@@ -46,7 +46,7 @@ img{
 }
 
 .profileLeft{
-    width: 200px;
+    width: 300px;
     padding: 0 40px;
 }
 
@@ -79,7 +79,7 @@ img{
     display: flex;
     font-size: 18px;
     margin-top: 140px;
-    margin-left: 280px;
+    margin-left: 200px;
 }
 
 .myState .state{
@@ -147,7 +147,7 @@ img{
     border-radius: 10px;
     position: absolute;
     bottom: 22px;
-    left: 220px;
+    left: 300px;
     border: none;
     font-size: 15px;
     font-weight: bold;
@@ -501,6 +501,15 @@ h3{
 .xi-thumbs-up{
     color: #fc9e6c;
     margin-left: 7px;
+    margin-right: 10px;
+}
+
+.modAndDel button{
+	width: 40px;
+	height: 20px;
+	background-color: #e0e0e0;
+	border-radius: 5px;
+	border : none;
 }
 
 .myCommentList li{

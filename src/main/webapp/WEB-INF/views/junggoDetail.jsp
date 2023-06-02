@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +18,7 @@
 	<div class="wrap">
 	
 		<%@ include file ="./header.jsp" %>
-	
+		<%@ include file ="./tabRigth.jsp" %>
         <div class="container">
             <div class="swiper-modify">
                 <div class="swiper mySwiper">
@@ -36,11 +37,13 @@
                     <div class="memberInfo-wrap">
                         <div class="memberInfo-Img"><img src="../resources/img/memberImg.png" alt="회원이미지"></div>
                         <div class="memberInfo-Text">
-                            <div class="nickname">${productDTO.userDTO.m_nicknm}</div>
+
+                            <div class="nickname">${menu == "board" ? boardDTO.userDTO.m_nicknm : productDTO.userDTO.m_nicknm}</div>
                             <div class="memberAddress">
-                            	<span>${productDTO.userDTO.m_addr1}</span>
-                            	<span>${productDTO.userDTO.m_addr2}</span>
+                              <span>${menu == "board" ? boardDTO.userDTO.m_addr1 : productDTO.userDTO.m_addr1}</span>
+                              <span>${menu == "board" ? boardDTO.userDTO.m_addr2 : productDTO.userDTO.m_addr2}</span>
                             </div>
+
                         </div><!--memberInfo-Text-->
                     </div><!--memberInfo-wrap-->
                     <div class="memberOndo-wrap">
@@ -60,39 +63,46 @@
                 <hr>
             </div><!--memberAll-->  
             <div class="content-wrap">
-                <h1 class="contentTitle"><c:out value="${productDTO.p_title }"/></h1><!--.contentTitle-->
+
+
+            	<h1 class="contentTitle"><c:out vlaue="${menu == "board" ? boardDTO.b_title : productDTO.b_title}"/></h1><!--.contentTitle-->
                 <div class="contentInfo">
-                    <span class="categry">${productDTO.p_cate }</span>
-                    &nbsp•&nbsp
+                    <span class="categry">${menu == "board" ? boardDTO.b_cate : productDTO.b_cate}</span>
+                    &nbsp;•&nbsp;
+
                     <span class="pullUp">끌올</span>
                     &nbsp;
-                    <span class="ctime">1일전<span>
+                    <span class="ctime">1${menu == "board" ? boardDTO.b_upDate : productDTO.p_update}<span>
                 </div><!--contentInfo-->
                 <div class="content">
-                   <c:out value="${productDTO.p_content}"/>
+
+                    <c:out value='${menu == "board" ? boardDTO.b_content : productDTO.p_content}'/>
                 </div><!--content-->
                 <div class="countUp">
-                    <span class="itemAttention">관심 ${productDTO.p_likey}</span>
-                    &nbsp•&nbsp
-                    <span class="itemChat">채팅 3</span>
-                    &nbsp•&nbsp
-                    <span class="itemCheck">조회 ${productDTO.p_viewcnt}</span>
+                    <span class="itemAttention">관심 ${menu == "board" ? boardDTO.b_likey : productDTO.p_likey}</span>
+                    &nbsp;•&nbsp;
+                    <span class="itemChat">채팅 ${menu == "board" ? boardDTO.b_comm : productDTO.p_comm}</span>
+                    &nbsp;•&nbsp;
+                    <span class="itemCheck">조회 ${menu == "board" ? boardDTO.b_viewCnt : productDTO.p_viewCnt}</span>
                 </div><!--.countUp-->
                 <hr>
             </div><!--.content-wrap-->
-            <div class="heartBar-wrap">
-                <div class="heartBar">
-                    <div class="heartBtn">
-                        <i class="xi-heart-o xi-4x"></i>  
-                     </div><!--heartBtn-->
-                    <div class="priceInfo">
-                        <div class="price"><c:out value="${productDTO.p_price }"/>원</div>
-                        <div class="priceNego">가격 제안 가능</div>
-                    </div><!--priceInfo-->
-                    <button type="button" class="chatBtn">채팅하기</button>
-                </div><!--.heartBar-->
-                <hr>
-            </div><!--.heartBar-wrap-->
+            <c:if test="${menu != 'board' }">
+	            <div class="heartBar-wrap">
+	                <div class="heartBar">
+	                    <div class="heartBtn">
+	                        <i class="xi-heart-o xi-4x"></i>  
+	                     </div><!--heartBtn-->
+	                    <div class="priceInfo">
+	                        <div class="price">10,000원</div>
+	                        <div class="priceNego">가격 제안 가능</div>
+	                    </div><!--priceInfo-->
+	                    <button type="button" class="chatBtn">채팅하기</button>
+	                </div><!--.heartBar-->
+	                <hr>
+	            </div><!--.heartBar-wrap-->
+            </c:if>
+
             <div class="comments-wrap">
                 <div class="commentsHeader">
                     <div class="commentsCnt">

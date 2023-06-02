@@ -2,12 +2,14 @@ package com.carrot.board.domain;
 
 import java.util.Date;
 
+import com.carrot.user.domain.UserDTO;
+
 public class BoardDTO {
-	
+
 	private String b_menu;
 	private Integer b_num;
 	private String b_cate;
-	private String b_emial;
+	private String b_email;
 	private String b_title;
 	private String b_content;
 	private String b_img;
@@ -18,14 +20,25 @@ public class BoardDTO {
 	private String b_likeyEmail;
 	private Integer b_comm;
 	private Integer b_viewCnt;
-		
-	public BoardDTO() {}
 
-	public BoardDTO(String b_cate, String b_emial, String b_title, String b_content) {
+	private UserDTO userDTO;
+
+	public BoardDTO() {
+	}
+
+	public BoardDTO(String b_cate, String b_email, String b_title, String b_content) {
 		this.b_cate = b_cate;
-		this.b_emial = b_emial;
+		this.b_email = b_email;
 		this.b_title = b_title;
 		this.b_content = b_content;
+	}
+
+	public UserDTO getUserDTO() {
+		return userDTO;
+	}
+
+	public void setUserDTO(UserDTO userDTO) {
+		this.userDTO = userDTO;
 	}
 
 	public String getB_menu() {
@@ -52,12 +65,12 @@ public class BoardDTO {
 		this.b_cate = b_cate;
 	}
 
-	public String getB_emial() {
-		return b_emial;
+	public String getB_email() {
+		return b_email;
 	}
 
-	public void setB_emial(String b_emial) {
-		this.b_emial = b_emial;
+	public void setB_email(String b_emial) {
+		this.b_email = b_emial;
 	}
 
 	public String getB_title() {
@@ -142,8 +155,11 @@ public class BoardDTO {
 
 	@Override
 	public String toString() {
-		return "BoardDTO [b_num=" + b_num + ", b_cate=" + b_cate + ", b_emial=" + b_emial + ", b_title=" + b_title
-				+ ", b_content=" + b_content + "]";
+		return "BoardDTO [b_menu=" + b_menu + ", b_num=" + b_num + ", b_cate=" + b_cate + ", b_emial=" + b_email
+				+ ", b_title=" + b_title + ", b_content=" + b_content + ", b_img=" + b_img + ", b_crDate=" + b_crDate
+				+ ", b_upDate=" + b_upDate + ", b_tempSaveYn=" + b_tempSaveYn + ", b_likey=" + b_likey
+				+ ", b_likeyEmail=" + b_likeyEmail + ", b_comm=" + b_comm + ", b_viewCnt=" + b_viewCnt + ", userDTO="
+				+ userDTO + "]";
 	}
 
 	@Override
@@ -154,7 +170,7 @@ public class BoardDTO {
 		result = prime * result + ((b_comm == null) ? 0 : b_comm.hashCode());
 		result = prime * result + ((b_content == null) ? 0 : b_content.hashCode());
 		result = prime * result + ((b_crDate == null) ? 0 : b_crDate.hashCode());
-		result = prime * result + ((b_emial == null) ? 0 : b_emial.hashCode());
+		result = prime * result + ((b_email == null) ? 0 : b_email.hashCode());
 		result = prime * result + ((b_img == null) ? 0 : b_img.hashCode());
 		result = prime * result + ((b_likey == null) ? 0 : b_likey.hashCode());
 		result = prime * result + ((b_likeyEmail == null) ? 0 : b_likeyEmail.hashCode());
@@ -196,10 +212,10 @@ public class BoardDTO {
 				return false;
 		} else if (!b_crDate.equals(other.b_crDate))
 			return false;
-		if (b_emial == null) {
-			if (other.b_emial != null)
+		if (b_email == null) {
+			if (other.b_email != null)
 				return false;
-		} else if (!b_emial.equals(other.b_emial))
+		} else if (!b_email.equals(other.b_email))
 			return false;
 		if (b_img == null) {
 			if (other.b_img != null)
@@ -248,5 +264,5 @@ public class BoardDTO {
 			return false;
 		return true;
 	}
-	
+
 }

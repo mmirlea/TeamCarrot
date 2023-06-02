@@ -35,6 +35,11 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
+	public int save(BoardDTO boardDto) throws Exception {
+		return session.insert(namespace + "save", boardDto);
+	}
+
+	@Override
 	public int update(BoardDTO boardDto) throws Exception {
 		return session.update(namespace + "update", boardDto);
 	}
@@ -76,7 +81,6 @@ public class BoardDAOImpl implements BoardDAO {
 	public int searchResultCnt(SearchCondition sc) throws Exception {
 		return session.selectOne(namespace + "searchResultCnt", sc);
 	}
-
 //	@Override
 //	public int updateCommentsCnt(int cnt, Integer b_num) throws Exception {
 //		Map map = new HashMap();

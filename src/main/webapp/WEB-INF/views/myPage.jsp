@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,24 +9,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="https://fonts.googleapis.com/css?family=Jua:400" rel="stylesheet">
-    <link rel="stylesheet" href="./css/Mypagecss.css">
+    <link href="<c:url value='/resources/css/myPageStyle.css?ba'/>" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 </head>
 <body>
+   <%--  <%@ include file ="./header.jsp" %> --%>
     <div class="wrap">
         <div class="container">
             <div class="myProfile">
                 <div class="profileLeft">
-                    <div><img src="./img/carrotimg/profilimg.png" alt="나의 프로필 이미지" class="myProfileImg"></div>
+                    <div><img src="../resources/img/carrotimg/profilimg.png" alt="나의 프로필 이미지" class="myProfileImg"></div>
                     <div class="nameTitle">
-                        <p class="nickname">붕어빵</p>
-                        <p class="nicknameTag">#1234567</p>
+                        <p class="nickname">${dto.m_nicknm}</p>
+                        <p class="nicknameTag">#${dto.m_num}</p>
                     </div>    
                 </div><!--.profileLeft-->
                 <div class="mpInfo">
-                    <div><i class="xi-gps-none">신정2동 <b>4회</b> 인증, 강원도 강릉시 <b>미인증</b></i></div>
+                    <div><i class="xi-gps-none">${dto.m_addr2} <b> 4회</b> 인증</i></div>
                     <div><i class="xi-clock-o">최근 3일 이내 활동 (2022년 4월 2일 가입)</i></div>
                 </div>
                 <div class="myState">
@@ -38,13 +42,13 @@
                 </div>
                 <div class="mpMannerOndo">
                     <p class="mpOndoTitle"><i class="xi-help-o"></i>매너온도</p>
-                    <div class="mpMyOndo">36.5℃ <img src="./img/carrotimg/ondoimg.png" alt="" class="mpOndoImg"></div>
+                    <div class="mpMyOndo">${dto.m_ondo}<img src="../resources/img/carrotimg/ondoimg.png" alt="" class="mpOndoImg"></div>
                     <div class="mpOndoBar">
                         <div class="mpOndoBar1"></div>
                         <div class="mpOndoBar2"></div>
                     </div>
                 </div><!--mpMannerOndo-->
-                <button type="menu" class="ModifyProfileBtn">프로필 수정</button>
+                <button type="menu" class="ModifyProfileBtn"><a href="/carrot/mypage/myprofile">프로필 수정</a></button>
                 
             </div>
             <div class="MyPageMenu">
@@ -70,7 +74,7 @@
                         <ul class="mpItemList">
                             <li>
                                 <a href="">
-                                    <div class="mpItemImg"><img src="./img/carrotimg/물건2.jpg" alt="위닉스 제습기"></div>
+                                    <div class="mpItemImg"><img src="../resources/img/carrotimg/물건2.jpg" alt="위닉스 제습기"></div>
                                     <div class="mpItemName">위닉스 제습기</div>
                                     <div class="mpItemPrice">50,000원</div>
                                     <div class="mpItemAddress">서울 성동구 행당동</div>
@@ -83,7 +87,7 @@
                             </li>
                             <li>
                                 <a href="">
-                                    <div class="mpItemImg"><img src="./img/carrotimg/물건5.jpg" alt="발뮤다 더 토스터, 더 오븐기"></div>
+                                    <div class="mpItemImg"><img src="../resources/img/carrotimg/물건5.jpg" alt="발뮤다 더 토스터, 더 오븐기"></div>
                                     <div class="mpItemName">발뮤다 더 토스터, 더 오븐기 상태 좋아요</div>
                                     <div class="mpItemPrice">100,000원</div>
                                     <div class="mpItemAddress">경기도 성남시 분당구 이매동</div>
@@ -96,7 +100,7 @@
                             </li>
                             <li>
                                 <a href="">
-                                    <div class="mpItemImg"><img src="./img/carrotimg/물건6.jpg" alt="캠핑테이블"></div>
+                                    <div class="mpItemImg"><img src="../resources/img/carrotimg/물건6.jpg" alt="캠핑테이블"></div>
                                     <div class="mpItemName">캠핑테이블</div>
                                     <div class="mpItemPrice">10,000원</div>
                                     <div class="mpItemAddress">경기도 부천시 중동</div>
@@ -109,7 +113,7 @@
                             </li>
                             <li>
                                 <a href="">
-                                    <div class="mpItemImg"><img src="./img/carrotimg/물건8.jpg" alt="RTX 3070 8GB 그래픽 카드"></div>
+                                    <div class="mpItemImg"><img src="../resources/img/carrotimg/물건8.jpg" alt="RTX 3070 8GB 그래픽 카드"></div>
                                     <div class="mpItemName">RTX 3070 8GB 그래픽 카드</div>
                                     <div class="mpItemPrice">250,000원</div>
                                     <div class="mpItemAddress">경기도 부천시 중동</div>
@@ -122,7 +126,7 @@
                             </li>
                             <li>
                                 <a href="">
-                                    <div class="mpItemImg"><img src="./img/carrotimg/물건9.jpg" alt="pxg 경량 스탠드백 골프백"></div>
+                                    <div class="mpItemImg"><img src="../resources/img/carrotimg/물건9.jpg" alt="pxg 경량 스탠드백 골프백"></div>
                                     <div class="mpItemName">pxg 경량 스탠드백 골프백</div>
                                     <div class="mpItemPrice">170,000원</div>
                                     <div class="mpItemAddress">서울 강남구 대치동</div>
@@ -135,7 +139,7 @@
                             </li>
                             <li>
                                 <a href="">
-                                    <div class="mpItemImg"><img src="./img/carrotimg/물건10.jpg" alt="아마하 오디오(CRX-040)"></div>
+                                    <div class="mpItemImg"><img src="../resources/img/carrotimg/물건10.jpg" alt="아마하 오디오(CRX-040)"></div>
                                     <div class="mpItemName">아마하 오디오(CRX-040)</div>
                                     <div class="mpItemPrice">10,000원</div>
                                     <div class="mpItemAddress">서울 서대문구 북아현동</div>
@@ -167,7 +171,7 @@
                             <ul class="saleProduct" >
                                 <li>
                                     <a href="" class="product">
-                                        <img src="./img/carrotimg/물건4.jpg" alt="">
+                                        <img src="../resources/img/carrotimg/물건4.jpg" alt="">
                                         <div class="productInfo">
                                             <div class="productName">이사가느라 가전 팔아요~! 직접 가지러 오셔야 합니다.</div>
                                             <div class="productData">광주 북구 신용동 ⋅ 2개월 전</div>
@@ -187,7 +191,7 @@
                                 </li>
                                 <li>
                                     <a href="" class="product">
-                                        <img src="./img/carrotimg/물건13.jpg" alt="기내용 캐리어">
+                                        <img src="../resources/img/carrotimg/물건13.jpg" alt="기내용 캐리어">
                                         <div class="productInfo">
                                             <div class="productName">기내용 캐리어</div>
                                             <div class="productData">충남 서산시 예천동 ⋅ 3개월 전</div>
@@ -207,7 +211,7 @@
                                 </li>
                                 <li>
                                     <a href="" class="product">
-                                        <img src="./img/carrotimg/물건14.jpg" alt="">
+                                        <img src="../resources/img/carrotimg/물건14.jpg" alt="">
                                         <div class="productInfo">
                                             <div class="productName">딥디크 플레르드뽀, 롬브로단로</div>
                                             <div class="productData">대전 서구 둔산2동 ⋅ 3개월 전</div>
@@ -231,7 +235,7 @@
                             <ul class="saleFinish">
                                 <li>
                                     <a href="" class="product">
-                                        <img src="./img/carrotimg/물건3.jpg" alt="그루m3 접이식 자전거">
+                                        <img src="../resources/img/carrotimg/물건3.jpg" alt="그루m3 접이식 자전거">
                                         <div class="productInfo">
                                             <div class="productName">그루m3 접이식 자전거</div>
                                             <div class="productData">서울 금천구 가산동 ⋅ 10일 전</div>
@@ -252,7 +256,7 @@
                                 </li>
                                 <li>
                                     <a href="" class="product">
-                                        <img src="./img/carrotimg/물건10.jpg" alt="아마하 오디오(CRX-040)">
+                                        <img src="../resources/img/carrotimg/물건10.jpg" alt="아마하 오디오(CRX-040)">
                                         <div class="productInfo">
                                             <div class="productName">아마하 오디오(CRX-040)</div>
                                             <div class="productData">서울 서대문구 북아현동 ⋅ 3개월 전</div>
@@ -273,7 +277,7 @@
                                 </li>
                                 <li>
                                     <a href="" class="product">
-                                        <img src="./img/carrotimg/물건8.jpg" alt="RTX 3070 8GB 그래픽 카드">
+                                        <img src="../resources/img/carrotimg/물건8.jpg" alt="RTX 3070 8GB 그래픽 카드">
                                         <div class="productInfo">
                                             <div class="productName">RTX 3070 8GB 그래픽 카드</div>
                                             <div class="productData">경기도 부천시 중동 ⋅ 5개월 전</div>
@@ -298,7 +302,7 @@
                             <ul class="saleHide">
                                 <li>
                                     <a href="" class="product">
-                                        <img src="./img/carrotimg/물건3.jpg" alt="그루m3 접이식 자전거">
+                                        <img src="../resources/img/carrotimg/물건3.jpg" alt="그루m3 접이식 자전거">
                                         <div class="productInfo">
                                             <div class="productName">그루m3 접이식 자전거</div>
                                             <div class="productData">서울 금천구 가산동 ⋅ 10일 전</div>
@@ -318,7 +322,7 @@
                                 </li>
                                 <li>
                                     <a href="" class="product">
-                                        <img src="./img/carrotimg/물건10.jpg" alt="아마하 오디오(CRX-040)">
+                                        <img src="../resources/img/carrotimg/물건10.jpg" alt="아마하 오디오(CRX-040)">
                                         <div class="productInfo">
                                             <div class="productName">아마하 오디오(CRX-040)</div>
                                             <div class="productData">서울 서대문구 북아현동 ⋅ 3개월 전</div>
@@ -344,7 +348,7 @@
                         <ul class="buyProduct">
                             <li>
                                 <a href="" class="product">
-                                    <img src="./img/carrotimg/물건3.jpg" alt="그루m3 접이식 자전거">
+                                    <img src="../resources/img/carrotimg/물건3.jpg" alt="그루m3 접이식 자전거">
                                     <div class="productInfo">
                                         <div class="productName">그루m3 접이식 자전거</div>
                                         <div class="productData">서울 금천구 가산동 ⋅ 10일 전</div>
@@ -365,7 +369,7 @@
                             </li>
                             <li>
                                 <a href="" class="product">
-                                    <img src="./img/carrotimg/물건10.jpg" alt="아마하 오디오(CRX-040)">
+                                    <img src="../resources/img/carrotimg/물건10.jpg" alt="아마하 오디오(CRX-040)">
                                     <div class="productInfo">
                                         <div class="productName">아마하 오디오(CRX-040)</div>
                                         <div class="productData">서울 서대문구 북아현동 ⋅ 3개월 전</div>
@@ -386,7 +390,7 @@
                             </li>
                             <li>
                                 <a href="" class="product">
-                                    <img src="./img/carrotimg/물건8.jpg" alt="RTX 3070 8GB 그래픽 카드">
+                                    <img src="../resources/img/carrotimg/물건8.jpg" alt="RTX 3070 8GB 그래픽 카드">
                                     <div class="productInfo">
                                         <div class="productName">RTX 3070 8GB 그래픽 카드</div>
                                         <div class="productData">경기도 부천시 중동 ⋅ 5개월 전</div>
@@ -407,7 +411,7 @@
                             </li>
                             <li>
                                 <a href="" class="product">
-                                    <img src="./img/carrotimg/물건6.jpg" alt="캠핑테이블">
+                                    <img src="../resources/img/carrotimg/물건6.jpg" alt="캠핑테이블">
                                     <div class="productInfo">
                                         <div class="productName">캠핑테이블</div>
                                         <div class="productData">경기도 부천시 중동 ⋅ 6개월 전</div>
@@ -440,7 +444,10 @@
                                     <div class="postInfo">
                                         <div class="mpComment">댓글 11</div>
                                         <div>
-                                            <i class="xi-thumbs-up"></i>2
+                                            <i class="xi-thumbs-up">2</i>
+                                        </div>
+                                        <div class="modAndDel">
+                                        	<button>수정</button> <button>삭제</button>
                                         </div>
                                     </div>
                                 </a>
@@ -456,7 +463,10 @@
                                     <div class="postInfo">
                                         <div class="mpComment">댓글 18</div>
                                         <div>
-                                            <i class="xi-thumbs-up"></i>5
+                                            <i class="xi-thumbs-up">5</i>
+                                        </div>
+                                        <div class="modAndDel">
+                                        	<button>수정</button> <button>삭제</button>
                                         </div>
                                     </div>
                                 </a>
@@ -466,12 +476,15 @@
                                     <div class="postCategory">맛집후기</div>
                                     <div class="postContent">
                                         <div> 안녕하세요 우와~~~대박대박~~~짱 맛있어요 효성상가에 새로 생겼네요 무심코 지나가다 초밥집이 생겨서 주문 했는데 신선함과 쫄깃한맛 짱 맛있네요 초밥에 밥도 적당히 들어가 입안가득 회가 가득한 식감 처음 먹어 보는 듯한 이 느낌 짱 맛있네요 자주 이용해야 겠어요 사장님 정말 맛있게 잘 먹었습니다!!</div>
-                                        <img src="./img/carrotimg/맛집후기.jpg" alt="">
+                                        <img src="../resources/img/carrotimg/맛집후기.jpg" alt="">
                                     </div>
                                     <div class="postInfo">
                                         <div class="mpComment">댓글 25</div>
                                         <div>
-                                            <i class="xi-thumbs-up"></i>13
+                                            <i class="xi-thumbs-up">13</i>
+                                        </div>
+                                        <div class="modAndDel">
+                                        	<button>수정</button> <button>삭제</button>
                                         </div>
                                     </div>
                                 </a>
@@ -575,7 +588,8 @@
             </div>
         </div>
     </div>
-    <script src="./js/mypagejs.js"></script>
+     <%@ include file ="./footer.jsp" %>
+    <script src="<c:url value='/resources/js/mypagejs.js'/>"></script>
 </body>
 </html>
 

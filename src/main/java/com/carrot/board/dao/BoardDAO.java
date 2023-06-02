@@ -13,6 +13,8 @@ public interface BoardDAO {
 	int count() throws Exception;
 
 	int insert(BoardDTO boardDto) throws Exception;
+	
+	int save(BoardDTO boardDto) throws Exception;
 
 	int update(BoardDTO boardDto) throws Exception;
 
