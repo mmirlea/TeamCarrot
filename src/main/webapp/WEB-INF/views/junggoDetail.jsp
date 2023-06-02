@@ -12,7 +12,7 @@
 <link  rel="stylesheet"  href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 <script src="https://kit.fontawesome.com/c0e3b26a7d.js" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css?a">
 </head>
 <body>
 	<div class="wrap">
@@ -65,9 +65,9 @@
             <div class="content-wrap">
 
 
-            	<h1 class="contentTitle"><c:out vlaue="${menu == "board" ? boardDTO.b_title : productDTO.b_title}"/></h1><!--.contentTitle-->
+            	<h1 class="contentTitle">"${menu == "board" ? boardDTO.b_title : productDTO.p_title}"</h1><!--.contentTitle-->
                 <div class="contentInfo">
-                    <span class="categry">${menu == "board" ? boardDTO.b_cate : productDTO.b_cate}</span>
+                    <span class="categry">${menu == "board" ? boardDTO.b_cate : productDTO.p_cate}</span>
                     &nbsp;•&nbsp;
 
                     <span class="pullUp">끌올</span>
@@ -83,7 +83,7 @@
                     &nbsp;•&nbsp;
                     <span class="itemChat">채팅 ${menu == "board" ? boardDTO.b_comm : productDTO.p_comm}</span>
                     &nbsp;•&nbsp;
-                    <span class="itemCheck">조회 ${menu == "board" ? boardDTO.b_viewCnt : productDTO.p_viewCnt}</span>
+                    <span class="itemCheck">조회 ${menu == "board" ? boardDTO.b_viewCnt : productDTO.p_viewcnt}</span>
                 </div><!--.countUp-->
                 <hr>
             </div><!--.content-wrap-->
@@ -94,7 +94,7 @@
 	                        <i class="xi-heart-o xi-4x"></i>  
 	                     </div><!--heartBtn-->
 	                    <div class="priceInfo">
-	                        <div class="price">10,000원</div>
+	                        <div class="price">${productDTO.p_price } 원</div>
 	                        <div class="priceNego">가격 제안 가능</div>
 	                    </div><!--priceInfo-->
 	                    <button type="button" class="chatBtn">채팅하기</button>

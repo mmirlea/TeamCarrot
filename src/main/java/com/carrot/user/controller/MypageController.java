@@ -1,19 +1,22 @@
 package com.carrot.user.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.carrot.board.domain.PageHandlerM;
+import com.carrot.board.domain.ProductDTO;
+import com.carrot.board.domain.SearchConditionM;
+import com.carrot.board.service.ProductService;
 import com.carrot.user.domain.UserDTO;
 import com.carrot.user.service.UserService;
 
@@ -25,7 +28,7 @@ public class MypageController {
 	UserService service;
 	
 	@GetMapping("/home")
-	public String mypage(Model m, UserDTO dto, HttpServletRequest request) {
+	public String mypage(Model m, UserDTO dto, HttpServletRequest request, SearchConditionM scm) {
 
 		if(!loginCheck(request))
 			return "redirect:/login/login?toURL=" + request.getRequestURI();
@@ -38,8 +41,24 @@ public class MypageController {
 			System.out.println(dto.toString());
 			
 			m.addAttribute("dto", dto);
+			
+			int totalCnt = service.getCount();
+			System.out.println("getCount:" + totalCnt);
+			
+			PageHandlerM pageHandlerM = new PageHandlerM(totalCnt, scm);
+			System.out.println(pageHandlerM);
+			
+			List<ProductDTO> list = service.getPage(scm);
+			System.out.println("list" + list);
+			
+			m.addAttribute("listM", list);
+			m.addAttribute("phm", pageHandlerM);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
+			e.printStackTrace();
+			m.addAttribute("msg", "LIST_ERR");
+			m.addAttribute("totalCnt", 0);
 		}
 		
 			return "myPage";
@@ -144,4 +163,32 @@ public class MypageController {
 			return session.getAttribute("m_email") != null;
 
 		}
+	
+//	//마이페이지 - 중고물품 게시글 목록 출력
+//	@GetMapping("/home")
+//	public String myList(Model m, SearchConditionP scp) {
+//		try {
+//			int totalCnt = serviceP.getCount();
+//			
+//			System.out.println("getCount:" + totalCnt);
+//			PageHandlerP pageHandlerP = new PageHandlerP(totalCnt, scp);
+//			System.out.println("pageHandlerP" + pageHandlerP);
+//			
+//			List<ProductDTO> list = serviceP.getPage(scp);
+//			System.out.println("list" + list);
+//			
+//			/* List<ProductDTO> list = service.selectAll(); */
+//			
+//			m.addAttribute("list", list);
+//			m.addAttribute("ph", pageHandlerP);
+//			
+//		}catch(Exception e) {
+//			e.printStackTrace();
+//			m.addAttribute("msg", "LIST_ERR");
+//			m.addAttribute("totalCnt", 0);
+//		}
+//		
+//		return "myPage";
+//	}
+	
 }

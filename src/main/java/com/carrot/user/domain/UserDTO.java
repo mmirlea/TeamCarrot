@@ -9,7 +9,7 @@ public class UserDTO {
 	private String m_ondo;
 	private String m_addr1;
 	private String m_addr2;
-	private float m_ondo;
+
 	
 	public UserDTO() {}
 
@@ -19,7 +19,7 @@ public class UserDTO {
 	}
 
 	public UserDTO(String m_email, String m_pw, String m_num, String m_nicknm, String m_proimg, String m_addr1,
-			String m_addr2, float m_ondo) {
+			String m_addr2, String m_ondo) {
 		this.m_email = m_email;
 		this.m_pw = m_pw;
 		this.m_num = m_num;
@@ -30,13 +30,6 @@ public class UserDTO {
 		this.m_ondo = m_ondo;
 	}
 
-	public float getM_ondo() {
-		return m_ondo;
-	}
-
-	public void setM_ondo(int m_ondo) {
-		this.m_ondo = m_ondo;
-	}
 
 	public String getM_email() {
 		return m_email;
