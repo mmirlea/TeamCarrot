@@ -34,6 +34,12 @@
 	<!-- 내프로필 수정 -->
 	<update id="modify" parameterType="UserDTO">
 		UPDATE MEMBER
+		SET M_NICKNM=#{m_nicknm}, M_PROIMG=#{m_proimg}
+		WHERE M_EMAIL=#{m_email}
+	</update>
+	
+	<update id="modNoImg" parameterType="UserDTO">
+		UPDATE MEMBER
 		SET M_NICKNM=#{m_nicknm}
 		WHERE M_EMAIL=#{m_email}
 	</update>

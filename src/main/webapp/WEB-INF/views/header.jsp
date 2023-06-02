@@ -20,7 +20,7 @@
                     <div class="divLogo">
                             <a href="<c:url value='/'/>">
 
-                            <img src="./resources/img/DaangnMarket_logo.png" alt="당근마켓로고"/>
+                            <img src="../resources/img/DaangnMarket_logo.png" alt="당근마켓로고"/>
 
                             <p>당근마켓</p>
                         </a>

@@ -47,4 +47,9 @@ public class UserDAOImpl implements UserDAO {
 	public int modifyAddr(UserDTO dto) throws Exception {
 		return session.update(namespace+"modifyAddr", dto);
 	}
+
+	@Override
+	public int modNoImg(UserDTO dto) throws Exception {
+		return session.update(namespace+"modNoImg", dto);
+	}
 }

@@ -26,15 +26,15 @@
         </div><!--.headerIn-->
     </div><!--header-->
     <div class="container">
-        <form action="<c:url value="/register/save"/>" method="post"   onsubmit="return formCheck(this)">
+        <form  action="<c:url value="/register/save"/>"  method="post" enctype="multipart/form-data"  onsubmit="return formCheck(this)">
             <table>
                 <tr>
                     <td class="tdImg" colspan="2">
                         <div class="profileImg">
-                            <img src="../resources/img/memberImg.png" alt="프로필이미지">
+                            <img id="preview" src="" alt="사진 미리보기">
                         </div>
                         <!-- <button type="submit" class="uploadImgBtn" >사진 올리기</button> -->
-                        <div class="uploadImgBtn"> <label for="imgUpload">사진 올리기</label><input type="file" id="imgUpload"></div>
+                        <div class="uploadImgBtn"> <label for="imgUpload">사진 올리기</label><input type="file" id="imgUpload" name="imageFile"></div>
                     </td>
                 </tr>
                 <tr>
@@ -87,7 +87,34 @@
             </table>
         </form>
     </div><!--container-->
-    <script>
+    <script>    
+    	//프로필 이미지 미리보기
+    	$(document).ready(function() {
+        	var imgUpload = $('#imgUpload');
+        	var previewImage = $('#preview');
+
+        	if (imgUpload.val() == '') {
+            	previewImage.attr('src', '../resources/img/memberImg.png');
+        	}
+    	});
+    
+    	$(document).ready(function() {
+    	  	$('#imgUpload').change(function() {
+	    	    var input = this;
+	    	    var preview = $('#preview')[0];
+	
+	    	    if (input.files && input.files[0]) {
+	    	      	var reader = new FileReader();
+	
+	    	      	reader.onload = function(e) {
+	    	        preview.src = e.target.result;
+	    	    };
+
+    	      reader.readAsDataURL(input.files[0]);
+    	    }
+    	  });
+    	});
+    
     	//공백확인
     	function formCheck(frm) {
     		var msg='';
@@ -139,7 +166,7 @@
     					$("#emailOverlap").attr("value","Y")
     					setMessage("사용가능한 이메일입니다.", $("#m_email"))
     				}
-    				else if (date == 1)
+    				else if (data == 1)
     					setMessage("중복된 이메일입니다.", $("#m_email"))
     				}
     		})
