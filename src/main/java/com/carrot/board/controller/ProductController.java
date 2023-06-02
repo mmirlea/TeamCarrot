@@ -29,9 +29,14 @@ public class ProductController {
 		try {
 			int totalCnt = service.getCount();
 			
+			System.out.println("getCount:" + totalCnt);
 			PageHandlerP pageHandlerP = new PageHandlerP(totalCnt, scp);
+			System.out.println("pageHandlerP" + pageHandlerP);
 			
 			List<ProductDTO> list = service.getSearchSelectPage(scp);
+			System.out.println("list" + list);
+			
+			/* List<ProductDTO> list = service.selectAll(); */
 			
 			m.addAttribute("list", list);
 			m.addAttribute("ph", pageHandlerP);

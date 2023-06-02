@@ -100,21 +100,30 @@
 	
 	<!-- 검색 조건 -->
 	<sql id="searchCondition">
-		<choose>
+		<!-- <choose>
 			<when test='addr1!="opRegion" and addr2=="opTown"'>
 				AND (p.p_title LIKE '%'||#{keyword}||'%'
 				OR p.p_content LIKE '%'||#{keyword}||'%')
-				AND m.m_addr1 LIKE '#{addr1}'
+				AND m.m_addr1 LIKE #{addr1}
 			</when>
 			<when test = 'addr1!="opRegion" and addr2!="opTown"'>
 				AND (p.p_title LIKE '%'||#{keyword}||'%'
 				OR p.p_content LIKE '%'||#{keyword}||'%')
-				AND (m.m_addr1 LIKE '#{addr1}' AND m.m_addr2 LIKE '#{addr2}')
+				AND (m.m_addr1 LIKE #{addr1} AND m.m_addr2 LIKE '#{addr2}')
 			</when>
-			<!-- <otherwise>
+			<otherwise>
 				AND (p.p_title LIKE '%'||#{keyword}||'%'
 				OR p.p_content LIKE '%'||#{keyword}||'%') 
-			</otherwise> -->
+			</otherwise>
+		</choose> -->
+		<choose>
+			<when test='addr1=="opRegion"'>
+				AND p.p_title LIKE '%'||#{keyword}||'%'
+			</when>
+			<otherwise>
+				ANd p.p_title LIKE '%'||#{keyword}||'%'
+				AND m.m_addr1 LIKE '%'||#{addr1}||'%'
+			</otherwise>
 		</choose>
 	</sql>
 	

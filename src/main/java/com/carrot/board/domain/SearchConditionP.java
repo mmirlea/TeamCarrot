@@ -7,19 +7,28 @@ public class SearchConditionP {
 	private Integer page=1;
 	private Integer pageSize=16;
 	private String addr1="";
-	private String addr2="";
+//	private String addr2="";
 	private String keyword="";
 	
 	public SearchConditionP() {}
 
 	
-	public SearchConditionP(Integer page, Integer pageSize, String addr1, String addr2, String keyword) {
+//	public SearchConditionP(Integer page, Integer pageSize, String addr1, String addr2, String keyword) {
+//		this.page = page;
+//		this.pageSize = pageSize;
+//		this.addr1 = addr1;
+//		this.addr2 = addr2;
+//		this.keyword = keyword;
+//	}
+
+	public SearchConditionP(Integer page, Integer pageSize, String addr1, String keyword) {
+		super();
 		this.page = page;
 		this.pageSize = pageSize;
 		this.addr1 = addr1;
-		this.addr2 = addr2;
 		this.keyword = keyword;
 	}
+
 
 	public Integer getPage() {
 		return page;
@@ -45,13 +54,13 @@ public class SearchConditionP {
 		this.addr1 = addr1;
 	}
 
-	public String getAddr2() {
-		return addr2;
-	}
-
-	public void setAddr2(String addr2) {
-		this.addr2 = addr2;
-	}
+//	public String getAddr2() {
+//		return addr2;
+//	}
+//
+//	public void setAddr2(String addr2) {
+//		this.addr2 = addr2;
+//	}
 
 	public String getKeyword() {
 		return keyword;
@@ -75,14 +84,14 @@ public class SearchConditionP {
 				.queryParam("page", page)
 				.queryParam("pageSize", pageSize)
 				.queryParam("addr1", addr1)
-				.queryParam("addr2", addr2)
+//				.queryParam("addr2", addr2)
 				.queryParam("keyword", keyword)
 				.build().toString();				
 	}
 
 	@Override
 	public String toString() {
-		return "SearchConditionP [page=" + page + ", pageSize=" + pageSize + ", addr1=" + addr1 + ", addr2=" + addr2
+		return "SearchConditionP [page=" + page + ", pageSize=" + pageSize + ", addr1=" + addr1
 				+ ", keyword=" + keyword + "]";
 	}
 
