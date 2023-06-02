@@ -121,22 +121,6 @@ public class MypageController {
 		    m.addAttribute("msg", "프로필 수정 완료");
 		    return "myProfile";
 		}
-	   
-//		try {
-//			if(service.modify(dto) != 1)
-//				throw new Exception("Modify failed");
-//			
-//			return "redirect:/mypage/myprofile";
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			
-//			m.addAttribute("dto", dto);
-//			m.addAttribute("msg", "프로필 수정 완료");
-//			
-//			return "myProfile";
-//		}
-		
-		
 		
 	}
 	
@@ -188,6 +172,29 @@ public class MypageController {
 		}
 	}
 	
+	//삭제
+	@PostMapping("/userDel")
+	public String userDel(UserDTO dto, HttpSession session, Model m) {
+		String m_email = (String) session.getAttribute("m_email");
+		
+		dto.setM_email(m_email);
+		try {
+			if(service.delUser(dto) != 1)
+				throw new Exception("Modify failed");
+			
+			return "redirect:/login/logout";
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+			m.addAttribute("dto", dto);
+			m.addAttribute("msg", "탈퇴 실패");
+			
+			return "alertPrint";
+		}
+	}
+	
 	//로그인 여부 확인
 	private boolean loginCheck(HttpServletRequest request) {
 			 
@@ -198,10 +205,11 @@ public class MypageController {
 			return session.getAttribute("m_email") != null;
 
 		}
-	
+
+	//파일명 저장 위치, 이름 지정
 
 	public static String saveImageToServer(MultipartFile file) throws IOException {
-        String uploadDir = "D:/01-STUDY/proimg/";
+        String uploadDir = "C:/01-STUDY/proimg/";
         //String uploadDir = "src/main/resources/static/images/";
         
         // 디렉토리가 존재하지 않으면 생성

@@ -54,6 +54,11 @@ public class UserServiceImpl implements UserService {
 	public int modNoImg(UserDTO dto) throws Exception {
 		return dao.modNoImg(dto);
 	}
+
+	@Override
+	public int delUser(UserDTO dto) throws Exception {
+		return dao.delUser(dto);
+	}
 	
 	@Override
 	public int getCount() throws Exception {

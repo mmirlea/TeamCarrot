@@ -24,7 +24,11 @@ public interface UserService {
 
 	int modifyAddr(UserDTO dto) throws Exception;
 	
+
+	int delUser(UserDTO dto) throws Exception;
+
 	int getCount() throws Exception;
 	
 	List<ProductDTO> getPage(SearchConditionM scm) throws Exception;
+
 }

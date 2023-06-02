@@ -95,7 +95,7 @@ public class RegisterController {
 	
 	//이미지 경로
 	    public static String saveImageToServer(MultipartFile file) throws IOException {
-	        String uploadDir = "D:/01-STUDY/proimg/";
+	        String uploadDir = "C:/01-STUDY/proimg/";
 	        //String uploadDir = "src/main/resources/static/images/";
 	        
 	        // 디렉토리가 존재하지 않으면 생성

@@ -8,11 +8,11 @@
 <title>Insert title here</title>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
-<link href="<c:url value='/resources/css/myProfileStyle.css?edd'/>" rel="stylesheet" />
+<link href="<c:url value='/resources/css/myProfileStyle.css?esdsd'/>" rel="stylesheet" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 </head>
+<%@ include file ="./header.jsp" %>
 <body>
-	<%@ include file ="./header.jsp" %>
 	 <div class="wrap">
         <form  enctype="multipart/form-data" action="<c:url value='/mypage/modify'/>" method="post">
 	        <div class="container">
@@ -105,11 +105,11 @@
 	                </div>
 	            </div> <!--.divLocal-->
 	             <div class="remove"> 
-	             	<button class="delBtn">계정 삭제</button>
-	             	<div class="delBtn2">
+	             	<button type="button" class="delBtn" id="delBtn">계정 삭제</button>
+	             	<div class="delBtn2" id="delBtn2" style="display:none">
 	             		정말 삭제하시겠습니까? 
-	             		<button class="realDel">예</button> 
-	             		<button class="realDel">아니오</button>
+	             		<button type="button" class="realDel" id="delBtnY">예</button> 
+	             		<button type="button" class="realDel" id="delBtnN">아니오</button>
 	             	</div>
 	             </div>
 	        </div> <!--.container-->
@@ -237,6 +237,31 @@
 	  		})
 	  	})
 	   	
+	  	$(function(){
+	   		$("#delBtn").click(function(){
+	   			if($("#delBtn2").css("display")=="none"){
+	   				$("#delBtn2").show();
+	   			}
+	   		})
+	   	})
+	   	
+	   	$(function(){
+	   		$("#delBtnN").click(function(){
+	   			$("#delBtn2").hide();
+	   		})
+	   	})
+	   	
+	   	$(document).ready(function() {
+       		$("#delBtnY").click(function() {
+	          		var form = $("<form></form>");
+		          	form.attr("action", "<c:url value='/mypage/userDel'/>");
+		          	form.attr("method", "POST");
+		          	
+		          	$("body").append(form);
+		          	form.submit();
+		          
+	    	});
+	 	});
     </script>
 </body>
 </html>

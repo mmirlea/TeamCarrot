@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-<link href="<c:url value='/resources/css/headerStyle.css'/>" rel="stylesheet" />
+<link href="<c:url value='/resources/css/headerStyle.css?ada'/>" rel="stylesheet" />
 </head>
 <body>
 
@@ -18,7 +18,7 @@
             <div class="headerIn ">
                 <div class="hTop">
                     <div class="divLogo">
-                            <a href="<c:url value='/'/>">
+                        <a href="<c:url value='/'/>">
 
                             <img src="../resources/img/DaangnMarket_logo.png" alt="당근마켓로고"/>
 
