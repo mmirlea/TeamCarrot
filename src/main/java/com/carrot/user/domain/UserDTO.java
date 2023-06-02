@@ -1,5 +1,7 @@
 package com.carrot.user.domain;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class UserDTO {
 	private String m_email;
 	private String m_pw;
@@ -9,9 +11,9 @@ public class UserDTO {
 	private String m_ondo;
 	private String m_addr1;
 	private String m_addr2;
-
-	public UserDTO() {
-	}
+	private MultipartFile imageFile;
+	
+	public UserDTO() {}
 
 	public UserDTO(String m_email, String m_pw) {
 		this.m_email = m_email;
@@ -29,6 +31,7 @@ public class UserDTO {
 		this.m_addr2 = m_addr2;
 		this.m_ondo = m_ondo;
 	}
+	
 
 	public String getM_email() {
 		return m_email;
@@ -159,6 +162,14 @@ public class UserDTO {
 		} else if (!m_pw.equals(other.m_pw))
 			return false;
 		return true;
+	}
+
+	public MultipartFile getImageFile() {
+		return imageFile;
+	}
+
+	public void setImageFile(MultipartFile imageFile) {
+		this.imageFile = imageFile;
 	}
 
 }
