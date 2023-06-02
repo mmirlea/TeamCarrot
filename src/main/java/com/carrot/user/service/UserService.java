@@ -1,5 +1,9 @@
 package com.carrot.user.service;
 
+import java.util.List;
+
+import com.carrot.board.domain.ProductDTO;
+import com.carrot.board.domain.SearchConditionM;
 import com.carrot.user.domain.UserDTO;
 
 public interface UserService {
@@ -20,5 +24,11 @@ public interface UserService {
 
 	int modifyAddr(UserDTO dto) throws Exception;
 	
+
 	int delUser(UserDTO dto) throws Exception;
+
+	int getCount() throws Exception;
+	
+	List<ProductDTO> getPage(SearchConditionM scm) throws Exception;
+
 }

@@ -11,7 +11,11 @@ public class UserDTO {
 	private String m_ondo;
 	private String m_addr1;
 	private String m_addr2;
+
+
+
 	private MultipartFile imageFile;
+
 	
 	public UserDTO() {}
 
@@ -31,7 +35,7 @@ public class UserDTO {
 		this.m_addr2 = m_addr2;
 		this.m_ondo = m_ondo;
 	}
-	
+
 
 	public String getM_email() {
 		return m_email;

@@ -21,6 +21,7 @@ public class SearchConditionP {
 //		this.keyword = keyword;
 //	}
 
+	
 	public SearchConditionP(Integer page, Integer pageSize, String addr1, String keyword) {
 		super();
 		this.page = page;
@@ -28,7 +29,6 @@ public class SearchConditionP {
 		this.addr1 = addr1;
 		this.keyword = keyword;
 	}
-
 
 	public Integer getPage() {
 		return page;
@@ -88,11 +88,13 @@ public class SearchConditionP {
 				.queryParam("keyword", keyword)
 				.build().toString();				
 	}
+	
 
 	@Override
 	public String toString() {
 		return "SearchConditionP [page=" + page + ", pageSize=" + pageSize + ", addr1=" + addr1
 				+ ", keyword=" + keyword + "]";
 	}
+	
 
 }
