@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
-<link href="<c:url value='/resources/css/junggoStyle.css'/>" rel="stylesheet" />
+<link href="<c:url value='/resources/css/junggoStyle.css?aaa'/>" rel="stylesheet" />
 </head>
 <body>
 <script>

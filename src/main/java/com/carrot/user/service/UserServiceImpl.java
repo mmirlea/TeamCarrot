@@ -1,8 +1,12 @@
 package com.carrot.user.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.carrot.board.domain.ProductDTO;
+import com.carrot.board.domain.SearchConditionM;
 import com.carrot.user.dao.UserDAO;
 import com.carrot.user.domain.UserDTO;
 
@@ -56,6 +60,13 @@ public class UserServiceImpl implements UserService {
 		return dao.delUser(dto);
 	}
 	
+	@Override
+	public int getCount() throws Exception {
+		return dao.count();
+	}
 	
+	public List<ProductDTO> getPage(SearchConditionM scm) throws Exception{
+		return dao.selectPage(scm);
+	}
 	
 }

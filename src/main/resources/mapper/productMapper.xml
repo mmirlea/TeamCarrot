@@ -85,11 +85,11 @@
 		AND p_num = #{p_num}
 	</update>
 	<!-- 페이징 처리하기 -->
-	<select id="selectPage" parameterType="map" resultMap="ProMemJoin">
+	<select id="selectPage" parameterType="SearchConditionP" resultMap="ProMemJoin">
 		SELECT *
 		FROM(SELECT ROWNUM rNum, A.*
 			FROM (SELECT p.p_menu, p.p_num, p.p_cate, m.m_nicknm, m_addr1, m_addr2, 
-			  			 p.p_title, p.p_content, p.p_price, p.p_likey, p.p_comm
+			  			 p.p_title, p.p_content, p.p_price, p.p_likey, p.p_comm, p.p_viewcnt
 				  FROM product p
 				  INNER JOIN member m
 				  ON p.p_email = m.m_email
@@ -132,7 +132,7 @@
 		SELECT * 
 		FROM(SELECT ROWNUM rNum, A.* 
 			FROM(SELECT p.p_menu, p.p_num, p.p_cate, m.m_nicknm, m.m_addr1, m.m_addr2, 
-			  			 p.p_title, p.p_content, p.p_price, p.p_likey, p.p_comm
+			  			 p.p_title, p.p_content, p.p_price, p.p_likey, p.p_comm, p.p_viewcnt
 				  FROM product p
 				  INNER JOIN member m
 				  ON p.p_email = m.m_email

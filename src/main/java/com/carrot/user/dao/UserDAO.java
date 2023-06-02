@@ -1,5 +1,9 @@
 package com.carrot.user.dao;
 
+import java.util.List;
+
+import com.carrot.board.domain.ProductDTO;
+import com.carrot.board.domain.SearchConditionM;
 import com.carrot.user.domain.UserDTO;
 
 public interface UserDAO {
@@ -21,4 +25,9 @@ public interface UserDAO {
 	int modifyAddr(UserDTO dto) throws Exception;
 	
 	int delUser(UserDTO dto) throws Exception;
+	
+	int count() throws Exception;
+	
+	List<ProductDTO> selectPage (SearchConditionM scm) throws Exception;
+
 }

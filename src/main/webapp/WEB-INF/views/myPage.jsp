@@ -9,13 +9,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="https://fonts.googleapis.com/css?family=Jua:400" rel="stylesheet">
-    <link href="<c:url value='/resources/css/myPageStyle.css?dddfa'/>" rel="stylesheet" />
+
+    <link href="<c:url value='/resources/css/myPageStyle.css?bfda'/>" rel="stylesheet" />
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 </head>
 <body>
+
+<script>
+	let msg="${msg}"
+    if(msg=="LIST_ERR") alert("게시물 목록을 가져오는데 실패했습니다. 다시 시도해 주세요.");
+	if(msg=="READ_ERR") alert("게시물을 읽어들이는데 실패했습니다.")
+</script>
+
+
    <%@ include file ="./header.jsp" %>
+
     <div class="wrap">
         <div class="container">
             <div class="myProfile">
@@ -174,17 +185,29 @@
                             <button><a href="javascript:saleShow2();">거래완료 3</a></button>
                             <button><a href="javascript:saleShow3();">숨김 2</a></button>
                         </div>
+                        <form action="">
                         <div id="saleing">
                             <ul class="saleProduct" >
+
+                            	<c:forEach var="productDTO" items="${listM}">
                                 <li>
-                                    <a href="" class="product">
+                                    <a href="<c:url value='/carrot/read?${phm.scm.getQueryString()}&p_num=${productDTO.p_num }'/>" class="product">
                                         <img src="../resources/img/carrotimg/물건4.jpg" alt="">
                                         <div class="productInfo">
-                                            <div class="productName">이사가느라 가전 팔아요~! 직접 가지러 오셔야 합니다.</div>
-                                            <div class="productData">광주 북구 신용동 ⋅ 2개월 전</div>
-                                            <div class="productPrice">99원</div>
+                                            <div class="productName"><c:out value="${productDTO.p_title}"/></div>
+                                            <div class="productData">
+                                            	<span>${productDTO.userDTO.m_addr1 }</span>
+                                            	<span>${productDTO.userDTO.m_addr2 }</span>
+                                            	 ⋅ 
+                                            	<span>2개월 전</span>
+                                            </div>
+                                            <div class="buttonArea">
+                                            	<div class="productPrice"><c:out value="${productDTO.p_price}"/>원</div>
+                                            	<div class="pBtn"><button type="button" id="modifyBtn" class="modifyBtn">수정하기</button></div>
+                                            	<div class="pBtn"><button type="button" id="removeBtn" class="removeBtn">삭제하기</button></div>
+                                          	</div>
                                             <div class="productCountUp">
-                                                <span class="productAttention">관심 29</span>
+                                                <span class="productAttention">관심 ${productDTO.p_likey}</span>
                                                 <span class="productChat">채팅 31</span>
                                             </div>
                                             <i class="xi-ellipsis-v"></i>
@@ -195,49 +218,28 @@
                                         <button class="Btn2"><a href="">예약중</a></button>
                                         <button><a href="">거래완료</a></button>
                                     </div>
-                                </li>
-                                <li>
-                                    <a href="" class="product">
-                                        <img src="../resources/img/carrotimg/물건13.jpg" alt="기내용 캐리어">
-                                        <div class="productInfo">
-                                            <div class="productName">기내용 캐리어</div>
-                                            <div class="productData">충남 서산시 예천동 ⋅ 3개월 전</div>
-                                            <div class="productPrice">10,000원</div>
-                                            <div class="productCountUp">
-                                                <span class="productAttention">관심 9</span>
-                                                <span class="productChat">채팅 21</span>
-                                            </div>
-                                            <i class="xi-ellipsis-v"></i>
-                                        </div>
-                                    </a>
-                                    <div class="productBtn">
-                                        <button><a href="">끌어올리기</a></button>
-                                        <button class="Btn2"><a href="">예약중</a></button>
-                                        <button><a href="">거래완료</a></button>
-                                    </div>
-                                </li>
-                                <li>
-                                    <a href="" class="product">
-                                        <img src="../resources/img/carrotimg/물건14.jpg" alt="">
-                                        <div class="productInfo">
-                                            <div class="productName">딥디크 플레르드뽀, 롬브로단로</div>
-                                            <div class="productData">대전 서구 둔산2동 ⋅ 3개월 전</div>
-                                            <div class="productPrice">100,000원</div>
-                                            <div class="productCountUp">
-                                                <span class="productAttention">관심 12</span>
-                                                <span class="productChat">채팅 14</span>
-                                            </div>
-                                            <i class="xi-ellipsis-v"></i>
-                                        </div>
-                                    </a>
-                                    <div class="productBtn">
-                                        <button><a href="">끌어올리기</a></button>
-                                        <button class="Btn2"><a href="">예약중</a></button>
-                                        <button><a href="">거래완료</a></button>
-                                    </div>
-                                </li>
+                              	 </li>
+                                
+                               </c:forEach>
+                               <div>
+						        	<c:if test="${phm.showPrev}">
+						        		<a href="<c:url value='/mypage/home${phm.scm.getQueryString(phm.beginPage-1)}'/>"> &lt; </a>   
+						        	</c:if>
+						        	
+						        	<c:forEach var="i" begin="${phm.beginPage}" end="${phm.endPage}">
+						        		<a href="<c:url value='/mypage/home${phm.scm.getQueryString(i)}'/>"> ${i}</a>
+						        	</c:forEach>
+						        	
+						        	
+						        	<c:if test="${phm.showNext}">
+						        		<a href="<c:url value='/mypage/home${phm.scm.getQueryString(phm.endPage+1)}'/>"> &gt; </a>   
+						        	</c:if>
+        
+								</div> 
+                              
                             </ul>
-                        </div>
+                        </div><!-- .saleing -->
+                        </form>
                         <div id="saleFinish" style="display: none;">
                             <ul class="saleFinish">
                                 <li>
