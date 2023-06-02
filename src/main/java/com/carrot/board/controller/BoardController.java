@@ -57,9 +57,6 @@ public class BoardController {
 	public String modify(BoardDTO boardDTO, RedirectAttributes rattr, Model m, HttpSession session) {
 		String b_email = (String) session.getAttribute("m_email");
 		boardDTO.setB_email(b_email);
-
-		System.out.println("modify -> email : " + b_email);
-		System.out.println("modify -> boardDTO : " + boardDTO);
 		try {
 			if (service.modify(boardDTO) != 1)
 				throw new Exception("Modify failed");
@@ -84,6 +81,7 @@ public class BoardController {
 	public String select(BoardDTO boardDTO, RedirectAttributes rattr, Model m, HttpSession session) {
 		String b_email = (String) session.getAttribute("m_email");
 		boardDTO.setB_email(b_email);
+		
 		try {
 			System.out.println("select -> boardDTO : " + boardDTO);
 			boardDTO = service.select(boardDTO.getB_num());

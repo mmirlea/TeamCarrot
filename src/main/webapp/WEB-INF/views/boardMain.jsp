@@ -89,7 +89,8 @@
 	                                        <div class="divInfo">
 	                                            <p class="local">${boardDTO.userDTO.m_addr1}</p> <!-- 위치 -->
 	                                            &nbsp;•&nbsp;
-	                                            <p class="time" onblur="timeForToday('boardDTO.b_crDate')"></p> <!-- 시간 -->
+	                                           <!--  <p class="time" onblur="timeForToday('boardDTO.b_crDate')"></p> --> <!-- 시간 -->
+	                                            <p class="time" >${boardDTO.b_upDate}</p> <!-- 시간 -->
 	                                            &nbsp;•&nbsp;
 	                                            <p class="look">${boardDTO.b_viewCnt}</p> <!-- 조회 -->
 	                                        </div>
