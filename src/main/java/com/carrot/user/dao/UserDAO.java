@@ -25,7 +25,7 @@ public interface UserDAO {
 	int modifyAddr(UserDTO dto) throws Exception;
 	
 	int delUser(UserDTO dto) throws Exception;
-
+	
 	int count() throws Exception;
 	
 	List<ProductDTO> selectPage (SearchConditionM scm) throws Exception;

@@ -60,7 +60,7 @@ public class UserDAOImpl implements UserDAO {
 	
 	public List<ProductDTO> selectPage (SearchConditionM scm) throws Exception{
 		return session.selectList(namespace + "selectPage", scm);
-
+	}
 
 	@Override
 	public int modNoImg(UserDTO dto) throws Exception {
