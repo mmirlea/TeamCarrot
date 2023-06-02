@@ -17,6 +17,10 @@ public class BoardServiceImple implements BoardService {
 	BoardDAO boardDAO;
 
 	@Override
+	public BoardDTO select(Integer b_num) throws Exception {
+		return boardDAO.select(b_num);
+	}
+
 	public int getCount() throws Exception {
 		return boardDAO.count();
 	}
@@ -25,7 +29,7 @@ public class BoardServiceImple implements BoardService {
 	public int write(BoardDTO boardDTO) throws Exception {
 		return boardDAO.insert(boardDTO);
 	}
-	
+
 	@Override
 	public int save(BoardDTO boardDTO) throws Exception {
 		return boardDAO.save(boardDTO);

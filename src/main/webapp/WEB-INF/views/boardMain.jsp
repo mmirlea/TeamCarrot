@@ -192,6 +192,24 @@
 		
 		        return `${Math.floor(betweenTimeDay / 365)}년전`;
 		 	}
+			
+			const addZero = function(value=1){
+				return value > 9 ? value : "0" + value;
+			}
+			
+			const dateToString = function(ms=0){
+				let date = new Date(ms);
+				
+				let yyyy = date.getFullYear();
+				let mm = addZero(date.getMonth() + 1);
+				let dd = addZero(date.getDate());
+				
+				let HH = addZero(date.getHours());
+				let MM = addZero(date.getMinutes());
+				let ss = addZero(date.getSeconds());
+				
+				return yyyy + "." + mm + "." + dd + " " + HH + ":" + MM + ":" + ss;
+			} 
     </script>
 	</div> <!--.wrap-->
 </body>

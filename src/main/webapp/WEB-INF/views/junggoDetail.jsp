@@ -65,7 +65,7 @@
             <div class="content-wrap">
 
 
-            	<h1 class="contentTitle"><c:out vlaue="${menu == "board" ? boardDTO.b_title : productDTO.b_title}"/></h1><!--.contentTitle-->
+            	<h1 class="contentTitle">${menu == 'board' ? boardDTO.b_title : productDTO.b_title}</h1><!--.contentTitle-->
                 <div class="contentInfo">
                     <span class="categry">${menu == "board" ? boardDTO.b_cate : productDTO.b_cate}</span>
                     &nbsp;•&nbsp;

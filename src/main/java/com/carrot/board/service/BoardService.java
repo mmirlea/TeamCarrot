@@ -7,6 +7,8 @@ import com.carrot.board.domain.BoardDTO;
 import com.carrot.board.domain.SearchCondition;
 
 public interface BoardService {
+	
+	BoardDTO select(Integer b_num) throws Exception;
 
 	int getCount() throws Exception;
 
