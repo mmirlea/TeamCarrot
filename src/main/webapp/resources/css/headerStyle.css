@@ -75,10 +75,12 @@ i {
 
 .divLogo p {
 	align-self: center;
+	margin-top: 5px;
+	line-height: 40px;
 }
 
 .gnb {
-	margin-top: 20px;
+	margin-top: 27px;
 }
 
 .gnb ul {
@@ -102,6 +104,7 @@ i {
 
 .member {
 	width: 850px;
+	margin-top: 10px;
 }
 
 .member ul {

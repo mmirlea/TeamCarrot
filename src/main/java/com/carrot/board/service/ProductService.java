@@ -1,7 +1,6 @@
 package com.carrot.board.service;
 
 import java.util.List;
-import java.util.Map;
 
 import com.carrot.board.domain.ProductDTO;
 import com.carrot.board.domain.SearchConditionP;
@@ -22,7 +21,7 @@ public interface ProductService {
 	
 	List<ProductDTO> selectAll() throws Exception;
 
-	List<ProductDTO> getPage(Map map) throws Exception;
+	List<ProductDTO> getPage(SearchConditionP scp) throws Exception;
 	
 	List<ProductDTO> getSearchSelectPage(SearchConditionP scp) throws Exception;
 	

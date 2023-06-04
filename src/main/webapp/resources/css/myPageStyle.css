@@ -39,10 +39,10 @@ img{
     margin: 20px 20px 0;
     padding: 20px 0;
     display: flex;
-    border: 5px solid #e2c3c3;
+    border: 1px solid #FF7E36;
     border-radius: 40px;
     position: relative;
-    box-shadow: 0 0 5px #fcb4b4;
+    box-shadow: 0px 0px 5px #fab692;
 }
 
 .profileLeft{
@@ -52,13 +52,13 @@ img{
 
 .myProfileImg{
     border-radius: 50%;
-    width: 140px;
-    margin: 10px 0 0 12px;
+    width: 170px;
+    height: 170px;
 }
 
 .nameTitle{
     display: flex;
-    margin-top: 15px;
+    margin: 5px 0 0 13px;
     font-size: 23px;
 }
 
@@ -297,6 +297,7 @@ h3{
 
 .productInfo{
     width: 700px;
+    
 }
 .saleProduct .xi-ellipsis-v{
     color: #bbb;
@@ -314,7 +315,20 @@ h3{
     color: rgb(134,142,150);
     margin-bottom: 13px;
 }
-
+.buttonArea{
+	display: flex;
+	align-items: center;
+}
+.buttonArea>div{
+	margin-right: 12px;
+}
+.modifyBtn, .removeBtn{
+	height: 22px;
+	width: 60px;
+	background-color: #e0e0e0;
+	border-radius: 5px;
+	border: none;
+}
 .productPrice{
     font-size: 22px;
     font-weight: bold;
