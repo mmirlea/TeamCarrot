@@ -13,8 +13,10 @@
 <body>
 	<div class="wrap">
 		<%@ include file ="./header.jsp" %>
-		<%@ include file ="./tabRigth.jsp" %>
-		
+		<jsp:include page="./tabRigth.jsp" flush="false">
+			<jsp:param name="menu" value="board" />
+		</jsp:include>
+
 		<script>
 			let msg = "${msg}";
 			if (msg == "DEL_OK")
@@ -55,7 +57,7 @@
 						</div>
 
                         <div class="divWrite">
-                            <a href="<c:url value='/board/write'/>">
+                            <a href="<c:url value='/board/write?menu=board'/>">
                                 <button class="btnWrite">
                                     <i class="fas fa-circle-plus"></i>
                                 </button>
@@ -70,7 +72,7 @@
                         <c:forEach var="boardDTO" items="${list}">
 	                        <li class="item">
 	                        	<input type="hidden" value="${boardDTO.b_num} " name="b_num">
-	                            <a href="<c:url value='/board/read?b_num=${boardDTO.b_num}'/>">
+	                            <a href="<c:url value='/board/read?menu=board&b_num=${boardDTO.b_num}'/>">
 	                            <!-- ${ph.sc.getQueryString() } -->
 	                                <div class="areaThumb">
 	                                    <!-- <i class="fa-thin fa-rectangle-xmark"></i> -->
@@ -171,46 +173,37 @@
        <%@ include file ="./footer.jsp" %>
 
 		<script type="text/javascript">
+			 $(document).ready(function() {
+				 document.querySelectorAll('.time').forEach(($time)=>{
+					 const time = $time.innerText
+					 console.log(timeForToday(time),new Date(time));
+					 $time.innerText = timeForToday(time);
+				 })
+				
+			 }) 
 			function timeForToday(value) {
 				const today = new Date();
 		        const timeValue = new Date(value);
 		
 		        const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
+		        console.log(betweenTime);
 		        if (betweenTime < 1) return '방금전';
 		        if (betweenTime < 60) {
-		            return `${betweenTime}분전`;
+		            return betweenTime + '분전';
 		        }
 		
 		        const betweenTimeHour = Math.floor(betweenTime / 60);
 		        if (betweenTimeHour < 24) {
-		            return `${betweenTimeHour}시간전`;
+		            return betweenTimeHour + '시간전';
 		        }
 		
 		        const betweenTimeDay = Math.floor(betweenTime / 60 / 24);
 		        if (betweenTimeDay < 365) {
-		            return `${betweenTimeDay}일전`;
+		            return betweenTimeDay + '일전';
 		        }
 		
-		        return `${Math.floor(betweenTimeDay / 365)}년전`;
+		        return Math.floor(betweenTimeDay / 365) + '년전';
 		 	}
-			
-			const addZero = function(value=1){
-				return value > 9 ? value : "0" + value;
-			}
-			
-			const dateToString = function(ms=0){
-				let date = new Date(ms);
-				
-				let yyyy = date.getFullYear();
-				let mm = addZero(date.getMonth() + 1);
-				let dd = addZero(date.getDate());
-				
-				let HH = addZero(date.getHours());
-				let MM = addZero(date.getMinutes());
-				let ss = addZero(date.getSeconds());
-				
-				return yyyy + "." + mm + "." + dd + " " + HH + ":" + MM + ":" + ss;
-			} 
     </script>
 	</div> <!--.wrap-->
 </body>

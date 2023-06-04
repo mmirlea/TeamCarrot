@@ -25,6 +25,8 @@ public interface BoardDAO {
 	List<BoardDTO> selectAll() throws Exception;
 
 	int increaseViewCnt(Integer b_num) throws Exception;
+	
+	int increaseLikeCnt(int cnt, BoardDTO boardDTO) throws Exception;
 
 	List<BoardDTO> selectPage(Map map) throws Exception;
 

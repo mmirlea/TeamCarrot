@@ -66,6 +66,14 @@ public class BoardDAOImpl implements BoardDAO {
 	public int increaseViewCnt(Integer b_num) throws Exception {
 		return session.update(namespace + "increaseViewCnt", b_num);
 	}
+	
+	@Override
+	public int increaseLikeCnt(int cnt, BoardDTO boardDTO) throws Exception {
+		Map map = new HashMap();
+		map.put("cnt", cnt);
+		map.put("boardDTO", boardDTO);
+		return session.update(namespace + "increaseLikeCnt", map);
+	}
 
 	@Override
 	public List<BoardDTO> selectPage(Map map) throws Exception {

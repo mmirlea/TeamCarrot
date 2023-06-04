@@ -15,6 +15,12 @@
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 </head>
+<% String menu = request.getParameter("menu"); %>
+<script type="text/javascript">
+const menu = '<%= request.getParameter("menu") %>'
+console.log(menu);
+
+</script>
 <body>
 	<form class="wrap" id="form">
 	
@@ -68,7 +74,7 @@
 	            	<h1 class="contentTitle">${menu == 'board' ? boardDTO.b_title : productDTO.b_title}</h1><!--.contentTitle-->
 					<div class="crud-wrap">
 	                    	<input type="hidden" value="${boardDTO.b_num} " name="b_num">
-	                    	<button type="button" class="btnModify" id="btnModify">수정</button>
+	                    	<button type="button" class="btnModify" id="btnModify" value="board">수정</button>
 	                    	<button type="button" class="btnDel" id="btnDel">삭제</button>
 	                </div>
             	</div>
@@ -85,7 +91,9 @@
                     <c:out value='${menu == "board" ? boardDTO.b_content : productDTO.p_content}'/>
                 </div><!--content-->
                 <div class="countUp">
-                    <span class="itemAttention">관심 ${menu == "board" ? boardDTO.b_likey : productDTO.p_likey}</span>
+                    <span class="itemAttention">
+                    	<button type="button" class="likey" id="btnLikey" name="b_likey"><i class="far fa-comment"></button>
+                    	관심 ${menu == "board" ? boardDTO.b_likey : productDTO.p_likey}</span>
                     &nbsp;•&nbsp;
                     <span class="itemChat">채팅 ${menu == "board" ? boardDTO.b_comm : productDTO.p_comm}</span>
                     &nbsp;•&nbsp;
@@ -93,7 +101,7 @@
                 </div><!--.countUp-->
                 <hr>
             </div><!--.content-wrap-->
-            <c:if test="${menu != 'board' }">
+            <c:if test="${menu ne 'board' }">
 	            <div class="heartBar-wrap">
 	                <div class="heartBar">
 	                    <div class="heartBtn">
@@ -214,8 +222,16 @@
 		$("#btnModify").on("click", function() {
 			let form = $('#form');
 			
-			form.attr("action", "<c:url value='/board/select?b_num=${b_num}'/>");
-			form.attr("method", "get");
+		  	const $a = document.createElement('a'); //가상 a태그 생성
+		  	$a.href = '/carrot/board/select?menu=board&'+'b_num='+${boardDTO.b_num};
+		  	$a.click();
+		})
+		
+		$("#btnLikey").on("click", function() {
+			let form = $('#form');
+			
+			form.attr("action", "<c:url value='/board/likeCnt'/>");
+			form.attr("method", "post");
 			form.append("<input type='hidden' name='b_num' value='${boardDTO.b_num}'>");
 			form.submit();
 		})

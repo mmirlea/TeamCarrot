@@ -13,8 +13,8 @@ public class BoardDTO {
 	private String b_title;
 	private String b_content;
 	private String b_img;
-	private Date b_crDate;
-	private Date b_upDate;
+	private String b_crDate;
+	private String b_upDate;
 	private String b_tempSaveYn;
 	private Integer b_likey;
 	private String b_likeyEmail;
@@ -105,19 +105,19 @@ public class BoardDTO {
 		this.b_img = b_img;
 	}
 
-	public Date getB_crDate() {
+	public String getB_crDate() {
 		return b_crDate;
 	}
 
-	public void setB_crDate(Date b_crDate) {
+	public void setB_crDate(String b_crDate) {
 		this.b_crDate = b_crDate;
 	}
 
-	public Date getB_upDate() {
+	public String getB_upDate() {
 		return b_upDate;
 	}
 
-	public void setB_upDate(Date b_upDate) {
+	public void setB_upDate(String b_upDate) {
 		this.b_upDate = b_upDate;
 	}
 
