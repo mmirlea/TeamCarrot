@@ -62,6 +62,11 @@ public class BoardServiceImple implements BoardService {
 		boardDAO.increaseViewCnt(b_num);
 		return boardDTO;
 	}
+	
+	@Override
+	public int increaseLikeCnt(int cnt, BoardDTO boardDTO) throws Exception {
+		return boardDAO.increaseLikeCnt(cnt, boardDTO);
+	}
 
 	// 페이징 처리
 	@Override

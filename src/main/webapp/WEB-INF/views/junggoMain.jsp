@@ -19,7 +19,9 @@
 	<div class="wrap">
 	
 		<%@ include file ="./header.jsp" %>
-		<%@ include file ="./tabRigth.jsp" %>
+		<jsp:include page="./tabRigth.jsp" flush="false">
+			<jsp:param name="menu" value="product" />
+		</jsp:include>
 		
         <div class="container">
             <div class="mainBanner">
