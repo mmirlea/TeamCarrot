@@ -58,7 +58,7 @@
 	    reader.onload = () => {
 	    	 const b_img = event.target.result;
 	         console.log('업로드할 blob파일',b_img);
-	         file	List.push(b_img);
+	         fileList.push(b_img);
 	         createFileList();
 	    }
 	}
