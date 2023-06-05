@@ -221,28 +221,29 @@
 			
 			if(!confirm("정말로 삭제하시겠습니까?")) return;
 			
-			debugger;
+			
 			let form = $('#form');
 			
 			console.log($(location).attr("pathname"))
 			
 			if($(location).attr("pathname") == "/carrot/carrot/read"){
+				
 				form.attr("action", "<c:url value='/carrot/remove?page=${page}&pageSize=${pageSize}'/>");
 				form.attr("method", "post");
-				form.append("<input type='hidden' name='p_num' value='${productDTO.p_num}'>");
+				//form.append("<input type='hidden' name='p_num' value='${productDTO.p_num}'>");
 				
 				form.submit();
 				
-			}else{
+			} else{
 				form.attr("action", "<c:url value='/board/remove?page=${page}&pageSize=${pageSize}'/>");
 				form.attr("method", "post");
-				form.append("<input type='hidden' name='b_num' value='${boardDTO.b_num}'>");
+				//form.append("<input type='hidden' name='b_num' value='${boardDTO.b_num}'>");
 				
 				form.submit();
-			}
+			} 
 		})
 		
- 		$("#btnModify").on("click", function() {
+ 		/* $("#btnModify").on("click", function() {
 			let form = $('#form');
 			
 			if($(location).attr("pathname") == "/carrot/carrot/read"){
@@ -255,7 +256,7 @@
 			  	$a.href = '/carrot/board/select?menu=board&'+'b_num='+${boardDTO.b_num};
 			  	$a.click();
 			}
-		}) 
+		})  */
 		
 		$("#btnLikey").on("click", function() {
 			debugger;
@@ -274,6 +275,8 @@
 				document.getElementById("btnLikey").innerHTML = '<i class="far fa-heart" aria-hidden="true"></i>';
 			} */
 		})
+		
+    })
 
 		
     </script>

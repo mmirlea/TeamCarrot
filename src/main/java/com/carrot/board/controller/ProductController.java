@@ -61,8 +61,13 @@ public class ProductController {
 		String login_email = (String) session.getAttribute("m_email");
 		try {
 			ProductDTO productDTO = service.read(p_num);
+			BoardDTO boardDTO = new BoardDTO(0 , "nocate", "noemail", "notitle", "nocontent");
+			
+			
+			System.out.println(productDTO);
 			
 			m.addAttribute(productDTO);
+			m.addAttribute(boardDTO);
 			m.addAttribute("menu", "product");
 			
 			session.setAttribute("login_email", login_email);
@@ -93,8 +98,8 @@ public class ProductController {
 
 			int rowCnt = service.remove(p_num, p_email);
 			
+			System.out.println(rowCnt);
 			
-
 			if (rowCnt != 1) {
 				throw new Exception("remove error");
 			}
