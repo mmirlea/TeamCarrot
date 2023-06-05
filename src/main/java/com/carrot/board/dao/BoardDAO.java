@@ -26,7 +26,11 @@ public interface BoardDAO {
 
 	int increaseViewCnt(Integer b_num) throws Exception;
 	
-	int increaseLikeCnt(int cnt, BoardDTO boardDTO) throws Exception;
+	int increaseLikeCnt(int b_num, BoardDTO boardDTO) throws Exception;
+	
+	int decreaseLikeCnt(String b_likeyEmail, BoardDTO boardDTO) throws Exception;
+	
+	String getLikeyEmail(BoardDTO boardDTO) throws Exception;
 
 	List<BoardDTO> selectPage(Map map) throws Exception;
 
