@@ -16,7 +16,7 @@ public class ProductDTO {
 	private Date p_crdate;
 	private Date p_update;
 	private String p_tempsaveyn;
-	private int p_price;
+	private Integer p_price;
 	private String p_negoyn;
 	private int p_likey;
 	private String p_likeyemail;
@@ -106,7 +106,7 @@ public class ProductDTO {
 	public void setP_tempsaveyn(String p_tempsaveyn) {
 		this.p_tempsaveyn = p_tempsaveyn;
 	}
-	public int getP_price() {
+	public Integer getP_price() {
 		return p_price;
 	}
 	public void setP_price(int p_price) {

@@ -62,4 +62,8 @@ public class ProductServiceImpl implements ProductService {
 	public int getSearchResultCnt(SearchConditionP scp) throws Exception{
 		return productDAO.searchResultCnt(scp);
 	}
+	
+	public ProductDTO select(Integer p_num) throws Exception{
+		return productDAO.select(p_num);
+	}
 }

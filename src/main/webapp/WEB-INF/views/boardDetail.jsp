@@ -77,11 +77,21 @@
 			$("#btnModify").on("click", function() {
 				if (formCheck()) {
 					let form = $('#form');
-		
-					form.attr("action", "<c:url value='/board/modify'/>");
-					form.attr("method", "post");
-		
-					form.submit();
+					if($(location).attr("pathname") == "/carrot/carrot/select"){
+						form.attr("action", "<c:url value='/carrot/modify'/>");
+						form.attr("method", "post");
+						
+						form.submit();
+						
+					}else {
+					
+						form.attr("action", "<c:url value='/board/modify'/>");
+						form.attr("method", "post");
+						
+						form.submit();
+					}
+					
+					
 				}
 			})
 			
@@ -175,6 +185,7 @@
                     	</c:if>
                     	<c:if test="${mode != 'new' }">
                     		<input type="hidden" value="${boardDTO.b_num} " name="b_num">
+                    		<input type="hidden" value="${productDTO.p_num} " name="p_num">
 	                        <button type="button" class="btnModify" id="btnModify">수정</button>
                     	</c:if>
                     	<input type="hidden" id="imgUpload"  />
@@ -216,7 +227,7 @@
 	                <div class="divPrice">
 	                    <span class="spPrice">
 	                        <i class="fa-solid fa-won-sign"></i> &nbsp; 
-	                        <input type="text" placeholder="가격">	                        
+	                        <input type="text" value="${productDTO.p_price}" >	                        
 	                        &nbsp;
 	                        <input type="checkbox" name="chkShare" id="chkShare">
 	                        <label for="chkShare">나눔</label>
@@ -224,6 +235,21 @@
 	                        <input type="checkbox" name="chkProposal" id="chkProposal">
 	                        <label for="chkProposal">가격제안받기</label>
 	                    </span>
+	                </div>
+	                
+	                <!-- 동네 -->
+	                <div class="divCategory"  >
+	                    <select name="p_cate" value="${productDTO.p_cate}" class="productCategory">
+	                    	<option value="주제선택" ${productDTO.p_cate == '카테고리선택' ? "selected" : ""}>카테고리선택</option>
+	                        <option value="디지털기기/가전" ${productDTO.p_cate == '디지털기기/가전' ? "selected" : ""}>디지털기기/가전</option>
+	                        <option value="가구/인테리어" ${productDTO.p_cate == '가구/인테리어' ? "selected" : ""}>가구/인테리어</option>
+	                        <option value="생활/주방" ${productDTO.p_cate == '생활/주방' ? "selected" : ""}>생활/주방</option>
+	                        <option value="유아용품" ${productDTO.p_cate == '유아용품' ? "selected" : ""}>유아용품</option>
+	                        <option value="의류" ${productDTO.p_cate == '의류' ? "selected" : ""}>의류</option>
+	                        <option value="도서" ${productDTO.p_cate == '도서' ? "selected" : ""}>도서</option>
+	                        <option value="티켓/교환권" ${productDTO.p_cate == '티켓/교환권' ? "selected" : ""}>티켓/교환권</option>
+	                        <option value="기타 중고물품" ${productDTO.p_cate == '기타 중고물품' ? "selected" : ""}>기타 중고물품</option>                        
+	                    </select>
 	                </div>
                 </c:if>
             </div>

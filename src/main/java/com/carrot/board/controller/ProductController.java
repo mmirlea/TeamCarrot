@@ -68,7 +68,7 @@ public class ProductController {
 			
 			m.addAttribute(productDTO);
 			m.addAttribute(boardDTO);
-			m.addAttribute("menu", "product");
+			//m.addAttribute("menu", "product");
 			
 			session.setAttribute("login_email", login_email);
 		}catch(Exception e) {
@@ -92,10 +92,13 @@ public class ProductController {
 			HttpSession session) {
 		String p_email = (String) session.getAttribute("m_email");
 
+		System.out.println(p_email);
 		try {
 			m.addAttribute("page", page);
 			m.addAttribute("pageSize", pageSize);
 
+			System.out.println(p_num + ", " + p_email);
+			
 			int rowCnt = service.remove(p_num, p_email);
 			
 			System.out.println(rowCnt);
@@ -114,9 +117,34 @@ public class ProductController {
 		return "redirect:/carrot/junggoMain";
 	}
 
+	// 수정 시 게시글 가져오기
+	@GetMapping("/select")
+	public String select(ProductDTO productDTO, RedirectAttributes rattr, Model m, HttpSession session) {
+		String p_email = (String) session.getAttribute("m_email");
+		productDTO.setP_email(p_email);
+		
+		try {
+			System.out.println("select -> productDTO : " + productDTO);
+			productDTO = service.select(productDTO.getP_num());
+
+			System.out.println(productDTO);
+			m.addAttribute("productDTO", productDTO);
+			m.addAttribute("menu", "product");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			m.addAttribute("msg", "LIST_ERR");
+		}
+
+		return "boardDetail";
+	}
+	
 	@PostMapping("/modify")
 	public String modify(ProductDTO productDTO, RedirectAttributes rattr, Model m, HttpSession session) {
 		String p_email = (String) session.getAttribute("m_email");
+		
+		System.out.println(p_email);
+		
 		productDTO.setP_email(p_email);
 		try {
 			if (service.modify(productDTO) != 1)
@@ -124,13 +152,13 @@ public class ProductController {
 
 			rattr.addFlashAttribute("msg", "MOD_OK");
 
-			return "redirect:/carrot/list";
+			return "redirect:/carrot/junggoMain";
 
 		} catch (Exception e) {
 			e.printStackTrace();
 
 			//m.addAttribute("mode", "new"); 
-			m.addAttribute("menu", "board");
+			m.addAttribute("menu", "product");
 			m.addAttribute("productDTO", productDTO); 
 			m.addAttribute("msg", "MOD_ERR"); 
 
