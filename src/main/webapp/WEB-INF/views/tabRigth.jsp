@@ -17,10 +17,16 @@
 <body>
 <script type="text/javascript">
 const menu = '<%= request.getParameter("menu") %>'
-console.log(menu);
+
 $(document).ready(function() {
 	$('#wirte').on('click',()=>{
-		window.location.href= window.location.origin+"/carrot/board/write?menu="+menu
+		if(menu ==  "product"){
+			window.location.href= window.location.origin+"/carrot/carrot/write?menu="+menu
+		
+		}else {
+			window.location.href= window.location.origin+"/carrot/board/write?menu="+menu
+		}
+	
 	})
 })
 </script>
@@ -62,11 +68,18 @@ $(document).ready(function() {
 	$(document).ready(function() {
 		$("#wirte").on("click", function() {
 			let form = $('#form');
+			if($(location).attr("search") == "?menu=product"){
+				form.attr("action", "<c:url value='/carrot/chkLogin'/>");
+				form.attr("method", "get");
+	
+				form.submit();
+			} else {
+				form.attr("action", "<c:url value='/board/chkLogin'/>");
+				form.attr("method", "get");
+	
+				form.submit();
+			}
 			
-			form.attr("action", "<c:url value='/board/chkLogin'/>");
-			form.attr("method", "get");
-
-			form.submit();
 		})
 	})
 	</script>
