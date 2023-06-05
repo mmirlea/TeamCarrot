@@ -27,7 +27,7 @@
 	</resultMap>
 
 	<!-- 게시글 읽어오기 -->
-	<select id="select" parameterType="int" resultType="BoardDTO">
+	<select id="select" parameterType="int" resultMap="BoardJoin">
 		SELECT B_MENU,    B_NUM,    B_CATE,   B_EMAIL, B_TITLE, 
 			   B_CONTENT, B_CRDATE, B_UPDATE, B_LIKEY, B_COMM,  B_VIEWCNT, 
 			   M_NICKNM, M_ADDR1
@@ -40,7 +40,7 @@
 	</select>
 
 	<!-- 게시글 목록 조회(등록일 기준으로 내림차순) -->
-	<select id="selectAll" resultType="BoardDTO">
+	<select id="selectAll" resultMap="BoardJoin">
 		SELECT B_MENU,    B_NUM, 	B_CATE,   B_EMAIL, B_TITLE,
 			   B_CONTENT, B_CRDATE, B_LIKEY,  B_COMM,  B_VIEWCNT, 
 			   M_NICKNM,  M_ADDR1,  M_ADDR2
@@ -205,14 +205,13 @@
 	<select id="searchSelectPage" parameterType="SearchCondition" resultType="BoardDTO">
 		SELECT *
 		  FROM (SELECT ROWNUM RUNM, A.*
-				  FROM (SELECT B_NUM, B_CATE, B_EMAIL, B_TITLE, B_CONTENT, B_CRDATE, B_LIKEY, B_COMM
-					      FROM BOARD
-					     WHERE 1 = 1
-					       AND B_MENU = '2'
+				  FROM (SELECT B_NUM, B_CATE, B_EMAIL, B_TITLE, B_CONTENT, B_UPDATE, B_LIKEY, B_COMM
+					      FROM BOARD LEFT OUTER JOIN MEMBER
+		    				ON B_EMAIL = M_EMAIL
+		 				 WHERE B_MENU = '2'
 					       AND B_TEMPSAVEYN = 'N'
 					    <include refid="searchCondition"></include>
-						ORDER BY B_CRDATE DESC, B_NUM DESC
-						   <include refid="searchAll"></include>) A)
+						ORDER BY B_CRDATE DESC, B_NUM DESC) A)
 		 WHERE RUNM BETWEEN ((NVL(#{page}, 0)-1) * #{pageSize} +1) AND (NVL(#{page}, 0) * #{pageSize})
 	</select>
 
