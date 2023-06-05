@@ -63,7 +63,8 @@
 	<!-- 글 수정하기 -->
 	<update id="update" parameterType="ProductDTO">
 		UPDATE product
-		SET p_title = #{p_title}, p_content = #{p_content}, p_update = SYSDATE
+		SET p_title = #{p_title}, p_content = #{p_content}, p_update = SYSDATE, 
+			p_price = #{p_price}, p_negoyn = #{p_negoyn}
 		WHERE p_menu = '1' AND p_num = #{p_num} AND p_email = #{p_email} 
 	</update>
 	

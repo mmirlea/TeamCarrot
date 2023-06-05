@@ -92,7 +92,7 @@
                 	<c:forEach var="productDTO" items="${list}">
                 		<li>
                 			<div>${productDTO.p_num}</div>
-                			<a href="<c:url value='/carrot/read?${ph.sc.getQueryString()}&p_num=${productDTO.p_num }'/>">
+                			<a href="<c:url value='/carrot/read?${ph.sc.getQueryString()}&p_num=${productDTO.p_num }&menu=product'/>">
                             <div class="itemImg"><img src="../resources/img/전동드릴 공구 셋트1.jpg" alt="전동드릴 공구 셋트1"></div>
                             <div class="itemName"><c:out value="${productDTO.p_title}"/></div>
                             <div class="itemPrice"><c:out value="${productDTO.p_price}"/></div>
