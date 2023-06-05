@@ -72,11 +72,6 @@ console.log(menu);
                 <hr>
             </div><!--memberAll-->  
             <div class="content-wrap">
-
-
-
-            	<h1 class="contentTitle">"${menu == "board" ? boardDTO.b_title : productDTO.p_title}"</h1><!--.contentTitle-->
-
             	<div class="content-top">
 	            	<h1 class="contentTitle">${menu == 'board' ? boardDTO.b_title : productDTO.b_title}</h1><!--.contentTitle-->
 					<div class="crud-wrap">
@@ -100,7 +95,7 @@ console.log(menu);
                 </div><!--content-->
                 <div class="countUp">
                     <span class="itemAttention">
-                    	<button type="button" class="likey" id="btnLikey" name="b_likey"><i class="far fa-comment"></button>
+                    	<button type="button" class="likey" id="btnLikey" name="b_likey"><i class="far fa-heart"></i></button>
                     	관심 ${menu == "board" ? boardDTO.b_likey : productDTO.p_likey}</span>
                     &nbsp;•&nbsp;
                     <span class="itemChat">채팅 ${menu == "board" ? boardDTO.b_comm : productDTO.p_comm}</span>
@@ -236,12 +231,18 @@ console.log(menu);
 		})
 		
 		$("#btnLikey").on("click", function() {
-			let form = $('#form');
+			 let form = $('#form');
 			
-			form.attr("action", "<c:url value='/board/likeCnt'/>");
-			form.attr("method", "post");
-			form.append("<input type='hidden' name='b_num' value='${boardDTO.b_num}'>");
-			form.submit();
+			if (document.getElementById("btnLikey").innerHTML == '<i class="far fa-heart" aria-hidden="true"></i>') {
+				document.getElementById("btnLikey").innerHTML = "<i class='fas fa-heart'></i>";
+				
+				/* form.attr("action", "<c:url value='/board/likeCnt'/>");
+				form.attr("method", "post");
+				form.append("<input type='hidden' name='b_num' value='${boardDTO.b_num}'>");
+				form.submit(); */
+			} else{
+				document.getElementById("btnLikey").innerHTML = '<i class="far fa-heart" aria-hidden="true"></i>';
+			}
 		})
 		
 	})

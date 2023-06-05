@@ -62,10 +62,21 @@ public class BoardServiceImple implements BoardService {
 		boardDAO.increaseViewCnt(b_num);
 		return boardDTO;
 	}
-	
+
 	@Override
-	public int increaseLikeCnt(int cnt, BoardDTO boardDTO) throws Exception {
-		return boardDAO.increaseLikeCnt(cnt, boardDTO);
+	public int increaseLikeCnt(int b_num, BoardDTO boardDTO) throws Exception {
+		return boardDAO.increaseLikeCnt(b_num, boardDTO);
+	}
+
+	@Override
+	public int decreaseLikeCnt(String b_likeyEmail, BoardDTO boardDTO) throws Exception {
+		b_likeyEmail = boardDAO.getLikeyEmail(boardDTO);
+		return boardDAO.decreaseLikeCnt(b_likeyEmail, boardDTO);
+	}
+
+	@Override
+	public String getLikeyEmail(BoardDTO boardDTO) throws Exception {
+		return boardDAO.getLikeyEmail(boardDTO);
 	}
 
 	// 페이징 처리

@@ -27,7 +27,11 @@ public interface BoardService {
 	// 읽을 때 조회되도록 한번에 묶어서 사용
 	BoardDTO read(int b_num) throws Exception;
 	
-	int increaseLikeCnt(int cnt, BoardDTO boardDTO) throws Exception;
+	int increaseLikeCnt(int b_num, BoardDTO boardDTO) throws Exception;
+	
+	int decreaseLikeCnt(String b_likeyEmail, BoardDTO boardDTO) throws Exception;
+	
+	String getLikeyEmail(BoardDTO boardDTO) throws Exception;
 
 	List<BoardDTO> getPage(Map map) throws Exception;
 

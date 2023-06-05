@@ -29,11 +29,12 @@ public class BoardController {
 	BoardService service;
 	
 	@PostMapping("/likeCnt")
-	public int likeCnt(Integer cnt, BoardDTO boardDTO, HttpSession session) {
+	public int likeCnt(Integer b_num, BoardDTO boardDTO, HttpSession session) {
 		String b_email = (String) session.getAttribute("m_email");
 		int likeCnt = 0;
+		System.out.println("likeCnt -> boardDTO" +boardDTO);
 		try {
-			likeCnt = service.increaseLikeCnt(cnt, boardDTO);
+			likeCnt = service.increaseLikeCnt(b_num, boardDTO);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
