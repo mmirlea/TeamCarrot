@@ -94,25 +94,22 @@ public class RegisterController {
 	}
 	
 	//이미지 경로
-	    public static String saveImageToServer(MultipartFile file) throws IOException {
-	        String uploadDir = "D:/01-STUDY/proimg/";
-	        //String uploadDir = "src/main/resources/static/images/";
-	        
-	        // 디렉토리가 존재하지 않으면 생성
-	        File directory = new File(uploadDir);
-	        if (!directory.exists()) {
-	            directory.mkdirs();
-	        }
+    public static String saveImageToServer(MultipartFile file) throws IOException {
+        String uploadDir = "D:/01-STUDY/proimg/";
+        //String uploadDir = "src/main/resources/static/images/";
 
-	        String originalFilename = StringUtils.cleanPath(file.getOriginalFilename());
-	        String fileName = System.currentTimeMillis() + "_" + originalFilename;
-	        String filePath = uploadDir + fileName;
-
-	        // 파일 저장
-	        File dest = new File(filePath);
-	        file.transferTo(dest);
-
-	        return fileName;
-	    }
+        // 디렉토리가 존재하지 않으면 생성
+        File directory = new File(uploadDir);
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+        String originalFilename = StringUtils.cleanPath(file.getOriginalFilename());
+        String fileName = System.currentTimeMillis() + "_" + originalFilename;
+        String filePath = uploadDir + fileName;
+        // 파일 저장
+        File dest = new File(filePath);
+        file.transferTo(dest);
+        return fileName;
+    }
 }
 

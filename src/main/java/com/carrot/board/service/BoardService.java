@@ -39,5 +39,5 @@ public interface BoardService {
 
 	int getSearchResultCnt(SearchCondition sc) throws Exception;
 
-//	int updateCommentsCnt(int cnt, Integer b_num) throws Exception;
+	int updateCommentsCnt(int cnt, Integer b_num) throws Exception;
 }
