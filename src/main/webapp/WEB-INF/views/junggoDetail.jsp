@@ -19,9 +19,12 @@
 </head>
 <% String menu = request.getParameter("menu"); %>
 <script type="text/javascript">
-const menu = '<%= request.getParameter("menu") %>'
-console.log(menu);
-
+	const menu = '<%= request.getParameter("menu") %>'
+	console.log(menu);
+	if(msg == "MOD_ERR") alert("게시글 수정에 실패하였습니다.")
+	if(msg == "DEL_ERR") alert("게시글 삭제에 실패하였습니다.")
+	let msg="${msg}"
+	
 </script>
 <body>
 	<form class="wrap" id="form">
@@ -72,13 +75,17 @@ console.log(menu);
                 <hr>
             </div><!--memberAll-->  
             <div class="content-wrap">
+
             	<div class="content-top">
-	            	<h1 class="contentTitle">${menu == 'board' ? boardDTO.b_title : productDTO.b_title}</h1><!--.contentTitle-->
-					<div class="crud-wrap">
-	                    	<input type="hidden" value="${boardDTO.b_num} " name="b_num">
-	                    	<button type="button" class="btnModify" id="btnModify" value="board">수정</button>
-	                    	<button type="button" class="btnDel" id="btnDel">삭제</button>
-	                </div>
+	            	<h1 class="contentTitle">${menu == 'board' ? boardDTO.b_title : productDTO.p_title}</h1><!--.contentTitle-->
+					
+					<c:if test="${login_email != null && (login_email == productDTO.p_email || login_email == boardDTO.b_email)}">
+						<div class="crud-wrap">
+		                    	<input type="hidden" value="${boardDTO.b_num} " name="b_num">
+		                    	<button type="button" class="btnModify" id="btnModify" value="board">수정</button>
+		                    	<button type="button" class="btnDel" id="btnDel">삭제</button>
+		                </div>
+	                </c:if>
             	</div>
 
                 <div class="contentInfo">
@@ -208,27 +215,47 @@ console.log(menu);
     
     <script type="text/javascript">
     $(document).ready(function() {
-			
+    	
+    	    	
 		$("#btnDel").on("click", function(){
 			
 			if(!confirm("정말로 삭제하시겠습니까?")) return;
 			
 			debugger;
 			let form = $('#form');
-			form.attr("action", "<c:url value='/board/remove?page=${page}&pageSize=${pageSize}'/>");
-			form.attr("method", "post");
-			form.append("<input type='hidden' name='b_num' value='${boardDTO.b_num}'>");
 			
-			form.submit();
+			console.log($(location).attr("pathname"))
+			
+			if($(location).attr("pathname") == "/carrot/carrot/read"){
+				form.attr("action", "<c:url value='/carrot/remove?page=${page}&pageSize=${pageSize}'/>");
+				form.attr("method", "post");
+				form.append("<input type='hidden' name='p_num' value='${productDTO.p_num}'>");
+				
+				form.submit();
+				
+			}else{
+				form.attr("action", "<c:url value='/board/remove?page=${page}&pageSize=${pageSize}'/>");
+				form.attr("method", "post");
+				form.append("<input type='hidden' name='b_num' value='${boardDTO.b_num}'>");
+				
+				form.submit();
+			}
 		})
 		
-		$("#btnModify").on("click", function() {
+ 		$("#btnModify").on("click", function() {
 			let form = $('#form');
 			
-		  	const $a = document.createElement('a'); //가상 a태그 생성
-		  	$a.href = '/carrot/board/select?menu=board&'+'b_num='+${boardDTO.b_num};
-		  	$a.click();
-		})
+			if($(location).attr("pathname") == "/carrot/carrot/read"){
+			  	const $a = document.createElement('a'); //가상 a태그 생성
+			  	$a.href = '/carrot/board/select?menu=product&'+'p_num='+${productDTO.p_num};
+			  	$a.click();
+			  	
+			} else {
+				const $a = document.createElement('a'); //가상 a태그 생성
+			  	$a.href = '/carrot/board/select?menu=board&'+'b_num='+${boardDTO.b_num};
+			  	$a.click();
+			}
+		}) 
 		
 		$("#btnLikey").on("click", function() {
 			 let form = $('#form');
@@ -244,8 +271,10 @@ console.log(menu);
 				document.getElementById("btnLikey").innerHTML = '<i class="far fa-heart" aria-hidden="true"></i>';
 			}
 		})
+
 		
-	})
+    })
+	
     	
     </script>
 </body>

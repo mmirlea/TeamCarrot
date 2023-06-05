@@ -10,6 +10,7 @@
 		<result property="p_menu" column="p_menu"/>
 		<result property="p_num" column="p_num"/>
 		<result property="p_cate" column="p_cate"/>
+		<result property="p_email" column="p_email"/>
 		<result property="p_title" column="p_title"/>
 		<result property="p_content" column="p_content"/>
 		<result property="p_price" column="p_price"/>
