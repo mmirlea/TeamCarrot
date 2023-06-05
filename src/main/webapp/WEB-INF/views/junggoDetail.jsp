@@ -21,7 +21,7 @@
 <script type="text/javascript">
 	const menu = '<%= request.getParameter("menu") %>'
 	console.log(menu);
-	if(msg == "MOD_ERR") alert("게시글 수정에 실패하였습니다.")
+	//if(msg == "MOD_ERR") alert("게시글 수정에 실패하였습니다.")
 	if(msg == "DEL_ERR") alert("게시글 삭제에 실패하였습니다.")
 	let msg="${msg}"
 	

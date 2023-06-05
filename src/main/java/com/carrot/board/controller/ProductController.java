@@ -147,9 +147,10 @@ public class ProductController {
 		
 		productDTO.setP_email(p_email);
 		try {
-			if (service.modify(productDTO) != 1)
+			if (service.modify(productDTO) != 1) {
+				System.out.println(productDTO);
 				throw new Exception("Modify failed");
-
+			}
 			rattr.addFlashAttribute("msg", "MOD_OK");
 
 			return "redirect:/carrot/junggoMain";

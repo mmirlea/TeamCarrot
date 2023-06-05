@@ -7,17 +7,17 @@
 <mapper namespace="com.carrot.board.dao.BoardMapper">
 
 	<resultMap id="BoardJoin" type="BoardDTO">
-		<result property="m_menu" column="M_MENU" />
-		<result property="m_num" column="M_NUM" />
-		<result property="m_cate" column="M_CATE" />
-		<result property="m_email" column="M_EMAIL" />
-		<result property="m_title" column="M_TITLE" />
-		<result property="m_content" column="M_CONTENT" />
-		<result property="m_crDate" column="M_CRDATE" />
-		<result property="m_upDate" column="M_UPDATE" />
-		<result property="m_likey" column="M_LIKEY" />
-		<result property="m_comm" column="M_COMM" />
-		<result property="m_viewcnt" column="M_VIEWCNT" />
+		<result property="b_menu" column="B_MENU" />
+		<result property="b_num" column="B_NUM" />
+		<result property="b_cate" column="B_CATE" />
+		<result property="b_email" column="B_EMAIL" />
+		<result property="b_title" column="B_TITLE" />
+		<result property="b_content" column="B_CONTENT" />
+		<result property="b_crDate" column="B_CRDATE" />
+		<result property="b_upDate" column="B_UPDATE" />
+		<result property="b_likey" column="B_LIKEY" />
+		<result property="b_comm" column="B_COMM" />
+		<result property="b_viewCnt" column="B_VIEWCNT" />
 		<association property="userDTO" javaType="UserDTO">
 			<id property="m_email" column="M_EMAIL" />
 			<result property="m_nicknm" column="M_NICKNM" />
@@ -72,13 +72,13 @@
 	<!-- 글 추가하기 -->
 	<insert id="insert" parameterType="BoardDTO">
 		INSERT INTO BOARD (B_MENU, B_NUM, B_CATE, B_EMAIL, B_TITLE, B_CONTENT)
-		VALUES (2, SEQ_BOARD_SEQ.NEXTVAL, #{b_cate}, #{b_email}, #{b_title}, #{b_content})
+		VALUES (2, SEQ_BOARD_NUM.NEXTVAL, #{b_cate}, #{b_email}, #{b_title}, #{b_content})
 	</insert>
 	
 	<!-- 임시저장 추가하기 -->
 	<insert id="save" parameterType="BoardDTO">
 		INSERT INTO BOARD (B_NUM, B_CATE, B_EMAIL, B_TITLE, B_CONTENT, B_TEMPSAVEYN)
-		VALUES (SEQ_BOARD_SEQ.NEXTVAL, #{b_cate}, #{b_email}, #{b_title}, #{b_content}, 'Y')
+		VALUES (SEQ_BOARD_NUM.NEXTVAL, #{b_cate}, #{b_email}, #{b_title}, #{b_content}, 'Y')
 	</insert>
 
 	<!-- 글 수정하기 -->
