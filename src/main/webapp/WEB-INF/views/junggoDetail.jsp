@@ -258,24 +258,24 @@
 		}) 
 		
 		$("#btnLikey").on("click", function() {
+			debugger;
 			 let form = $('#form');
+			 
+			 alert("알람");
 			
-			if (document.getElementById("btnLikey").innerHTML == '<i class="far fa-heart" aria-hidden="true"></i>') {
+			/* if (document.getElementById("btnLikey").innerHTML == '<i class="far fa-heart" aria-hidden="true"></i>') {
 				document.getElementById("btnLikey").innerHTML = "<i class='fas fa-heart'></i>";
 				
-				/* form.attr("action", "<c:url value='/board/likeCnt'/>");
+				form.attr("action", "<c:url value='/board/likeCnt'/>");
 				form.attr("method", "post");
 				form.append("<input type='hidden' name='b_num' value='${boardDTO.b_num}'>");
-				form.submit(); */
+				form.submit(); 
 			} else{
 				document.getElementById("btnLikey").innerHTML = '<i class="far fa-heart" aria-hidden="true"></i>';
-			}
+			} */
 		})
 
 		
-    })
-	
-    	
     </script>
 </body>
 </html>

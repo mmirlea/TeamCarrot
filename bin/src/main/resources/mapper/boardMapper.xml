@@ -212,7 +212,7 @@
 					       AND B_TEMPSAVEYN = 'N'
 					    <include refid="searchCondition"></include>
 						ORDER BY B_CRDATE DESC, B_NUM DESC
-						   <include refid="searchAll"></include>) A)
+						<include refid="searchAll"></include>) A)
 		 WHERE RUNM BETWEEN ((NVL(#{page}, 0)-1) * #{pageSize} +1) AND (NVL(#{page}, 0) * #{pageSize})
 	</select>
 
