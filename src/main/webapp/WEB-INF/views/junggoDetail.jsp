@@ -21,7 +21,7 @@
 <script type="text/javascript">
 	const menu = '<%= request.getParameter("menu") %>'
 	console.log(menu);
-	if(msg == "MOD_ERR") alert("게시글 수정에 실패하였습니다.")
+	//if(msg == "MOD_ERR") alert("게시글 수정에 실패하였습니다.")
 	if(msg == "DEL_ERR") alert("게시글 삭제에 실패하였습니다.")
 	let msg="${msg}"
 	
@@ -230,25 +230,26 @@
 				
 				form.attr("action", "<c:url value='/carrot/remove?page=${page}&pageSize=${pageSize}'/>");
 				form.attr("method", "post");
-				//form.append("<input type='hidden' name='p_num' value='${productDTO.p_num}'>");
+				form.append("<input type='hidden' name='p_num' value='${productDTO.p_num}'>");
 				
 				form.submit();
 				
 			} else{
 				form.attr("action", "<c:url value='/board/remove?page=${page}&pageSize=${pageSize}'/>");
 				form.attr("method", "post");
-				//form.append("<input type='hidden' name='b_num' value='${boardDTO.b_num}'>");
+				form.append("<input type='hidden' name='b_num' value='${boardDTO.b_num}'>");
 				
 				form.submit();
 			} 
 		})
 		
- 		/* $("#btnModify").on("click", function() {
+ 		 $("#btnModify").on("click", function() {
 			let form = $('#form');
 			
+						
 			if($(location).attr("pathname") == "/carrot/carrot/read"){
 			  	const $a = document.createElement('a'); //가상 a태그 생성
-			  	$a.href = '/carrot/board/select?menu=product&'+'p_num='+${productDTO.p_num};
+			  	$a.href = '/carrot/carrot/select?menu=product&'+'p_num='+${productDTO.p_num};
 			  	$a.click();
 			  	
 			} else {
@@ -256,7 +257,7 @@
 			  	$a.href = '/carrot/board/select?menu=board&'+'b_num='+${boardDTO.b_num};
 			  	$a.click();
 			}
-		})  */
+		})  
 		
 		$("#btnLikey").on("click", function() {
 			debugger;

@@ -26,4 +26,6 @@ public interface ProductService {
 	List<ProductDTO> getSearchSelectPage(SearchConditionP scp) throws Exception;
 	
 	int getSearchResultCnt(SearchConditionP scp) throws Exception;
+	
+	ProductDTO select(Integer p_num) throws Exception;
 }
