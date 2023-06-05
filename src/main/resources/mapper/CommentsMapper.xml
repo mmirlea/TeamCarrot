@@ -34,7 +34,7 @@
 		SELECT C_MENU, C_PNUM, C_NUM, C_PCNUM, C_EMAIL, C_CONTENT, C_CRDATE, C_UPDATE
 		FROM COMMENTS
 		WHERE C_PNUM = #{c_pnum}
-		ORDER BY C_CRDATE ASC, C_NUM DESC
+		ORDER BY C_CRDATE ASC, C_NUM ASC
 	</select>
 	
 	<!-- 댓글 번호에 따른 댓글 내용 확인하기 -->

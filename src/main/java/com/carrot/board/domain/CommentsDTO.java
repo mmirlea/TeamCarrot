@@ -15,6 +15,13 @@ public class CommentsDTO {
 	
 	public CommentsDTO() {}
 
+	public CommentsDTO(Integer c_pnum, Integer c_pcnum, String c_email, String c_content) {
+		this.c_pnum = c_pnum;
+		this.c_pcnum = c_pcnum;
+		this.c_email = c_email;
+		this.c_content = c_content;
+	}
+
 	public CommentsDTO(String c_menu, Integer c_pnum, Integer c_num, Integer c_pcnum, String c_email,
 			String c_content) {
 		this.c_menu = c_menu;
