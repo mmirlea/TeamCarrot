@@ -20,7 +20,7 @@
 	let form = document.getElementById("form");
 	
 	function formCheck() {
-		if (form.b_title.value == "") {
+		/* if (form.b_title.value == "") {
 			setMessage('제목을 입력하세요', form.b_title);
 			return false;
 		}
@@ -30,20 +30,21 @@
 			return false;
 		}
 		
-			if (form.b_content.value == "") {
-				setMessage('내용을 입력하세요', form.b_content);
-				return false;
-			}
-		
-			return true;
+		if (form.b_content.value == "") {
+			setMessage('내용을 입력하세요', form.b_content);
+			return false;
+		} */
+	
+		return true;
+	}
+	
+	function setMessage(msg, element) {
+		alert(msg);
+	
+		if (element) {
+			element.select();
 		}
-		function setMessage(msg, element) {
-			alert(msg);
-		
-			if (element) {
-				element.select();
-			}
-		}
+	}
 
 	$(document).ready(function() {
 	$('#close').on('click',()=>{
