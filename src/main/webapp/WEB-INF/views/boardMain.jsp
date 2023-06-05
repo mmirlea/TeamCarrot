@@ -167,7 +167,6 @@
 				</div> <!--pageList-->
 			</div> <!--paging-->
 
-
 		</div> <!--.container-->
 
        <%@ include file ="./footer.jsp" %>
