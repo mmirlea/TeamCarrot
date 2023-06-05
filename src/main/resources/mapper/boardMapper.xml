@@ -72,13 +72,13 @@
 	<!-- 글 추가하기 -->
 	<insert id="insert" parameterType="BoardDTO">
 		INSERT INTO BOARD (B_MENU, B_NUM, B_CATE, B_EMAIL, B_TITLE, B_CONTENT)
-		VALUES (2, SEQ_BOARD_SEQ.NEXTVAL, #{b_cate}, #{b_email}, #{b_title}, #{b_content})
+		VALUES (2, SEQ_BOARD_NUM.NEXTVAL, #{b_cate}, #{b_email}, #{b_title}, #{b_content})
 	</insert>
 	
 	<!-- 임시저장 추가하기 -->
 	<insert id="save" parameterType="BoardDTO">
 		INSERT INTO BOARD (B_NUM, B_CATE, B_EMAIL, B_TITLE, B_CONTENT, B_TEMPSAVEYN)
-		VALUES (SEQ_BOARD_SEQ.NEXTVAL, #{b_cate}, #{b_email}, #{b_title}, #{b_content}, 'Y')
+		VALUES (SEQ_BOARD_NUM.NEXTVAL, #{b_cate}, #{b_email}, #{b_title}, #{b_content}, 'Y')
 	</insert>
 
 	<!-- 글 수정하기 -->
