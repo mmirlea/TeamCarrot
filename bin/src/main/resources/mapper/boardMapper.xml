@@ -200,7 +200,7 @@
 		</choose>
 	</sql>
 
-	<!-- 게시글 검색하기, 검색 후 페이징 처리 되어야 하기 때문에 --> 
+	<!-- 게시글 검색하기, 검색 후 페이징 처리 되어야 하기 때문에   --> 
 	<!-- SearchCondition 어떤 패키지에 포함되어있는지 원래는 표기해야함 -> 등록하면 안해도됨  -->
 	<select id="searchSelectPage" parameterType="SearchCondition" resultType="BoardDTO">
 		SELECT *
@@ -212,7 +212,7 @@
 					       AND B_TEMPSAVEYN = 'N'
 					    <include refid="searchCondition"></include>
 						ORDER BY B_CRDATE DESC, B_NUM DESC
-						<include refid="searchAll"></include>) A)
+						   <include refid="searchAll"></include>) A)
 		 WHERE RUNM BETWEEN ((NVL(#{page}, 0)-1) * #{pageSize} +1) AND (NVL(#{page}, 0) * #{pageSize})
 	</select>
 
