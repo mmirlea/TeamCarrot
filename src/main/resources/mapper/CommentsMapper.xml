@@ -30,7 +30,7 @@
 	</insert>
 	
 	<!-- 게시글의 댓글 모두 검색 -->
-	<select id="selectAll" parameterType="int" resultType="CommentDTO">
+	<select id="selectAll" parameterType="int" resultType="CommentsDTO">
 		SELECT C_MENU, C_PNUM, C_NUM, C_PCNUM, C_EMAIL, C_CONTENT, C_CRDATE, C_UPDATE
 		FROM COMMENTS
 		WHERE C_PNUM = #{c_pnum}
