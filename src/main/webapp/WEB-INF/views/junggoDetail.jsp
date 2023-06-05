@@ -261,7 +261,7 @@
 			debugger;
 			 let form = $('#form');
 			 
-			 alert("알람");
+			 alert("알람!!!");
 			
 			/* if (document.getElementById("btnLikey").innerHTML == '<i class="far fa-heart" aria-hidden="true"></i>') {
 				document.getElementById("btnLikey").innerHTML = "<i class='fas fa-heart'></i>";
