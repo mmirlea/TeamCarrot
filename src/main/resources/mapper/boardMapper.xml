@@ -173,4 +173,9 @@
 		     AND B_NUM = #{b_num}
 	</update> -->
 
+	<update id="updateCommentsCnt" parameterType="map">
+		UPDATE BOARD
+		SET B_COMM = B_COMM + #{cnt}
+		WHERE B_NUM = #{b_num}
+	</update>
 </mapper>

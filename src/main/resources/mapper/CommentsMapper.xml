@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.carrot.board.dao.CommentsMapper">
+	<!-- 게시글 댓글 전체 삭제 -->
+	<delete id="deleteAll" parameterType="int">
+		DELETE FROM COMMENTS
+		WHERE C_PNUM = #{c_pnum}
+	</delete>
+	
+	<!-- 게시글 댓글 개수 확인 -->
+	<select id="count" parameterType="int" resultType="int">
+		SELECT count(*)
+		FROM COMMENTS
+		WHERE C_PNUM = #{c_pnum}
+	</select>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="delete" parameterType="map">
+		DELETE FROM COMMENTS
+		WHERE C_NUM = #{c_num} AND C_EMAIL = #{c_email}
+	</delete>
+	
+	<!-- 댓글 추가 -->
+	<insert id="insert" parameterType="CommentsDTO">
+		INSERT INTO comments(C_MENU, C_PNUM, C_NUM, C_PCNUM, C_EMAIL, C_CONTENT, C_CRDATE, C_UPDATE)
+		VALUES (#{c_menu}, #{c_pnum}, seq_comm_num.nextval, #{c_pcnum}, #{c_email}, #{c_content}, SYSDATE, SYSDATE)
+	</insert>
+	
+	<!-- 게시글의 댓글 모두 검색 -->
+	<select id="selectAll" parameterType="int" resultType="CommentDTO">
+		SELECT C_MENU, C_PNUM, C_NUM, C_PCNUM, C_EMAIL, C_CONTENT, C_CRDATE, C_UPDATE
+		FROM COMMENTS
+		WHERE C_PNUM = #{c_pnum}
+		ORDER BY C_CRDATE ASC, C_NUM DESC
+	</select>
+	
+	<!-- 댓글 번호에 따른 댓글 내용 확인하기 -->
+	<select id="select" parameterType="int" resultType="CommentsDTO">
+		SELECT C_MENU, C_PNUM, C_NUM, C_PCNUM, C_EMAIL, C_CONTENT, C_CRDATE, C_UPDATE
+		FROM COMMENTS
+		WHERE C_NUM = #{c_num}
+	</select>
+	
+	<!-- 댓글 변경하기 -->
+	<update id="update" parameterType="CommentsDTO">
+		UPDATE COMMENTS
+		SET C_CONTENT = #{c_content}, C_UPDATE = SYSDATE
+		WHERE C_NUM = #{c_num} AND C_CONTENT = #{c_content}
+	</update>
+</mapper>
