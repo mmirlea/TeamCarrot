@@ -7,22 +7,24 @@
 <mapper namespace="com.carrot.board.dao.BoardMapper">
 
 	<resultMap id="BoardJoin" type="BoardDTO">
-		<result property="m_menu" column="M_MENU" />
-		<result property="m_num" column="M_NUM" />
-		<result property="m_cate" column="M_CATE" />
-		<result property="m_email" column="M_EMAIL" />
-		<result property="m_title" column="M_TITLE" />
-		<result property="m_content" column="M_CONTENT" />
-		<result property="m_crDate" column="M_CRDATE" />
-		<result property="m_upDate" column="M_UPDATE" />
-		<result property="m_likey" column="M_LIKEY" />
-		<result property="m_comm" column="M_COMM" />
-		<result property="m_viewcnt" column="M_VIEWCNT" />
+		<result property="b_menu" column="B_MENU" />
+		<result property="b_num" column="B_NUM" />
+		<result property="b_cate" column="B_CATE" />
+		<result property="b_email" column="B_EMAIL" />
+		<result property="b_title" column="B_TITLE" />
+		<result property="b_content" column="B_CONTENT" />
+		<result property="b_crDate" column="B_CRDATE" />
+		<result property="b_upDate" column="B_UPDATE" />
+		<result property="b_likey" column="B_LIKEY" />
+		<result property="b_likeyEmail" column="B_LIKEYEMAIL" />
+		<result property="b_comm" column="B_COMM" />
+		<result property="b_viewCnt" column="B_VIEWCNT" />
 		<association property="userDTO" javaType="UserDTO">
 			<id property="m_email" column="M_EMAIL" />
 			<result property="m_nicknm" column="M_NICKNM" />
 			<result property="m_addr1" column="M_ADDR1" />
 			<result property="m_addr2" column="M_ADDR2" />
+			<result property="m_ondo" column="M_ONDO" />
 		</association>
 	</resultMap>
 

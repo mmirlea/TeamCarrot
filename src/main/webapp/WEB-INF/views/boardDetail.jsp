@@ -71,46 +71,46 @@
 	})
 	
 	$("#btnBoard").on("click", function() {
-				location.href="<c:url value='/board/list?page=${page}&pageSize=${pageSize}'/>";
-			})
-			
-			$("#btnModify").on("click", function() {
-				if (formCheck()) {
-					let form = $('#form');
-		
-					form.attr("action", "<c:url value='/board/modify'/>");
-					form.attr("method", "post");
-		
-					form.submit();
-				}
-			})
-			
-			$("#btnWrite").on("click", function() {
-				if (formCheck()) {
-					let form = $('#form');
-					$('.imgUpload').value = fileList;
-					form.attr("action", "<c:url value='/board/write?'/>");
-					form.attr("method", "post");
-		
-					form.submit();
-				}
-			})
+		location.href="<c:url value='/board/list?page=${page}&pageSize=${pageSize}'/>";
+	})
+	
+	$("#btnModify").on("click", function() {
+		if (formCheck()) {
+			let form = $('#form');
 
-			//임시저장
-			$("#btnSave").on("click", function() {
-				if (formCheck()) {
-					let form = $('#form');
-					
-					if($("#txtSave").val() == null || $("#txtSave").val() == "" || $("#txtSave").val() == "N"){
-						$("#txtSave").attr("value", "Y");
-					}
-					
-					form.attr("action", "<c:url value='/board/save'/>");
-					form.attr("method", "post");
-					
-					form.submit();
-				}
-			})
+			form.attr("action", "<c:url value='/board/modify'/>");
+			form.attr("method", "post");
+
+			form.submit();
+		}
+	})
+	
+	$("#btnWrite").on("click", function() {
+		if (formCheck()) {
+			let form = $('#form');
+			$('.imgUpload').value = fileList;
+			form.attr("action", "<c:url value='/board/write?'/>");
+			form.attr("method", "post");
+
+			form.submit();
+		}
+	})
+
+	//임시저장
+	$("#btnSave").on("click", function() {
+		if (formCheck()) {
+			let form = $('#form');
+			
+			if($("#txtSave").val() == null || $("#txtSave").val() == "" || $("#txtSave").val() == "N"){
+				$("#txtSave").attr("value", "Y");
+			}
+			
+			form.attr("action", "<c:url value='/board/save'/>");
+			form.attr("method", "post");
+			
+			form.submit();
+		}
+	})
 	
 	//파일 생성하기
 	function createFileList(){

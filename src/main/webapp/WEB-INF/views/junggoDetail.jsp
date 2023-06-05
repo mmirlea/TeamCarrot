@@ -79,13 +79,12 @@
             	<div class="content-top">
 	            	<h1 class="contentTitle">${menu == 'board' ? boardDTO.b_title : productDTO.p_title}</h1><!--.contentTitle-->
 					
-					<c:if test="${login_email != null && (login_email == productDTO.p_email || login_email == boardDTO.b_email)}">
-						<div class="crud-wrap">
-		                    	<input type="hidden" value="${boardDTO.b_num} " name="b_num">
-		                    	<button type="button" class="btnModify" id="btnModify" value="board">수정</button>
-		                    	<button type="button" class="btnDel" id="btnDel">삭제</button>
-		                </div>
-	                </c:if>
+					<div class="crud-wrap">
+                    	<input type="hidden" value="${menu eq 'board' ? boardDTO.b_num : 0}" name="b_num">
+                    	<input type="hidden" value="${menu ne 'board' ? 0 : productDTO.p_num}" name="b_num">
+                    	<button type="button" class="btnModify" id="btnModify" value="board">수정</button>
+                    	<button type="button" class="btnDel" id="btnDel">삭제</button>
+	                </div>
             	</div>
 
                 <div class="contentInfo">
