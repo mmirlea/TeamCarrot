@@ -6,15 +6,17 @@ public class SearchCondition {
 
 	private Integer page = 1;
 	private Integer pageSize = 16;
+	private String addr1 = "";
 	private String option = "";
 	private String keyword = "";
 
 	public SearchCondition() {
 	}
 
-	public SearchCondition(Integer page, Integer pageSize, String option, String keyword) {
+	public SearchCondition(Integer page, Integer pageSize, String addr1, String option, String keyword) {
 		this.page = page;
 		this.pageSize = pageSize;
+		this.addr1 = addr1;
 		this.option = option;
 		this.keyword = keyword;
 	}
@@ -35,6 +37,14 @@ public class SearchCondition {
 		this.pageSize = pageSize;
 	}
 
+	public String getAddr1() {
+		return addr1;
+	}
+
+	public void setAddr1(String addr1) {
+		this.addr1 = addr1;
+	}
+
 	public String getOption() {
 		return option;
 	}
@@ -53,8 +63,8 @@ public class SearchCondition {
 
 	@Override
 	public String toString() {
-		return "SearchCondition [page=" + page + ", pageSize=" + pageSize + ", option=" + option + ", keyword="
-				+ keyword + "]";
+		return "SearchCondition [page=" + page + ", pageSize=" + pageSize + ", addr1=" + addr1 + ", option=" + option
+				+ ", keyword=" + keyword + "]";
 	}
 
 	// 페이지를 지정하지 않을 때 호출
@@ -66,7 +76,9 @@ public class SearchCondition {
 	public String getQueryString(Integer page) {
 		// uriComponentsBuilder : components를 생성함
 		return UriComponentsBuilder.newInstance().queryParam("page", page).queryParam("pageSize", pageSize)
-				.queryParam("option", option).queryParam("keyword", keyword).build().toString();
+				.queryParam("addr1", addr1)
+				.queryParam("option", option)
+				.queryParam("keyword", keyword).build().toString();
 	}
 
 }

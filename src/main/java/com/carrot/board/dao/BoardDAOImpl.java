@@ -68,6 +68,30 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
+	public int increaseLikeCnt(int b_num, BoardDTO boardDTO) throws Exception {
+		Map map = new HashMap();
+		map.put("b_num", b_num);
+		map.put("boardDTO", boardDTO);
+		return session.update(namespace + "increaseLikeCnt", map);
+	}
+
+	@Override
+	public int decreaseLikeCnt(String b_likeyEmail, BoardDTO boardDTO) throws Exception {
+		Map map = new HashMap();
+		map.put("b_likeyEmail", b_likeyEmail);
+		map.put("boardDTO", boardDTO);
+		return session.update(namespace + "decreaseLikeCnt", map);
+	}
+
+	@Override
+	public String getLikeyEmail(BoardDTO boardDTO) throws Exception {
+//		map = new HashMap();
+//		map.put("b_num", b_num);
+//		map.put("b_email", b_email);
+		return session.selectOne(namespace + "getLikeyEmail", boardDTO);
+	}
+
+	@Override
 	public List<BoardDTO> selectPage(Map map) throws Exception {
 		return session.selectList(namespace + "selectPage", map);
 	}

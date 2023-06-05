@@ -28,6 +28,20 @@ public class BoardController {
 	@Autowired
 	BoardService service;
 	
+	@PostMapping("/likeCnt")
+	public int likeCnt(Integer b_num, BoardDTO boardDTO, HttpSession session) {
+		String b_email = (String) session.getAttribute("m_email");
+		int likeCnt = 0;
+		System.out.println("likeCnt -> boardDTO" +boardDTO);
+		try {
+			likeCnt = service.increaseLikeCnt(b_num, boardDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return likeCnt;
+	}
+	
 	@PostMapping("/remove")
 	public String remove(Integer b_num, Integer page, Integer pageSize, RedirectAttributes rattr, Model m,
 			HttpSession session) {
@@ -186,6 +200,7 @@ public class BoardController {
 
 			List<BoardDTO> list = service.getSearchSelectPage(sc);
 
+			System.out.println(list);
 			m.addAttribute("list", list);
 			m.addAttribute("ph", pageHandler);
 
@@ -199,6 +214,15 @@ public class BoardController {
 		}
 
 		return "boardMain";
+	}
+	
+	@GetMapping("/chkLogin")
+	public String chkLogin(Model m, HttpServletRequest request) {
+		
+		System.out.println("앎ㄴㅇㄻㄴㅇㄹ");
+		if (!loginCheck(request))
+			return "redirect:/login/login?toURL=" + request.getRequestURL();
+		return "redirect:/login/login?toURL=" + request.getRequestURL();
 	}
 
 	private boolean loginCheck(HttpServletRequest request) {
