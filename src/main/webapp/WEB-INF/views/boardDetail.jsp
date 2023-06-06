@@ -13,28 +13,28 @@
 </head>
 <% String menu = request.getParameter("menu"); %>
 <script type="text/javascript">
-	const menu = '<%= request.getParameter("menu") %>'
-	let b_title = document.getElementById("b_title");
-	let b_cate = document.getElementById("b_cate");
-	let b_content = document.getElementById("b_content");
-	let form = document.getElementById("form");
+	let menu = '<%= request.getParameter("menu") %>'
 	
 	function formCheck() {
-		/* if (form.b_title.value == "") {
+		let form = document.getElementById("form");
+		let b_title = document.getElementById("b_title");
+		let b_cate = document.getElementById("b_cate");
+		let b_content = document.getElementById("b_content");
+		
+		if (b_title.value == "") {
 			setMessage('제목을 입력하세요', form.b_title);
 			return false;
 		}
 		
-		if (form.b_cate.value == "" || form.b_cate.value == "주제선택") {
+		if (b_cate.value == "" || form.b_cate.value == "주제선택") {
 			setMessage('카테고리를 선택하세요', form.b_cate);
 			return false;
 		}
 		
-		if (form.b_content.value == "") {
+		if (b_content.value == "") {
 			setMessage('내용을 입력하세요', form.b_content);
 			return false;
-		} */
-	
+		}
 		return true;
 	}
 	
@@ -42,7 +42,7 @@
 		alert(msg);
 	
 		if (element) {
-			element.select();
+			element.focus();
 		}
 	}
 
@@ -51,19 +51,19 @@
 		history.back();
 	})
 	
-	let fileList = [];
-	
+	let fileList = ['${boardDTO.b_img}'];
+	console.log(fileList);
+	createFileList();
 	function fileToBase64(file){
 		const reader = new FileReader();
 	    reader.readAsDataURL(file)
 	    reader.onload = () => {
 	    	 const b_img = event.target.result;
-	         console.log('업로드할 blob파일',b_img);
+	         fileList = [];
 	         fileList.push(b_img);
 	         createFileList();
 	    }
 	}
-	
 	
 	$('#fileUpload').on('change',(e)=>{
 		 const file = $('#fileUpload')[0].files[0];
@@ -88,7 +88,6 @@
 	$("#btnWrite").on("click", function() {
 		if (formCheck()) {
 			let form = $('#form');
-			$('.imgUpload').value = fileList;
 			form.attr("action", "<c:url value='/board/write?'/>");
 			form.attr("method", "post");
 
@@ -98,18 +97,16 @@
 
 	//임시저장
 	$("#btnSave").on("click", function() {
-		if (formCheck()) {
-			let form = $('#form');
-			
-			if($("#txtSave").val() == null || $("#txtSave").val() == "" || $("#txtSave").val() == "N"){
-				$("#txtSave").attr("value", "Y");
-			}
-			
-			form.attr("action", "<c:url value='/board/save'/>");
-			form.attr("method", "post");
-			
-			form.submit();
+		let form = $('#form');
+		
+		if($("#txtSave").val() == null || $("#txtSave").val() == "" || $("#txtSave").val() == "N"){
+			$("#txtSave").attr("value", "Y");
 		}
+		
+		form.attr("action", "<c:url value='/board/save'/>");
+		form.attr("method", "post");
+		
+		form.submit();
 	})
 	
 	//파일 생성하기
@@ -120,13 +117,14 @@
 			const $li = document.createElement('li');
 			const $div = document.createElement('div');
 			const $img = document.createElement('img');
-			$li.className = ''
-			$div.className = ''
-			$img.className = ''
+			$li.className = 'lPhoto';
+			$div.className = 'dPhoto';
+			$img.className = 'img-photo'
 			$img.src = b_img;
 			$div.append($img);		
 			$li.append($div);
 			divPhoto.append($li);
+			$('#b_img').val(b_img);
 		})
 	}
 })
@@ -139,7 +137,7 @@
 		if (msg == "MOD_ERR")
 			alert("게시글 수정에 실패하였습니다.");
 	</script>
-	<form class="wrap" id="form">
+	<form class="wrap" id="form" enctype="multipart/form-data">
 
         <div class="header">
             <div class="headerIn">
@@ -162,7 +160,7 @@
                     <div class="gnbItem">                    
                         <button type="button" class="btnPic" >
                         	<label for="fileUpload"><i class="fa-solid fa-image"></i></label>                        	
-                        	<input type="file" id="fileUpload"  style="display:none">
+                        	<input type="file" id="fileUpload" name="fileUpload" style="display:none">
                         </button>
                     </div>
                     <div class="gnbItem">
@@ -187,7 +185,7 @@
             <div class="divTitle" id="divTitle">
                 <!-- <h1 class="spanTitle">제목</h1> -->
                 <div class="hTitle">
-					<input type="text" name="${menu == 'board' ? 'b_title' : 'p_title'}" class="spanTitle"
+					<input type="text" id="b_title" name="${menu == 'board' ? 'b_title' : 'p_title'}" class="spanTitle"
 						placeholder="제목을 입력하세요"
 						value="<c:out value='${menu == "board" ? boardDTO.b_title : productDTO.p_title }'/>">
 				</div>
@@ -196,7 +194,7 @@
                 <c:if test="${menu eq 'board' }">
                 	<!-- 동네 -->
 	                <div class="divCategory"  >
-	                    <select name="b_cate" value="${boardDTO.b_cate}" class="boardCategory">
+	                    <select id="b_cate" name="b_cate" value="${boardDTO.b_cate}" class="boardCategory">
 	                    	<option value="주제선택" ${boardDTO.b_cate == '주제선택' ? "selected" : ""}>주제선택</option>
 	                        <option value="동네사건사고" ${boardDTO.b_cate == '동네사건사고' ? "selected" : ""}>동네사건사고</option>
 	                        <option value="동네맛집" ${boardDTO.b_cate == '동네맛집' ? "selected" : ""}>동네맛집</option>
@@ -240,7 +238,7 @@
 			
             <div class="divContent" >				
                 <!-- 가까이 사는 동네 이웃들에게 궁금한 것을 물어보세요! &#10; 우리동네 근처 이웃이 친절하게 진짜 동네 정보를 알려줄 거예요 -->
-				<textarea class="spContent" name="${menu == 'board' ? 'b_content' : 'p_content'}"><c:out value='${menu == "board" ? boardDTO.b_content : productDTO.p_content }'/></textarea>
+				<textarea class="spContent" id="b_content" name="${menu == 'board' ? 'b_content' : 'p_content'}"><c:out value='${menu == "board" ? boardDTO.b_content : productDTO.p_content }'/></textarea>
 			</div>
         </div> <!--.container-->
     </form>

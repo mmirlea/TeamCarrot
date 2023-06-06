@@ -16,7 +16,7 @@
 </head>
 <body>
 <script type="text/javascript">
-const menu = '<%= request.getParameter("menu") %>'
+menu = '<%= request.getParameter("menu") %>'
 console.log(menu);
 $(document).ready(function() {
 	$('#wirte').on('click',()=>{

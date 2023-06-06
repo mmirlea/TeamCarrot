@@ -202,7 +202,6 @@ public class BoardController {
 
 			List<BoardDTO> list = service.getSearchSelectPage(sc);
 
-			System.out.println(list);
 			m.addAttribute("list", list);
 			m.addAttribute("ph", pageHandler);
 
@@ -221,7 +220,7 @@ public class BoardController {
 	@GetMapping("/chkLogin")
 	public String chkLogin(Model m, HttpServletRequest request) {
 		
-		System.out.println("앎ㄴㅇㄻㄴㅇㄹ");
+		System.out.println("request.getRequestURL() " + request.getRequestURL());
 		if (!loginCheck(request))
 			return "redirect:/login/login?toURL=" + request.getRequestURL();
 		return "redirect:/login/login?toURL=" + request.getRequestURL();
