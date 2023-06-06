@@ -15,6 +15,9 @@ public class BoardServiceImple implements BoardService {
 
 	@Autowired
 	BoardDAO boardDAO;
+	
+	@Autowired
+	FileService fileService;
 
 	@Override
 	public BoardDTO select(Integer b_num) throws Exception {
@@ -26,17 +29,20 @@ public class BoardServiceImple implements BoardService {
 	}
 
 	@Override
-	public int write(BoardDTO boardDTO) throws Exception {
+	public int write(BoardDTO boardDTO) throws Exception {	
+		boardDTO.setB_img(fileService.createFile(boardDTO.getFileUpload()));
 		return boardDAO.insert(boardDTO);
 	}
 
 	@Override
 	public int save(BoardDTO boardDTO) throws Exception {
+		boardDTO.setB_img(fileService.createFile(boardDTO.getFileUpload()));
 		return boardDAO.save(boardDTO);
 	}
 
 	@Override
 	public int modify(BoardDTO boardDTO) throws Exception {
+		boardDTO.setB_img(fileService.createFile(boardDTO.getFileUpload()));
 		return boardDAO.update(boardDTO);
 	}
 

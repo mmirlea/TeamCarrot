@@ -186,8 +186,19 @@ i {
     border-radius: 20px;
 }
 
+.container .divPhoto {
+    width: 100%;
+}
+
 .container .divContent {
     width: 100%;
+}
+
+.divContent .img-photo{
+    margin-left: 5px;
+    width: 240px;
+    height: 200px;
+    object-fit: cover;	
 }
 
 .divContent .spContent {

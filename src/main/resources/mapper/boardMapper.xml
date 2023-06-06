@@ -13,9 +13,11 @@
 		<result property="b_email" column="B_EMAIL" />
 		<result property="b_title" column="B_TITLE" />
 		<result property="b_content" column="B_CONTENT" />
+		<result property="b_img" column="B_IMG" />
 		<result property="b_crDate" column="B_CRDATE" />
 		<result property="b_upDate" column="B_UPDATE" />
 		<result property="b_likey" column="B_LIKEY" />
+		<result property="b_likeyEmail" column="B_LIKEYEMAIL" />
 		<result property="b_comm" column="B_COMM" />
 		<result property="b_viewCnt" column="B_VIEWCNT" />
 		<association property="userDTO" javaType="UserDTO">
@@ -23,13 +25,14 @@
 			<result property="m_nicknm" column="M_NICKNM" />
 			<result property="m_addr1" column="M_ADDR1" />
 			<result property="m_addr2" column="M_ADDR2" />
+			<result property="m_ondo" column="M_ONDO" />
 		</association>
 	</resultMap>
 
 	<!-- 게시글 읽어오기 -->
 	<select id="select" parameterType="int" resultMap="BoardJoin">
-		SELECT B_MENU,    B_NUM,    B_CATE,   B_EMAIL, B_TITLE, 
-			   B_CONTENT, B_CRDATE, B_UPDATE, B_LIKEY, B_COMM,  B_VIEWCNT, 
+		SELECT B_MENU, B_NUM,    B_CATE,   B_EMAIL, B_TITLE, B_CONTENT, 
+			   B_IMG,  B_CRDATE, B_UPDATE, B_LIKEY, B_COMM,  B_VIEWCNT, 
 			   M_NICKNM, M_ADDR1
 		  FROM BOARD LEFT OUTER JOIN MEMBER
 		    ON B_EMAIL = M_EMAIL
@@ -42,7 +45,7 @@
 	<!-- 게시글 목록 조회(등록일 기준으로 내림차순) -->
 	<select id="selectAll" resultMap="BoardJoin">
 		SELECT B_MENU,    B_NUM, 	B_CATE,   B_EMAIL, B_TITLE,
-			   B_CONTENT, B_CRDATE, B_LIKEY,  B_COMM,  B_VIEWCNT, 
+			   B_CONTENT, B_IMG,   B_CRDATE, B_LIKEY,  B_COMM,  B_VIEWCNT, 
 			   M_NICKNM,  M_ADDR1,  M_ADDR2
 		  FROM BOARD LEFT OUTER JOIN MEMBER
 		    ON B_EMAIL = M_EMAIL
@@ -71,14 +74,14 @@
 
 	<!-- 글 추가하기 -->
 	<insert id="insert" parameterType="BoardDTO">
-		INSERT INTO BOARD (B_MENU, B_NUM, B_CATE, B_EMAIL, B_TITLE, B_CONTENT)
-		VALUES (2, SEQ_BOARD_NUM.NEXTVAL, #{b_cate}, #{b_email}, #{b_title}, #{b_content})
+		INSERT INTO BOARD (B_MENU, B_NUM, B_CATE, B_EMAIL, B_TITLE, B_CONTENT, B_IMG)
+		VALUES (2, SEQ_BOARD_SEQ.NEXTVAL, #{b_cate}, #{b_email}, #{b_title}, #{b_content}, #{b_img})
 	</insert>
 	
 	<!-- 임시저장 추가하기 -->
 	<insert id="save" parameterType="BoardDTO">
-		INSERT INTO BOARD (B_NUM, B_CATE, B_EMAIL, B_TITLE, B_CONTENT, B_TEMPSAVEYN)
-		VALUES (SEQ_BOARD_NUM.NEXTVAL, #{b_cate}, #{b_email}, #{b_title}, #{b_content}, 'Y')
+		INSERT INTO BOARD (B_NUM, B_CATE, B_EMAIL, B_TITLE, B_CONTENT, B_TEMPSAVEYN, B_IMG)
+		VALUES (SEQ_BOARD_SEQ.NEXTVAL, #{b_cate}, #{b_email}, #{b_title}, #{b_content}, 'Y', #{b_img})
 	</insert>
 
 	<!-- 글 수정하기 -->
@@ -87,6 +90,7 @@
 		   SET B_TITLE = #{b_title},
 		       B_CONTENT = #{b_content},
 		       B_CATE = #{b_cate},
+		       B_IMG = #{b_img},
 		       B_UPDATE = SYSDATE
 		 WHERE B_MENU = '2'
 		   AND B_NUM = #{b_num}
@@ -163,7 +167,7 @@
 	<select id="selectPage" parameterType="map" resultType="BoardDTO">
 		SELECT *
 		  FROM (SELECT ROWNUM RUNM, A.*
-				  FROM (SELECT B_NUM, B_CATE, B_EMAIL, B_TITLE, B_CONTENT, B_CRDATE, B_LIKEY, B_COMM
+				  FROM (SELECT B_NUM, B_CATE, B_EMAIL, B_TITLE, B_CONTENT, B_IMG, B_CRDATE, B_LIKEY, B_COMM
 					      FROM BOARD
 					     WHERE B_MENU = '2'
 					       AND B_TEMPSAVEYN = 'N'
@@ -202,17 +206,19 @@
 
 	<!-- 게시글 검색하기, 검색 후 페이징 처리 되어야 하기 때문에   --> 
 	<!-- SearchCondition 어떤 패키지에 포함되어있는지 원래는 표기해야함 -> 등록하면 안해도됨  -->
-	<select id="searchSelectPage" parameterType="SearchCondition" resultType="BoardDTO">
+	<select id="searchSelectPage" parameterType="SearchCondition" resultMap="BoardJoin">
 		SELECT *
-		  FROM (SELECT ROWNUM RUNM, A.*
-				  FROM (SELECT B_NUM, B_CATE, B_EMAIL, B_TITLE, B_CONTENT, B_UPDATE, B_LIKEY, B_COMM
+		  FROM (SELECT ROWNUM RNUM, A.*
+				  FROM (SELECT B_NUM,    B_CATE,   B_EMAIL, B_TITLE, B_CONTENT, B_IMG,
+				  			   B_CRDATE, B_UPDATE, B_LIKEY, B_COMM,  B_VIEWCNT,
+				  			   M_NICKNM, M_ADDR1,  M_ADDR2   
 					      FROM BOARD LEFT OUTER JOIN MEMBER
 		    				ON B_EMAIL = M_EMAIL
 		 				 WHERE B_MENU = '2'
 					       AND B_TEMPSAVEYN = 'N'
 					    <include refid="searchCondition"></include>
 						ORDER BY B_CRDATE DESC, B_NUM DESC) A)
-		 WHERE RUNM BETWEEN ((NVL(#{page}, 0)-1) * #{pageSize} +1) AND (NVL(#{page}, 0) * #{pageSize})
+		 WHERE RNUM BETWEEN ((NVL(#{page}, 0)-1) * #{pageSize} +1) AND (NVL(#{page}, 0) * #{pageSize})
 	</select>
 
 	<!-- 검색했을 때 게시글 개수 -->
