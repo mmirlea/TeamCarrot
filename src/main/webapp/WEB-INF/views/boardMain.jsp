@@ -175,7 +175,6 @@
 			 $(document).ready(function() {
 				 document.querySelectorAll('.time').forEach(($time)=>{
 					 const time = $time.innerText
-					 console.log(timeForToday(time),new Date(time));
 					 $time.innerText = timeForToday(time);
 				 })
 				

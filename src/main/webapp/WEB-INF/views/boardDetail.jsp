@@ -13,72 +13,46 @@
 </head>
 <% String menu = request.getParameter("menu"); %>
 <script type="text/javascript">
-	let menu = '<%= request.getParameter("menu") %>'
-	
-	
-	
-	console.log(menu);
-	
-	function formCheck() {
-		let form = document.getElementById("form");
-		let b_title = document.getElementById("b_title");
-		let b_cate = document.getElementById("b_cate");
-		let b_content = document.getElementById("b_content");
-		
-		if (b_title.value == "") {
-			setMessage('제목을 입력하세요', form.b_title);
-			return false;
-		}
-		
+let menu = '<%= request.getParameter("menu") %>'
+
+function formCheck() {
+	let form = document.getElementById("form");
+	let b_title = document.getElementById("b_title");
+	let b_cate = document.getElementById("b_cate");
+	let b_content = document.getElementById("b_content");
+
+	if (b_title.value == "") {
+		setMessage('제목을 입력하세요', form.b_title);
+		return false;
+	}
+	if (b_content.value == "") {
+		setMessage('내용을 입력하세요', form.b_content);
+		return false;
+	}
+
+	if (menu === 'board') {
 		if (b_cate.value == "" || form.b_cate.value == "주제선택") {
 			setMessage('카테고리를 선택하세요', form.b_cate);
 			return false;
 		}
-		
-		if (b_content.value == "") {
-			setMessage('내용을 입력하세요', form.b_content);
-			return false;
-		}
-		return true;
 	}
-	
-	function setMessage(msg, element) {
-		alert(msg);
-	
-		if (element) {
-			element.focus();
-		}
-	}
+	return true;
+}
 
-	$(document).ready(function() {
-		$('#close').on('click',()=>{
+function setMessage(msg, element) {
+	alert(msg);
+
+	if (element) {
+		element.focus();
+	}
+}
+
+$(document).ready(function() {
+	$('#btnBoard').on('click',()=>{
 		history.back();
-		})
-	
+	})
 
-	let fileList = ['${boardDTO.b_img}'];
-	console.log(fileList);
-	createFileList();
-	function fileToBase64(file){
-		const reader = new FileReader();
-	    reader.readAsDataURL(file)
-	    reader.onload = () => {
-	    	 const b_img = event.target.result;
-	         fileList = [];
-	         fileList.push(b_img);
-	         createFileList();
-	    }
-	}
-	
-	$('#fileUpload').on('change',(e)=>{
-		 const file = $('#fileUpload')[0].files[0];
-		 fileToBase64(file);
-	})
-	
-	$("#btnBoard").on("click", function() {
-		location.href="<c:url value='/board/list?page=${page}&pageSize=${pageSize}'/>";
-	})
-	
+	// 수정
 	$("#btnModify").on("click", function() {
 		let form = $('#form');
 		
@@ -91,11 +65,16 @@
 		form.attr("method", "post");
 		form.submit();
 	})
-	
+
+	// 저장
 	$("#btnWrite").on("click", function() {
 		if (formCheck()) {
 			let form = $('#form');
-			form.attr("action", "<c:url value='/board/write?'/>");
+			if (menu !== 'board') {
+				form.attr("action", "<c:url value='/carrot/write?'/>");
+			} else {
+				form.attr("action", "<c:url value='/board/write?'/>");
+			}
 			form.attr("method", "post");
 
 			form.submit();
@@ -116,26 +95,69 @@
 		form.submit();
 	})
 	
-	//파일 생성하기
+	// 수정하기 시 파일 가져와 웹에 보이기
+	let fileList = ['${boardDTO.b_img}'];
+	createFileList();
+
+	// 파일 이벤트핸들러
+	$('#fileUpload').on('change',(e)=>{
+		 const file = $('#fileUpload')[0].files[0];
+		 fileToBase64(file); // 올린파일을 웹에서 볼 수 있게 변환
+	})
+
+	// 파일 변환해서 생성하기
+	function fileToBase64(file){
+		const reader = new FileReader();
+	    reader.readAsDataURL(file)
+	    reader.onload = () => {
+	    	 const b_img = event.target.result;
+	         fileList = [];
+	         fileList.push(b_img);
+	         createFileList();
+	    }
+	}
+
+	// 생성한 파일 웹그리기
 	function createFileList(){
 		const divPhoto = document.querySelector('.divPhoto > ul');
 		divPhoto.innerHTML = '';
-		fileList.forEach((b_img) => {
+		fileList.filter(file=>file !== '').forEach((b_img) => {
 			const $li = document.createElement('li');
 			const $div = document.createElement('div');
+			const $button = document.createElement('button');
+			const $i = document.createElement('i');
 			const $img = document.createElement('img');
 			$li.className = 'lPhoto';
 			$div.className = 'dPhoto';
+			$button.className = 'btnImgDel'
+			$i.className = 'fa-solid fa-circle-xmark'
+			// 파일 삭제하기
+			$button.addEventListener('click',function (){
+				const fileURL = fileList[0];
+				if(fileURL && !fileURL.includes('base64')){
+					let fileName = fileURL.split('/')[3];
+					$.ajax({
+						type: 'get',
+						url: '/carrot/delFile/'+fileName,
+					})
+				}else{
+					$('#fileUpload')[0].value = "";
+				}
+				fileList = [];
+				createFileList();
+			})
 			$img.className = 'img-photo'
 			$img.src = b_img;
 			$div.append($img);		
+			$button.append($i);
+			$div.append($button);
 			$li.append($div);
 			divPhoto.append($li);
 			$('#b_img').val(b_img);
 		})
 	}
-})
 
+})
 </script>
 <body>
 	<script>	
@@ -158,7 +180,6 @@
                 </div>
                
                 <div class="headerTitle">
-                	${menu }
                 	<h1>${menu eq "board" ? "동네생활" : "내 물건 팔기" }</h1>
                     <!-- <h1>동네생활</h1> -->
                     <!-- 중고 -->
@@ -173,8 +194,7 @@
                         </button>
                     </div>
                     <div class="gnbItem">
-                   	 	<input type="hidden" class ="txtSave" name="b_tempSaveYn" value="N">
-                   	 	<input type="hidden" class ="txtSave" name="p_tempsaveyn" value="N">
+                   	 	<input type="hidden" id ="txtSave" name="b_tempSaveYn" value="N">
                         <button type="button" class="btnSave" id="btnSave">저장</button>
                     </div>
                     <div class="gnbItem">
@@ -219,20 +239,19 @@
 	                    </select>
 	                </div>
                 </c:if>
-                ${menu}
+                
                 <c:if test="${menu eq 'product' }">
                 	<!-- 중고 -->
 	                <div class="divPrice">
 	                    <span class="spPrice">
 	                        <i class="fa-solid fa-won-sign"></i> &nbsp; 
-	                        <input type="text" name="p_price" value="${productDTO.p_price}" >	                        
+	                        <input type="text" name="p_price" value="${productDTO.p_price}" >
 	                        &nbsp;
 	                        <input type="checkbox" name="chkShare" id="chkShare">
 	                        <label for="chkShare">나눔</label>
 	                        &nbsp;
 	                        <input type="checkbox" name="p_negoyn" id="chkProposal" ${productDTO.p_negoyn == "Y" ? "checked" : "" }>
 	                        <label for="chkProposal">가격제안받기</label>
-	                        
 	                    </span>
 	                </div>
 	                
