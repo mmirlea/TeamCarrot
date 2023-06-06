@@ -19,6 +19,10 @@
 	let b_content = document.getElementById("b_content");
 	let form = document.getElementById("form");
 	
+	
+	
+	console.log(menu);
+	
 	function formCheck() {
 		/* if (form.b_title.value == "") {
 			setMessage('제목을 입력하세요', form.b_title);
@@ -47,62 +51,90 @@
 	}
 
 	$(document).ready(function() {
-	$('#close').on('click',()=>{
+		$('#close').on('click',()=>{
 		history.back();
-	})
+		})
 	
-	let fileList = [];
+		let fileList = [];
 	
-	function fileToBase64(file){
-		const reader = new FileReader();
-	    reader.readAsDataURL(file)
-	    reader.onload = () => {
-	    	 const b_img = event.target.result;
-	         console.log('업로드할 blob파일',b_img);
-	         fileList.push(b_img);
-	         createFileList();
-	    }
-	}
+		function fileToBase64(file){
+			const reader = new FileReader();
+		   	reader.readAsDataURL(file)
+		    reader.onload = () => {
+		    	 const b_img = event.target.result;
+		         console.log('업로드할 blob파일',b_img);
+		         fileList.push(b_img);
+		         createFileList();
+	    	}
+		}
 	
 	
-	$('#fileUpload').on('change',(e)=>{
-		 const file = $('#fileUpload')[0].files[0];
-		 fileToBase64(file);
-	})
+		$('#fileUpload').on('change',(e)=>{
+			 const file = $('#fileUpload')[0].files[0];
+			 fileToBase64(file);
+		})
 	
-	$("#btnBoard").on("click", function() {
+		$("#btnBoard").on("click", function() {
 				location.href="<c:url value='/board/list?page=${page}&pageSize=${pageSize}'/>";
 			})
-			
-			$("#btnModify").on("click", function() {
-				if (formCheck()) {
-					let form = $('#form');
-					if($(location).attr("pathname") == "/carrot/carrot/select"){
-						form.attr("action", "<c:url value='/carrot/modify'/>");
-						form.attr("method", "post");
+		
+				
+		
+		
+		$("#btnModify").on("click", function() {
+			if (formCheck()) {
+				let form = $('#form');
+				//가격제안 체크박스 value
+				if($("input:checkbox[name='p_negoyn']").is(":checked")){
+				
+					$("input:checkbox[name='p_negoyn']").attr("value", "Y");
+					alert($('input:checkbox[name="p_negoyn"]').val());
 						
-						form.submit();
+				} 
+				
+				if($(location).attr("pathname") == "/carrot/carrot/select"){
+					form.attr("action", "<c:url value='/carrot/modify'/>");
+					form.attr("method", "post");
 						
-					}else {
-					
-						form.attr("action", "<c:url value='/board/modify'/>");
-						form.attr("method", "post");
+					form.submit();
 						
-						form.submit();
-					}
+				}else {
 					
+					form.attr("action", "<c:url value='/board/modify'/>");
+					form.attr("method", "post");
 					
+					form.submit();
 				}
-			})
+					
+				
+			}
+		})
 			
 			$("#btnWrite").on("click", function() {
 				if (formCheck()) {
 					let form = $('#form');
 					$('.imgUpload').value = fileList;
-					form.attr("action", "<c:url value='/board/write?'/>");
-					form.attr("method", "post");
-		
-					form.submit();
+					
+					if($("input:checkbox[name='p_negoyn']").is(":checked")){
+						
+						$("input:checkbox[name='p_negoyn']").attr("value", "Y");
+						alert($('input:checkbox[name="p_negoyn"]').val());
+							
+					} 
+					
+					if($(location).attr("pathname") == "/carrot/carrot/write"){
+						form.attr("action", "<c:url value='/carrot/write?'/>");
+						form.attr("method", "post");
+			
+						form.submit();
+						
+					}else{
+						form.attr("action", "<c:url value='/board/write?'/>");
+						form.attr("method", "post");
+			
+						form.submit();
+					}
+					
 				}
 			})
 
@@ -111,35 +143,44 @@
 				if (formCheck()) {
 					let form = $('#form');
 					
-					if($("#txtSave").val() == null || $("#txtSave").val() == "" || $("#txtSave").val() == "N"){
-						$("#txtSave").attr("value", "Y");
+					if($(".txtSave").val() == null || $(".txtSave").val() == "" || $(".txtSave").val() == "N"){
+						$(".txtSave").attr("value", "Y");
+					}
+					if($(location).attr("pathname") == "/carrot/carrot/select"){	
+						form.attr("action", "<c:url value='/carrot/save'/>");
+						form.attr("method", "post");
+						
+						form.submit();
+					}else{
+						form.attr("action", "<c:url value='/board/save'/>");
+						form.attr("method", "post");
+						
+						form.submit();
 					}
 					
-					form.attr("action", "<c:url value='/board/save'/>");
-					form.attr("method", "post");
-					
-					form.submit();
 				}
 			})
 	
-	//파일 생성하기
-	function createFileList(){
-		const divPhoto = document.querySelector('.divPhoto > ul');
-		divPhoto.innerHTML = '';
-		fileList.forEach((b_img) => {
-			const $li = document.createElement('li');
-			const $div = document.createElement('div');
-			const $img = document.createElement('img');
-			$li.className = ''
-			$div.className = ''
-			$img.className = ''
-			$img.src = b_img;
-			$div.append($img);		
-			$li.append($div);
-			divPhoto.append($li);
-		})
-	}
-})
+		//파일 생성하기
+		function createFileList(){
+			const divPhoto = document.querySelector('.divPhoto > ul');
+			divPhoto.innerHTML = '';
+			fileList.forEach((b_img) => {
+				const $li = document.createElement('li');
+				const $div = document.createElement('div');
+				const $img = document.createElement('img');
+				$li.className = ''
+				$div.className = ''
+				$img.className = ''
+				$img.src = b_img;
+				$div.append($img);		
+				$li.append($div);
+				divPhoto.append($li);
+			})
+		}
+		
+		
+	})
 </script>
 <body>
 	<script>	
@@ -162,6 +203,7 @@
                 </div>
                
                 <div class="headerTitle">
+                	${menu }
                 	<h1>${menu eq "board" ? "동네생활" : "내 물건 팔기" }</h1>
                     <!-- <h1>동네생활</h1> -->
                     <!-- 중고 -->
@@ -176,7 +218,8 @@
                         </button>
                     </div>
                     <div class="gnbItem">
-                   	 	<input type="hidden" id ="txtSave" name="b_tempSaveYn" value="N">
+                   	 	<input type="hidden" class ="txtSave" name="b_tempSaveYn" value="N">
+                   	 	<input type="hidden" class ="txtSave" name="p_tempsaveyn" value="N">
                         <button type="button" class="btnSave" id="btnSave">저장</button>
                     </div>
                     <div class="gnbItem">
@@ -221,19 +264,20 @@
 	                    </select>
 	                </div>
                 </c:if>
-                
+                ${menu}
                 <c:if test="${menu eq 'product' }">
                 	<!-- 중고 -->
 	                <div class="divPrice">
 	                    <span class="spPrice">
 	                        <i class="fa-solid fa-won-sign"></i> &nbsp; 
-	                        <input type="text" value="${productDTO.p_price}" >	                        
+	                        <input type="text" name="p_price" value="${productDTO.p_price}" >	                        
 	                        &nbsp;
 	                        <input type="checkbox" name="chkShare" id="chkShare">
 	                        <label for="chkShare">나눔</label>
 	                        &nbsp;
-	                        <input type="checkbox" name="chkProposal" id="chkProposal">
+	                        <input type="checkbox" name="p_negoyn" id="chkProposal" ${productDTO.p_negoyn == "Y" ? "checked" : "" }>
 	                        <label for="chkProposal">가격제안받기</label>
+	                        
 	                    </span>
 	                </div>
 	                

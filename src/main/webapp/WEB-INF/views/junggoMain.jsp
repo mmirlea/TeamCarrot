@@ -111,18 +111,6 @@
                 </ul>
             </div><!--productList-->
             <div class="paging">
-                <!-- <div class="pageList">
-                    <ul>
-                        <li class="firstPage"><a href="#"><p>첫 페이지</p></a></li>
-                        <li class="prevPage"><a href="#"><p>이전 페이지</p></a></li>
-                        <li class="num"><a href="#"><p>1</p></a></li>
-                        <li class="num"><a href="#"><p>2</p></a></li>
-                        <li class="num"><a href="#"><p>3</p></a></li>
-                        <li class="nextPage"><a href="#"><p>다음 페이지</p></a></li>
-                        <li class="lastPage"><a href="#"><p>마지막 페이지</p></a></li>
-                    </ul>
-                </div>pageList  -->  
-                
                <div class="paging">
 				<div class="pageList">
 					<ul>
