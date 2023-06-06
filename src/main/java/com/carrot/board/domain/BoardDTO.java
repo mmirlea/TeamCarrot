@@ -1,6 +1,6 @@
 package com.carrot.board.domain;
 
-import java.util.Date;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.carrot.user.domain.UserDTO;
 
@@ -22,6 +22,8 @@ public class BoardDTO {
 	private Integer b_viewCnt;
 
 	private UserDTO userDTO;
+	
+	private MultipartFile fileUpload;
 
 	public BoardDTO() {
 	}
@@ -50,6 +52,14 @@ public class BoardDTO {
 		this.b_title = b_title;
 		this.b_content = b_content;
 		this.b_tempSaveYn = b_tempSaveYn;
+	}
+	
+	public MultipartFile getFileUpload() {
+		return fileUpload;
+	}
+
+	public void setFileUpload(MultipartFile fileUpload) {
+		this.fileUpload = fileUpload;
 	}
 
 	public UserDTO getUserDTO() {

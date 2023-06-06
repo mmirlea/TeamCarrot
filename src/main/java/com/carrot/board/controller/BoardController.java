@@ -71,6 +71,8 @@ public class BoardController {
 	public String modify(BoardDTO boardDTO, RedirectAttributes rattr, Model m, HttpSession session) {
 		String b_email = (String) session.getAttribute("m_email");
 		boardDTO.setB_email(b_email);
+		System.out.println("modify b_email " + b_email);
+		System.out.println("modify boardDTO " + boardDTO);
 		try {
 			if (service.modify(boardDTO) != 1)
 				throw new Exception("Modify failed");
@@ -200,7 +202,6 @@ public class BoardController {
 
 			List<BoardDTO> list = service.getSearchSelectPage(sc);
 
-			System.out.println(list);
 			m.addAttribute("list", list);
 			m.addAttribute("ph", pageHandler);
 
@@ -219,7 +220,7 @@ public class BoardController {
 	@GetMapping("/chkLogin")
 	public String chkLogin(Model m, HttpServletRequest request) {
 		
-		System.out.println("앎ㄴㅇㄻㄴㅇㄹ");
+		System.out.println("request.getRequestURL() " + request.getRequestURL());
 		if (!loginCheck(request))
 			return "redirect:/login/login?toURL=" + request.getRequestURL();
 		return "redirect:/login/login?toURL=" + request.getRequestURL();

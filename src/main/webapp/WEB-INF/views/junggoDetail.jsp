@@ -19,11 +19,11 @@
 </head>
 <% String menu = request.getParameter("menu"); %>
 <script type="text/javascript">
-	const menu = '<%= request.getParameter("menu") %>'
+	let menu = '<%= request.getParameter("menu") %>'
+	let msg="${msg}"
 	console.log(menu);
 	//if(msg == "MOD_ERR") alert("게시글 수정에 실패하였습니다.")
 	if(msg == "DEL_ERR") alert("게시글 삭제에 실패하였습니다.")
-	let msg="${msg}"
 	
 </script>
 <body>
@@ -35,7 +35,8 @@
             <div class="swiper-modify">
                 <div class="swiper mySwiper">
                     <div class="swiper-wrapper">
-                    <div class="swiper-slide"><a href="#"><img src="../resources/img/이사가느라 가전 팔아요1.jpg" alt="이사가느라 가전 팔아요1"></a></div>
+	                <div class="swiper-slide"><a href="#"><img src="${menu == 'board' ? boardDTO.b_img : productDTO.p_img}" alt="" class="thumb" onerror="this.src='/carrot/resources/img/이사가느라 가전 팔아요1.jpg'"></a></div>
+	                <div class="swiper-slide"><a href="#"><img src="../resources/img/이사가느라 가전 팔아요1.jpg" alt="이사가느라 가전 팔아요1"></a></div>
                     <div class="swiper-slide"><a href="#"><img src="../resources/img/이사가느라 가전 팔아요2.jpg" alt="이사가느라 가전 팔아요2"></a></div>
                     <div class="swiper-slide"><a href="#"><img src="../resources/img/이사가느라 가전 팔아요3.jpg" alt="이사가느라 가전 팔아요3"></a></div>
                     </div><!--swiper-wrapper-->
@@ -79,13 +80,12 @@
             	<div class="content-top">
 	            	<h1 class="contentTitle">${menu == 'board' ? boardDTO.b_title : productDTO.p_title}</h1><!--.contentTitle-->
 					
-					<c:if test="${login_email != null && (login_email == productDTO.p_email || login_email == boardDTO.b_email)}">
-						<div class="crud-wrap">
-		                    	<input type="hidden" value="${boardDTO.b_num} " name="b_num">
-		                    	<button type="button" class="btnModify" id="btnModify" value="board">수정</button>
-		                    	<button type="button" class="btnDel" id="btnDel">삭제</button>
-		                </div>
-	                </c:if>
+					<div class="crud-wrap">
+                    	<input type="hidden" value="${menu eq 'board' ? boardDTO.b_num : 0}" name="b_num" id="b_num">
+                    	<input type="hidden" value="${menu ne 'board' ? 0 : productDTO.p_num}" name="p_num" id="p_num">
+                    	<button type="button" class="btnModify" id="btnModify" value="board">수정</button>
+                    	<button type="button" class="btnDel" id="btnDel">삭제</button>
+	                </div>
             	</div>
 
                 <div class="contentInfo">
@@ -229,7 +229,7 @@
     
     <script>
 		  //댓글 관련-----------------------------------------------
-		  let c_pnum = ${CommentsDTO.c_pnum};
+		  let c_pnum = Math.max(0,${commentsDTO.c_pnum});
 		
 		  //댓글 리스트
 		  let showList = function(c_pnum) {
@@ -409,23 +409,6 @@
 		    return tmp;
 		  }
 		
-		  let addZero = function(value = 1) {
-		    return value > 9 ? value : "0" + value;
-		  }
-		
-		  let dateToString = function(ms = 0) {
-		    let date = new Date(ms);
-		
-		    let yyyy = date.getFullYear();
-		    let mm = addZero(date.getMonth() + 1);
-		    let dd = addZero(date.getDate());
-		
-		    let HH = addZero(date.getHours());
-		    let MM = addZero(date.getMinutes());
-		    let ss = addZero(date.getSeconds());
-		
-		    return yyyy + "." + mm + "." + dd + ":" + MM + ":" + ss;
-		  }
 	</script>
     
     <script type="text/javascript">
@@ -441,7 +424,7 @@
 			
 			console.log($(location).attr("pathname"))
 			
-			if($(location).attr("pathname") == "/carrot/carrot/read"){
+			if(menu !== 'board'){
 				
 				form.attr("action", "<c:url value='/carrot/remove?page=${page}&pageSize=${pageSize}'/>");
 				form.attr("method", "post");
@@ -458,21 +441,17 @@
 			} 
 		})
 		
- 		 $("#btnModify").on("click", function() {
-			let form = $('#form');
-			
-						
-			if($(location).attr("pathname") == "/carrot/carrot/read"){
-			  	const $a = document.createElement('a'); //가상 a태그 생성
-			  	$a.href = '/carrot/carrot/select?menu=product&'+'p_num='+${productDTO.p_num};
-			  	$a.click();
-			  	
+ 		$("#btnModify").on("click", function() {
+ 			let bNum = $('#b_num').val();
+ 			let pNum = $('#p_num').val();
+ 			const $a = document.createElement('a'); //가상 a태그 생성
+			if(menu !== 'board'){
+			  	$a.href = '/carrot/carrot/select?menu=product&'+'p_num='+ pNum;
 			} else {
-				const $a = document.createElement('a'); //가상 a태그 생성
-			  	$a.href = '/carrot/board/select?menu=board&'+'b_num='+${boardDTO.b_num};
-			  	$a.click();
-			}
-		})  
+			  	$a.href = '/carrot/board/select?menu=board&'+'b_num='+bNum;
+			} 
+			$a.click();
+ 		}) 
 		
 		$("#btnLikey").on("click", function() {
 			debugger;
@@ -491,8 +470,7 @@
 				document.getElementById("btnLikey").innerHTML = '<i class="far fa-heart" aria-hidden="true"></i>';
 			} */
 		})
-		
-    })
+	})
     
     </script>
 </body>

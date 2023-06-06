@@ -144,7 +144,8 @@ i {
 	height: 260px;
 	overflow: hidden;
 	/* border-radius: 20px; */
-	margin-bottom: 16px;
+	margin-bottom: 16px;	
+    object-fit:cover;
 }
 
 .areaThumb .pLine {

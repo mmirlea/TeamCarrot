@@ -33,7 +33,7 @@
 	
 		<div class="container">
 			<div class="mainBanner">
-                <!-- <a href="#"><img src="./resource/img/동네소식.png" alt="게시판"></a> -->
+                <!-- <a href="#"><img src="./resources/img/동네소식.png" alt="게시판"></a> -->
             </div>
 
             <div class="board">
@@ -77,8 +77,8 @@
 	                                <div class="areaThumb">
 	                                    <!-- <i class="fa-thin fa-rectangle-xmark"></i> -->
 	                                    <!-- <p class="pLine"></p> -->
-	                                    <img src="./resources/img/notice.png" alt="" class="thumb">
-	                                   <!--  <img src="./resource/img/notice.png" alt="" class="thumb"> -->
+	                                    <img src="${boardDTO.b_img}" alt="" class="thumb" onerror="this.src='/carrot/resources/img/notice.png'">
+	                                    <!--  <img src="./resources/img/notice.png" alt="" class="thumb"> -->
 	                                </div> <!--.areaThumb, 리스트 이미지-->
 	
 	                                <div class="areaText">
