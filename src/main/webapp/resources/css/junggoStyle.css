@@ -104,12 +104,14 @@ i {
 }
 .productList ul{
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
 }
 .productList li{
     width: 260px;
+    margin-right: 20px;
+    margin-left: 20px;
     margin-bottom: 40px;
+
 }
 .productList a{
     color: #333;
@@ -173,8 +175,15 @@ i {
 .paging li a{
     color:#333;
 }
+
+.paging .num{
+display: flex;
+}
+
 .paging .num a{ 
     color:#FF7E36;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 .paging .num p{
     width: 48px;
@@ -192,7 +201,7 @@ i {
     background-color: #FF7E36;
 }
 .firstPage, .prevPage, .nextPage, .lastPage{
-    width: 120px;
+    width: 20px;
     background-color: #eee;
     border-radius: 12px;
     padding-top: 8px;

@@ -10,8 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.carrot.board.domain.BoardDTO;
 import com.carrot.board.domain.ProductDTO;
+import com.carrot.board.domain.SearchConditionM;
+import com.carrot.board.domain.SearchConditionP;
+import com.carrot.user.dao.UserDAO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/spring/**/root-context.xml" })
@@ -19,6 +21,8 @@ public class ProductDAOImplTest {
 
 	@Autowired
 	ProductDAO productDAO;
+	@Autowired
+	UserDAO usertDAO;
 	
 	@Test
 	public void selectAllTest() throws Exception {
@@ -34,4 +38,22 @@ public class ProductDAOImplTest {
 		list = productDAO.selectAll();
 		assertTrue(list.size() == 1);
 	}
+	
+	@Test
+	public void searchSelectPageTest() throws Exception{
+		SearchConditionP scp = new SearchConditionP(1, 16, "북구", "발뮤다");
+		List<ProductDTO> list = productDAO.searchSelectPage(scp);
+		System.out.println("list: " + list);
+						
+	}
+	
+	@Test
+	public void selectPageTest() throws Exception{
+		SearchConditionM scm = new SearchConditionM(1, 16);
+		List<ProductDTO> list = usertDAO.selectPage(scm);
+		System.out.println("list: " + list);
+		
+	}
+	
+	
 }

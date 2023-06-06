@@ -8,7 +8,9 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
-		<property name="url" value="jdbc:oracle:thin:@localhost:1521:XE"></property>
+		<property name="url" value="jdbc:oracle:thin:@121.187.29.85:1521:XE"></property>
+		<!-- 	<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property> 
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:XE"></property>  -->
 		<property name="username" value="carrot"></property>
 		<property name="password" value="1234"></property>
 	</bean>
@@ -24,6 +26,12 @@
 		<constructor-arg ref="sqlSessionFactory" />
 	</bean>
 	
+	<bean id="characterEncodingFilter" class="org.springframework.web.filter.CharacterEncodingFilter">
+    	<property name="encoding" value="UTF-8"/>
+    	<property name="forceEncoding" value="true"/>
+	</bean>
+	
 	<context:component-scan base-package="com.carrot.board" />
 	<context:component-scan base-package="com.carrot.user" />
+	
 </beans>

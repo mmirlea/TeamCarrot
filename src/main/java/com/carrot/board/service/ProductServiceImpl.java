@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.carrot.board.dao.ProductDAO;
 import com.carrot.board.domain.ProductDTO;
+import com.carrot.board.domain.SearchConditionP;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -49,5 +50,20 @@ public class ProductServiceImpl implements ProductService {
 	public List<ProductDTO> selectAll() throws Exception {
 		return productDAO.selectAll();
 	}
-
+	
+	public List<ProductDTO> getPage(SearchConditionP scp) throws Exception{
+		return productDAO.selectPage(scp);
+	}
+	
+	public List<ProductDTO> getSearchSelectPage(SearchConditionP scp) throws Exception{
+		return productDAO.searchSelectPage(scp);
+	}
+	
+	public int getSearchResultCnt(SearchConditionP scp) throws Exception{
+		return productDAO.searchResultCnt(scp);
+	}
+	
+	public ProductDTO select(Integer p_num) throws Exception{
+		return productDAO.select(p_num);
+	}
 }

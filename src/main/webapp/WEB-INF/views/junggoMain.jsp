@@ -7,17 +7,21 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
-<link href="<c:url value='/resources/css/junggoStyle.css'/>" rel="stylesheet" />
+<link href="<c:url value='/resources/css/junggoStyle.css?aaa'/>" rel="stylesheet" />
 </head>
 <body>
 <script>
 	let msg="${msg}"
-    if(msg=="LIST_ERR")  alert("게시물 목록을 가져오는데 실패했습니다. 다시 시도해 주세요.");
+    if(msg=="LIST_ERR") alert("게시물 목록을 가져오는데 실패했습니다. 다시 시도해 주세요.");
+	if(msg=="READ_ERR") alert("게시물을 읽어들이는데 실패했습니다.")
 </script>
 
 	<div class="wrap">
 	
 		<%@ include file ="./header.jsp" %>
+		<jsp:include page="./tabRigth.jsp" flush="false">
+			<jsp:param name="menu" value="product" />
+		</jsp:include>
 		
         <div class="container">
             <div class="mainBanner">
@@ -81,13 +85,17 @@
             </div>
             <div class="productList">
                 <h1>중고거래 매물</h1>
+                <c:if test="${ph.getTotalCnt()==null || ph.getTotalCnt() == 0}">
+					<div>게시글이 없습니다.</div>
+				</c:if>
                 <ul>
                 	<c:forEach var="productDTO" items="${list}">
                 		<li>
-                			<a href="junggoDetail.jsp">
+                			<div>${productDTO.p_num}</div>
+                			<a href="<c:url value='/carrot/read?${ph.sc.getQueryString()}&p_num=${productDTO.p_num }&menu=product'/>">
                             <div class="itemImg"><img src="../resources/img/전동드릴 공구 셋트1.jpg" alt="전동드릴 공구 셋트1"></div>
-                            <div class="itemName">${productDTO.p_title}</div>
-                            <div class="itemPrice">${productDTO.p_price}</div>
+                            <div class="itemName"><c:out value="${productDTO.p_title}"/></div>
+                            <div class="itemPrice"><c:out value="${productDTO.p_price}"/></div>
                             <div class="itemAddress">
                             	<span>${productDTO.userDTO.m_addr1}</span>
                             	<span>${productDTO.userDTO.m_addr2}</span>
@@ -95,223 +103,15 @@
                             <div class="itemCountUp">
                                 <span class="itemAttention">관심 ${productDTO.p_likey}</span>
                                 &nbsp;•&nbsp;
-                                <span class="itemChat">댓글 ${productDTO.p_comm}</span>
+                                <span class="itemChat">채팅 3</span>
                             </div>
                         </a>    
                 		</li>
                 	</c:forEach>
-                    <!-- <li>
-                        <a href="junggoDetail.jsp">
-                            <div class="itemImg"><img src="./resources/img/전동드릴 공구 셋트1.jpg" alt="전동드릴 공구 셋트1"></div>
-                            <div class="itemName">전동드릴 공구 셋트</div>
-                            <div class="itemPrice">10,000원</div>
-                            <div class="itemAddress">서울 마포구 동교동</div>
-                            <div class="itemCountUp">
-                                <span class="itemAttention">관심 25</span>
-                                &nbsp;•&nbsp;
-                                <span class="itemChat">댓글 65</span>
-                            </div>
-                        </a>    
-                    </li>
-                    <li>
-                        <a href="">
-                            <div class="itemImg"><img src="./resources/img/LG 43인치 UHDtv1.jpg" alt="LG 43인치 UHDtv1"></div>
-                            <div class="itemName">LG 43인치 UHDtv1 팝니다.</div>
-                            <div class="itemPrice">250,000원</div>
-                            <div class="itemAddress">경기도 안양시 만안구 안양동</div>
-                            <div class="itemCountUp">
-                                <span class="itemAttention">관심 28</span>
-                                &nbsp;•&nbsp;
-                                <span class="itemChat">댓글 63</span>
-                        </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="junggoDetail.jsp">
-                            <div class="itemImg"><img src="./resources/img/이사가느라 가전 팔아요1.jpg" alt="이사가느라 가전 팔아요1"></div>
-                            <div class="itemName">이사가느라 가전 팔아요~!골라가세요~!</div>
-                            <div class="itemPrice">99원</div>
-                            <div class="itemAddress">광주 북구 신용동</div>
-                            <div class="itemCountUp">
-                                <span class="itemAttention">관심 26</span>
-                                &nbsp;•&nbsp;
-                                <span class="itemChat">댓글 27</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="itemImg"><img src="./resources/img/발뮤다 더 토스터1.jpg" alt="발뮤다 더 토스터1"></div>
-                            <div class="itemName">발뮤다 더 토스터,더 오븐레인지,더 팟 팝니다.</div>
-                            <div class="itemPrice">100,000원</div>
-                            <div class="itemAddress">경기도 성남시 분당구 이매동</div>
-                            <div class="itemCountUp">
-                                <span class="itemAttention">관심 30</span>
-                                &nbsp;•&nbsp;
-                                <span class="itemChat">댓글 31</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="itemImg"><img src="./resources/img/전동드릴 공구 셋트1.jpg" alt="전동드릴 공구 셋트1"></div>
-                            <div class="itemName">전동드릴 공구 셋트</div>
-                            <div class="itemPrice">10,000원</div>
-                            <div class="itemAddress">서울 마포구 동교동</div>
-                            <div class="itemCountUp">
-                                <span class="itemAttention">관심 25</span>
-                                &nbsp;•&nbsp;
-                                <span class="itemChat">댓글 65</span>
-                            </div>
-                        </a>    
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="itemImg"><img src="./resources/img/LG 43인치 UHDtv1.jpg" alt="LG 43인치 UHDtv1"></div>
-                            <div class="itemName">LG 43인치 UHDtv1 팝니다.</div>
-                            <div class="itemPrice">250,000원</div>
-                            <div class="itemAddress">경기도 안양시 만안구 안양동</div>
-                            <div class="itemCountUp">
-                                <span class="itemAttention">관심 28</span>
-                                &nbsp;•&nbsp;
-                                <span class="itemChat">댓글 63</span>
-                        </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="itemImg"><img src="./resources/img/이사가느라 가전 팔아요1.jpg" alt="이사가느라 가전 팔아요1"></div>
-                            <div class="itemName">이사가느라 가전 팔아요~!골라가세요~!</div>
-                            <div class="itemPrice">99원</div>
-                            <div class="itemAddress">광주 북구 신용동</div>
-                            <div class="itemCountUp">
-                                <span class="itemAttention">관심 26</span>
-                                &nbsp;•&nbsp;
-                                <span class="itemChat">댓글 27</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="itemImg"><img src="./resources/img/발뮤다 더 토스터1.jpg" alt="발뮤다 더 토스터1"></div>
-                            <div class="itemName">발뮤다 더 토스터,더 오븐레인지,더 팟 팝니다.</div>
-                            <div class="itemPrice">100,000원</div>
-                            <div class="itemAddress">경기도 성남시 분당구 이매동</div>
-                            <div class="itemCountUp">
-                                <span class="itemAttention">관심 30</span>
-                                &nbsp;•&nbsp;
-                                <span class="itemChat">댓글 31</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="itemImg"><img src="./resources/img/전동드릴 공구 셋트1.jpg" alt="전동드릴 공구 셋트1"></div>
-                            <div class="itemName">전동드릴 공구 셋트</div>
-                            <div class="itemPrice">10,000원</div>
-                            <div class="itemAddress">서울 마포구 동교동</div>
-                            <div class="itemCountUp">
-                                <span class="itemAttention">관심 25</span>
-                                &nbsp;•&nbsp;
-                                <span class="itemChat">댓글 65</span>
-                            </div>
-                        </a>    
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="itemImg"><img src="./resources/img/LG 43인치 UHDtv1.jpg" alt="LG 43인치 UHDtv1"></div>
-                            <div class="itemName">LG 43인치 UHDtv1 팝니다.</div>
-                            <div class="itemPrice">250,000원</div>
-                            <div class="itemAddress">경기도 안양시 만안구 안양동</div>
-                            <div class="itemCountUp">
-                                <span class="itemAttention">관심 28</span>
-                                &nbsp;•&nbsp;
-                                <span class="itemChat">댓글 63</span>
-                        </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="itemImg"><img src="./resources/img/이사가느라 가전 팔아요1.jpg" alt="이사가느라 가전 팔아요1"></div>
-                            <div class="itemName">이사가느라 가전 팔아요~!골라가세요~!</div>
-                            <div class="itemPrice">99원</div>
-                            <div class="itemAddress">광주 북구 신용동</div>
-                            <div class="itemCountUp">
-                                <span class="itemAttention">관심 26</span>
-                                &nbsp;•&nbsp;
-                                <span class="itemChat">댓글 27</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="itemImg"><img src="./resources/img/발뮤다 더 토스터1.jpg" alt="발뮤다 더 토스터1"></div>
-                            <div class="itemName">발뮤다 더 토스터,더 오븐레인지,더 팟 팝니다.</div>
-                            <div class="itemPrice">100,000원</div>
-                            <div class="itemAddress">경기도 성남시 분당구 이매동</div>
-                            <div class="itemCountUp">
-                                <span class="itemAttention">관심 30</span>
-                                &nbsp;•&nbsp;
-                                <span class="itemChat">댓글 31</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="itemImg"><img src="./resources/img/전동드릴 공구 셋트1.jpg" alt="전동드릴 공구 셋트1"></div>
-                            <div class="itemName">전동드릴 공구 셋트</div>
-                            <div class="itemPrice">10,000원</div>
-                            <div class="itemAddress">서울 마포구 동교동</div>
-                            <div class="itemCountUp">
-                                <span class="itemAttention">관심 25</span>
-                                &nbsp;•&nbsp;
-                                <span class="itemChat">댓글 65</span>
-                            </div>
-                        </a>    
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="itemImg"><img src="./resources/img/LG 43인치 UHDtv1.jpg" alt="LG 43인치 UHDtv1"></div>
-                            <div class="itemName">LG 43인치 UHDtv1 팝니다.</div>
-                            <div class="itemPrice">250,000원</div>
-                            <div class="itemAddress">경기도 안양시 만안구 안양동</div>
-                            <div class="itemCountUp">
-                                <span class="itemAttention">관심 28</span>
-                                &nbsp;•&nbsp;
-                                <span class="itemChat">댓글 63</span>
-                        </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="itemImg"><img src="./resources/img/이사가느라 가전 팔아요1.jpg" alt="이사가느라 가전 팔아요1"></div>
-                            <div class="itemName">이사가느라 가전 팔아요~!골라가세요~!</div>
-                            <div class="itemPrice">99원</div>
-                            <div class="itemAddress">광주 북구 신용동</div>
-                            <div class="itemCountUp">
-                                <span class="itemAttention">관심 26</span>
-                                &nbsp;•&nbsp;
-                                <span class="itemChat">댓글 27</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="itemImg"><img src="./resources/img/발뮤다 더 토스터1.jpg" alt="발뮤다 더 토스터1"></div>
-                            <div class="itemName">발뮤다 더 토스터,더 오븐레인지,더 팟 팝니다.</div>
-                            <div class="itemPrice">100,000원</div>
-                            <div class="itemAddress">경기도 성남시 분당구 이매동</div>
-                            <div class="itemCountUp">
-                                <span class="itemAttention">관심 30</span>
-                                &nbsp;•&nbsp;
-                                <span class="itemChat">댓글 31</span>
-                            </div>
-                        </a>
-                    </li> -->
                 </ul>
             </div><!--productList-->
             <div class="paging">
-                <div class="pageList">
+                <!-- <div class="pageList">
                     <ul>
                         <li class="firstPage"><a href="#"><p>첫 페이지</p></a></li>
                         <li class="prevPage"><a href="#"><p>이전 페이지</p></a></li>
@@ -321,7 +121,55 @@
                         <li class="nextPage"><a href="#"><p>다음 페이지</p></a></li>
                         <li class="lastPage"><a href="#"><p>마지막 페이지</p></a></li>
                     </ul>
-                </div><!--pageList-->   
+                </div>pageList  -->  
+                
+               <div class="paging">
+				<div class="pageList">
+					<ul>
+						<li class="firstPage">
+							<c:if test="${ph.showPrev}">
+			       				<a href="<c:url value='/carrot/junggoMain${ph.sc.getQueryString(ph.beginPage-1)}'/>"> 
+			       				<p>&lt;&lt;</p>
+			       				</a>  
+			       			</c:if>
+		       			</li>
+		       	
+		       			<li class="prevPage">
+		       				<c:if test="${ph.showPrev}">
+			       				<a href="<c:url value='/carrot/junggoMain${ph.sc.getQueryString(ph.beginPage-1)}'/>"> 
+			       				<p>&lt;</p>
+			       				</a>   
+			       			</c:if>
+		       			</li>
+		       			
+		       			<li class="num">
+					       	<c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
+					       		<a href="<c:url value='/carrot/junggoMain${ph.sc.getQueryString(i)}'/>"> 
+					       		<p>${i}</p>
+					       		</a>
+					       	</c:forEach>
+				       	</li>
+				       	
+				       	<li class="nextPage">
+					       	<c:if test="${ph.showNext}">
+					       		<a href="<c:url value='/carrot/junggoMain${ph.sc.getQueryString(ph.endPage+1)}'/>">
+					       		<p>&gt;</p>
+			       				</a>   
+					       	</c:if>
+				       	</li>
+				       	
+				       	<li class="lastPage">
+					       	<c:if test="${ph.showNext}">
+					       		<a href="<c:url value='/carrot/junggoMain${ph.sc.getQueryString(ph.endPage+1)}'/>">
+								<p>&gt;&gt;</p>
+			       				</a>    
+					       	</c:if>
+				       	</li>
+				   	</ul>
+				</div> <!--pageList-->
+			</div> <!--paging-->
+                
+            </div><!--paging-->
                 
             </div><!--paging-->
         </div><!--container-->
