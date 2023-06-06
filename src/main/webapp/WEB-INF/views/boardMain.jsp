@@ -72,7 +72,7 @@
                         <c:forEach var="boardDTO" items="${list}">
 	                        <li class="item">
 	                        	<input type="hidden" value="${boardDTO.b_num} " name="b_num">
-	                            <a href="<c:url value='/board/read?menu=board&b_num=${boardDTO.b_num}'/>">
+	                            <a href="<c:url value='/board/read?${ph.sc.getQueryString()}&menu=board&b_num=${boardDTO.b_num}'/>">
 	                            <!-- ${ph.sc.getQueryString() } -->
 	                                <div class="areaThumb">
 	                                    <!-- <i class="fa-thin fa-rectangle-xmark"></i> -->

@@ -100,5 +100,10 @@ public class BoardServiceImple implements BoardService {
 	public int getSearchResultCnt(SearchCondition sc) throws Exception {
 		return boardDAO.searchResultCnt(sc);
 	}
+	
+	@Override
+	public int updateCommentsCnt(int cnt, Integer b_num) throws Exception {
+		return boardDAO.updateCommentsCnt(cnt, b_num);
+	}
 
 }

@@ -11,9 +11,6 @@ public class UserDTO {
 	private String m_ondo;
 	private String m_addr1;
 	private String m_addr2;
-
-
-
 	private MultipartFile imageFile;
 
 	

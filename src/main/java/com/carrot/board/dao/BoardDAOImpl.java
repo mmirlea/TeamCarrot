@@ -105,12 +105,12 @@ public class BoardDAOImpl implements BoardDAO {
 	public int searchResultCnt(SearchCondition sc) throws Exception {
 		return session.selectOne(namespace + "searchResultCnt", sc);
 	}
-//	@Override
-//	public int updateCommentsCnt(int cnt, Integer b_num) throws Exception {
-//		Map map = new HashMap();
-//		map.put("cnt", cnt);
-//		map.put("b_num", b_num);
-//		return session.update(namespace + "updateCommentsCnt", map);
-//	}
+	@Override
+	public int updateCommentsCnt(int cnt, Integer b_num) throws Exception {
+		Map map = new HashMap();
+		map.put("cnt", cnt);
+		map.put("b_num", b_num);
+		return session.update(namespace + "updateCommentsCnt", map);
+	}
 
 }

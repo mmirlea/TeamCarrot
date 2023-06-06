@@ -22,7 +22,7 @@
 	let menu = '<%= request.getParameter("menu") %>'
 	let msg="${msg}"
 	console.log(menu);
-	if(msg == "MOD_ERR") alert("게시글 수정에 실패하였습니다.")
+	//if(msg == "MOD_ERR") alert("게시글 수정에 실패하였습니다.")
 	if(msg == "DEL_ERR") alert("게시글 삭제에 실패하였습니다.")
 	
 </script>
@@ -128,6 +128,7 @@
             </c:if>
     	</div> <!-- .container -->
     </form><!--.wrap-->
+  
     
     <form class="wrap" id="commFrm">
 		<div class="comments-wrap">
@@ -213,6 +214,203 @@
 		</div><!--.comments-wrap-->
     </form>
     
+    comment : <input type="text" name="c_content"> <br>
+	
+		<button id="sendBtn" type="button">SEND</button>
+		<button id="modBtn" type="button">수정확인</button>
+		
+		<!-- 댓글 표시 -->
+		<div id="commentsList"></div>
+		
+		<div id="replyForm" style="display:none">
+			<input type="text" name="replyComment">
+			<button type="button" id="wrtRepBtn">등록</button>
+		</div>
+    
+    <script>
+		  //댓글 관련-----------------------------------------------
+		  let c_pnum = Math.max(0,${commentsDTO.c_pnum});
+		
+		  //댓글 리스트
+		  let showList = function(c_pnum) {
+		    $.ajax({
+		      type: 'GET',
+		      url: '/carrot/comments?p_num=' + c_pnum,
+		      success: function(result) {
+		        $("#commentsList").html(toHtml(result));
+		      },
+		      error: function() {
+		        alert("error");
+		      }
+		    });
+		  }
+		
+		  //댓글 작성
+		  $(document).ready(function() {
+		    //목록 보이기
+		    showList(c_pnum);
+		
+		    $("#sendBtn").click(function() {
+		      let c_content = $("input[name=c_content]").val()
+		
+		      if (c_content.trim() == '') {
+		        alert("댓글을 입력하세요!")
+		        $("input[name=c_content]").focus();
+		        return;
+		      }
+		
+		      $.ajax({
+		        type: 'POST',
+		        url: '/carrot/comments?p_num=' + c_pnum,
+		        headers: {
+		          "content-type": "application/json"
+		        },
+		        data: JSON.stringify({
+		          c_pnum: c_pnum,
+		          c_content: c_content
+		        }),
+		        success: function(result) {
+		          alert(result);
+		          showList(c_pnum);
+		        },
+		        error: function() {
+		          alert("error");
+		        }
+		      });
+		    })
+		
+		    //답글 달기
+		    $("#commentsList").on("click", ".replyBtn", function() {
+		      $("#replyForm").appendTo($(this).parent());
+		      $("#replyForm").css("display", "block");
+		    })
+		
+		    $("#wrtRepBtn").click(function() {
+		      let c_content = $("input[name=replyComment]").val()
+		
+		      let c_pcnum = $("#replyForm").parent().attr("data-c_pcnum")
+		
+		      if (c_content.trim() == '') {
+		        alert("댓글을 입력하세요!")
+		        $("input[name=replyComment]").focus();
+		        return;
+		      }
+		
+		      $.ajax({
+		        type: 'POST',
+		        url: '/carrot/comments?c_pnum=' + c_pnum,
+		        headers: {
+		          "content-type": "application/json"
+		        },
+		        data: JSON.stringify({
+		          c_pnum: c_pnum,
+		          c_pcnum: c_pcnum,
+		          c_content: c_content
+		        }),
+		        success: function(result) {
+		          alert(result);
+		          showList(c_pnum);
+		        },
+		        error: function() {
+		          alert("error");
+		        }
+		      });
+		
+		      $("#replyForm").css("display", "none");
+		      $("input[name=replyComment]").val('');
+		      $("#replyForm").appendTo("body");
+		    })
+		
+		    //댓글 삭제
+		    $("#commentsList").on("click", ".delBtn", function() {
+		      let c_num = $(this).parent().attr("data-c_num");
+		      let c_pnum = $(this).parent().attr("data-c_pnum");
+		
+		      $.ajax({
+		        type: 'DELETE',
+		        url: '/carrot/comments/' + c_num + '?c_pnum=' + c_pnum,
+		        success: function(result) {
+		          alert(result);
+		
+		          showList(c_pnum);
+		        },
+		        error: function() {
+		          alert("error");
+		        }
+		      });
+		    })
+		
+		    //수정 확인
+		    $("#modBtn").click(function() {
+		      let c_content = $("input[name=c_content]").val()
+		
+		      let c_num = $(this).attr("data-c_num");
+		
+		      if (c_content.trim() == '') {
+		        alert("댓글을 입력하세요!")
+		        $("input[name=c_content]").focus();
+		        return;
+		      }
+		
+		      $.ajax({
+		        type: 'PATCH',
+		        url: '/carrot/comments/' + c_num,
+		        headers: {
+		          "content-type": "application/json"
+		        },
+		        data: JSON.stringify({
+		          c_num: c_num,
+		          c_content: c_content
+		        }),
+		        success: function(result) {
+		          alert(result);
+		          showList(c_pnum);
+		        },
+		        error: function() {
+		          alert("error");
+		        }
+		      });
+		    })
+		
+		    //댓글 수정
+		    $("#commentsList").on("click", ".modBtn", function() {
+		      let c_num = $(this).parent().attr("data-c_num");
+		
+		      let c_content = $("span.c_content", $(this).parent()).text();
+		
+		      $("input[name=c_content]").val(c_content);
+		
+		      $("#modBtn").attr("data-c_num", c_num);
+		    })
+		  })
+		
+		  //결과를 화면에 출력하기 위한 함수 생성
+		  let toHtml = function(comments) {
+		    let tmp = "<ul id='comments'>";
+		
+		    comments.forEach(function(comment) {
+		      tmp += '<li data-c_num=' + comment.c_num;
+		      tmp += ' data-c_pcnum=' + comment.c_pcnum;
+		      tmp += ' data-c_pnum=' + comment.c_pnum + '>';
+		
+		      if (comment.c_num != comment.pcno)
+		        tmp += 'ㄴ';
+		
+		      tmp += ' commenter=<span class="commenter">' + comment.c_email + '</span>';
+		      tmp += ' comments=<span class="comments">' + comment.c_content + '</span>';
+		      tmp += ' up_date=' + dateToString(comment.c_update);
+		      tmp += ' <button class="delBtn">삭제</button>';
+		      tmp += ' <button class="modBtn">수정</button>';
+		      tmp += ' <button class="replyBtn">답글</button>';
+		      tmp += '</li>';
+		    })
+		    tmp += "</ul>";
+		
+		    return tmp;
+		  }
+		
+	</script>
+    
     <script type="text/javascript">
     $(document).ready(function() {
     	
@@ -221,25 +419,26 @@
 			
 			if(!confirm("정말로 삭제하시겠습니까?")) return;
 			
-			debugger;
+			
 			let form = $('#form');
 			
 			console.log($(location).attr("pathname"))
 			
-			if($(location).attr("pathname") == "/carrot/carrot/read"){
+			if(menu !== 'board'){
+				
 				form.attr("action", "<c:url value='/carrot/remove?page=${page}&pageSize=${pageSize}'/>");
 				form.attr("method", "post");
 				form.append("<input type='hidden' name='p_num' value='${productDTO.p_num}'>");
 				
 				form.submit();
 				
-			}else{
+			} else{
 				form.attr("action", "<c:url value='/board/remove?page=${page}&pageSize=${pageSize}'/>");
 				form.attr("method", "post");
 				form.append("<input type='hidden' name='b_num' value='${boardDTO.b_num}'>");
 				
 				form.submit();
-			}
+			} 
 		})
 		
  		$("#btnModify").on("click", function() {
@@ -272,9 +471,7 @@
 			} */
 		})
 	})
-
-
-		
+    
     </script>
 </body>
 </html>

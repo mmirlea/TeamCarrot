@@ -28,6 +28,17 @@ public class BoardDTO {
 	public BoardDTO() {
 	}
 
+	
+	
+	public BoardDTO(Integer b_num, String b_cate, String b_email, String b_title, String b_content) {
+		this.b_num = b_num;
+		this.b_cate = b_cate;
+		this.b_email = b_email;
+		this.b_title = b_title;
+		this.b_content = b_content;
+	}
+
+
 	public BoardDTO(String b_cate, String b_email, String b_title, String b_content) {
 		this.b_cate = b_cate;
 		this.b_email = b_email;

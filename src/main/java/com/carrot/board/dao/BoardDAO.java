@@ -38,5 +38,5 @@ public interface BoardDAO {
 
 	int searchResultCnt(SearchCondition sc) throws Exception;
 
-//	int updateCommentsCnt(int cnt, Integer b_num) throws Exception;
+	int updateCommentsCnt(int cnt, Integer b_num) throws Exception;
 }

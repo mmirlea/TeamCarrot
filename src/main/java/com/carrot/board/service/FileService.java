@@ -16,8 +16,11 @@ public class FileService {
 		String fileName = uploadFile.getOriginalFilename();
 		String url = URL_PATH + fileName;
 		String saveFilePath = SAVE_PATH + fileName;
-		uploadFile.transferTo(new File(saveFilePath));
-		return url;
+		if(!uploadFile.isEmpty()) {
+			uploadFile.transferTo(new File(saveFilePath));	
+			return url;
+		}
+		return "";
 	}
 	
 	// 파일 찾기

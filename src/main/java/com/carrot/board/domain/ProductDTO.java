@@ -8,7 +8,7 @@ import com.carrot.user.domain.UserDTO;
 
 public class ProductDTO {
 	private String p_menu;
-	private int p_num;
+	private Integer p_num;
 	private String p_cate;
 	private String p_email;
 	private String p_title;
@@ -16,7 +16,7 @@ public class ProductDTO {
 	private Date p_crdate;
 	private Date p_update;
 	private String p_tempsaveyn;
-	private int p_price;
+	private Integer p_price;
 	private String p_negoyn;
 	private int p_likey;
 	private String p_likeyemail;
@@ -58,7 +58,7 @@ public class ProductDTO {
 	public void setP_menu(String p_menu) {
 		this.p_menu = p_menu;
 	}
-	public int getP_num() {
+	public Integer getP_num() {
 		return p_num;
 	}
 	public void setP_num(int p_num) {
@@ -106,7 +106,7 @@ public class ProductDTO {
 	public void setP_tempsaveyn(String p_tempsaveyn) {
 		this.p_tempsaveyn = p_tempsaveyn;
 	}
-	public int getP_price() {
+	public Integer getP_price() {
 		return p_price;
 	}
 	public void setP_price(int p_price) {

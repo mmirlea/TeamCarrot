@@ -92,7 +92,7 @@
                 	<c:forEach var="productDTO" items="${list}">
                 		<li>
                 			<div>${productDTO.p_num}</div>
-                			<a href="<c:url value='/carrot/read?${ph.sc.getQueryString()}&p_num=${productDTO.p_num }'/>">
+                			<a href="<c:url value='/carrot/read?${ph.sc.getQueryString()}&p_num=${productDTO.p_num }&menu=product'/>">
                             <div class="itemImg"><img src="../resources/img/전동드릴 공구 셋트1.jpg" alt="전동드릴 공구 셋트1"></div>
                             <div class="itemName"><c:out value="${productDTO.p_title}"/></div>
                             <div class="itemPrice"><c:out value="${productDTO.p_price}"/></div>
@@ -123,21 +123,53 @@
                     </ul>
                 </div>pageList  -->  
                 
-                <div>
-		        	<c:if test="${ph.showPrev}">
-		        		<a href="<c:url value='/carrot/junggoMain${ph.sc.getQueryString(ph.beginPage-1)}'/>"> 이전 페이지</a>   
-		        	</c:if>
-		        	
-		        	<c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
-		        		<a href="<c:url value='/carrot/junggoMain${ph.sc.getQueryString(i)}'/>"> ${i}</a>
-		        	</c:forEach>
-		        	
-		        	
-		        	<c:if test="${ph.showNext}">
-		        		<a href="<c:url value='/carrot/junggoMain${ph.sc.getQueryString(ph.endPage+1)}'/>"> 다음 페이지</a>   
-		        	</c:if>
-        
-        		</div>
+               <div class="paging">
+				<div class="pageList">
+					<ul>
+						<li class="firstPage">
+							<c:if test="${ph.showPrev}">
+			       				<a href="<c:url value='/carrot/junggoMain${ph.sc.getQueryString(ph.beginPage-1)}'/>"> 
+			       				<p>&lt;&lt;</p>
+			       				</a>  
+			       			</c:if>
+		       			</li>
+		       	
+		       			<li class="prevPage">
+		       				<c:if test="${ph.showPrev}">
+			       				<a href="<c:url value='/carrot/junggoMain${ph.sc.getQueryString(ph.beginPage-1)}'/>"> 
+			       				<p>&lt;</p>
+			       				</a>   
+			       			</c:if>
+		       			</li>
+		       			
+		       			<li class="num">
+					       	<c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
+					       		<a href="<c:url value='/carrot/junggoMain${ph.sc.getQueryString(i)}'/>"> 
+					       		<p>${i}</p>
+					       		</a>
+					       	</c:forEach>
+				       	</li>
+				       	
+				       	<li class="nextPage">
+					       	<c:if test="${ph.showNext}">
+					       		<a href="<c:url value='/carrot/junggoMain${ph.sc.getQueryString(ph.endPage+1)}'/>">
+					       		<p>&gt;</p>
+			       				</a>   
+					       	</c:if>
+				       	</li>
+				       	
+				       	<li class="lastPage">
+					       	<c:if test="${ph.showNext}">
+					       		<a href="<c:url value='/carrot/junggoMain${ph.sc.getQueryString(ph.endPage+1)}'/>">
+								<p>&gt;&gt;</p>
+			       				</a>    
+					       	</c:if>
+				       	</li>
+				   	</ul>
+				</div> <!--pageList-->
+			</div> <!--paging-->
+                
+            </div><!--paging-->
                 
             </div><!--paging-->
         </div><!--container-->
