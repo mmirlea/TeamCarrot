@@ -17,6 +17,8 @@
 		<result property="p_likey" column="p_likey"/>
 		<result property="p_comm" column="p_comm"/>
 		<result property="p_viewcnt" column="p_viewcnt"/>
+		<result property="p_tempsaveyn" column="p_tempsaveyn"/>
+		<result property="p_negoyn" column="p_negoyn"/>
 		<association property="userDTO" javaType="UserDTO">
 			<id property="m_email" column="m_email"/>
 			<result property="m_nicknm" column="m_nicknm"/>
@@ -40,7 +42,7 @@
 	<!-- 게시글 읽어오기 -->	
 	<select id="select" parameterType="int" resultMap="ProMemJoin">
 		SELECT p.p_menu, p.p_num, p.p_cate, p.p_email, p.p_title, p.p_content, p.p_img, 
-			   p.p_crdate, p.p_update, p.p_tempsaveyn, p.p_price, p.p_likey, p.p_likeyemail,
+			   p.p_crdate, p.p_update, p.p_tempsaveyn, p.p_price, p.p_likey, p.p_likeyemail, p.p_negoyn,
 			   p.p_comm, p.p_viewcnt, m.m_nicknm, m.m_addr1, m.m_addr2, m.m_ondo, m.m_proimg
 		FROM product p 
 		INNER JOIN member m
@@ -56,8 +58,13 @@
 	
 	<!-- 글 추가하기 -->
 	<insert id="insert" parameterType="ProductDTO">
-		INSERT INTO product(p_menu, p_num, p_cate, p_email, p_title, p_content, p_crdate, p_tempsaveyn, p_price)
-		VALUES('1', seq_product_num.nextval, #{p_cate}, #{p_email}, #{p_title}, #{p_content}, SYSDATE, #{p_tempsaveyn}, #{p_price})
+		INSERT INTO product(p_menu, p_num, p_cate, p_email, p_title, p_content, p_crdate, p_tempsaveyn, p_price, p_negoyn)
+		VALUES('1', seq_product_num.nextval, #{p_cate}, #{p_email}, #{p_title}, #{p_content}, SYSDATE, #{p_tempsaveyn}, #{p_price}, #{p_negoyn})
+	</insert>
+	<!-- 임시저장 추가하기 -->
+	<insert id="save" parameterType="ProductDTO">
+		INSERT INTO PRODUCT (p_num, p_cate, p_email, p_title, p_content, p_tempsaveyn, p_price, p_negoyn)
+		VALUES (SEQ_PRODUCT_NUM.NEXTVAL, #{p_cate}, #{p_email}, #{p_title}, #{p_content}, 'Y', #{p_price}, #{p_negoyn})
 	</insert>
 	
 	<!-- 글 수정하기 -->
@@ -66,6 +73,20 @@
 		SET p_title = #{p_title}, p_content = #{p_content}, p_update = SYSDATE, 
 			p_price = #{p_price}, p_negoyn = #{p_negoyn}
 		WHERE p_menu = '1' AND p_num = #{p_num} AND p_email = #{p_email} 
+	</update>
+	<!-- 임시저장 작성하기 -->
+	<update id="tempUpdate" parameterType="ProductDTO">
+		UPDATE PRODUCT
+		   SET p_title = #{p_title},
+		       p_content = #{p_content},
+		       p_price = #{p_price},
+		       p_negoyn = #{p_negoyn},
+		       AND p_tempsaveyn = 'N'
+		       p_update = SYSDATE
+		 WHERE p_menu = '1'
+		   AND p_num = #{p_num}
+		   AND p_email = #{p_email}
+		   AND p_tempsaveyn = 'Y'
 	</update>
 	
 	<!-- 글 삭제하기 -->

@@ -20,7 +20,7 @@ function formCheck() {
 	let b_title = document.getElementById("b_title");
 	let b_cate = document.getElementById("b_cate");
 	let b_content = document.getElementById("b_content");
-	
+
 	if (b_title.value == "") {
 		setMessage('제목을 입력하세요', form.b_title);
 		return false;
@@ -29,7 +29,7 @@ function formCheck() {
 		setMessage('내용을 입력하세요', form.b_content);
 		return false;
 	}
-	
+
 	if (menu === 'board') {
 		if (b_cate.value == "" || form.b_cate.value == "주제선택") {
 			setMessage('카테고리를 선택하세요', form.b_cate);
@@ -98,13 +98,13 @@ $(document).ready(function() {
 	// 수정하기 시 파일 가져와 웹에 보이기
 	let fileList = ['${boardDTO.b_img}'];
 	createFileList();
-	
+
 	// 파일 이벤트핸들러
 	$('#fileUpload').on('change',(e)=>{
 		 const file = $('#fileUpload')[0].files[0];
 		 fileToBase64(file); // 올린파일을 웹에서 볼 수 있게 변환
 	})
-	
+
 	// 파일 변환해서 생성하기
 	function fileToBase64(file){
 		const reader = new FileReader();
@@ -140,11 +140,9 @@ $(document).ready(function() {
 						type: 'get',
 						url: '/carrot/delFile/'+fileName,
 					})
-					
 				}else{
 					$('#fileUpload')[0].value = "";
 				}
-				 	
 				fileList = [];
 				createFileList();
 			})
@@ -158,8 +156,7 @@ $(document).ready(function() {
 			$('#b_img').val(b_img);
 		})
 	}
-	
-	
+
 })
 </script>
 <body>
@@ -248,12 +245,12 @@ $(document).ready(function() {
 	                <div class="divPrice">
 	                    <span class="spPrice">
 	                        <i class="fa-solid fa-won-sign"></i> &nbsp; 
-	                        <input type="text" value="${productDTO.p_price}" >	                        
+	                        <input type="text" name="p_price" value="${productDTO.p_price}" >
 	                        &nbsp;
 	                        <input type="checkbox" name="chkShare" id="chkShare">
 	                        <label for="chkShare">나눔</label>
 	                        &nbsp;
-	                        <input type="checkbox" name="chkProposal" id="chkProposal">
+	                        <input type="checkbox" name="p_negoyn" id="chkProposal" ${productDTO.p_negoyn == "Y" ? "checked" : "" }>
 	                        <label for="chkProposal">가격제안받기</label>
 	                    </span>
 	                </div>

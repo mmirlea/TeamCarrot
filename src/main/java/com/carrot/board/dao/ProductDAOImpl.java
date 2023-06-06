@@ -35,6 +35,10 @@ public class ProductDAOImpl implements ProductDAO {
 		return session.insert(namespace + "insert", dto);
 	}
 	
+	public int save(ProductDTO dto) throws Exception{
+		return session.insert(namespace + "save", dto);
+	}
+	
 	@Override
 	public int update(ProductDTO dto) throws Exception{
 		return session.update(namespace + "update", dto);
