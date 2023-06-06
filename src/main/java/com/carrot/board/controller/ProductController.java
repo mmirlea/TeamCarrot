@@ -94,14 +94,18 @@ public class ProductController {
 
 		String p_email = (String) session.getAttribute("m_email");
 		productDTO.setP_email(p_email);
-
+		if(request.getParameter("p_negoyn") == null) {
+			productDTO.setP_negoyn("N");
+		}
+		
 		try {
 			if (service.write(productDTO) != 1)
 				throw new Exception("Write failed");
 
 			rattr.addFlashAttribute("msg", "WRT_OK");
 			return "redirect:/carrot/junggoMain";
-
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			m.addAttribute("mode", "new");
@@ -165,17 +169,23 @@ public class ProductController {
 	}
 	
 	@PostMapping("/modify")
-	public String modify(ProductDTO productDTO, RedirectAttributes rattr, Model m, HttpSession session) {
+	public String modify(ProductDTO productDTO, RedirectAttributes rattr, Model m, HttpSession session, HttpServletRequest request) {
 		String p_email = (String) session.getAttribute("m_email");
 		
 		System.out.println(p_email);
 		
 		productDTO.setP_email(p_email);
+		
+		if(request.getParameter("p_negoyn") == null) {
+			productDTO.setP_negoyn("N");
+		}
+		
 		try {
 			if (service.modify(productDTO) != 1) {
 				System.out.println(productDTO);
 				throw new Exception("Modify failed");
 			}
+			
 			rattr.addFlashAttribute("msg", "MOD_OK");
 
 			return "redirect:/carrot/junggoMain";
@@ -200,6 +210,28 @@ public class ProductController {
 		return "boardDetail";
 	}
 
+	@PostMapping("/save")
+	public String save(ProductDTO productDTO, RedirectAttributes rattr, Model m, HttpSession session) {
+		String p_email = (String) session.getAttribute("m_email");
+		productDTO.setP_email(p_email);
+		productDTO.setP_tempsaveyn("Y");
+		
+		try {
+			if (service.save(productDTO) != 1)
+				throw new Exception("Write failed");
+
+			rattr.addFlashAttribute("msg", "WRT_OK");
+			return "redirect:/carrot/junggoMain";
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			m.addAttribute("mode", "new");
+			m.addAttribute("menu", "product");
+			m.addAttribute("productDTO", productDTO);
+			m.addAttribute("msg", "WRT_ERR");
+		}
+		return "boardDetail";
+	}
 	
 	//로그인 확인
 	@GetMapping("/chkLogin")

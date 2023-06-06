@@ -12,7 +12,9 @@ public interface ProductService {
 	int getCount() throws Exception;
 
 	int write(ProductDTO dto) throws Exception;
-
+	
+	int save(ProductDTO dto) throws Exception;
+	
 	int modify(ProductDTO dto) throws Exception;
 
 	int remove(Integer p_num, String p_email) throws Exception;

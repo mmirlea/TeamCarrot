@@ -11,6 +11,8 @@ public interface ProductDAO {
 
 	int count() throws Exception;
 
+	int save(ProductDTO dto) throws Exception;
+	
 	int insert(ProductDTO dto) throws Exception;
 
 	int update(ProductDTO dto) throws Exception;

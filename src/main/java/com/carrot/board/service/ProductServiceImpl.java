@@ -32,6 +32,10 @@ public class ProductServiceImpl implements ProductService {
 		return productDAO.insert(dto);
 	}
 
+	public int save(ProductDTO dto) throws Exception{
+		return productDAO.save(dto);
+	}
+	
 	@Override
 	public int modify(ProductDTO dto) throws Exception {
 		return productDAO.update(dto);

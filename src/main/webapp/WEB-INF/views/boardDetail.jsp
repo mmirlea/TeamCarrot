@@ -15,6 +15,10 @@
 <script type="text/javascript">
 	let menu = '<%= request.getParameter("menu") %>'
 	
+	
+	
+	console.log(menu);
+	
 	function formCheck() {
 		let form = document.getElementById("form");
 		let b_title = document.getElementById("b_title");
@@ -47,10 +51,11 @@
 	}
 
 	$(document).ready(function() {
-	$('#close').on('click',()=>{
+		$('#close').on('click',()=>{
 		history.back();
-	})
+		})
 	
+
 	let fileList = ['${boardDTO.b_img}'];
 	console.log(fileList);
 	createFileList();
@@ -130,6 +135,7 @@
 		})
 	}
 })
+
 </script>
 <body>
 	<script>	
@@ -152,6 +158,7 @@
                 </div>
                
                 <div class="headerTitle">
+                	${menu }
                 	<h1>${menu eq "board" ? "동네생활" : "내 물건 팔기" }</h1>
                     <!-- <h1>동네생활</h1> -->
                     <!-- 중고 -->
@@ -166,7 +173,8 @@
                         </button>
                     </div>
                     <div class="gnbItem">
-                   	 	<input type="hidden" id ="txtSave" name="b_tempSaveYn" value="N">
+                   	 	<input type="hidden" class ="txtSave" name="b_tempSaveYn" value="N">
+                   	 	<input type="hidden" class ="txtSave" name="p_tempsaveyn" value="N">
                         <button type="button" class="btnSave" id="btnSave">저장</button>
                     </div>
                     <div class="gnbItem">
@@ -211,19 +219,20 @@
 	                    </select>
 	                </div>
                 </c:if>
-                
+                ${menu}
                 <c:if test="${menu eq 'product' }">
                 	<!-- 중고 -->
 	                <div class="divPrice">
 	                    <span class="spPrice">
 	                        <i class="fa-solid fa-won-sign"></i> &nbsp; 
-	                        <input type="text" value="${productDTO.p_price}" >	                        
+	                        <input type="text" name="p_price" value="${productDTO.p_price}" >	                        
 	                        &nbsp;
 	                        <input type="checkbox" name="chkShare" id="chkShare">
 	                        <label for="chkShare">나눔</label>
 	                        &nbsp;
-	                        <input type="checkbox" name="chkProposal" id="chkProposal">
+	                        <input type="checkbox" name="p_negoyn" id="chkProposal" ${productDTO.p_negoyn == "Y" ? "checked" : "" }>
 	                        <label for="chkProposal">가격제안받기</label>
+	                        
 	                    </span>
 	                </div>
 	                
