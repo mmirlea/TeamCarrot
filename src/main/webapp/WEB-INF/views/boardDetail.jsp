@@ -56,10 +56,17 @@ $(document).ready(function() {
 	$("#btnModify").on("click", function() {
 		let form = $('#form');
 		
+		if($("input:checkbox[name='p_negoyn']").is(":checked")){
+			
+			$("input:checkbox[name='p_negoyn']").attr("value", "Y");
+			alert($('input:checkbox[name="p_negoyn"]').val());
+				
+		}
+		
 		if (menu !== 'board') {
-		form.attr("action", "<c:url value='/carrot/modify'/>");
+			form.attr("action", "<c:url value='/carrot/modify'/>");
 		} else {
-		form.attr("action", "<c:url value='/board/modify'/>");
+			form.attr("action", "<c:url value='/board/modify'/>");
 		}
 		
 		form.attr("method", "post");
@@ -68,17 +75,22 @@ $(document).ready(function() {
 
 	// 저장
 	$("#btnWrite").on("click", function() {
-		if (formCheck()) {
-			let form = $('#form');
-			if (menu !== 'board') {
-				form.attr("action", "<c:url value='/carrot/write?'/>");
-			} else {
-				form.attr("action", "<c:url value='/board/write?'/>");
-			}
-			form.attr("method", "post");
-
-			form.submit();
+		
+		if($("input:checkbox[name='p_negoyn']").is(":checked")){
+			
+			$("input:checkbox[name='p_negoyn']").attr("value", "Y");
+			alert($('input:checkbox[name="p_negoyn"]').val());
+				
 		}
+		if (menu !== 'board') {
+			form.attr("action", "<c:url value='/carrot/write'/>");
+		} else {
+			form.attr("action", "<c:url value='/board/write'/>");
+		}
+		
+		form.attr("method", "post");
+		form.submit();
+		
 	})
 
 	//임시저장
@@ -89,9 +101,13 @@ $(document).ready(function() {
 			$("#txtSave").attr("value", "Y");
 		}
 		
-		form.attr("action", "<c:url value='/board/save'/>");
-		form.attr("method", "post");
+		if (menu !== 'board') {
+			form.attr("action", "<c:url value='/carrot/save'/>");
+		} else {
+			form.attr("action", "<c:url value='/board/save'/>");
+		}
 		
+		form.attr("method", "post");
 		form.submit();
 	})
 	
@@ -244,18 +260,19 @@ $(document).ready(function() {
                 	<!-- 중고 -->
 	                <div class="divPrice">
 	                    <span class="spPrice">
-	                        <i class="fa-solid fa-won-sign"></i> &nbsp; 
-	                        <input type="text" name="p_price" value="${productDTO.p_price}" >
+	                        <i class="fa-solid fa-won-sign"></i> &nbsp;
+	                        <input type="text" name="p_price" value="${productDTO.p_price}" >	                        
 	                        &nbsp;
 	                        <input type="checkbox" name="chkShare" id="chkShare">
 	                        <label for="chkShare">나눔</label>
 	                        &nbsp;
 	                        <input type="checkbox" name="p_negoyn" id="chkProposal" ${productDTO.p_negoyn == "Y" ? "checked" : "" }>
 	                        <label for="chkProposal">가격제안받기</label>
+	                        
 	                    </span>
 	                </div>
 	                
-	                <!-- 동네 -->
+	                
 	                <div class="divCategory"  >
 	                    <select name="p_cate" value="${productDTO.p_cate}" class="productCategory">
 	                    	<option value="주제선택" ${productDTO.p_cate == '카테고리선택' ? "selected" : ""}>카테고리선택</option>
