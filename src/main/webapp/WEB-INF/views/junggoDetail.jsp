@@ -251,10 +251,11 @@
 		    showList(c_pnum);
 		
 		    $("#sendBtn").click(function() {
-		      let c_content = $("input[name=c_content]").val()
-		
+		      let c_content = $("input[name=c_content]").val();
+			  let c_pnum = 4;
+		      
 		      if (c_content.trim() == '') {
-		        alert("댓글을 입력하세요!")
+		        alert("댓글을 입력하세요!");
 		        $("input[name=c_content]").focus();
 		        return;
 		      }
