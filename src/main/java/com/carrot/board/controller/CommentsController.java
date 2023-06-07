@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.carrot.board.domain.CommentsDTO;
@@ -46,7 +47,7 @@ public class CommentsController {
 	
 	//댓글 등록하는 메서드
 	@PostMapping("/comments")
-	public ResponseEntity<String> write(@RequestBody CommentsDTO dto, Integer c_pnum, HttpSession session){
+	public ResponseEntity<String> write(@RequestBody CommentsDTO dto, @RequestParam("c_pnum") Integer c_pnum, HttpSession session){
 		String c_email = (String) session.getAttribute("m_email");
 		
 		dto.setC_email(c_email);

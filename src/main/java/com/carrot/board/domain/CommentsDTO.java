@@ -22,14 +22,16 @@ public class CommentsDTO {
 		this.c_content = c_content;
 	}
 
-	public CommentsDTO(String c_menu, Integer c_pnum, Integer c_num, Integer c_pcnum, String c_email,
-			String c_content) {
+	public CommentsDTO(String c_menu, Integer c_pnum, Integer c_num, Integer c_pcnum, String c_email, String c_content,
+			Date c_crdate, Date c_update) {
 		this.c_menu = c_menu;
 		this.c_pnum = c_pnum;
 		this.c_num = c_num;
 		this.c_pcnum = c_pcnum;
 		this.c_email = c_email;
 		this.c_content = c_content;
+		this.c_crdate = c_crdate;
+		this.c_update = c_update;
 	}
 
 	public String getC_menu() {
