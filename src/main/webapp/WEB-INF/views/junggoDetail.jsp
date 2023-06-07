@@ -24,7 +24,6 @@
 	console.log(menu);
 	//if(msg == "MOD_ERR") alert("게시글 수정에 실패하였습니다.")
 	if(msg == "DEL_ERR") alert("게시글 삭제에 실패하였습니다.")
-	
 </script>
 <body>
 	<form class="wrap" id="form">
@@ -82,7 +81,7 @@
 					
 					<div class="crud-wrap">
                     	<input type="hidden" value="${menu eq 'board' ? boardDTO.b_num : 0}" name="b_num" id="b_num">
-                    	<input type="hidden" value="${menu ne 'board' ? 0 : productDTO.p_num}" name="p_num" id="p_num">
+                    	<input type="hidden" value="${menu eq 'product' ? productDTO.p_num : 0}" name="p_num" id="p_num">
                     	<button type="button" class="btnModify" id="btnModify" value="board">수정</button>
                     	<button type="button" class="btnDel" id="btnDel">삭제</button>
 	                </div>
