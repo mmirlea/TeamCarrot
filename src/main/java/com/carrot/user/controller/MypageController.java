@@ -209,7 +209,7 @@ public class MypageController {
 	//파일명 저장 위치, 이름 지정
 
 	public static String saveImageToServer(MultipartFile file) throws IOException {
-        String uploadDir = "C:/01-STUDY/proimg/";
+        String uploadDir = "D:/01-STUDY/proimg/";
         //String uploadDir = "src/main/resources/static/images/";
         
         // 디렉토리가 존재하지 않으면 생성
