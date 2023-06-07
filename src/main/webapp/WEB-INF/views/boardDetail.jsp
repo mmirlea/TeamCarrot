@@ -131,6 +131,13 @@ $(document).ready(function() {
 		 fileToBase64(file); // 올린파일을 웹에서 볼 수 있게 변환
 	})
 
+	
+	$('#fileUpload_p').on('change',(e)=>{
+		 const file = $('#fileUpload_p')[0].files[0];
+		 fileToBase64(file); // 올린파일을 웹에서 볼 수 있게 변환
+	})
+	
+	
 	// 파일 변환해서 생성하기
 	function fileToBase64(file){
 		const reader = new FileReader();
@@ -214,7 +221,7 @@ $(document).ready(function() {
 						url: '/carrot/delFile/'+fileName,
 					})
 				}else{
-					$('#fileUpload')[0].value = "";
+					$('#fileUploa_p')[0].value = "";
 				}
 				fileList_p = [];
 				createFileList_p();
@@ -263,7 +270,7 @@ $(document).ready(function() {
                     <div class="gnbItem">                    
                         <button type="button" class="btnPic" >
                         	<label for="fileUpload"><i class="fa-solid fa-image"></i></label>                        	
-                        	<input type="file" id="fileUpload" name="fileUpload" style="display:none">
+                        	<input type="file" id="fileUpload" name="${menu == 'board'? 'fileUpload' : 'fileUpload_p'}" style="display:none">
                         </button>
                     </div>
                     <div class="gnbItem">

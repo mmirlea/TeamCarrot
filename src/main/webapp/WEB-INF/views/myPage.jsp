@@ -36,7 +36,7 @@
 		                  	<c:when test="${dto.m_proimg eq null}">
 		                    	<img src="../resources/img/carrotimg/profilimg.png" alt="나의 프로필 이미지" class="myProfileImg">
 		                    </c:when>
-		                    <c:otherwise> <img src="/proimg/${dto.m_proimg}" lt="프로필 사진" class="myProfileImg"></c:otherwise>
+		                    <c:otherwise> <img src="/proimg/${dto.m_proimg}" alt="프로필 사진" class="myProfileImg"></c:otherwise>
 	                   </c:choose>
                     </div>
                     <div class="nameTitle">
