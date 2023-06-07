@@ -48,6 +48,6 @@
 	<update id="update" parameterType="CommentsDTO">
 		UPDATE COMMENTS
 		SET C_CONTENT = #{c_content}, C_UPDATE = SYSDATE
-		WHERE C_NUM = #{c_num} AND C_CONTENT = #{c_content}
+		WHERE C_NUM = #{c_num} AND C_EMAIL = #{C_EMAIL}
 	</update>
 </mapper>
