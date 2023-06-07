@@ -19,6 +19,7 @@
 		<result property="p_viewcnt" column="p_viewcnt"/>
 		<result property="p_tempsaveyn" column="p_tempsaveyn"/>
 		<result property="p_negoyn" column="p_negoyn"/>
+		<result property="p_img" column="p_img"/>
 		<association property="userDTO" javaType="UserDTO">
 			<id property="m_email" column="m_email"/>
 			<result property="m_nicknm" column="m_nicknm"/>
@@ -31,7 +32,7 @@
 	<!-- 게시글 목록 조회 -->             
 	<select id="selectAll" resultMap="ProMemJoin">
 		SELECT p.p_menu, p.p_num, p.p_cate, m.m_nicknm, m_addr1, m_addr2, 
-			   p.p_title, p.p_content, p.p_price, p.p_likey, p.p_comm
+			   p.p_title, p.p_content, p.p_price, p.p_likey, p.p_comm, p_img
 		FROM product p
 		INNER JOIN member m
 		ON p.p_email = m.m_email
@@ -42,7 +43,7 @@
 	<!-- 게시글 읽어오기 -->	
 	<select id="select" parameterType="int" resultMap="ProMemJoin">
 		SELECT p.p_menu, p.p_num, p.p_cate, p.p_email, p.p_title, p.p_content, p.p_img, 
-			   p.p_crdate, p.p_update, p.p_tempsaveyn, p.p_price, p.p_likey, p.p_likeyemail, p.p_negoyn,
+			   p.p_crdate, p.p_update, p.p_tempsaveyn, p.p_price, p.p_likey, p.p_likeyemail, p.p_negoyn, p.p_img,
 			   p.p_comm, p.p_viewcnt, m.m_nicknm, m.m_addr1, m.m_addr2, m.m_ondo, m.m_proimg
 		FROM product p 
 		INNER JOIN member m
@@ -58,20 +59,20 @@
 	
 	<!-- 글 추가하기 -->
 	<insert id="insert" parameterType="ProductDTO">
-		INSERT INTO product(p_menu, p_num, p_cate, p_email, p_title, p_content, p_crdate, p_tempsaveyn, p_price, p_negoyn)
-		VALUES('1', seq_product_num.nextval, #{p_cate}, #{p_email}, #{p_title}, #{p_content}, SYSDATE, #{p_tempsaveyn}, #{p_price}, #{p_negoyn})
+		INSERT INTO product(p_menu, p_num, p_cate, p_email, p_title, p_content, p_crdate, p_tempsaveyn, p_price, p_negoyn, p_img)
+		VALUES('1', seq_product_num.nextval, #{p_cate}, #{p_email}, #{p_title}, #{p_content}, SYSDATE, #{p_tempsaveyn}, #{p_price}, #{p_negoyn}, #{p_img})
 	</insert>
 	<!-- 임시저장 추가하기 -->
 	<insert id="save" parameterType="ProductDTO">
-		INSERT INTO PRODUCT (p_num, p_cate, p_email, p_title, p_content, p_tempsaveyn, p_price, p_negoyn)
-		VALUES (SEQ_PRODUCT_NUM.NEXTVAL, #{p_cate}, #{p_email}, #{p_title}, #{p_content}, 'Y', #{p_price}, #{p_negoyn})
+		INSERT INTO PRODUCT (p_num, p_cate, p_email, p_title, p_content, p_tempsaveyn, p_price, p_negoyn, p_img)
+		VALUES (SEQ_PRODUCT_NUM.NEXTVAL, #{p_cate}, #{p_email}, #{p_title}, #{p_content}, 'Y', #{p_price}, #{p_negoyn}, #{p_img})
 	</insert>
 	
 	<!-- 글 수정하기 -->
 	<update id="update" parameterType="ProductDTO">
 		UPDATE product
 		SET p_title = #{p_title}, p_content = #{p_content}, p_update = SYSDATE, 
-			p_price = #{p_price}, p_negoyn = #{p_negoyn}
+			p_price = #{p_price}, p_negoyn = #{p_negoyn}, p_img = #{p_img} 
 		WHERE p_menu = '1' AND p_num = #{p_num} AND p_email = #{p_email} 
 	</update>
 	<!-- 임시저장 작성하기 -->
@@ -81,6 +82,7 @@
 		       p_content = #{p_content},
 		       p_price = #{p_price},
 		       p_negoyn = #{p_negoyn},
+		       p_img = #{p_img}
 		       AND p_tempsaveyn = 'N'
 		       p_update = SYSDATE
 		 WHERE p_menu = '1'
@@ -112,7 +114,7 @@
 		SELECT *
 		FROM(SELECT ROWNUM rNum, A.*
 			FROM (SELECT p.p_menu, p.p_num, p.p_cate, m.m_nicknm, m_addr1, m_addr2, 
-			  			 p.p_title, p.p_content, p.p_price, p.p_likey, p.p_comm, p.p_viewcnt
+			  			 p.p_title, p.p_content, p.p_price, p.p_likey, p.p_comm, p.p_viewcnt, p.p_img
 				  FROM product p
 				  INNER JOIN member m
 				  ON p.p_email = m.m_email
@@ -123,22 +125,6 @@
 	
 	<!-- 검색 조건 -->
 	<sql id="searchCondition">
-		<!-- <choose>
-			<when test='addr1!="opRegion" and addr2=="opTown"'>
-				AND (p.p_title LIKE '%'||#{keyword}||'%'
-				OR p.p_content LIKE '%'||#{keyword}||'%')
-				AND m.m_addr1 LIKE #{addr1}
-			</when>
-			<when test = 'addr1!="opRegion" and addr2!="opTown"'>
-				AND (p.p_title LIKE '%'||#{keyword}||'%'
-				OR p.p_content LIKE '%'||#{keyword}||'%')
-				AND (m.m_addr1 LIKE #{addr1} AND m.m_addr2 LIKE '#{addr2}')
-			</when>
-			<otherwise>
-				AND (p.p_title LIKE '%'||#{keyword}||'%'
-				OR p.p_content LIKE '%'||#{keyword}||'%') 
-			</otherwise>
-		</choose> -->
 		<choose>
 			<when test='addr1=="opRegion"'>
 				AND p.p_title LIKE '%'||#{keyword}||'%'
@@ -155,7 +141,7 @@
 		SELECT * 
 		FROM(SELECT ROWNUM rNum, A.* 
 			FROM(SELECT p.p_menu, p.p_num, p.p_cate, m.m_nicknm, m.m_addr1, m.m_addr2, 
-			  			 p.p_title, p.p_content, p.p_price, p.p_likey, p.p_comm, p.p_viewcnt
+			  			 p.p_title, p.p_content, p.p_price, p.p_likey, p.p_comm, p.p_viewcnt, p.p_img
 				  FROM product p
 				  INNER JOIN member m
 				  ON p.p_email = m.m_email
@@ -169,7 +155,7 @@
 	<select id="searchResultCnt" parameterType="SearchConditionP" resultType="int">
 		SELECT count(*)
 		FROM (SELECT p.p_menu, p.p_num, p.p_cate, m.m_nicknm, m_addr1, m_addr2, 
-			  			 p.p_title, p.p_content, p.p_price, p.p_likey, p.p_comm
+			  			 p.p_title, p.p_content, p.p_price, p.p_likey, p.p_comm, p.p_img
 				  FROM product p
 				  INNER JOIN member m
 				  ON p.p_email = m.m_email

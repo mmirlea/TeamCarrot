@@ -13,7 +13,11 @@
 <script>
 	let msg="${msg}"
     if(msg=="LIST_ERR") alert("게시물 목록을 가져오는데 실패했습니다. 다시 시도해 주세요.");
-	if(msg=="READ_ERR") alert("게시물을 읽어들이는데 실패했습니다.")
+	if(msg=="READ_ERR") alert("게시물을 읽어들이는데 실패했습니다.");
+	if (msg == "DEL_OK") alert("게시글이 삭제되었습니다.");
+	if (msg == "DEL_ERR") alert("게시글 삭제에 실패하였습니다.");
+	if (msg == "WRT_OK") alert("성공적으로 등록되었습니다.");
+	if (msg == "MOD_OK") alert("게시글 수정을 성공하였습니다.");
 </script>
 
 	<div class="wrap">
@@ -93,7 +97,9 @@
                 		<li>
                 			<div>${productDTO.p_num}</div>
                 			<a href="<c:url value='/carrot/read?${ph.sc.getQueryString()}&p_num=${productDTO.p_num }&menu=product'/>">
-                            <div class="itemImg"><img src="../resources/img/전동드릴 공구 셋트1.jpg" alt="전동드릴 공구 셋트1"></div>
+                            <div class="itemImg">
+                               	<img src="${productDTO.p_img}" alt="" class="thumb" onerror="this.src='/carrot/resources/img/notice.png'">
+                            </div>
                             <div class="itemName"><c:out value="${productDTO.p_title}"/></div>
                             <div class="itemPrice"><c:out value="${productDTO.p_price}"/></div>
                             <div class="itemAddress">

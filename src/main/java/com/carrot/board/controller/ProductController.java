@@ -1,5 +1,8 @@
 package com.carrot.board.controller;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -39,11 +42,12 @@ public class ProductController {
 			
 			List<ProductDTO> list = service.getSearchSelectPage(scp);
 			System.out.println("list" + list);
-			
-			/* List<ProductDTO> list = service.selectAll(); */
-			
+						
 			m.addAttribute("list", list);
 			m.addAttribute("ph", pageHandlerP);
+			
+			Instant startOfToday = LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant();
+			m.addAttribute("startOfToday", startOfToday.toEpochMilli());
 			
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -211,10 +215,14 @@ public class ProductController {
 	}
 
 	@PostMapping("/save")
-	public String save(ProductDTO productDTO, RedirectAttributes rattr, Model m, HttpSession session) {
+	public String save(ProductDTO productDTO, RedirectAttributes rattr, Model m, HttpSession session, HttpServletRequest request) {
 		String p_email = (String) session.getAttribute("m_email");
 		productDTO.setP_email(p_email);
 		productDTO.setP_tempsaveyn("Y");
+		
+		if(request.getParameter("p_negoyn") == null) {
+			productDTO.setP_negoyn("N");
+		}
 		
 		try {
 			if (service.save(productDTO) != 1)
