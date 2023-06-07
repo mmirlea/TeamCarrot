@@ -56,14 +56,14 @@ $(document).ready(function() {
 	$("#btnModify").on("click", function() {
 		let form = $('#form');
 		
-		if($("input:checkbox[name='p_negoyn']").is(":checked")){
-			
-			$("input:checkbox[name='p_negoyn']").attr("value", "Y");
-			alert($('input:checkbox[name="p_negoyn"]').val());
-				
-		}
-		
 		if (menu !== 'board') {
+
+			if($("input:checkbox[name='p_negoyn']").is(":checked")){
+				
+				$("input:checkbox[name='p_negoyn']").attr("value", "Y");
+				alert($('input:checkbox[name="p_negoyn"]').val());
+			}
+			
 			form.attr("action", "<c:url value='/carrot/modify'/>");
 		} else {
 			form.attr("action", "<c:url value='/board/modify'/>");
@@ -75,14 +75,14 @@ $(document).ready(function() {
 
 	// 저장
 	$("#btnWrite").on("click", function() {
-		
-		if($("input:checkbox[name='p_negoyn']").is(":checked")){
-			
-			$("input:checkbox[name='p_negoyn']").attr("value", "Y");
-			alert($('input:checkbox[name="p_negoyn"]').val());
-				
-		}
+		let form = $('#form');
 		if (menu !== 'board') {
+			if($("input:checkbox[name='p_negoyn']").is(":checked")){
+				
+				$("input:checkbox[name='p_negoyn']").attr("value", "Y");
+				alert($('input:checkbox[name="p_negoyn"]').val());
+					
+			}
 			form.attr("action", "<c:url value='/carrot/write'/>");
 		} else {
 			form.attr("action", "<c:url value='/board/write'/>");
