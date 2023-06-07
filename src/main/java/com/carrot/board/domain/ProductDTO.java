@@ -30,7 +30,7 @@ public class ProductDTO {
 	
 	private UserDTO userDTO;
 	
-	private MultipartFile fileUpload;
+	private MultipartFile fileUpload_p;
 	
 	public ProductDTO() {}
 	
@@ -47,12 +47,12 @@ public class ProductDTO {
 
 
 	
-	public MultipartFile getFileUpload() {
-		return fileUpload;
+	public MultipartFile getFileUpload_p() {
+		return fileUpload_p;
 	}
 
-	public void setFileUpload(MultipartFile fileUpload) {
-		this.fileUpload = fileUpload;
+	public void setFileUpload_p(MultipartFile fileUpload_p) {
+		this.fileUpload_p = fileUpload_p;
 	}
 
 	public String getP_img() {
@@ -194,14 +194,14 @@ public class ProductDTO {
 				+ ", p_likey=" + p_likey + ", p_likeyemail=" + p_likeyemail + ", p_comm=" + p_comm + ", p_viewcnt="
 				+ p_viewcnt + ", p_soldoutyn=" + p_soldoutyn + ", p_reserveyn=" + p_reserveyn + ", p_buyemail="
 				+ p_buyemail + ", p_hiddenyn=" + p_hiddenyn + ", p_img=" + p_img + ", userDTO=" + userDTO
-				+ ", fileUpload=" + fileUpload + "]";
+				+ ", fileUpload=" + fileUpload_p + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((fileUpload == null) ? 0 : fileUpload.hashCode());
+		result = prime * result + ((fileUpload_p == null) ? 0 : fileUpload_p.hashCode());
 		result = prime * result + ((p_buyemail == null) ? 0 : p_buyemail.hashCode());
 		result = prime * result + ((p_cate == null) ? 0 : p_cate.hashCode());
 		result = prime * result + p_comm;
@@ -235,10 +235,10 @@ public class ProductDTO {
 		if (getClass() != obj.getClass())
 			return false;
 		ProductDTO other = (ProductDTO) obj;
-		if (fileUpload == null) {
-			if (other.fileUpload != null)
+		if (fileUpload_p == null) {
+			if (other.fileUpload_p != null)
 				return false;
-		} else if (!fileUpload.equals(other.fileUpload))
+		} else if (!fileUpload_p.equals(other.fileUpload_p))
 			return false;
 		if (p_buyemail == null) {
 			if (other.p_buyemail != null)
