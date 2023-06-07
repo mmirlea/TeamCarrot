@@ -12,7 +12,9 @@
 </head>
 <body>
 	<div class="wrap">
-		<%@ include file ="./header.jsp" %>
+		<jsp:include page ="./header.jsp" flush="false">
+			<jsp:param name="menu" value="board" />
+		</jsp:include>
 		<jsp:include page="./tabRigth.jsp" flush="false">
 			<jsp:param name="menu" value="board" />
 		</jsp:include>

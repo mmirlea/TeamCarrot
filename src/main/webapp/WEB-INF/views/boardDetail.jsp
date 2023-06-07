@@ -61,7 +61,7 @@ $(document).ready(function() {
 			if($("input:checkbox[name='p_negoyn']").is(":checked")){
 				
 				$("input:checkbox[name='p_negoyn']").attr("value", "Y");
-				alert($('input:checkbox[name="p_negoyn"]').val());
+				
 			}
 			
 			form.attr("action", "<c:url value='/carrot/modify'/>");

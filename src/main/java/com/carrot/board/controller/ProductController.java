@@ -61,18 +61,19 @@ public class ProductController {
 		
 	//중고물풀 게시글 읽기
 	@GetMapping("/read")
-	public String read(Integer p_num, Model m, HttpSession session) {
+	public String read(Integer p_num, Model m, Integer page, Integer pageSize, HttpSession session) {
 		String login_email = (String) session.getAttribute("m_email");
 		try {
 			ProductDTO productDTO = service.read(p_num);
-			BoardDTO boardDTO = new BoardDTO(0 , "nocate", "noemail", "notitle", "nocontent");
+			//BoardDTO boardDTO = new BoardDTO(0 , "nocate", "noemail", "notitle", "nocontent");
 			
 			
 			System.out.println(productDTO);
 			
 			m.addAttribute(productDTO);
-			m.addAttribute(boardDTO);
-			//m.addAttribute("menu", "product");
+			m.addAttribute("menu", "product");
+			m.addAttribute("page", page);
+			m.addAttribute("pageSize", pageSize);
 			
 			Instant startOfToday = LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant();
 			m.addAttribute("startOfToday", startOfToday.toEpochMilli());
