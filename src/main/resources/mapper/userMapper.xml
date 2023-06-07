@@ -26,7 +26,7 @@
 	
 	<!-- 마이페이지 -->
 	<select id="mypageInfo" parameterType="String"  resultType="UserDTO">
-		SELECT M_EMAIL, M_PW, M_NUM, M_NICKNM, M_ONDO, M_ADDR1, M_ADDR2
+		SELECT M_EMAIL, M_PW, M_NUM, M_NICKNM, M_PROIMG ,M_ONDO, M_ADDR1, M_ADDR2
 		FROM MEMBER
 		WHERE M_EMAIL=#{m_email}
 	</select>
