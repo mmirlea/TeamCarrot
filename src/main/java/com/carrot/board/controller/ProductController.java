@@ -74,6 +74,9 @@ public class ProductController {
 			m.addAttribute(boardDTO);
 			//m.addAttribute("menu", "product");
 			
+			Instant startOfToday = LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant();
+			m.addAttribute("startOfToday", startOfToday.toEpochMilli());
+			
 			session.setAttribute("login_email", login_email);
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -239,6 +242,20 @@ public class ProductController {
 			m.addAttribute("msg", "WRT_ERR");
 		}
 		return "boardDetail";
+	}
+	
+	@PostMapping("/likeCnt")
+	public int likeCnt(Integer p_num, ProductDTO productDTO, HttpSession session) {
+		String p_email = (String) session.getAttribute("m_email");
+		int likeCnt = 0;
+		System.out.println("likeCnt -> productDTO" + productDTO);
+		try {
+			likeCnt = service.increaseLikeCnt(p_num, productDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return likeCnt;
 	}
 	
 	//로그인 확인

@@ -22,6 +22,12 @@ public interface ProductService {
 	int removeAll() throws Exception;
 	
 	List<ProductDTO> selectAll() throws Exception;
+	
+	int increaseLikeCnt(int p_num, ProductDTO productDTO) throws Exception;
+	
+	int decreaseLikeCnt(String p_likeyEmail, ProductDTO productDTO) throws Exception;
+	
+	String getLikeyEmail(ProductDTO productDTO) throws Exception;
 
 	List<ProductDTO> getPage(SearchConditionP scp) throws Exception;
 	
