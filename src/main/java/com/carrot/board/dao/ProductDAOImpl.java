@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.carrot.board.domain.BoardDTO;
 import com.carrot.board.domain.ProductDTO;
 import com.carrot.board.domain.SearchConditionM;
 import com.carrot.board.domain.SearchConditionP;
@@ -65,6 +66,30 @@ public class ProductDAOImpl implements ProductDAO {
 	@Override
 	public int increaseViewCnt(Integer p_num) throws Exception{
 		return session.update(namespace + "increaseViewCnt", p_num);
+	}
+	
+	@Override
+	public int increaseLikeCnt(int p_num, ProductDTO dto) throws Exception {
+		Map map = new HashMap();
+		map.put("p_num", p_num);
+		map.put("productDTO", dto);
+		return session.update(namespace + "increaseLikeCnt", map);
+	}
+
+	@Override
+	public int decreaseLikeCnt(String p_likeyemail, ProductDTO dto) throws Exception {
+		Map map = new HashMap();
+		map.put("p_likeyemail", p_likeyemail);
+		map.put("productDTO", dto);
+		return session.update(namespace + "decreaseLikeCnt", map);
+	}
+
+	@Override
+	public String getLikeyEmail(ProductDTO dto) throws Exception {
+//		map = new HashMap();
+//		map.put("p_num", p_num);
+//		map.put("p_email", p_email);
+		return session.selectOne(namespace + "getLikeyEmail", dto);
 	}
 	
 	public List<ProductDTO> selectPage (SearchConditionP scp) throws Exception{

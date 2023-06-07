@@ -13,8 +13,8 @@ public class ProductDTO {
 	private String p_email;
 	private String p_title;
 	private String p_content;
-	private Date p_crdate;
-	private Date p_update;
+	private String p_crdate;
+	private String p_update;
 	private String p_tempsaveyn;
 	private Integer p_price;
 	private String p_negoyn;
@@ -107,16 +107,16 @@ public class ProductDTO {
 	public void setP_content(String p_content) {
 		this.p_content = p_content;
 	}
-	public Date getP_crdate() {
+	public String getP_crdate() {
 		return p_crdate;
 	}
-	public void setP_crdate(Date p_crdate) {
+	public void setP_crdate(String p_crdate) {
 		this.p_crdate = p_crdate;
 	}
-	public Date getP_update() {
+	public String getP_update() {
 		return p_update;
 	}
-	public void setP_update(Date p_update) {
+	public void setP_update(String p_update) {
 		this.p_update = p_update;
 	}
 	public String getP_tempsaveyn() {

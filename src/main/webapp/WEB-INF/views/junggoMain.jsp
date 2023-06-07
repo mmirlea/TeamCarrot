@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
-<link href="<c:url value='/resources/css/junggoStyle.css?aaa'/>" rel="stylesheet" />
+<link href="<c:url value='/resources/css/junggoStyle.css'/>" rel="stylesheet" />
 </head>
 <body>
 <script>
@@ -110,6 +110,8 @@
                                 <span class="itemAttention">관심 ${productDTO.p_likey}</span>
                                 &nbsp;•&nbsp;
                                 <span class="itemChat">채팅 3</span>
+                                &nbsp;•&nbsp;
+                                <span class="time">${productDTO.p_update}</span>
                             </div>
                         </a>    
                 		</li>
@@ -169,7 +171,40 @@
         </div><!--container-->
        
        <%@ include file ="./footer.jsp" %>
-       
-    </div> <!--wrap-->   
+
+    </div> <!--wrap-->  
+    
+    <script type="text/javascript">
+			 $(document).ready(function() {
+				 document.querySelectorAll('.time').forEach(($time)=>{
+					 const time = $time.innerText
+					 $time.innerText = timeForToday(time);
+				 })
+				
+			 }) 
+			function timeForToday(value) {
+				const today = new Date();
+		        const timeValue = new Date(value);
+		
+		        const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
+		        console.log(betweenTime);
+		        if (betweenTime < 1) return '방금전';
+		        if (betweenTime < 60) {
+		            return betweenTime + '분전';
+		        }
+		
+		        const betweenTimeHour = Math.floor(betweenTime / 60);
+		        if (betweenTimeHour < 24) {
+		            return betweenTimeHour + '시간전';
+		        }
+		
+		        const betweenTimeDay = Math.floor(betweenTime / 60 / 24);
+		        if (betweenTimeDay < 365) {
+		            return betweenTimeDay + '일전';
+		        }
+		
+		        return Math.floor(betweenTimeDay / 365) + '년전';
+		 	}
+    </script> 
 </body>
 </html>

@@ -20,6 +20,8 @@
 		<result property="p_tempsaveyn" column="p_tempsaveyn"/>
 		<result property="p_negoyn" column="p_negoyn"/>
 		<result property="p_img" column="p_img"/>
+		<result property="p_update" column="p_update"/>
+		<result property="p_crdate" column="p_crdate"/>
 		<association property="userDTO" javaType="UserDTO">
 			<id property="m_email" column="m_email"/>
 			<result property="m_nicknm" column="m_nicknm"/>
@@ -32,7 +34,7 @@
 	<!-- 게시글 목록 조회 -->             
 	<select id="selectAll" resultMap="ProMemJoin">
 		SELECT p.p_menu, p.p_num, p.p_cate, m.m_nicknm, m_addr1, m_addr2, 
-			   p.p_title, p.p_content, p.p_price, p.p_likey, p.p_comm, p_img
+			   p.p_title, p.p_content, p.p_price, p.p_likey, p.p_comm, p.p_img, p.p_update, p.p_crdate
 		FROM product p
 		INNER JOIN member m
 		ON p.p_email = m.m_email
@@ -109,12 +111,37 @@
 		WHERE p_menu = '1'
 		AND p_num = #{p_num}
 	</update>
+	
+	<!-- 좋아요 증가 -->
+	<update id="increaseLikeCnt" parameterType="map">
+		UPDATE product
+		   SET p_likey = p_likey + 1,
+		       p_likeyemail = p_likeyemail || #{p_email} || '/'
+		 WHERE p_menu = '1'
+		   AND p_num = #{p_num}
+	</update>
+	
+	<!-- 좋아요 감소 -->
+	<update id="decreaseLikeCnt" parameterType="map">
+		UPDATE product
+		   SET p_likey = p_likey - 1,
+		       p_likeyemail = #{p_likeyemail}
+		 WHERE p_menu = '1'
+		   AND p_num = #{p_num}
+	</update>
+	
+	<select id="getLikeyEmail" parameterType="productDTO" resultType="string">
+		SELECT p_likeyemail FROM product
+		 WHERE p_num = #{p_num}
+		 AND p_likeyemail LIKE LIKE '%'||#{p_email}||'%'
+	</select>
+	
 	<!-- 페이징 처리하기 -->
 	<select id="selectPage" parameterType="SearchConditionP" resultMap="ProMemJoin">
 		SELECT *
 		FROM(SELECT ROWNUM rNum, A.*
 			FROM (SELECT p.p_menu, p.p_num, p.p_cate, m.m_nicknm, m_addr1, m_addr2, 
-			  			 p.p_title, p.p_content, p.p_price, p.p_likey, p.p_comm, p.p_viewcnt, p.p_img
+			  			 p.p_title, p.p_content, p.p_price, p.p_likey, p.p_comm, p.p_viewcnt, p.p_img, p.p_update, p.p_crdate
 				  FROM product p
 				  INNER JOIN member m
 				  ON p.p_email = m.m_email
@@ -141,7 +168,7 @@
 		SELECT * 
 		FROM(SELECT ROWNUM rNum, A.* 
 			FROM(SELECT p.p_menu, p.p_num, p.p_cate, m.m_nicknm, m.m_addr1, m.m_addr2, 
-			  			 p.p_title, p.p_content, p.p_price, p.p_likey, p.p_comm, p.p_viewcnt, p.p_img
+			  			 p.p_title, p.p_content, p.p_price, p.p_likey, p.p_comm, p.p_viewcnt, p.p_img, p.p_update, p.p_crdate
 				  FROM product p
 				  INNER JOIN member m
 				  ON p.p_email = m.m_email
@@ -155,7 +182,7 @@
 	<select id="searchResultCnt" parameterType="SearchConditionP" resultType="int">
 		SELECT count(*)
 		FROM (SELECT p.p_menu, p.p_num, p.p_cate, m.m_nicknm, m_addr1, m_addr2, 
-			  			 p.p_title, p.p_content, p.p_price, p.p_likey, p.p_comm, p.p_img
+			  			 p.p_title, p.p_content, p.p_price, p.p_likey, p.p_comm, p.p_img, p.p_update, p.p_crdate
 				  FROM product p
 				  INNER JOIN member m
 				  ON p.p_email = m.m_email

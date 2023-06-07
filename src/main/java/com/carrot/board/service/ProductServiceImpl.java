@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.carrot.board.dao.ProductDAO;
+import com.carrot.board.domain.BoardDTO;
 import com.carrot.board.domain.ProductDTO;
 import com.carrot.board.domain.SearchConditionP;
 
@@ -53,6 +54,22 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public List<ProductDTO> selectAll() throws Exception {
 		return productDAO.selectAll();
+	}
+	
+	@Override
+	public int increaseLikeCnt(int p_num, ProductDTO dto) throws Exception {
+		return productDAO.increaseLikeCnt(p_num, dto);
+	}
+
+	@Override
+	public int decreaseLikeCnt(String p_likeyemail, ProductDTO dto) throws Exception {
+		p_likeyemail = productDAO.getLikeyEmail(dto);
+		return productDAO.decreaseLikeCnt(p_likeyemail, dto);
+	}
+
+	@Override
+	public String getLikeyEmail(ProductDTO dto) throws Exception {
+		return productDAO.getLikeyEmail(dto);
 	}
 	
 	public List<ProductDTO> getPage(SearchConditionP scp) throws Exception{

@@ -201,13 +201,14 @@ public class BoardController {
 			PageHandler pageHandler = new PageHandler(totalCnt, sc);
 
 			List<BoardDTO> list = service.getSearchSelectPage(sc);
-
+			System.out.println("list" + list);
+			
 			m.addAttribute("list", list);
 			m.addAttribute("ph", pageHandler);
 
 			Instant startOfToday = LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant();
 			m.addAttribute("startOfToday", startOfToday.toEpochMilli());
-
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			m.addAttribute("msg", "LIST_ERR");
