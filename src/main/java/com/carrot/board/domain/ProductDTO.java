@@ -26,8 +26,11 @@ public class ProductDTO {
 	private String p_reserveyn;
 	private String p_buyemail;
 	private String p_hiddenyn;
+	private String p_img;
 	
 	private UserDTO userDTO;
+	
+	private MultipartFile fileUpload;
 	
 	public ProductDTO() {}
 	
@@ -44,6 +47,22 @@ public class ProductDTO {
 
 
 	
+	public MultipartFile getFileUpload() {
+		return fileUpload;
+	}
+
+	public void setFileUpload(MultipartFile fileUpload) {
+		this.fileUpload = fileUpload;
+	}
+
+	public String getP_img() {
+		return p_img;
+	}
+
+	public void setP_img(String p_img) {
+		this.p_img = p_img;
+	}
+
 	public UserDTO getUserDTO() {
 		return userDTO;
 	}
@@ -174,9 +193,151 @@ public class ProductDTO {
 				+ p_update + ", p_tempsaveyn=" + p_tempsaveyn + ", p_price=" + p_price + ", p_negoyn=" + p_negoyn
 				+ ", p_likey=" + p_likey + ", p_likeyemail=" + p_likeyemail + ", p_comm=" + p_comm + ", p_viewcnt="
 				+ p_viewcnt + ", p_soldoutyn=" + p_soldoutyn + ", p_reserveyn=" + p_reserveyn + ", p_buyemail="
-				+ p_buyemail + ", p_hiddenyn=" + p_hiddenyn + ", userDTO=" + userDTO + "]";
+				+ p_buyemail + ", p_hiddenyn=" + p_hiddenyn + ", p_img=" + p_img + ", userDTO=" + userDTO
+				+ ", fileUpload=" + fileUpload + "]";
 	}
 
-	
-	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((fileUpload == null) ? 0 : fileUpload.hashCode());
+		result = prime * result + ((p_buyemail == null) ? 0 : p_buyemail.hashCode());
+		result = prime * result + ((p_cate == null) ? 0 : p_cate.hashCode());
+		result = prime * result + p_comm;
+		result = prime * result + ((p_content == null) ? 0 : p_content.hashCode());
+		result = prime * result + ((p_crdate == null) ? 0 : p_crdate.hashCode());
+		result = prime * result + ((p_email == null) ? 0 : p_email.hashCode());
+		result = prime * result + ((p_hiddenyn == null) ? 0 : p_hiddenyn.hashCode());
+		result = prime * result + ((p_img == null) ? 0 : p_img.hashCode());
+		result = prime * result + p_likey;
+		result = prime * result + ((p_likeyemail == null) ? 0 : p_likeyemail.hashCode());
+		result = prime * result + ((p_menu == null) ? 0 : p_menu.hashCode());
+		result = prime * result + ((p_negoyn == null) ? 0 : p_negoyn.hashCode());
+		result = prime * result + ((p_num == null) ? 0 : p_num.hashCode());
+		result = prime * result + ((p_price == null) ? 0 : p_price.hashCode());
+		result = prime * result + ((p_reserveyn == null) ? 0 : p_reserveyn.hashCode());
+		result = prime * result + ((p_soldoutyn == null) ? 0 : p_soldoutyn.hashCode());
+		result = prime * result + ((p_tempsaveyn == null) ? 0 : p_tempsaveyn.hashCode());
+		result = prime * result + ((p_title == null) ? 0 : p_title.hashCode());
+		result = prime * result + ((p_update == null) ? 0 : p_update.hashCode());
+		result = prime * result + p_viewcnt;
+		result = prime * result + ((userDTO == null) ? 0 : userDTO.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ProductDTO other = (ProductDTO) obj;
+		if (fileUpload == null) {
+			if (other.fileUpload != null)
+				return false;
+		} else if (!fileUpload.equals(other.fileUpload))
+			return false;
+		if (p_buyemail == null) {
+			if (other.p_buyemail != null)
+				return false;
+		} else if (!p_buyemail.equals(other.p_buyemail))
+			return false;
+		if (p_cate == null) {
+			if (other.p_cate != null)
+				return false;
+		} else if (!p_cate.equals(other.p_cate))
+			return false;
+		if (p_comm != other.p_comm)
+			return false;
+		if (p_content == null) {
+			if (other.p_content != null)
+				return false;
+		} else if (!p_content.equals(other.p_content))
+			return false;
+		if (p_crdate == null) {
+			if (other.p_crdate != null)
+				return false;
+		} else if (!p_crdate.equals(other.p_crdate))
+			return false;
+		if (p_email == null) {
+			if (other.p_email != null)
+				return false;
+		} else if (!p_email.equals(other.p_email))
+			return false;
+		if (p_hiddenyn == null) {
+			if (other.p_hiddenyn != null)
+				return false;
+		} else if (!p_hiddenyn.equals(other.p_hiddenyn))
+			return false;
+		if (p_img == null) {
+			if (other.p_img != null)
+				return false;
+		} else if (!p_img.equals(other.p_img))
+			return false;
+		if (p_likey != other.p_likey)
+			return false;
+		if (p_likeyemail == null) {
+			if (other.p_likeyemail != null)
+				return false;
+		} else if (!p_likeyemail.equals(other.p_likeyemail))
+			return false;
+		if (p_menu == null) {
+			if (other.p_menu != null)
+				return false;
+		} else if (!p_menu.equals(other.p_menu))
+			return false;
+		if (p_negoyn == null) {
+			if (other.p_negoyn != null)
+				return false;
+		} else if (!p_negoyn.equals(other.p_negoyn))
+			return false;
+		if (p_num == null) {
+			if (other.p_num != null)
+				return false;
+		} else if (!p_num.equals(other.p_num))
+			return false;
+		if (p_price == null) {
+			if (other.p_price != null)
+				return false;
+		} else if (!p_price.equals(other.p_price))
+			return false;
+		if (p_reserveyn == null) {
+			if (other.p_reserveyn != null)
+				return false;
+		} else if (!p_reserveyn.equals(other.p_reserveyn))
+			return false;
+		if (p_soldoutyn == null) {
+			if (other.p_soldoutyn != null)
+				return false;
+		} else if (!p_soldoutyn.equals(other.p_soldoutyn))
+			return false;
+		if (p_tempsaveyn == null) {
+			if (other.p_tempsaveyn != null)
+				return false;
+		} else if (!p_tempsaveyn.equals(other.p_tempsaveyn))
+			return false;
+		if (p_title == null) {
+			if (other.p_title != null)
+				return false;
+		} else if (!p_title.equals(other.p_title))
+			return false;
+		if (p_update == null) {
+			if (other.p_update != null)
+				return false;
+		} else if (!p_update.equals(other.p_update))
+			return false;
+		if (p_viewcnt != other.p_viewcnt)
+			return false;
+		if (userDTO == null) {
+			if (other.userDTO != null)
+				return false;
+		} else if (!userDTO.equals(other.userDTO))
+			return false;
+		return true;
+	}
+
+
 }

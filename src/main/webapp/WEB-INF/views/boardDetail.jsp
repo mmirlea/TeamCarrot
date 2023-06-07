@@ -97,11 +97,18 @@ $(document).ready(function() {
 	$("#btnSave").on("click", function() {
 		let form = $('#form');
 		
-		if($("#txtSave").val() == null || $("#txtSave").val() == "" || $("#txtSave").val() == "N"){
-			$("#txtSave").attr("value", "Y");
+		if($(".txtSave").val() == null || $(".txtSave").val() == "" || $(".txtSave").val() == "N"){
+			$(".txtSave").attr("value", "Y");
 		}
 		
 		if (menu !== 'board') {
+			if($("input:checkbox[name='p_negoyn']").is(":checked")){
+				
+				$("input:checkbox[name='p_negoyn']").attr("value", "Y");
+				alert($('input:checkbox[name="p_negoyn"]').val());
+					
+			}
+			
 			form.attr("action", "<c:url value='/carrot/save'/>");
 		} else {
 			form.attr("action", "<c:url value='/board/save'/>");
@@ -115,6 +122,9 @@ $(document).ready(function() {
 	let fileList = ['${boardDTO.b_img}'];
 	createFileList();
 
+	let fileList_p = ['${productDTO.p_img}'];
+	createFileList_p();	
+	
 	// 파일 이벤트핸들러
 	$('#fileUpload').on('change',(e)=>{
 		 const file = $('#fileUpload')[0].files[0];
@@ -126,10 +136,18 @@ $(document).ready(function() {
 		const reader = new FileReader();
 	    reader.readAsDataURL(file)
 	    reader.onload = () => {
-	    	 const b_img = event.target.result;
-	         fileList = [];
-	         fileList.push(b_img);
-	         createFileList();
+	    	
+	    	 if (menu !== 'board') {
+	    		 const p_img = event.target.result;
+		         fileList_p = [];
+		         fileList_p.push(p_img);
+		         createFileList_p();
+	    	 }else{
+	    		 const b_img = event.target.result;
+		         fileList = [];
+		         fileList.push(b_img);
+		         createFileList();
+	    	 }
 	    }
 	}
 
@@ -172,6 +190,45 @@ $(document).ready(function() {
 			$('#b_img').val(b_img);
 		})
 	}
+	// 생성한 파일 웹그리기
+	function createFileList_p(){
+		const divPhoto = document.querySelector('.divPhoto > ul');
+		divPhoto.innerHTML = '';
+		fileList_p.filter(file=>file !== '').forEach((p_img) => {
+			const $li = document.createElement('li');
+			const $div = document.createElement('div');
+			const $button = document.createElement('button');
+			const $i = document.createElement('i');
+			const $img = document.createElement('img');
+			$li.className = 'lPhoto';
+			$div.className = 'dPhoto';
+			$button.className = 'btnImgDel'
+			$i.className = 'fa-solid fa-circle-xmark'
+			// 파일 삭제하기
+			$button.addEventListener('click',function (){
+				const fileURL = fileList_p[0];
+				if(fileURL && !fileURL.includes('base64')){
+					let fileName = fileURL.split('/')[3];
+					$.ajax({
+						type: 'get',
+						url: '/carrot/delFile/'+fileName,
+					})
+				}else{
+					$('#fileUpload')[0].value = "";
+				}
+				fileList_p = [];
+				createFileList_p();
+			})
+			$img.className = 'img-photo'
+			$img.src = p_img;
+			$div.append($img);		
+			$button.append($i);
+			$div.append($button);
+			$li.append($div);
+			divPhoto.append($li);
+			$('#p_img').val(p_img);
+		})
+	}
 
 })
 </script>
@@ -210,7 +267,8 @@ $(document).ready(function() {
                         </button>
                     </div>
                     <div class="gnbItem">
-                   	 	<input type="hidden" id ="txtSave" name="b_tempSaveYn" value="N">
+                   	 	<input type="hidden" class ="txtSave" name="b_tempSaveYn" value="N">
+                   	 	<input type="hidden" class ="txtSave" name="p_tempsaveyn" value="N">
                         <button type="button" class="btnSave" id="btnSave">저장</button>
                     </div>
                     <div class="gnbItem">
