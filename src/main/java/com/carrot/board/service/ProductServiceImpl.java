@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.carrot.board.dao.ProductDAO;
-import com.carrot.board.domain.BoardDTO;
 import com.carrot.board.domain.ProductDTO;
 import com.carrot.board.domain.SearchConditionP;
 
@@ -15,6 +14,8 @@ public class ProductServiceImpl implements ProductService {
 
 	@Autowired
 	ProductDAO productDAO;
+	@Autowired
+	FileService fileService;
 	
 	@Override
 	public ProductDTO read(Integer p_num) throws Exception {
@@ -30,15 +31,18 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public int write(ProductDTO dto) throws Exception {
+		dto.setP_img(fileService.createFile(dto.getFileUpload_p()));
 		return productDAO.insert(dto);
 	}
 
 	public int save(ProductDTO dto) throws Exception{
+		dto.setP_img(fileService.createFile(dto.getFileUpload_p()));
 		return productDAO.save(dto);
 	}
 	
 	@Override
 	public int modify(ProductDTO dto) throws Exception {
+		dto.setP_img(fileService.createFile(dto.getFileUpload_p()));
 		return productDAO.update(dto);
 	}
 
