@@ -150,7 +150,7 @@
 		WHERE rNum BETWEEN ((NVL(#{page}, 0)-1) * #{pageSize} +1) AND (NVL(#{page}, 0) * #{pageSize})
 	</select>
 	
-	<!-- 검색 조건 -->
+	<!-- addr1 검색 조건 -->
 	<sql id="searchCondition">
 		<choose>
 			<when test='addr1=="opRegion"'>
@@ -162,7 +162,35 @@
 			</otherwise>
 		</choose>
 	</sql>
-	
+	<!-- cate 검색 조건 -->
+	<sql id="searchCondition2">
+		<choose>
+			<when test='cate=="digital"'>
+				AND p.p_cate LIKE '%디지털기기%'		
+			</when>
+			<when test='cate=="furniture"'>
+				AND p.p_cate Like '%가구%'
+			</when>
+			<when test='cate=="kitchen"'>
+				AND p.p_cate Like '%생활%'
+			</when>
+			<when test='cate=="baby"'>
+				AND p.p_cate Like '%유아용품%'
+			</when>
+			<when test='cate=="clothes"'>
+				AND p.p_cate Like '%의류%'
+			</when>
+			<when test='cate=="book"'>
+				AND p.p_cate Like '%도서%'
+			</when>
+			<when test='cate=="ticket"'>
+				AND p.p_cate Like '%티켓%'
+			</when>
+			<when test='cate=="etc"'>
+				AND p.p_cate Like '%기타%'
+			</when>
+		</choose>
+	</sql>
 	<!-- 게시글 검색하기 -->
 	<select id="searchSelectPage" parameterType="SearchConditionP" resultMap="ProMemJoin">
 		SELECT * 
@@ -175,6 +203,7 @@
 				  WHERE p.p_menu = '1'
 				  AND 1=1
 				  <include refid="searchCondition"></include>
+				  <include refid="searchCondition2"></include>
 				  ORDER BY p.p_crdate DESC, p.p_num DESC) A)
 		WHERE rNum BETWEEN ((NVL(#{page}, 0)-1) * #{pageSize} +1) AND (NVL(#{page}, 0) * #{pageSize})
 	</select>
@@ -189,5 +218,6 @@
 				  WHERE p.p_menu = '1'
 		WHERE 1=1
 		<include refid="searchCondition"></include>
+		<include refid="searchCondition2"></include>
 	</select>
 </mapper>

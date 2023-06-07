@@ -16,7 +16,7 @@
 
 <c:set var="loginOutLink" value="${sessionScope.m_email==null ? '/login/login' : '/login/logout'}" />
 <c:set var="loginOut" value="${sessionScope.m_email==null ? '로그인/회원가입' : '로그아웃'}" />
-
+<c:set var="menu" value="${param.menu}"/>
 	<div class="header">
 		<div class="headerIn ">
 			<div class="hTop">
@@ -38,10 +38,16 @@
 					</ul>
 				</div>
 			</div> <!--.hTop-->
-
-			<!-- <form action="<c:url value="/carrot/junggoMain"/>" method="get" -->
-			<form action="<c:url value="/board/list"/>" method="get"
-				name="cateForm">
+	${menu }
+			<c:choose>
+				<c:when test="${menu }=='product'">
+					<form action="<c:url value="/carrot/junggoMain"/>" method="get">
+				</c:when>
+				<c:when test="${menu }=='board'">
+					<form action="<c:url value="/board/list"/>" method="get" name="cateForm">
+				</c:when>
+			</c:choose>
+	
 				<div class="hBottom">
 					<div class="d"></div>
 					<div class="searchLocal">
