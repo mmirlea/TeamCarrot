@@ -228,15 +228,41 @@
     
     <script>
 		//댓글 관련-----------------------------------------------
-		let cp_pnum = Math.max(0,${productDTO.p_num});
+		//let p_num = Math.max(0,${productDTO.p_num});
+		let p_num=${productDTO.p_num};
 		
 		//댓글 리스트
-		let showList = function(cp_pnum){
+		let showList = function(p_num){
 			$.ajax({
 				type: 'GET',
-				url: '/carrot/read/comments?cp_pnum' + cp_pnum
-			})
+				url: '/carrot/read/comments?p_num' + p_num,
+				success : function(result){
+					$("#commentsList").html(toHtml(result));
+				},
+				error : function(){alert("error")}
+			});
 		}
+		
+		//댓글 작성
+		$(document).ready(function(){
+			//목록 보이기
+			showList(p_num);
+			
+			$("#sendBtn").click(function(){
+				let cp_content = $("input[name=cp_content]").val()
+				
+				if(cp_content.trim() == ''){
+					alert("댓글을 입력하세요!")
+					$("input[name=cp_content]").focus();
+					return;
+				}
+				
+				$.ajax({
+					type: 'POST',
+					url: '/carrot/read/comments?p_num' + p_num,
+				})
+			})
+		})
 		
 	</script>
     
