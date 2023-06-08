@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.carrot.board.domain.BoardDTO;
+import com.carrot.board.domain.LikeyDTO;
 import com.carrot.board.domain.PageHandler;
 import com.carrot.board.domain.SearchCondition;
 import com.carrot.board.service.BoardService;
@@ -28,13 +29,12 @@ public class BoardController {
 	@Autowired
 	BoardService service;
 	
-	@PostMapping("/likeCnt")
-	public int likeCnt(Integer b_num, BoardDTO boardDTO, HttpSession session) {
+	@GetMapping("/like")
+	public int likeCnt(Integer b_num, BoardDTO boardDTO, LikeyDTO likeyDTO, HttpSession session) {
 		String b_email = (String) session.getAttribute("m_email");
 		int likeCnt = 0;
-		System.out.println("likeCnt -> boardDTO" +boardDTO);
 		try {
-			likeCnt = service.increaseLikeCnt(b_num, boardDTO);
+			likeCnt = service.UpLike(b_num, boardDTO, likeyDTO);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

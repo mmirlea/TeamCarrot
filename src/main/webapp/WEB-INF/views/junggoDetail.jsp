@@ -102,6 +102,7 @@
                 <div class="countUp">
                     <span class="itemAttention">
                     	<button type="button" class="likey" id="btnLikey" name='${menu == "board"? "b_likey" : "p_likey"}'><i class="far fa-heart"></i></button>
+                    	<button type="button" class="disLikey" id="btnDisLikey" name='${menu == "board"? "b_likey" : "p_likey"}'><i class="fas fa-heart"></i></button>
                          관심 ${menu == "board" ? boardDTO.b_likey : productDTO.p_likey}</span>
                     &nbsp;•&nbsp;
                     <span class="itemChat">채팅 ${menu == "board" ? boardDTO.b_comm : productDTO.p_comm}</span>
@@ -413,7 +414,7 @@
     
     <script type="text/javascript">
     $(document).ready(function() {
-    	
+    	$("#btnDisLikey").hide();
     	    	
 		$("#btnDel").on("click", function(){
 			
@@ -454,21 +455,25 @@
  		}) 
 		
 		$("#btnLikey").on("click", function() {
+			 let bNum = $('#b_num').val();
+	 		 let pNum = $('#p_num').val();
+	 		 
+			 $("#btnDisLikey").show();
+			 $("#btnLikey").hide();
+			 
+			 if(menu !== 'board'){
+			  	$a.href = '/carrot/carrot/like?menu=1&'+'p_num='+ pNum;
+			} else {
 			debugger;
+			  	$a.href = '/carrot/board/like?menu=2&'+'b_num='+bNum;
+			} 
+		})
+		
+		$("#btnDisLikey").on("click", function() {
 			 let form = $('#form');
 			 
-			 alert("알람!!!");
-			
-			/* if (document.getElementById("btnLikey").innerHTML == '<i class="far fa-heart" aria-hidden="true"></i>') {
-				document.getElementById("btnLikey").innerHTML = "<i class='fas fa-heart'></i>";
-				
-				form.attr("action", "<c:url value='/board/likeCnt'/>");
-				form.attr("method", "post");
-				form.append("<input type='hidden' name='b_num' value='${boardDTO.b_num}'>");
-				form.submit(); 
-			} else{
-				document.getElementById("btnLikey").innerHTML = '<i class="far fa-heart" aria-hidden="true"></i>';
-			} */
+			 $("#btnLikey").show();
+			 $("#btnDisLikey").hide();
 		})
 	})
     

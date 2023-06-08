@@ -142,8 +142,7 @@
 	<!-- 좋아요 증가 -->
 	<update id="increaseLikeCnt" parameterType="map">
 		UPDATE BOARD
-		   SET B_LIKEY = B_LIKEY + 1,
-		       B_LIKEYEMAIL = B_LIKEYEMAIL || #{b_email} || '/'
+		   SET B_LIKEY = B_LIKEY + 1
 		 WHERE B_MENU = '2'
 		   AND B_NUM = #{b_num}
 	</update>
@@ -151,17 +150,10 @@
 	<!-- 좋아요 감소 -->
 	<update id="decreaseLikeCnt" parameterType="map">
 		UPDATE BOARD
-		   SET B_LIKEY = B_LIKEY - 1,
-		       B_LIKEYEMAIL = #{b_likeyEmail}
+		   SET B_LIKEY = B_LIKEY - 1
 		 WHERE B_MENU = '2'
 		   AND B_NUM = #{b_num}
 	</update>
-	
-	<select id="getLikeyEmail" parameterType="BoardDTO" resultType="string">
-		SELECT B_LIKEYEMAIL FROM BOARD
-		 WHERE B_NUM = #{b_num}
-		 AND B_LIKEYEMAIL LIKE LIKE '%'||#{b_email}||'%'
-	</select>
 	
 	<!-- 페이징 처리하기 -->
 	<select id="selectPage" parameterType="map" resultType="BoardDTO">

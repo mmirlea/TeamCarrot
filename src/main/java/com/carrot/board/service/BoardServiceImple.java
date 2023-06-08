@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.carrot.board.dao.BoardDAO;
 import com.carrot.board.domain.BoardDTO;
+import com.carrot.board.domain.LikeyDTO;
 import com.carrot.board.domain.SearchCondition;
 
 @Service
@@ -18,7 +19,10 @@ public class BoardServiceImple implements BoardService {
 	
 	@Autowired
 	FileService fileService;
-
+	
+	@Autowired
+	LikeyService likeyService;
+	
 	@Override
 	public BoardDTO select(Integer b_num) throws Exception {
 		return boardDAO.select(b_num);
@@ -68,9 +72,16 @@ public class BoardServiceImple implements BoardService {
 		boardDAO.increaseViewCnt(b_num);
 		return boardDTO;
 	}
-
+	
+	@Override
+	public int UpLike(Integer b_num, BoardDTO boardDTO, LikeyDTO likeyDTO) throws Exception {
+		likeyService.insertLike(likeyDTO);
+		return boardDAO.increaseLikeCnt(b_num, boardDTO);
+	}
+	
 	@Override
 	public int increaseLikeCnt(int b_num, BoardDTO boardDTO) throws Exception {
+		
 		return boardDAO.increaseLikeCnt(b_num, boardDTO);
 	}
 

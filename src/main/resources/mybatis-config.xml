@@ -10,6 +10,7 @@
 	</settings>
 	<!-- 별칭 -->
 	<typeAliases>
+		<typeAlias alias="LikeyDTO" type="com.carrot.board.domain.LikeyDTO" />
 		<typeAlias alias="BoardDTO" type="com.carrot.board.domain.BoardDTO" />
       	<typeAlias alias="ProductDTO" type="com.carrot.board.domain.ProductDTO"/>
     	<typeAlias alias="SearchConditionP" type="com.carrot.board.domain.SearchConditionP" />
