@@ -189,6 +189,9 @@
 			<when test='cate=="etc"'>
 				AND p.p_cate Like '%기타%'
 			</when>
+			<otherwise>
+				AND 1=1
+			</otherwise>
 		</choose>
 	</sql>
 	<!-- 게시글 검색하기 -->
@@ -201,7 +204,6 @@
 				  INNER JOIN member m
 				  ON p.p_email = m.m_email
 				  WHERE p.p_menu = '1'
-				  AND 1=1
 				  <include refid="searchCondition"></include>
 				  <include refid="searchCondition2"></include>
 				  ORDER BY p.p_crdate DESC, p.p_num DESC) A)
