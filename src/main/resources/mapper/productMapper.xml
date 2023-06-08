@@ -222,4 +222,11 @@
 		<include refid="searchCondition"></include>
 		<include refid="searchCondition2"></include>
 	</select>
+	
+	<!-- 상품 댓글 -->
+	<update id="updateCommentspCnt" parameterType="map">
+		UPDATE PRODUCT
+		SET P_COMM = P_COMM + #{cnt}
+		WHERE P_NUM = #{p_num}
+	</update>
 </mapper>
