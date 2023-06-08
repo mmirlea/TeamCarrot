@@ -41,7 +41,7 @@ public class ProductDAOImplTest {
 	
 	@Test
 	public void searchSelectPageTest() throws Exception{
-		SearchConditionP scp = new SearchConditionP(1, 16, "북구", "발뮤다");
+		SearchConditionP scp = new SearchConditionP(1, 16, "남구", "발뮤다", "");
 		List<ProductDTO> list = productDAO.searchSelectPage(scp);
 		System.out.println("list: " + list);
 						
