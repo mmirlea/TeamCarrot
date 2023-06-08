@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-<link href="<c:url value='/resources/css/headerStyle.css'/>" rel="stylesheet" />
+<link href="<c:url value='/resources/css/headerStyle.css?a'/>" rel="stylesheet" />
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 
 </head>
@@ -40,13 +40,15 @@
 			</div> <!--.hTop-->
 	${menu }
 			<c:choose>
-				<c:when test="${menu }=='product'">
+				<c:when test="${menu eq 'product'}">
 					<form action="<c:url value="/carrot/junggoMain"/>" method="get">
 				</c:when>
-				<c:when test="${menu }=='board'">
+				<c:when test="${menu eq 'board'}">
 					<form action="<c:url value="/board/list"/>" method="get" name="cateForm">
 				</c:when>
 			</c:choose>
+			
+				<form action="<c:url value="/carrot/junggoMain"/>" method="get">
 	
 				<div class="hBottom">
 					<div class="d"></div>
@@ -90,11 +92,11 @@
 							<option value="울산광역시 중구" ${addr1=='울산광역시 중구' ? "selected" : ""}>울산광역시
 								중구</option>
 						</select>
-						<!-- <select name="addr2" class="town">
-                        	<option value="opTown">동네를 선택하세요</option>
-                        </select> -->
+						
 					</div> <!--.divSetLocal-->
 				</div> <!--.hBottom-->
+				
+				
 			</form>
 		</div> <!--.headIn-->
 	</div> <!--.header-->

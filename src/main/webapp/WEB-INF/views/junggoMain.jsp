@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
-<link href="<c:url value='/resources/css/junggoStyle.css'/>" rel="stylesheet" />
+<link href="<c:url value='/resources/css/junggoStyle.css?a'/>" rel="stylesheet" />
 </head>
 <body>
 <% String menu = request.getParameter("menu"); %>
@@ -34,8 +34,8 @@
             <div class="mainBanner">
                 <a href="#"><img src="../resources/img/중고거래 배너.png" alt="동네 이웃과 안전한 중고거래..."></a>
             </div><!--mainBanner-->
-            <form>
-	            <div class="category-wrap">
+            
+	        	<div class="category-wrap">
 	                <ul>
 	                    <li class="categoryItem">
 	                        <button type="button" class="categoryBtn">
@@ -91,7 +91,7 @@
 	                    </li>
 	                </ul>
 	            </div>
-            </form>
+
             <div class="productList">
                 <h1>중고거래 매물</h1>
                 <c:if test="${ph.getTotalCnt()==null || ph.getTotalCnt() == 0}">
