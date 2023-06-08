@@ -30,8 +30,9 @@ public class BoardController {
 	BoardService service;
 	
 	@GetMapping("/like")
-	public int likeCnt(Integer b_num, BoardDTO boardDTO, LikeyDTO likeyDTO, HttpSession session) {
+	public int upLikeCnt(Integer b_num, BoardDTO boardDTO, LikeyDTO likeyDTO, HttpSession session) {
 		String b_email = (String) session.getAttribute("m_email");
+		System.out.println("넘어와");
 		int likeCnt = 0;
 		try {
 			likeCnt = service.UpLike(b_num, boardDTO, likeyDTO);

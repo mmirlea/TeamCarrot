@@ -21,7 +21,6 @@
 <script type="text/javascript">
 	let menu = '<%= request.getParameter("menu") %>'
 	let msg="${msg}"
-	console.log(menu);
 	//if(msg == "MOD_ERR") alert("게시글 수정에 실패하였습니다.")
 	if(msg == "DEL_ERR") alert("게시글 삭제에 실패하였습니다.")
 </script>
@@ -246,29 +245,23 @@
     	$("#btnDisLikey").hide();
     	    	
 		$("#btnDel").on("click", function(){
-			
 			if(!confirm("정말로 삭제하시겠습니까?")) return;
+				let form = $('#form');
 			
-			
-			let form = $('#form');
-			
-			console.log($(location).attr("pathname"))
-			
-			if(menu !== 'board'){
-				
-				form.attr("action", "<c:url value='/carrot/remove?page=${page}&pageSize=${pageSize}'/>");
-				form.attr("method", "post");
-				form.append("<input type='hidden' name='p_num' value='${productDTO.p_num}'>");
-				
-				form.submit();
-				
-			} else{
-				form.attr("action", "<c:url value='/board/remove?page=${page}&pageSize=${pageSize}'/>");
-				form.attr("method", "post");
-				form.append("<input type='hidden' name='b_num' value='${boardDTO.b_num}'>");
-				
-				form.submit();
-			} 
+				if(menu !== 'board'){
+					form.attr("action", "<c:url value='/carrot/remove?page=${page}&pageSize=${pageSize}'/>");
+					form.attr("method", "post");
+					form.append("<input type='hidden' name='p_num' value='${productDTO.p_num}'>");
+					
+					form.submit();
+					
+				} else{
+					form.attr("action", "<c:url value='/board/remove?page=${page}&pageSize=${pageSize}'/>");
+					form.attr("method", "post");
+					form.append("<input type='hidden' name='b_num' value='${boardDTO.b_num}'>");
+					
+					form.submit();
+				} 
 		})
 		
  		$("#btnModify").on("click", function() {
@@ -284,17 +277,17 @@
  		}) 
 		
 		$("#btnLikey").on("click", function() {
-			 let bNum = $('#b_num').val();
-	 		 let pNum = $('#p_num').val();
-	 		 
-			 $("#btnDisLikey").show();
-			 $("#btnLikey").hide();
-			 
-			 if(menu !== 'board'){
-			  	$a.href = '/carrot/carrot/like?menu=1&'+'p_num='+ pNum;
+			let bNum = $('#b_num').val();
+	 		let pNum = $('#p_num').val();
+	 		
+			$("#btnDisLikey").show();
+			$("#btnLikey").hide();
+			const $a = document.createElement('a'); //가상 a태그 생성
+			if(menu !== 'board'){
+			 	$a.href = '/carrot/carrot/like?menu=1&'+'p_num='+ pNum;
 			} else {
 			debugger;
-			  	$a.href = '/carrot/board/like?menu=2&'+'b_num='+bNum;
+			 	$a.href = '/carrot/board/like?menu=2&'+'b_num='+bNum;
 			} 
 		})
 		
@@ -305,7 +298,6 @@
 			 $("#btnDisLikey").hide();
 		})
 	})
-    
     </script>
     
     <script type="text/javascript">
@@ -321,7 +313,6 @@
 		        const timeValue = new Date(value);
 		
 		        const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
-		        console.log(betweenTime);
 		        if (betweenTime < 1) return '방금전';
 		        if (betweenTime < 60) {
 		            return betweenTime + '분전';
