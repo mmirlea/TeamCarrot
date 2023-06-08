@@ -10,14 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.carrot.board.domain.CommentsDTO;
+import com.carrot.board.domain.CommentspDTO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations= {"file:src/main/webapp/WEB-INF/spring/root-context.xml"})
-public class CommentsDAOImplTest {
+public class Comments_pDAOImplTest {
 	
 	@Autowired
-	CommentsDAO commentsDao;
+	Comments_pDAO commentsDao;
 	
 	@Test
 	public void count() throws Exception{
