@@ -34,7 +34,7 @@
             <div class="mainBanner">
                 <a href="#"><img src="../resources/img/중고거래 배너.png" alt="동네 이웃과 안전한 중고거래..."></a>
             </div><!--mainBanner-->
-            
+            <form action="<c:url value="/carrot/junggoMain"/>" method="get">
 	        	<div class="category-wrap">
 	                <ul>
 	                    <li class="categoryItem">
@@ -91,7 +91,7 @@
 	                    </li>
 	                </ul>
 	            </div>
-
+			</form>
             <div class="productList">
                 <h1>중고거래 매물</h1>
                 <c:if test="${ph.getTotalCnt()==null || ph.getTotalCnt() == 0}">
