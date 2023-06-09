@@ -33,7 +33,7 @@ i {
 /*#region 헤더시작*/
 .header {
 	background-color: white;
-	height: 140px;
+	/* height: 140px; */
 	/* margin-bottom: 32px; */
 	border-bottom: 1px solid #999;
 	box-shadow: 0 3px 3px -3px #999;
@@ -129,7 +129,7 @@ i {
 	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
-	margin-bottom: 16px;
+	margin-bottom: 32px;
 	display: flex;
 }
 
@@ -211,19 +211,21 @@ i {
 /*#endregion 전체 적용 속성 끝*/
 
 /* 카테고리 */
-/* .category-wrap{
+/*.category*/
+.category-wrap{
     width: 1200px;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 16px;
+    margin-bottom: 32px;
 }
 .category-wrap ul{
     display: flex;
     justify-content: space-between;
 }
-.categoryBtn{
-    width: 124px;
-    height: 124px;
+.categoryItem{
+
+	width: 120px;
+	height: 85px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -231,24 +233,25 @@ i {
     cursor: pointer;
     border: none;
     background-color: #fff;
-    color:#a0a0a0;
+    text-align: center;
 }
-.categoryBtn i {
-	color: #A0A0A0;
-}
-.categoryBtn i:hover{
-    color:#FF7E36;
-}
-.categoryBtn:active{
-    color:#FF7E36;
+
+.categoryBtn{
+	appearance: none;
 }
 .fas{
     font-size: 50px;
     margin-bottom: 8px;
+    color: #A0A0A0;
+}
+.fas:hover{
+	color:#FF7E36;
 }
 .categoryText{
+	width:120px;
     font-size: 16px;
     line-height: 1.5;
     font-weight: bold;
     color: #666;
-} */
+    text-align: center;
+}
