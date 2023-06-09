@@ -227,17 +227,18 @@
 			<input type="text" name="replyContent">
 			<button type="button" id="wrtRepBtn">등록</button>
 		</div>
-    
+    	
+    	<%@ include file ="./footer.jsp" %>
     <script>
 		//댓글 관련-----------------------------------------------
 		//let p_num = Math.max(0,${productDTO.p_num});
-		let p_num=${productDTO.p_num};
+		let cp_pnum=${productDTO.p_num};
 		
 		//댓글 리스트
-		let showList = function(p_num){
+		let showList = function(cp_pnum){
 			$.ajax({
 				type: 'GET',
-				url: '/carrot/read/comments?p_num' + p_num,
+				url: '/carrot/commentsp?cp_pnum=' + cp_pnum,
 				success : function(result){
 					$("#commentsList").html(toHtml(result));
 				},
@@ -248,10 +249,10 @@
 		//댓글 작성
 		$(document).ready(function(){
 			//목록 보이기
-			showList(p_num);
+			showList(cp_pnum);
 			
 			$("#sendBtn").click(function(){
-				let cp_content = $("input[name=cp_content]").val()
+				let cp_content = $("input[name=cp_content]").val();
 				
 				if(cp_content.trim() == ''){
 					alert("댓글을 입력하세요!")
@@ -261,19 +262,30 @@
 				
 				$.ajax({
 					type: 'POST',
-					url: '/carrot/read/comments?p_num' + p_num,
-				})
+					url: '/carrot/commentsp?cp_pnum=' + cp_pnum + '&cp_pcnum=' + cp_pcnum,
+					headers : {"content-type" : "application/json"},
+					data : JSON.stringify({cp_pnum:cp_pnum, cp_content:cp_content}),
+					success : function(result){
+						alert(result);
+						showList(cp_pnum);
+					},
+					error : function(){alert("error")}
+				});
 			})
 			
 			//답글 달기
 			$("#commentsList").on("click", ".replyBtn", function(){
 				$("#replyForm").appendTo($(this).parent());
 				$("#replyForm").css("display", "block");
+				
+				let cp_pcnum = $(this).parent().attr("data-cp_num");
+				cp_pcnum = parseInt(cp_pcnum);
+			    $("#replyForm").attr("data-cp_pcnum", cp_pcnum);
 			})
 			
 			$("#wrtRepBtn").click (function(){
 				let cp_content = $("input[name=replyContent]").val();
-				let cp_pcno = $("#replyForm").parent().attr("data-cp_pcnum");
+				let cp_pcnum = $("#replyForm").parent().attr("data-cp_pcnum");
 				
 				if(cp_content.trim() == ''){
 					alert("댓글을 입력하세요!")
@@ -283,12 +295,12 @@
 				
 				$.ajax({
 					type:'POST',
-					url: '/carrot/comments?p_num=' + p_num,
-					header : {"content-type" : "application/json"},
-					data : JSON.stringify({cp_pnum:p_num, cp_pcnum:cp_pcnum, cp_content: cp_content}),
-					seccess : function(result){
+					url: '/carrot/commentsp?cp_pnum=' + cp_pnum,
+					headers : {"content-type" : "application/json"},
+					data : JSON.stringify({cp_pnum:cp_pnum, cp_pcnum:cp_pcnum, cp_content: cp_content}),
+					success : function(result){
 						alert(result);
-						showList(p_num);
+						showList(cp_pnum);
 					},
 					error : function(){alert("error")}
 				});
@@ -304,10 +316,10 @@
 				
 				$.ajax({
 					type:"DELETE",
-					url: '/carrot/comments/' + cp_num + '?p_num=' + p_num,
+					url: '/carrot/commentsp/' + cp_num + '?cp_pnum=' + cp_pnum,
 					success : function(result){
-						alert("result")
-						showList(p_num);
+						alert(result);
+						showList(cp_pnum);
 					},
 					error : function(){alert("error")}
 				});
@@ -326,13 +338,69 @@
 				
 				$.ajax({
 					type:'PATCH',
-					url: '/carrot/comments/' + cp_num,
+					url: '/carrot/commentsp/' + cp_num,
 					headers : {"content-type" : "application/json"},
-					data : JSON.stringify({})
+					data : JSON.stringify({cp_num:cp_num, cp_content:cp_content}),
+					success : function(result){
+						alert(result);
+						showList(cp_pnum);
+					},
+					error : function(){alert("error")}
 				})
+			})
+			
+			//댓글 수정
+			$("#commentsList").on("click", ".modBtn", function(){
+				let cp_num=$(this).parent().attr("data-cp_num");
+				
+				let cp_content = $("span.cp_content", $(this).parent()).text();
+				
+				$("input[name=cp_content]").val(cp_content);
+				
+				$("#modBtn").attr("data-cp_num", cp_num);
 			})
 		})
 		
+		//결과물 출력
+		let toHtml = function(commentsp){
+			let tmp="<ul id='commentsp'>";
+			
+			commentsp.forEach(function(commentsp){
+				tmp += '<li data-cp_num=' + commentsp.cp_num
+				tmp += ' data-cp_pcnum=' + commentsp.cp_pcnum
+				tmp += ' data-cp_pnum=' + commentsp.cp_pnum + '>'
+				
+				if(commentsp.cp_num != commentsp.cp_pcnum)
+					tmp += 'ㄴ'
+				tmp += ' commenter=<span class="cp_email">' + commentsp.cp_email + '</span>'
+				tmp += ' comment=<span class="cp_content">' + commentsp.cp_content + '</span>'
+				tmp += ' up_date=' + dateToString(commentsp.cp_update)
+				tmp += ' <button class="delBtn">삭제</button>'
+				tmp += ' <button class="modBtn">수정</button>'
+				tmp += ' <button class="replyBtn">답글</button>'
+				tmp += '</li>'
+			})
+			tmp += "</ul>"
+			
+			return tmp;
+		}
+		let addZero = function(value=1){
+			return value > 9 ? value : "0" + value;
+		}
+		
+		let dateToString = function(ms=0){
+			let date = new Date(ms);
+			
+			let yyyy = date.getFullYear();
+			let mm = addZero(date.getMonth()+1);
+			let dd = addZero(date.getDate());
+			
+			let HH = addZero(date.getHours());
+			let MM = addZero(date.getMinutes());
+			let ss = addZero(date.getSeconds());
+			
+			return yyyy+"년"+mm+"월"+dd+"일"+MM+":"+ss;
+		}
 	</script>
     
     <script type="text/javascript">

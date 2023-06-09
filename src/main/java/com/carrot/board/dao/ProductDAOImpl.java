@@ -103,4 +103,12 @@ public class ProductDAOImpl implements ProductDAO {
 	public int searchResultCnt(SearchConditionP scp)throws Exception{
 		return session.selectOne(namespace + "searchResultCnt", scp);
 	}
+
+	@Override
+	public int updateCommentspCnt(Integer p_num, int cnt) throws Exception {
+		Map map = new HashMap();
+		map.put("cnt", cnt);
+		map.put("p_num", p_num);
+		return session.update(namespace + "updateCommentspCnt", map);
+	}
 }

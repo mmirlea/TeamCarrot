@@ -24,6 +24,6 @@ public interface CommentspService {
 	int write(CommentspDTO commentspDTO) throws Exception;
 
 	//댓글 지우기 (댓글 수 감소)
-	int remove(Integer cp_num, String cp_email, Integer cp_pnum) throws Exception;
+	int removep(Integer cp_num, String cp_email, Integer cp_pnum) throws Exception;
 
 }
