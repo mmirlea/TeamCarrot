@@ -69,19 +69,13 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 	
 	@Override
-	public int increaseLikeCnt(int p_num, ProductDTO dto) throws Exception {
-		Map map = new HashMap();
-		map.put("p_num", p_num);
-		map.put("productDTO", dto);
-		return session.update(namespace + "increaseLikeCnt", map);
+	public int increaseLikeCnt(Integer b_num) throws Exception {
+		return session.update(namespace + "increaseLikeCnt", b_num);
 	}
 
 	@Override
-	public int decreaseLikeCnt(String p_likeyemail, ProductDTO dto) throws Exception {
-		Map map = new HashMap();
-		map.put("p_likeyemail", p_likeyemail);
-		map.put("productDTO", dto);
-		return session.update(namespace + "decreaseLikeCnt", map);
+	public int decreaseLikeCnt(Integer b_num) throws Exception {
+		return session.update(namespace + "decreaseLikeCnt", b_num);
 	}
 
 	@Override

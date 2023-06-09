@@ -26,9 +26,9 @@ public interface BoardDAO {
 
 	int increaseViewCnt(Integer b_num) throws Exception;
 	
-	int increaseLikeCnt(int b_num, BoardDTO boardDTO) throws Exception;
+	int increaseLikeCnt(Integer b_num, BoardDTO boardDto) throws Exception;
 	
-	int decreaseLikeCnt(String b_likeyEmail, BoardDTO boardDTO) throws Exception;
+	int decreaseLikeCnt(Integer b_num, BoardDTO boardDto) throws Exception;
 	
 	String getLikeyEmail(BoardDTO boardDTO) throws Exception;
 

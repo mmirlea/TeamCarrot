@@ -16,4 +16,14 @@
 		   AND L_PBNUM = #{l_pbnum}
 		   AND L_EMAIL = #{l_email}
 	</delete>
+	
+	<select id="count" resultType="int">
+		SELECT COUNT(*) CNT
+		  FROM LIKEY
+	     WHERE L_MENU = #{l_menu}
+		   AND L_PBNUM = #{l_pbnum}
+		   AND L_EMAIL = #{l_email}
+	  GROUP BY L_MENU, L_PBNUM, L_EMAIL
+	     <!-- WHERE B_MENU = '2' -->
+	</select>
 </mapper>

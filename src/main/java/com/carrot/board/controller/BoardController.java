@@ -21,6 +21,7 @@ import com.carrot.board.domain.LikeyDTO;
 import com.carrot.board.domain.PageHandler;
 import com.carrot.board.domain.SearchCondition;
 import com.carrot.board.service.BoardService;
+import com.carrot.board.service.LikeyService;
 
 @Controller
 @RequestMapping("/board")
@@ -28,21 +29,67 @@ public class BoardController {
 
 	@Autowired
 	BoardService service;
-	
-	@GetMapping("/like")
-	public int upLikeCnt(Integer b_num, BoardDTO boardDTO, LikeyDTO likeyDTO, HttpSession session) {
-		String b_email = (String) session.getAttribute("m_email");
-		System.out.println("넘어와");
-		int likeCnt = 0;
+
+	@Autowired
+	LikeyService likeyService;
+
+	@GetMapping("/dislike")
+	public String downLikeCnt(Integer b_num, BoardDTO boardDto, LikeyDTO likeyDTO, HttpSession session) {
+		String l_email = (String) session.getAttribute("m_email");
+
+		likeyDTO.setL_menu("2");
+		likeyDTO.setL_pbnum(b_num);
+		likeyDTO.setL_email(l_email);
+
+		System.out.println("downLikeCnt b_num" + b_num);
+		System.out.println("downLikeCnt likeyDTO" + likeyDTO);
+		
 		try {
-			likeCnt = service.UpLike(b_num, boardDTO, likeyDTO);
+			int cnt = service.getCount();
+			System.out.println(cnt);
+
+			if (cnt != 0) {
+				if (likeyService.deleteLike(likeyDTO) != 1)
+					throw new Exception("LikeDown_Likey failed");
+				if (service.decreaseLikeCnt(b_num, boardDto) != 1)
+					throw new Exception("LikeDown_Board failed");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		return likeCnt;
+
+		return "junggoDetail";
 	}
-	
+
+	@GetMapping("/like")
+	public String upLikeCnt(Integer b_num, BoardDTO boardDto, LikeyDTO likeyDTO, HttpSession session) {
+		String l_email = (String) session.getAttribute("m_email");
+
+		likeyDTO.setL_menu("2");
+		likeyDTO.setL_pbnum(b_num);
+		likeyDTO.setL_email(l_email);
+		
+		System.out.println("upLikeCnt b_num" + b_num);
+		System.out.println("upLikeCnt likeyDTO" + likeyDTO);
+
+		try {
+			int cnt = service.getCount();
+			
+			System.out.println("cnt " + cnt);
+
+			if (cnt == 0) {
+				if (likeyService.insertLike(likeyDTO) != 1)
+					throw new Exception("LikeUp_Likey failed");
+				if (service.increaseLikeCnt(b_num, boardDto) != 1)
+					throw new Exception("LikeUp_Board failed");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return "junggoDetail";
+	}
+
 	@PostMapping("/remove")
 	public String remove(Integer b_num, Integer page, Integer pageSize, RedirectAttributes rattr, Model m,
 			HttpSession session) {
@@ -85,20 +132,20 @@ public class BoardController {
 		} catch (Exception e) {
 			e.printStackTrace();
 
-			//m.addAttribute("mode", "new"); 
+			// m.addAttribute("mode", "new");
 			m.addAttribute("menu", "board");
-			m.addAttribute("boardDto", boardDTO); 
-			m.addAttribute("msg", "MOD_ERR"); 
+			m.addAttribute("boardDto", boardDTO);
+			m.addAttribute("msg", "MOD_ERR");
 
-			return "boardDetail"; 
+			return "boardDetail";
 		}
 	}
-	
+
 	@GetMapping("/select")
 	public String select(BoardDTO boardDTO, RedirectAttributes rattr, Model m, HttpSession session) {
 		String b_email = (String) session.getAttribute("m_email");
 		boardDTO.setB_email(b_email);
-		
+
 		try {
 			System.out.println("select -> boardDTO : " + boardDTO);
 			boardDTO = service.select(boardDTO.getB_num());
@@ -113,7 +160,7 @@ public class BoardController {
 
 		return "boardDetail";
 	}
-	
+
 	@GetMapping("/save")
 	public String save(Model m) {
 		m.addAttribute("mode", "new");
@@ -126,7 +173,7 @@ public class BoardController {
 		String b_email = (String) session.getAttribute("m_email");
 		boardDTO.setB_email(b_email);
 		boardDTO.setB_tempSaveYn("Y");
-		
+
 		try {
 			if (service.save(boardDTO) != 1)
 				throw new Exception("Write failed");
@@ -180,7 +227,7 @@ public class BoardController {
 
 	@GetMapping("/read")
 	public String read(Integer b_num, Integer page, Integer pageSize, Model m) {
-		
+
 		try {
 			BoardDTO boardDTO = service.read(b_num);
 			m.addAttribute("boardDTO", boardDTO);
@@ -203,13 +250,13 @@ public class BoardController {
 
 			List<BoardDTO> list = service.getSearchSelectPage(sc);
 			System.out.println("list" + list);
-			
+
 			m.addAttribute("list", list);
 			m.addAttribute("ph", pageHandler);
 
 			Instant startOfToday = LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant();
 			m.addAttribute("startOfToday", startOfToday.toEpochMilli());
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			m.addAttribute("msg", "LIST_ERR");
@@ -218,10 +265,10 @@ public class BoardController {
 
 		return "boardMain";
 	}
-	
+
 	@GetMapping("/chkLogin")
 	public String chkLogin(Model m, HttpServletRequest request) {
-		
+
 		System.out.println("request.getRequestURL() " + request.getRequestURL());
 		if (!loginCheck(request))
 			return "redirect:/login/login?toURL=" + request.getRequestURL();

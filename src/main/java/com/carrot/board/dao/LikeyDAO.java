@@ -21,4 +21,8 @@ public class LikeyDAO {
 	public int deleteLike(LikeyDTO likeyDTO) throws Exception {
 		return session.delete(namespace + "deleteLike", likeyDTO);
 	}
+	
+	public int count(LikeyDTO likeyDTO) throws Exception {
+		return session.selectOne(namespace + "count", likeyDTO);
+	}
 }

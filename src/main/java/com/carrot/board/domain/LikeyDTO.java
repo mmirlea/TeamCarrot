@@ -3,10 +3,10 @@ package com.carrot.board.domain;
 public class LikeyDTO {
 
 	private String l_menu;
-	private String l_pbnum;
+	private Integer l_pbnum;
 	private String l_email;
 
-	public LikeyDTO(String l_menu, String l_pbnum, String l_email) {
+	public LikeyDTO(String l_menu, Integer l_pbnum, String l_email) {
 		super();
 		this.l_menu = l_menu;
 		this.l_pbnum = l_pbnum;
@@ -21,11 +21,11 @@ public class LikeyDTO {
 		this.l_menu = l_menu;
 	}
 
-	public String getL_pbnum() {
+	public Integer getL_pbnum() {
 		return l_pbnum;
 	}
 
-	public void setL_pbnum(String l_pbnum) {
+	public void setL_pbnum(Integer l_pbnum) {
 		this.l_pbnum = l_pbnum;
 	}
 

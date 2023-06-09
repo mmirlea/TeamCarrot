@@ -22,7 +22,7 @@ public class FileController {
 
 	@GetMapping("/file/{fileName}")
 	public void findFile(@PathVariable("fileName") String fileName, HttpServletResponse response)throws Exception {
-		System.out.println("fileName " + fileName);
+		//System.out.println("fileName " + fileName);
 		FileInputStream in = null;
 		BufferedOutputStream out = null ;
 		try {

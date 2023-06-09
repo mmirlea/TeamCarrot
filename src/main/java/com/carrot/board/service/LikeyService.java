@@ -19,4 +19,8 @@ public class LikeyService {
 	public int deleteLike(LikeyDTO likeyDTO) throws Exception{
 		return likeyDAO.deleteLike(likeyDTO);
 	}
+	
+	public int count(LikeyDTO likeyDTO) throws Exception{
+		return likeyDAO.count(likeyDTO);
+	}
 }

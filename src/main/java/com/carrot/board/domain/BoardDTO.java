@@ -22,22 +22,12 @@ public class BoardDTO {
 	private Integer b_viewCnt;
 
 	private UserDTO userDTO;
-	
+	private LikeyDTO likeyDTO;
+
 	private MultipartFile fileUpload;
 
 	public BoardDTO() {
 	}
-
-	
-	
-	public BoardDTO(Integer b_num, String b_cate, String b_email, String b_title, String b_content) {
-		this.b_num = b_num;
-		this.b_cate = b_cate;
-		this.b_email = b_email;
-		this.b_title = b_title;
-		this.b_content = b_content;
-	}
-
 
 	public BoardDTO(String b_cate, String b_email, String b_title, String b_content) {
 		this.b_cate = b_cate;
@@ -53,13 +43,21 @@ public class BoardDTO {
 		this.b_content = b_content;
 		this.b_tempSaveYn = b_tempSaveYn;
 	}
-	
+
 	public MultipartFile getFileUpload() {
 		return fileUpload;
 	}
 
 	public void setFileUpload(MultipartFile fileUpload) {
 		this.fileUpload = fileUpload;
+	}
+
+	public LikeyDTO getLikeyDTO() {
+		return likeyDTO;
+	}
+
+	public void setLikeyDTO(LikeyDTO likeyDTO) {
+		this.likeyDTO = likeyDTO;
 	}
 
 	public UserDTO getUserDTO() {

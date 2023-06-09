@@ -62,6 +62,7 @@
                             <div class="ondo">
                                 <span class="ondoNum">${productDTO.userDTO.m_ondo }</span>
                                 <span class="celsius">°C</span>
+                                <span class="celsius"></span>
                             </div><!--ondo-->
                             <div class="ondoBar"></div>
                         </div>
@@ -228,8 +229,8 @@
     
     <script>
 		//댓글 관련-----------------------------------------------
-		//let p_num = Math.max(0,${productDTO.p_num});
-		let p_num=${productDTO.p_num};
+		let p_num = Math.max(0,${productDTO.p_num});
+		//let p_num=${productDTO.p_num};
 		
 		//댓글 리스트
 		let showList = function(p_num){
@@ -268,8 +269,9 @@
     
     <script type="text/javascript">
     $(document).ready(function() {
-    	$("#btnDisLikey").hide();
-    	    	
+    	
+    
+    	
 		$("#btnDel").on("click", function(){
 			if(!confirm("정말로 삭제하시겠습니까?")) return;
 				let form = $('#form');
@@ -305,23 +307,29 @@
 		$("#btnLikey").on("click", function() {
 			let bNum = $('#b_num').val();
 	 		let pNum = $('#p_num').val();
-	 		
 			$("#btnDisLikey").show();
 			$("#btnLikey").hide();
 			const $a = document.createElement('a'); //가상 a태그 생성
 			if(menu !== 'board'){
-			 	$a.href = '/carrot/carrot/like?menu=1&'+'p_num='+ pNum;
+			 	$a.href = '/carrot/carrot/like?menu=product&'+'p_num='+ pNum;
 			} else {
-			debugger;
-			 	$a.href = '/carrot/board/like?menu=2&'+'b_num='+bNum;
+			 	$a.href = '/carrot/board/like?menu=board&'+'b_num='+bNum;
 			} 
+			$a.click();
 		})
 		
 		$("#btnDisLikey").on("click", function() {
-			 let form = $('#form');
-			 
-			 $("#btnLikey").show();
-			 $("#btnDisLikey").hide();
+			let bNum = $('#b_num').val();
+	 		let pNum = $('#p_num').val();
+			$("#btnLikey").show();
+			$("#btnDisLikey").hide();
+			const $a = document.createElement('a'); //가상 a태그 생성
+			if(menu !== 'board'){
+			 	$a.href = '/carrot/carrot/dislike?menu=product&'+'p_num='+ pNum;
+			} else {
+			 	$a.href = '/carrot/board/dislike?menu=board&'+'b_num='+bNum;
+			} 
+			$a.click();
 		})
 	})
     </script>

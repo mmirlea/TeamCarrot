@@ -20,9 +20,6 @@ public class BoardServiceImple implements BoardService {
 	@Autowired
 	FileService fileService;
 	
-	@Autowired
-	LikeyService likeyService;
-	
 	@Override
 	public BoardDTO select(Integer b_num) throws Exception {
 		return boardDAO.select(b_num);
@@ -74,26 +71,13 @@ public class BoardServiceImple implements BoardService {
 	}
 	
 	@Override
-	public int UpLike(Integer b_num, BoardDTO boardDTO, LikeyDTO likeyDTO) throws Exception {
-		likeyService.insertLike(likeyDTO);
-		return boardDAO.increaseLikeCnt(b_num, boardDTO);
-	}
-	
-	@Override
-	public int increaseLikeCnt(int b_num, BoardDTO boardDTO) throws Exception {
-		
-		return boardDAO.increaseLikeCnt(b_num, boardDTO);
+	public int increaseLikeCnt(Integer b_num, BoardDTO boardDto) throws Exception {
+		return boardDAO.increaseLikeCnt(b_num, boardDto);
 	}
 
 	@Override
-	public int decreaseLikeCnt(String b_likeyEmail, BoardDTO boardDTO) throws Exception {
-		b_likeyEmail = boardDAO.getLikeyEmail(boardDTO);
-		return boardDAO.decreaseLikeCnt(b_likeyEmail, boardDTO);
-	}
-
-	@Override
-	public String getLikeyEmail(BoardDTO boardDTO) throws Exception {
-		return boardDAO.getLikeyEmail(boardDTO);
+	public int decreaseLikeCnt(Integer b_num, BoardDTO boardDto) throws Exception {
+		return boardDAO.decreaseLikeCnt(b_num, boardDto);
 	}
 
 	// 페이징 처리
