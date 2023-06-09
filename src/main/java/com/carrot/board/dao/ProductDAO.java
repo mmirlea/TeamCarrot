@@ -36,5 +36,8 @@ public interface ProductDAO {
 	public List<ProductDTO> searchSelectPage(SearchConditionP scp) throws Exception;
 	
 	public int searchResultCnt(SearchConditionP scp)throws Exception;
+	
+	int updateCommentspCnt(Integer p_num, int cnt) throws Exception;
+	
 
 }

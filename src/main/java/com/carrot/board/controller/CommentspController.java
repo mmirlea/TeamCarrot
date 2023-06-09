@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.carrot.board.domain.CommentspDTO;
@@ -26,18 +27,18 @@ public class CommentspController {
 	CommentspService service;
 	
 	//댓글 수정
-	@PatchMapping("/commentsp/{c_num}")
-	public ResponseEntity<String> modify(@PathVariable Integer cp_num, @RequestBody CommentspDTO dto, HttpSession session, HttpServletRequest request){
+	@PatchMapping("/commentsp/{cp_num}")
+	public ResponseEntity<String> modify(@PathVariable Integer cp_num, @RequestBody CommentspDTO commentspDTO, HttpSession session, HttpServletRequest request){
 		session = request.getSession();
 		String cp_email = (String)session.getAttribute("m_email");
 		
-		dto.setCp_num(cp_num);
-		dto.setCp_email(cp_email);
+		commentspDTO.setCp_num(cp_num);
+		commentspDTO.setCp_email(cp_email);
 		
-		System.out.println("dto : " + dto);
+		System.out.println("dto : " + commentspDTO);
 		
 		try {
-			if(service.modify(dto) != 1) {
+			if(service.modify(commentspDTO) != 1) {
 				throw new Exception("comment modify Failed");
 			}
 			return new ResponseEntity<String>("MOD_OK",HttpStatus.OK);
@@ -50,17 +51,23 @@ public class CommentspController {
 	
 	//댓글 등록
 	@PostMapping("/commentsp")
-	public ResponseEntity<String> write(@RequestBody CommentspDTO dto, Integer p_num, HttpSession session, HttpServletRequest request){
+	public ResponseEntity<String> write(@RequestBody CommentspDTO commentspDTO, @RequestParam Integer cp_pnum, @RequestParam(required = false) Integer cp_pcnum, HttpSession session, HttpServletRequest request){
 		session = request.getSession();
 		String cp_email = (String)session.getAttribute("m_email");
 		
-		dto.setCp_email(cp_email);
-		dto.setCp_pnum(p_num);
-	
-		System.out.println("dto : " + dto);
+		commentspDTO.setCp_email(cp_email);
+		commentspDTO.setCp_pnum(cp_pnum);
+		
+		if (cp_pcnum != null) {
+            commentspDTO.setCp_pcnum(cp_pcnum);
+        } else {
+            commentspDTO.setCp_pcnum(commentspDTO.getCp_num());
+        }
+		
+		System.out.println("dto : " + commentspDTO);
 		
 		try {
-			if(service.write(dto) != 1)
+			if(service.write(commentspDTO) != 1)
 				throw new Exception("comment write Failed");
 			return new ResponseEntity<String>("WRT_OK", HttpStatus.OK);
 		} catch (Exception e) {
@@ -72,12 +79,12 @@ public class CommentspController {
 	
 	//댓글 삭제
 	@DeleteMapping("/commentsp/{cp_num}")
-	public ResponseEntity<String> remove(@PathVariable Integer cp_num, Integer p_num, HttpSession session, HttpServletRequest request){
+	public ResponseEntity<String> remove(@PathVariable Integer cp_num, Integer cp_pnum, HttpSession session, HttpServletRequest request){
 		session = request.getSession();
 		String cp_email = (String)session.getAttribute("m_email");
 		
 		try {
-			int rowCnt = service.remove(cp_num, cp_email, p_num);
+			int rowCnt = service.removep(cp_num, cp_email, cp_pnum);
 			
 			if(rowCnt != 1)
 				throw new Exception("Comments Delete Failed");
@@ -90,11 +97,11 @@ public class CommentspController {
 	}
 	
 	//댓글 목록 반환
-	@GetMapping("/comments")
-	public ResponseEntity<List<CommentspDTO>> list(Integer p_num){
+	@GetMapping("/commentsp")
+	public ResponseEntity<List<CommentspDTO>> list(Integer cp_pnum){
 		List<CommentspDTO> list = null;
 		try {
-			list = service.getList(p_num);
+			list = service.getList(cp_pnum);
 			return new ResponseEntity<List<CommentspDTO>>(list, HttpStatus.OK);
 		} catch(Exception e) {
 			e.printStackTrace();
