@@ -8,18 +8,19 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.carrot.board.dao.BoardDAO;
 import com.carrot.board.dao.CommentspDAO;
+import com.carrot.board.dao.ProductDAO;
 import com.carrot.board.domain.CommentspDTO;
 
 @Service
 public class CommentspServiceImpl implements CommentspService {
 	
 	CommentspDAO commentspDAO;
-	BoardDAO boardDAO;
+	ProductDAO productDAO;
 	
 	@Autowired
-	public CommentspServiceImpl(CommentspDAO commentspDAO, BoardDAO boardDAO) {
+	public CommentspServiceImpl(CommentspDAO commentspDAO, ProductDAO productDAO) {
 		this.commentspDAO = commentspDAO;
-		this.boardDAO = boardDAO;
+		this.productDAO = productDAO;
 	}
 	
 	//댓글 개수
@@ -50,16 +51,16 @@ public class CommentspServiceImpl implements CommentspService {
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public int write(CommentspDTO commentspDTO) throws Exception{
-		boardDAO.updateCommentsCnt(commentspDTO.getCp_pnum(), 1);
+		productDAO.updateCommentspCnt(commentspDTO.getCp_pnum(), 1);
 		return commentspDAO.insert(commentspDTO);
 	}
 	
 	//댓글 지우기 (댓글 수 감소)
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public int remove(Integer cp_num, String cp_email, Integer cp_pnum) throws Exception{
-		int rowCnt = boardDAO.updateCommentsCnt(cp_pnum, -1);
-		System.out.println("updateCommentsCnt - rowCnt = " + rowCnt);
+	public int removep(Integer cp_num, String cp_email, Integer cp_pnum) throws Exception{
+		int rowCnt = productDAO.updateCommentspCnt(cp_pnum, -1);
+		System.out.println("updateCommentspCnt - rowCnt = " + rowCnt);
 		rowCnt = commentspDAO.delete(cp_num, cp_email);
 		System.out.println("rowCnt = " + rowCnt);
 		return rowCnt;

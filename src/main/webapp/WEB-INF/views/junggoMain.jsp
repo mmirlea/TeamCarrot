@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
-<link href="<c:url value='/resources/css/junggoStyle.css?a'/>" rel="stylesheet" />
+<link href="<c:url value='/resources/css/junggoStyle.css?vf'/>" rel="stylesheet" />
 </head>
 <body>
 <% String menu = request.getParameter("menu"); %>
@@ -25,6 +25,8 @@
 	
 		<jsp:include page ="./header.jsp" flush="false">
 			<jsp:param name="menu" value="product" />
+			<jsp:param name="cate" value="${cate}" />
+			<jsp:param name="detail" value="no"/>
 		</jsp:include>
 		<jsp:include page="./tabRigth.jsp" flush="false">
 			<jsp:param name="menu" value="product" />
@@ -34,64 +36,7 @@
             <div class="mainBanner">
                 <a href="#"><img src="../resources/img/중고거래 배너.png" alt="동네 이웃과 안전한 중고거래..."></a>
             </div><!--mainBanner-->
-            
-	        	<div class="category-wrap">
-	                <ul>
-	                    <li class="categoryItem">
-	                        <button type="button" class="categoryBtn">
-	                            <i class="fa-solid fas fa-star" name="cate" value="star"></i> 
-	                            <div class="categoryText">인기매물</div>
-	                        </button> 
-	                    </li>
-	                    <li class="categoryItem">
-	                        <button type="button" class="categoryBtn" name="cate" value="digital">
-	                            <i class="fa-solid fas fa-laptop"></i> 
-	                            <div class="categoryText">디지털기기/가전</div>
-	                        </button>
-	                    </li>
-	                    <li class="categoryItem">
-	                        <button type="button" class="categoryBtn" name="cate" value="funiture">
-	                            <i class="fa-solid fas fa-couch"></i>
-	                            <div class="categoryText">가구/인테리어</div>
-	                        </button>
-	                    </li>
-	                    <li class="categoryItem">
-	                        <button type="button" class="categoryBtn" name="cate" value="kitchen">
-	                            <i class="fa-solid fas fa-kitchen-set"></i>
-	                            <div class="categoryText">생활/주방</div> 
-	                        </button>
-	                    <li class="categoryItem">
-	                        <button type="button" class="categoryBtn" name="cate" value="baby">
-	                            <i class="fa-solid fas fa-baby-carriage"></i>
-	                            <div class="categoryText">유아용품</div>
-	                        </button>
-	                    </li>
-	                    <li class="categoryItem">
-	                        <button type="button" class="categoryBtn" name="cate" value="clothes">
-	                            <i class="fa-solid fas fa-shirt"></i>
-	                            <div class="categoryText">의류</div>
-	                        </button>
-	                    </li>
-	                    <li class="categoryItem">
-	                        <button type="button" class="categoryBtn" name="cate" value="book">
-	                            <i class="fa-solid fas fa-book"></i>
-	                            <div class="categoryText">도서</div>
-	                        </button>
-	                    </li>
-	                    <li class="categoryItem">
-	                        <button type="button" class="categoryBtn" name="cate" value="ticket">
-	                            <i class="fa-solid fas fa-ticket"></i> 
-	                            <div class="categoryText">티켓/교환권</div>
-	                        </button>
-	                    <li class="categoryItem">
-	                        <button type="button" class="categoryBtn" name="cate" value="etc">
-	                            <i class="fa-solid fas fa-box"></i>
-	                            <div class="categoryText">기타 중고물품</div>
-	                        </button>
-	                    </li>
-	                </ul>
-	            </div>
-
+			
             <div class="productList">
                 <h1>중고거래 매물</h1>
                 <c:if test="${ph.getTotalCnt()==null || ph.getTotalCnt() == 0}">
@@ -186,7 +131,19 @@
 					 $time.innerText = timeForToday(time);
 				 })
 				
+				/* $(".categoryBtn").change(function(){
+					let form = $('#form');
+					
+					form.attr("action", "<c:url value='/carrot/junggoMain'/>");
+					form.attr("method", "GET");
+										
+					form.submit();
+			
+				}) */
+				
 			 }) 
+			 
+			
 			function timeForToday(value) {
 				const today = new Date();
 		        const timeValue = new Date(value);
@@ -210,6 +167,8 @@
 		
 		        return Math.floor(betweenTimeDay / 365) + '년전';
 		 	}
+			 
+			
     </script> 
 </body>
 </html>

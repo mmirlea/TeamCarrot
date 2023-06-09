@@ -3,9 +3,9 @@ package com.carrot.board.domain;
 import java.util.Date;
 
 public class CommentspDTO {
-	private Integer cp_pnum;
-	private Integer cp_num;
-	private Integer cp_pcnum;
+	private Integer cp_pnum; //게시글 번호
+	private Integer cp_num; //댓글 번호
+	private Integer cp_pcnum; //부모 댓글 번호
 	private String cp_email;
 	private String cp_content;
 	private Date cp_crdate;
