@@ -28,7 +28,9 @@
 <body>
 	<form class="wrap" id="form">
 	
-		<%@ include file ="./header.jsp" %>
+		<jsp:include page ="./header.jsp" flush="false">
+			<jsp:param name="detail" value="detail" />
+		</jsp:include>
 		<%@ include file ="./tabRigth.jsp" %>
         <div class="container">
             <div class="swiper-modify">
