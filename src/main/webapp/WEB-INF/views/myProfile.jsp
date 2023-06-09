@@ -170,7 +170,7 @@
 	          		var form = $("<form></form>");
 		          	form.attr("action", "<c:url value='/mypage/modify/pw'/>");
 		          	form.attr("method", "POST");
-		
+	
 		          	var mPwInput = $("<input>");
 		         	mPwInput.attr("type", "hidden");
 		          	mPwInput.attr("name", "m_pw");
