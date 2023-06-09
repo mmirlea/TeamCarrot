@@ -222,7 +222,7 @@
 		<div id="commentsList"></div>
 		
 		<div id="replyForm" style="display:none">
-			<input type="text" name="replyComment">
+			<input type="text" name="replyContent">
 			<button type="button" id="wrtRepBtn">등록</button>
 		</div>
     
@@ -260,6 +260,73 @@
 				$.ajax({
 					type: 'POST',
 					url: '/carrot/read/comments?p_num' + p_num,
+				})
+			})
+			
+			//답글 달기
+			$("#commentsList").on("click", ".replyBtn", function(){
+				$("#replyForm").appendTo($(this).parent());
+				$("#replyForm").css("display", "block");
+			})
+			
+			$("#wrtRepBtn").click (function(){
+				let cp_content = $("input[name=replyContent]").val();
+				let cp_pcno = $("#replyForm").parent().attr("data-cp_pcnum");
+				
+				if(cp_content.trim() == ''){
+					alert("댓글을 입력하세요!")
+					$("input[name=replyContent]").focus();
+					return ;
+				}
+				
+				$.ajax({
+					type:'POST',
+					url: '/carrot/comments?p_num=' + p_num,
+					header : {"content-type" : "application/json"},
+					data : JSON.stringify({cp_pnum:p_num, cp_pcnum:cp_pcnum, cp_content: cp_content}),
+					seccess : function(result){
+						alert(result);
+						showList(p_num);
+					},
+					error : function(){alert("error")}
+				});
+				$("#replyForm").css("display","none");
+				$("input[name=replyContent]").val('');
+				$("#replyForm").appendTo("body");
+			})
+			
+			//댓글 삭제
+			$("#commentsList").on("click", ".delBtn", function(){
+				let cp_num=$(this).parent().attr("data-cp_num");
+				let cp_pnum=$(this).parent().attr("data-cp_pnum");
+				
+				$.ajax({
+					type:"DELETE",
+					url: '/carrot/comments/' + cp_num + '?p_num=' + p_num,
+					success : function(result){
+						alert("result")
+						showList(p_num);
+					},
+					error : function(){alert("error")}
+				});
+			})
+			
+			//수정 확인을 클릭하면
+			$("#modBtn").click(function(){
+				let cp_content = $("input[name=cp_content]").val();
+				let cp_num = $(this).attr("data-cp_num");
+				
+				if(cp_content.trim() == ''){
+					alert("댓글을 입력하세요!")
+					$("input[name=cp_content]").focus();
+					return;
+				}
+				
+				$.ajax({
+					type:'PATCH',
+					url: '/carrot/comments/' + cp_num,
+					headers : {"content-type" : "application/json"},
+					data : JSON.stringify({})
 				})
 			})
 		})
