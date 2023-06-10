@@ -7,7 +7,7 @@ import com.carrot.board.domain.SearchConditionP;
 
 public interface ProductService {
 
-	ProductDTO read(Integer p_num) throws Exception;
+	ProductDTO read(ProductDTO dto) throws Exception;
 
 	int getCount() throws Exception;
 
@@ -35,5 +35,5 @@ public interface ProductService {
 	
 	int getSearchResultCnt(SearchConditionP scp) throws Exception;
 	
-	ProductDTO select(Integer p_num) throws Exception;
+	ProductDTO select(ProductDTO dto) throws Exception;
 }

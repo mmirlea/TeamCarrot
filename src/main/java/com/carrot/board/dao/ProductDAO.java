@@ -7,7 +7,7 @@ import com.carrot.board.domain.SearchConditionP;
 
 public interface ProductDAO {
 
-	ProductDTO select(Integer p_num) throws Exception;
+	ProductDTO select(ProductDTO dto) throws Exception;
 
 	int count() throws Exception;
 
