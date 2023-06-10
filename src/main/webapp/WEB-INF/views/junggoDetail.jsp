@@ -80,13 +80,6 @@
 
             	<div class="content-top">
 	            	<h1 class="contentTitle">${menu == 'board' ? boardDTO.b_title : productDTO.p_title}</h1><!--.contentTitle-->
-					
-					<div class="crud-wrap">
-                    	<input type="hidden" value="${menu eq 'board' ? boardDTO.b_num : 0}" name="b_num" id="b_num">
-                    	<input type="hidden" value="${menu eq 'product' ? productDTO.p_num : 0}" name="p_num" id="p_num">
-                    	<button type="button" class="btnModify" id="btnModify" value="board">수정</button>
-                    	<button type="button" class="btnDel" id="btnDel">삭제</button>
-	                </div>
             	</div>
 
                 <div class="contentInfo">
@@ -102,10 +95,7 @@
                     <c:out value='${menu == "board" ? boardDTO.b_content : productDTO.p_content}'/>
                 </div><!--content-->
                 <div class="countUp">
-                    <span class="itemAttention">
-                    	<button type="button" class="likey" id="btnLikey" name='${menu == "board"? "b_likey" : "p_likey"}'><i class="far fa-heart"></i></button>
-                    	<button type="button" class="disLikey" id="btnDisLikey" name='${menu == "board"? "b_likey" : "p_likey"}'><i class="fas fa-heart"></i></button>
-                         관심 ${menu == "board" ? boardDTO.b_likey : productDTO.p_likey}</span>
+                    <span class="itemAttention">관심 ${menu == "board" ? boardDTO.b_likey : productDTO.p_likey}</span>
                     &nbsp;•&nbsp;
                     <span class="itemChat">채팅 ${menu == "board" ? boardDTO.b_comm : productDTO.p_comm}</span>
                     &nbsp;•&nbsp;
@@ -113,22 +103,32 @@
                 </div><!--.countUp-->
                 <hr>
             </div><!--.content-wrap-->
-            <c:if test="${menu ne 'board' }">
 	            <div class="heartBar-wrap">
 	                <div class="heartBar">
-	                    <div class="heartBtn">
-	                        <i class="xi-heart-o xi-4x"></i>  
-	                     </div><!--heartBtn-->
-	                    <div class="priceInfo">
-	                        <div class="price">${productDTO.p_price } 원</div>
-	                        <div class="priceNego">가격 제안 가능</div>
-	                    </div><!--priceInfo-->
-	                    <button type="button" class="chatBtn">채팅하기</button>
+                    	<div class="heartBtn">
+                    		<button type="button" class="likey"  id="btnLikey" name='${menu == "board"? "b_likey" : "p_likey"}'><i class="far fa-heart"></i></button>
+                    		<button type="button" class="disLikey" id="btnDisLikey" name='${menu == "board"? "b_likey" : "p_likey"}'><i class="fas fa-heart"></i></button>
+	                     </div>
+	                     <!--heartBtn-->
+						<c:if test="${menu ne 'board' }">
+		                    <div class="priceInfo">
+		                        <div class="price">${productDTO.p_price } 원</div>
+		                        <div class="priceNego">가격 제안 가능</div>
+		                    </div><!--priceInfo-->
+            			</c:if>
+						<div class="crud-wrap">
+	                    	<input type="hidden" value="${menu eq 'board' ? boardDTO.b_num : 0}" name="b_num" id="b_num">
+	                    	<input type="hidden" value="${menu eq 'product' ? productDTO.p_num : 0}" name="p_num" id="p_num">
+	                    	<button type="button" class="btnModify" id="btnModify" value="board">수정</button>
+	                    	<button type="button" class="btnDel" id="btnDel">삭제</button>
+		                </div>
+		                <button type="button" class="chatBtn">채팅하기</button>
 	                </div><!--.heartBar-->
 	                <hr>
 	            </div><!--.heartBar-wrap-->
-            </c:if>
     	</div> <!-- .container -->
+    	
+    	<input type="text">${boardDTO.likeyDTO.l_menu}
     </form><!--.wrap-->
   
     
@@ -233,8 +233,8 @@
     <script>
 		//댓글 관련-----------------------------------------------
 
-		//let p_num = Math.max(0,${productDTO.p_num});
-		let cp_pnum=${productDTO.p_num};
+		let p_num = Math.max(0,${productDTO.p_num});
+		//let cp_pnum=${productDTO.p_num};
 
 		
 		//댓글 리스트
@@ -409,7 +409,14 @@
     <script type="text/javascript">
     $(document).ready(function() {
     	
-    
+    	let bNum = $('#b_num').val();
+ 		let pNum = $('#p_num').val();
+ 		
+ 		if ('${boardDTO.b_likeYN}' === 'Y') {
+			$("#btnLikey").hide();
+    	} else {
+			$("#btnDisLikey").hide();
+    	}
     	
 		$("#btnDel").on("click", function(){
 			if(!confirm("정말로 삭제하시겠습니까?")) return;
@@ -432,8 +439,6 @@
 		})
 		
  		$("#btnModify").on("click", function() {
- 			let bNum = $('#b_num').val();
- 			let pNum = $('#p_num').val();
  			const $a = document.createElement('a'); //가상 a태그 생성
 			if(menu !== 'board'){
 			  	$a.href = '/carrot/carrot/select?menu=product&'+'p_num='+ pNum;
@@ -444,8 +449,6 @@
  		}) 
 		
 		$("#btnLikey").on("click", function() {
-			let bNum = $('#b_num').val();
-	 		let pNum = $('#p_num').val();
 			$("#btnDisLikey").show();
 			$("#btnLikey").hide();
 			const $a = document.createElement('a'); //가상 a태그 생성
@@ -458,8 +461,6 @@
 		})
 		
 		$("#btnDisLikey").on("click", function() {
-			let bNum = $('#b_num').val();
-	 		let pNum = $('#p_num').val();
 			$("#btnLikey").show();
 			$("#btnDisLikey").hide();
 			const $a = document.createElement('a'); //가상 a태그 생성

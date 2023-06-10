@@ -8,7 +8,7 @@ import com.carrot.board.domain.SearchCondition;
 
 public interface BoardDAO {
 
-	BoardDTO select(Integer b_num) throws Exception;
+	BoardDTO select(BoardDTO boardDTO) throws Exception;
 
 	int count() throws Exception;
 

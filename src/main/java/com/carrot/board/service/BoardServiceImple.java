@@ -21,8 +21,8 @@ public class BoardServiceImple implements BoardService {
 	FileService fileService;
 	
 	@Override
-	public BoardDTO select(Integer b_num) throws Exception {
-		return boardDAO.select(b_num);
+	public BoardDTO select(BoardDTO boardDTO) throws Exception {
+		return boardDAO.select(boardDTO);
 	}
 
 	public int getCount() throws Exception {
@@ -64,9 +64,9 @@ public class BoardServiceImple implements BoardService {
 
 	// 읽을 때 조회되도록 한번에 묶어서 사용
 	@Override
-	public BoardDTO read(int b_num) throws Exception {
-		BoardDTO boardDTO = boardDAO.select(b_num);
-		boardDAO.increaseViewCnt(b_num);
+	public BoardDTO read(BoardDTO boardDTO) throws Exception {
+		boardDTO = boardDAO.select(boardDTO);
+		boardDAO.increaseViewCnt(boardDTO.getB_num());
 		return boardDTO;
 	}
 	

@@ -20,8 +20,8 @@ public class BoardDAOImpl implements BoardDAO {
 	String namespace = "com.carrot.board.dao.BoardMapper.";
 
 	@Override
-	public BoardDTO select(Integer b_num) throws Exception {
-		return session.selectOne(namespace + "select", b_num);
+	public BoardDTO select(BoardDTO boardDTO) throws Exception {
+		return session.selectOne(namespace + "select", boardDTO);
 	}
 
 	@Override

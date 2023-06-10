@@ -182,23 +182,6 @@ a{
     justify-content: space-between;
 }
 
-.crud-wrap{
-	display: flex;
-}
-
-.crud-wrap .btnModify,.btnDel{
-    font-size: 14px;
-    line-height: 14px;
-    font-weight: bold;
-    color: #fff;
-    background-color: #FF7E36;
-    border: none;
-    width: 45px;
-    height: 30px;
-    border-radius: 8px;
-    margin-right: 5px;
-}
-
 .contentInfo{
     font-size: 15px;
     line-height: 15px;
@@ -257,11 +240,23 @@ a{
     padding-right: 20px;
     margin-right:20px;
 }
-.xi-heart-o{
+
+.likey, .disLikey{
+	border: 0;
+	outline: 0;
+	background-color: transparent;
+}
+
+.heartBtn i{
+    color: #FF7E36;
+    font-size: 50px;
+}
+
+.far fa-heart{
     color: rgb(134,142,150);
     cursor: pointer;
 }
-.xi-heart-o:active{
+.far fa-heart:active{
 }
 
 /* price */
@@ -277,6 +272,26 @@ a{
     font-weight: bold;
     color: #FF7E36;
 }
+
+.crud-wrap{
+	position: absolute;
+    right: 180px;
+}
+
+.crud-wrap .btnModify,.btnDel{
+	border: 0;
+	outline: 0;
+    font-size: 14px;
+    line-height: 14px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #FF7E36;
+    width: 45px;
+    height: 30px;
+    border-radius: 8px;
+    margin-right: 5px;
+}
+
 .chatBtn{
     position:absolute;
     right: 20px;

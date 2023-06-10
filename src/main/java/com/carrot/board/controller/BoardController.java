@@ -41,24 +41,18 @@ public class BoardController {
 		likeyDTO.setL_pbnum(b_num);
 		likeyDTO.setL_email(l_email);
 
-		System.out.println("downLikeCnt b_num" + b_num);
-		System.out.println("downLikeCnt likeyDTO" + likeyDTO);
-		
-		try {
-			int cnt = service.getCount();
-			System.out.println(cnt);
+		System.out.println("downLikeCnt b_num ->" + b_num);
+		System.out.println("downLikeCnt likeyDTO ->" + likeyDTO);
 
-			if (cnt != 0) {
-				if (likeyService.deleteLike(likeyDTO) != 1)
-					throw new Exception("LikeDown_Likey failed");
-				if (service.decreaseLikeCnt(b_num, boardDto) != 1)
-					throw new Exception("LikeDown_Board failed");
-			}
+		try {
+			if (likeyService.deleteLike(likeyDTO) != 1)
+				throw new Exception("LikeDown_Likey failed");
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		return "junggoDetail";
+		return "redirect:/board/read?menu=board&b_num=" + b_num;
 	}
 
 	@GetMapping("/like")
@@ -68,26 +62,19 @@ public class BoardController {
 		likeyDTO.setL_menu("2");
 		likeyDTO.setL_pbnum(b_num);
 		likeyDTO.setL_email(l_email);
-		
-		System.out.println("upLikeCnt b_num" + b_num);
-		System.out.println("upLikeCnt likeyDTO" + likeyDTO);
+
+		System.out.println("upLikeCnt b_num " + b_num);
+		System.out.println("upLikeCnt likeyDTO " + likeyDTO);
 
 		try {
-			int cnt = service.getCount();
-			
-			System.out.println("cnt " + cnt);
 
-			if (cnt == 0) {
-				if (likeyService.insertLike(likeyDTO) != 1)
-					throw new Exception("LikeUp_Likey failed");
-				if (service.increaseLikeCnt(b_num, boardDto) != 1)
-					throw new Exception("LikeUp_Board failed");
-			}
+			if (likeyService.insertLike(likeyDTO) != 1)
+				throw new Exception("LikeUp_Likey failed");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		return "junggoDetail";
+		return "redirect:/board/read?menu=board&b_num=" + b_num;
 	}
 
 	@PostMapping("/remove")
@@ -148,7 +135,7 @@ public class BoardController {
 
 		try {
 			System.out.println("select -> boardDTO : " + boardDTO);
-			boardDTO = service.select(boardDTO.getB_num());
+			boardDTO = service.select(boardDTO);
 
 			m.addAttribute("boardDTO", boardDTO);
 			m.addAttribute("menu", "board");
@@ -226,12 +213,18 @@ public class BoardController {
 	}
 
 	@GetMapping("/read")
-	public String read(Integer b_num, Integer page, Integer pageSize, Model m) {
+	public String read(Integer b_num, Integer page, Integer pageSize, Model m, HttpSession session) {
 
 		try {
-			BoardDTO boardDTO = service.read(b_num);
+			BoardDTO boardDTO = new BoardDTO();
+			boardDTO.setB_num(b_num);
+			String b_email = (String) session.getAttribute("m_email");
+			boardDTO.setB_email(b_email);
+			boardDTO = service.read(boardDTO);
+			
+			System.out.println("read  boardDTO -> " + boardDTO);
 			m.addAttribute("boardDTO", boardDTO);
-			m.addAttribute("menu", "board");
+			m.addAttribute("menu", "board"); 
 			m.addAttribute("page", page);
 			m.addAttribute("pageSize", pageSize);
 

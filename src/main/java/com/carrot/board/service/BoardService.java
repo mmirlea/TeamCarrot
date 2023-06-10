@@ -9,7 +9,7 @@ import com.carrot.board.domain.SearchCondition;
 
 public interface BoardService {
 
-	BoardDTO select(Integer b_num) throws Exception;
+	BoardDTO select(BoardDTO boardDTO) throws Exception;
 
 	int getCount() throws Exception;
 
@@ -26,7 +26,7 @@ public interface BoardService {
 	List<BoardDTO> getAll() throws Exception;
 
 	// 읽을 때 조회되도록 한번에 묶어서 사용
-	BoardDTO read(int b_num) throws Exception;
+	BoardDTO read(BoardDTO boardDTO) throws Exception;
 
 	int increaseLikeCnt(Integer b_num, BoardDTO boardDto) throws Exception;
 

@@ -13,13 +13,14 @@
 		<result property="b_email" column="B_EMAIL" />
 		<result property="b_title" column="B_TITLE" />
 		<result property="b_content" column="B_CONTENT" />
+		<result property="b_img" column="B_IMG" />
 		<result property="b_crDate" column="B_CRDATE" />
 		<result property="b_upDate" column="B_UPDATE" />
 		<result property="b_likey" column="B_LIKEY" />
+		<result property="b_likeYN" column="B_LIKEYN" />
 		<result property="b_likeyEmail" column="B_LIKEYEMAIL" />
 		<result property="b_comm" column="B_COMM" />
 		<result property="b_viewCnt" column="B_VIEWCNT" />
-		<result property="b_img" column="B_IMG" />
 		<association property="userDTO" javaType="UserDTO">
 			<id property="m_email" column="M_EMAIL" />
 			<result property="m_nicknm" column="M_NICKNM" />
@@ -30,10 +31,12 @@
 	</resultMap>
 
 	<!-- 게시글 읽어오기 -->
-	<select id="select" parameterType="int" resultMap="BoardJoin">
-		SELECT B_MENU,   B_NUM,    B_CATE,  B_EMAIL, B_TITLE,   B_CONTENT, 
-			   B_CRDATE, B_UPDATE, B_LIKEY, B_COMM,  B_VIEWCNT, 
-			   M_NICKNM, M_ADDR1, B_IMG
+	<select id="select" parameterType="BoardDTO" resultMap="BoardJoin">
+		SELECT B_MENU,   B_NUM,    B_CATE,  B_EMAIL,   B_TITLE, B_CONTENT, 
+			   B_CRDATE, B_UPDATE, B_COMM,  B_VIEWCNT, B_IMG,
+			   M_NICKNM, M_ADDR1,  
+			   (SELECT COUNT(*) CNT FROM LIKEY WHERE B_MENU = L_MENU AND B_NUM= L_PBNUM )AS B_LIKEY,
+			   (SELECT DECODE(L_EMAIL, #{b_email}, 'Y', 'N') FROM LIKEY WHERE B_MENU = L_MENU AND B_NUM= L_PBNUM )AS B_LIKEYN
 		  FROM BOARD LEFT OUTER JOIN MEMBER
 		    ON B_EMAIL = M_EMAIL
 		 WHERE B_MENU = 2
@@ -201,9 +204,10 @@
 	<select id="searchSelectPage" parameterType="SearchCondition" resultMap="BoardJoin">
 		SELECT *
 		  FROM (SELECT ROWNUM RNUM, A.*
-				  FROM (SELECT B_MENU,   B_NUM,    B_CATE,  B_EMAIL, 	  B_TITLE, B_CONTENT,
-				  			   B_CRDATE, B_UPDATE, B_LIKEY, B_LIKEYEMAIL, B_COMM,  B_VIEWCNT,
-				  			   M_NICKNM, M_ADDR1,  M_ADDR2, B_IMG   
+				  FROM (SELECT B_MENU,   B_NUM,    B_CATE,   B_EMAIL, 	   B_TITLE, B_CONTENT,
+				  			   B_IMG,    B_CRDATE, B_UPDATE, B_LIKEYEMAIL, B_COMM,  B_VIEWCNT,
+				  			   M_NICKNM, M_ADDR1,  M_ADDR2,
+				  			   (SELECT COUNT(*) CNT FROM LIKEY WHERE B_MENU = L_MENU AND B_NUM= L_PBNUM )AS B_LIKEY
 					      FROM BOARD LEFT OUTER JOIN MEMBER
 		    				ON B_EMAIL = M_EMAIL
 		 				 WHERE B_MENU = '2'
