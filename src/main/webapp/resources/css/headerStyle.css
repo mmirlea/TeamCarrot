@@ -239,10 +239,10 @@ i {
 .categoryBtn{
 	appearance: none;
 }
-.fas{
+.categoryBtn .fas{
     font-size: 50px;
     margin-bottom: 8px;
-    color: #A0A0A0;
+    /* color: #A0A0A0; */
 }
 .fas:hover{
 	color:#FF7E36;
