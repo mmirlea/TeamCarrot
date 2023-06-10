@@ -20,8 +20,8 @@ public class BoardDAOImpl implements BoardDAO {
 	String namespace = "com.carrot.board.dao.BoardMapper.";
 
 	@Override
-	public BoardDTO select(Integer b_num) throws Exception {
-		return session.selectOne(namespace + "select", b_num);
+	public BoardDTO select(BoardDTO boardDTO) throws Exception {
+		return session.selectOne(namespace + "select", boardDTO);
 	}
 
 	@Override
@@ -68,19 +68,13 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	public int increaseLikeCnt(int b_num, BoardDTO boardDTO) throws Exception {
-		Map map = new HashMap();
-		map.put("b_num", b_num);
-		map.put("boardDTO", boardDTO);
-		return session.update(namespace + "increaseLikeCnt", map);
+	public int increaseLikeCnt(Integer b_num, BoardDTO boardDto) throws Exception {
+		return session.update(namespace + "increaseLikeCnt", b_num);
 	}
 
 	@Override
-	public int decreaseLikeCnt(String b_likeyEmail, BoardDTO boardDTO) throws Exception {
-		Map map = new HashMap();
-		map.put("b_likeyEmail", b_likeyEmail);
-		map.put("boardDTO", boardDTO);
-		return session.update(namespace + "decreaseLikeCnt", map);
+	public int decreaseLikeCnt(Integer b_num, BoardDTO boardDto) throws Exception {
+		return session.update(namespace + "decreaseLikeCnt", b_num);
 	}
 
 	@Override
@@ -105,6 +99,7 @@ public class BoardDAOImpl implements BoardDAO {
 	public int searchResultCnt(SearchCondition sc) throws Exception {
 		return session.selectOne(namespace + "searchResultCnt", sc);
 	}
+
 	@Override
 	public int updateCommentsCnt(int cnt, Integer b_num) throws Exception {
 		Map map = new HashMap();

@@ -21,23 +21,14 @@ public class BoardDTO {
 	private Integer b_comm;
 	private Integer b_viewCnt;
 
+	private String b_likeYN;
 	private UserDTO userDTO;
-	
+	private LikeyDTO likeyDTO;
+
 	private MultipartFile fileUpload;
 
 	public BoardDTO() {
 	}
-
-	
-	
-	public BoardDTO(Integer b_num, String b_cate, String b_email, String b_title, String b_content) {
-		this.b_num = b_num;
-		this.b_cate = b_cate;
-		this.b_email = b_email;
-		this.b_title = b_title;
-		this.b_content = b_content;
-	}
-
 
 	public BoardDTO(String b_cate, String b_email, String b_title, String b_content) {
 		this.b_cate = b_cate;
@@ -53,7 +44,7 @@ public class BoardDTO {
 		this.b_content = b_content;
 		this.b_tempSaveYn = b_tempSaveYn;
 	}
-	
+
 	public MultipartFile getFileUpload() {
 		return fileUpload;
 	}
@@ -62,12 +53,28 @@ public class BoardDTO {
 		this.fileUpload = fileUpload;
 	}
 
+	public LikeyDTO getLikeyDTO() {
+		return likeyDTO;
+	}
+
+	public void setLikeyDTO(LikeyDTO likeyDTO) {
+		this.likeyDTO = likeyDTO;
+	}
+
 	public UserDTO getUserDTO() {
 		return userDTO;
 	}
 
 	public void setUserDTO(UserDTO userDTO) {
 		this.userDTO = userDTO;
+	}
+
+	public String getB_likeYN() {
+		return b_likeYN;
+	}
+
+	public void setB_likeYN(String b_likeYN) {
+		this.b_likeYN = b_likeYN;
 	}
 
 	public String getB_menu() {
@@ -187,8 +194,8 @@ public class BoardDTO {
 		return "BoardDTO [b_menu=" + b_menu + ", b_num=" + b_num + ", b_cate=" + b_cate + ", b_email=" + b_email
 				+ ", b_title=" + b_title + ", b_content=" + b_content + ", b_img=" + b_img + ", b_crDate=" + b_crDate
 				+ ", b_upDate=" + b_upDate + ", b_tempSaveYn=" + b_tempSaveYn + ", b_likey=" + b_likey
-				+ ", b_likeyEmail=" + b_likeyEmail + ", b_comm=" + b_comm + ", b_viewCnt=" + b_viewCnt + ", userDTO="
-				+ userDTO + "]";
+				+ ", b_likeyEmail=" + b_likeyEmail + ", b_comm=" + b_comm + ", b_viewCnt=" + b_viewCnt + ", b_likeYN="
+				+ b_likeYN + ", userDTO=" + userDTO + ", likeyDTO=" + likeyDTO + ", fileUpload=" + fileUpload + "]";
 	}
 
 	@Override

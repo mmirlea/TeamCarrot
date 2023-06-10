@@ -25,9 +25,9 @@ public interface ProductDAO {
 	
 	int increaseViewCnt(Integer p_num) throws Exception;
 	
-	int increaseLikeCnt(int p_num, ProductDTO productDTO) throws Exception;
+	int increaseLikeCnt(Integer b_num) throws Exception;
 	
-	int decreaseLikeCnt(String p_likeyemail, ProductDTO productDTO) throws Exception;
+	int decreaseLikeCnt(Integer b_num) throws Exception;
 	
 	String getLikeyEmail(ProductDTO productDTO) throws Exception;
 	

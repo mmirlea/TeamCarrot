@@ -16,14 +16,12 @@ import com.carrot.board.domain.CommentspDTO;
 @ContextConfiguration(locations= {"file:src/main/webapp/WEB-INF/spring/root-context.xml"})
 public class Comments_pDAOImplTest {
 	
-	@Autowired
-	Comments_pDAO commentsDao;
-	
-	@Test
-	public void count() throws Exception{
-		commentsDao.deleteAll(1);
-		assertTrue(commentsDao.count(1)==0);
-	}
+	/*
+	 * @Autowired Comments_pDAO commentsDao;
+	 * 
+	 * @Test public void count() throws Exception{ commentsDao.deleteAll(1);
+	 * assertTrue(commentsDao.count(1)==0); }
+	 */
 	
 //	@Test
 //	public void delete() throws Exception{

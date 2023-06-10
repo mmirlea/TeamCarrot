@@ -61,14 +61,13 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	@Override
-	public int increaseLikeCnt(int p_num, ProductDTO dto) throws Exception {
-		return productDAO.increaseLikeCnt(p_num, dto);
+	public int increaseLikeCnt(Integer b_num) throws Exception {
+		return productDAO.increaseLikeCnt(b_num);
 	}
 
 	@Override
-	public int decreaseLikeCnt(String p_likeyemail, ProductDTO dto) throws Exception {
-		p_likeyemail = productDAO.getLikeyEmail(dto);
-		return productDAO.decreaseLikeCnt(p_likeyemail, dto);
+	public int decreaseLikeCnt(Integer b_num) throws Exception {
+		return productDAO.decreaseLikeCnt(b_num);
 	}
 
 	@Override
