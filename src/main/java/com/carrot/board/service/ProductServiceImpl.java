@@ -18,9 +18,9 @@ public class ProductServiceImpl implements ProductService {
 	FileService fileService;
 	
 	@Override
-	public ProductDTO read(Integer p_num) throws Exception {
-		ProductDTO productDTO = productDAO.select(p_num);
-		productDAO.increaseViewCnt(p_num);
+	public ProductDTO read(ProductDTO productDTO) throws Exception {
+		productDTO = productDAO.select(productDTO);
+		productDAO.increaseViewCnt(productDTO.getP_num());
 		return productDTO;
 	}
 
@@ -87,7 +87,7 @@ public class ProductServiceImpl implements ProductService {
 		return productDAO.searchResultCnt(scp);
 	}
 	
-	public ProductDTO select(Integer p_num) throws Exception{
-		return productDAO.select(p_num);
+	public ProductDTO select(ProductDTO dto) throws Exception{
+		return productDAO.select(dto);
 	}
 }

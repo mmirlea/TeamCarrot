@@ -15,6 +15,7 @@
 		<result property="p_content" column="p_content"/>
 		<result property="p_price" column="p_price"/>
 		<result property="p_likey" column="p_likey"/>
+		<result property="p_likeYN" column="p_likeYN"/>
 		<result property="p_comm" column="p_comm"/>
 		<result property="p_viewcnt" column="p_viewcnt"/>
 		<result property="p_tempsaveyn" column="p_tempsaveyn"/>
@@ -43,10 +44,12 @@
 	</select>
 	
 	<!-- 게시글 읽어오기 -->	
-	<select id="select" parameterType="int" resultMap="ProMemJoin">
+	<select id="select" parameterType="ProductDTO" resultMap="ProMemJoin">
 		SELECT p.p_menu, p.p_num, p.p_cate, p.p_email, p.p_title, p.p_content, p.p_img, 
-			   p.p_crdate, p.p_update, p.p_tempsaveyn, p.p_price, p.p_likey, p.p_likeyemail, p.p_negoyn, p.p_img,
-			   p.p_comm, p.p_viewcnt, m.m_nicknm, m.m_addr1, m.m_addr2, m.m_ondo, m.m_proimg
+			   p.p_crdate, p.p_update, p.p_tempsaveyn, p.p_price, p.p_negoyn, p.p_img,
+			   p.p_comm, p.p_viewcnt, m.m_nicknm, m.m_addr1, m.m_addr2, m.m_ondo, m.m_proimg,  
+			   (SELECT COUNT(*) CNT FROM LIKEY WHERE P_MENU = L_MENU AND P_NUM= L_PBNUM )AS p_likey,
+			   (SELECT DECODE(L_EMAIL, #{p_email}, 'Y', 'N') FROM LIKEY WHERE P_MENU = L_MENU AND P_NUM= L_PBNUM )AS p_likeYN
 		FROM product p 
 		INNER JOIN member m
 		ON p.p_email = m.m_email
@@ -202,7 +205,8 @@
 		SELECT * 
 		FROM(SELECT ROWNUM rNum, A.* 
 			FROM(SELECT p.p_menu, p.p_num, p.p_cate, m.m_nicknm, m.m_addr1, m.m_addr2, 
-			  			 p.p_title, p.p_content, p.p_price, p.p_likey, p.p_comm, p.p_viewcnt, p.p_img, p.p_update, p.p_crdate
+			  			 p.p_title, p.p_content, p.p_price, p.p_comm, p.p_viewcnt, p.p_img, p.p_update, p.p_crdate,
+			  			 (SELECT COUNT(*) CNT FROM LIKEY WHERE P_MENU = L_MENU AND P_NUM= L_PBNUM )AS p_likey
 				  FROM product p
 				  INNER JOIN member m
 				  ON p.p_email = m.m_email

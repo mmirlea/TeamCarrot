@@ -22,8 +22,8 @@ public class ProductDAOImpl implements ProductDAO {
 	String namespace = "com.carrot.board.dao.ProductMapper.";
 	
 	@Override
-	public ProductDTO select(Integer p_num) throws Exception{
-		return session.selectOne(namespace + "select", p_num);
+	public ProductDTO select(ProductDTO dto) throws Exception{
+		return session.selectOne(namespace + "select", dto);
 	}
 	
 	@Override

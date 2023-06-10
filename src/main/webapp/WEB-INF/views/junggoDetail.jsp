@@ -412,11 +412,19 @@
     	let bNum = $('#b_num').val();
  		let pNum = $('#p_num').val();
  		
- 		if ('${boardDTO.b_likeYN}' === 'Y') {
-			$("#btnLikey").hide();
-    	} else {
-			$("#btnDisLikey").hide();
-    	}
+ 		if(menu !== 'board'){
+ 	 		if ('${productDTO.p_likeYN}' === 'Y') {
+ 				$("#btnLikey").hide();
+ 	    	} else {
+ 				$("#btnDisLikey").hide();
+ 	    	}
+ 		} else {
+ 	 		if ('${boardDTO.b_likeYN}' === 'Y') {
+ 				$("#btnLikey").hide();
+ 	    	} else {
+ 				$("#btnDisLikey").hide();
+ 	    	}
+ 		}
     	
 		$("#btnDel").on("click", function(){
 			if(!confirm("정말로 삭제하시겠습니까?")) return;

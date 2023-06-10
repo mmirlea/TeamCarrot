@@ -36,57 +36,47 @@ public class ProductController {
 	LikeyService likeyService;
 
 	@GetMapping("/dislike")
-	public String downLikeCnt(Integer b_num, LikeyDTO likeyDTO, HttpSession session) {
+	public String downLikeCnt(Integer p_num, LikeyDTO likeyDTO, HttpSession session) {
 		String l_email = (String) session.getAttribute("m_email");
 
-		likeyDTO.setL_menu("2");
-		likeyDTO.setL_pbnum(b_num);
+		likeyDTO.setL_menu("1");
+		likeyDTO.setL_pbnum(p_num);
 		likeyDTO.setL_email(l_email);
 
-		System.out.println("downLikeCnt b_num" + b_num);
+		System.out.println("downLikeCnt p_num" + p_num);
 		System.out.println("downLikeCnt likeyDTO" + likeyDTO);
 
 		try {
-			int cnt = service.getCount();
-			System.out.println(cnt);
-
-			if (cnt != 0) {
-				if (likeyService.deleteLike(likeyDTO) != 1)
-					throw new Exception("LikeDown_Likey failed");
-				if (service.decreaseLikeCnt(b_num) != 1)
-					throw new Exception("LikeDown_Board failed");
-			}
+			if (likeyService.deleteLike(likeyDTO) != 1)
+				throw new Exception("LikeDown_Likey failed");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		return "junggoDetail";
+		return "redirect:/carrot/read?menu=product&p_num=" + p_num;
 	}
 
 	@GetMapping("/like")
-	public String upLikeCnt(Integer b_num, LikeyDTO likeyDTO, HttpSession session) {
+	public String upLikeCnt(Integer p_num, LikeyDTO likeyDTO, HttpSession session) {
 		String l_email = (String) session.getAttribute("m_email");
 
-		likeyDTO.setL_menu("2");
-		likeyDTO.setL_pbnum(b_num);
+		likeyDTO.setL_menu("1");
+		likeyDTO.setL_pbnum(p_num);
 		likeyDTO.setL_email(l_email);
+		
+		System.out.println("upLikeCnt p_num" + p_num);
+		System.out.println("upLikeCnt likeyDTO" + likeyDTO);
 
 		try {
-			int cnt = service.getCount();
-
-			if (cnt == 0) {
-				if (likeyService.insertLike(likeyDTO) != 1)
-					throw new Exception("LikeUp_Likey failed");
-				if (service.increaseLikeCnt(b_num) != 1)
-					throw new Exception("LikeUp_Board failed");
-			}
+			if (likeyService.insertLike(likeyDTO) != 1)
+				throw new Exception("LikeUp_Likey failed");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		return "junggoDetail";
+		return "redirect:/carrot/read?menu=product&p_num=" + p_num;
 	}
-
+	
 	// 중고물품 게시글 목록 출력
 	@GetMapping("/junggoMain")
 	public String list(Model m, SearchConditionP scp) {
@@ -120,9 +110,10 @@ public class ProductController {
 	public String read(Integer p_num, Model m, Integer page, Integer pageSize, HttpSession session) {
 		String login_email = (String) session.getAttribute("m_email");
 		try {
-			ProductDTO productDTO = service.read(p_num);
-			// BoardDTO boardDTO = new BoardDTO(0 , "nocate", "noemail", "notitle",
-			// "nocontent");
+			ProductDTO productDTO = new ProductDTO();
+			productDTO.setP_num(p_num);
+			productDTO.setP_email(login_email);
+			productDTO = service.read(productDTO);
 
 			System.out.println(productDTO);
 
@@ -218,7 +209,7 @@ public class ProductController {
 
 		try {
 			System.out.println("select -> productDTO : " + productDTO);
-			productDTO = service.select(productDTO.getP_num());
+			productDTO = service.select(productDTO);
 
 			System.out.println(productDTO);
 			m.addAttribute("productDTO", productDTO);
