@@ -134,22 +134,31 @@ public class ProductController {
 		return "junggoDetail";
 	}
 
+	//탭에서 + 버튼을 눌렸을 때, 글쓰기 페이지가 나오게 하는 메서드
 	@GetMapping("/write")
-	public String write(Model m) {
+	public String write(Model m, HttpServletRequest request) {
+		
+				
 		m.addAttribute("mode", "new");
 		m.addAttribute("menu", "product");
-		return "boardDetail";
-	}
-
-	@PostMapping("/write")
-	public String write(ProductDTO productDTO, RedirectAttributes rattr, Model m, HttpSession session,
-			HttpServletRequest request) {
+		
 		// 로그인 확인
 		if (!loginCheck(request))
 			return "redirect:/login/login?toURL=" + request.getRequestURL();
-
+		
+		return "boardDetail";
+	}
+	
+	//글쓰기 페이지에서 완료버튼을 눌렸을 때, 글쓰기가 가능하게 하는 메서드
+	@PostMapping("/write")
+	public String write(ProductDTO productDTO, RedirectAttributes rattr, Model m, HttpSession session,
+			HttpServletRequest request) {
+		
 		String p_email = (String) session.getAttribute("m_email");
 		productDTO.setP_email(p_email);
+		
+		System.out.println(p_email);
+		
 		if (request.getParameter("p_negoyn") == null) {
 			productDTO.setP_negoyn("N");
 		}
@@ -295,15 +304,6 @@ public class ProductController {
 	}
 
 	// 로그인 확인
-	@GetMapping("/chkLogin")
-	public String chkLogin(Model m, HttpServletRequest request) {
-
-		System.out.println("앎ㄴㅇㄻㄴㅇㄹ");
-		if (!loginCheck(request))
-			return "redirect:/login/login?toURL=" + request.getRequestURL();
-		return "redirect:/login/login?toURL=" + request.getRequestURL();
-	}
-
 	private boolean loginCheck(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		return session.getAttribute("m_email") != null;

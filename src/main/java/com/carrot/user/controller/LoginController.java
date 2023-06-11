@@ -60,7 +60,7 @@ public class LoginController {
 		
 		toURL = toURL == null || toURL.equals("") ? "/" : toURL;
 		
-		return "redirect:/";
+		return "redirect:" + toURL;
 		
 	}
 	

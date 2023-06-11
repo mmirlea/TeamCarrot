@@ -179,7 +179,11 @@ public class BoardController {
 	}
 
 	@GetMapping("/write")
-	public String write(Model m) {
+	public String write(Model m, HttpServletRequest request) {
+		// 로그인 확인
+		if (!loginCheck(request))
+			return "redirect:/login/login?toURL=" + request.getRequestURL();
+		
 		m.addAttribute("mode", "new");
 		m.addAttribute("menu", "board");
 		return "boardDetail";
@@ -188,10 +192,7 @@ public class BoardController {
 	@PostMapping("/write")
 	public String write(BoardDTO boardDTO, RedirectAttributes rattr, Model m, HttpSession session,
 			HttpServletRequest request) {
-		// 로그인 확인
-		if (!loginCheck(request))
-			return "redirect:/login/login?toURL=" + request.getRequestURL();
-
+		
 		String b_email = (String) session.getAttribute("m_email");
 		boardDTO.setB_email(b_email);
 

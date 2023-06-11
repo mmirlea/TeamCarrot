@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-<link href="<c:url value='/resources/css/headerStyle.css?bab'/>" rel="stylesheet" />
+<link href="<c:url value='/resources/css/headerStyle.css?b'/>" rel="stylesheet" />
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 
 </head>
@@ -168,10 +168,7 @@
 	$(document).ready(function() {
 		$(".categoryBtn").change(function(){
 			let form = $('#form');
-					
-			/* form.attr("action", "<c:url value='/carrot/junggoMain'/>");
-			form.attr("method", "GET"); */
-										
+													
 			form.submit();
 			
 		})
