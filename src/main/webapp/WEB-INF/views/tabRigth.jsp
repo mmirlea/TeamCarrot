@@ -64,7 +64,7 @@ $(document).ready(function() {
 		</a>
 	</form> <!--.divTab-->
 	
-	<script type="text/javascript">
+<!-- 	<script type="text/javascript">
 	$(document).ready(function() {
 		$("#wirte").on("click", function() {
 			let form = $('#form');
@@ -82,6 +82,6 @@ $(document).ready(function() {
 			
 		})
 	})
-	</script>
+	</script> -->
 </body>
 </html>
