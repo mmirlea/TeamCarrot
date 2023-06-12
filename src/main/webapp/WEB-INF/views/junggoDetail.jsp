@@ -130,7 +130,6 @@
 	            </div><!--.heartBar-wrap-->
     	</div> <!-- .container -->
     	
-    	<input type="text">${boardDTO.likeyDTO.l_menu}
     </form><!--.wrap-->
   
     
@@ -235,8 +234,8 @@
     <script>
 		//댓글 관련-----------------------------------------------
 
-		let p_num = Math.max(0,${productDTO.p_num});
-		//let cp_pnum=${productDTO.p_num};
+		//let p_num = Math.max(0,${productDTO.p_num});
+		let cp_pnum=${productDTO.p_num};
 
 		
 		//댓글 리스트
@@ -377,7 +376,7 @@
 				
 				if(commentsp.cp_num != commentsp.cp_pcnum)
 					tmp += 'ㄴ'
-				tmp += ' commenter=<span class="cp_email">' + commentsp.cp_email + '</span>'
+				tmp += ' commenter=<span class="cp_email">' + commentsp.cp_nicknm + '</span>'
 				tmp += ' comment=<span class="cp_content">' + commentsp.cp_content + '</span>'
 				tmp += ' up_date=' + dateToString(commentsp.cp_update)
 				tmp += ' <button class="delBtn">삭제</button>'

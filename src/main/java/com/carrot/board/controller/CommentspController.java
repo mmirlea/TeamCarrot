@@ -31,9 +31,11 @@ public class CommentspController {
 	public ResponseEntity<String> modify(@PathVariable Integer cp_num, @RequestBody CommentspDTO commentspDTO, HttpSession session, HttpServletRequest request){
 		session = request.getSession();
 		String cp_email = (String)session.getAttribute("m_email");
+		//String cp_nicknm = (String)session.getAttribute("m_nicknm");
 		
 		commentspDTO.setCp_num(cp_num);
 		commentspDTO.setCp_email(cp_email);
+		//commentspDTO.setCp_nicknm(cp_nicknm);
 		
 		System.out.println("dto : " + commentspDTO);
 		

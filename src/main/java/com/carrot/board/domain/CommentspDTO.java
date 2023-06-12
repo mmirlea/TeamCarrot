@@ -10,18 +10,20 @@ public class CommentspDTO {
 	private String cp_content;
 	private Date cp_crdate;
 	private Date cp_update;
+	private String cp_nicknm;
 	
 	public CommentspDTO() {}
 
-	public CommentspDTO(Integer cp_pnum, Integer cp_pcnum, String cp_email, String cp_content) {
+	public CommentspDTO(Integer cp_pnum, Integer cp_pcnum, String cp_email, String cp_content, String cp_nicknm) {
 		this.cp_pnum = cp_pnum;
 		this.cp_pcnum = cp_pcnum;
 		this.cp_email = cp_email;
 		this.cp_content = cp_content;
+		this.cp_nicknm = cp_nicknm;
 	}
 
 	public CommentspDTO(Integer cp_pnum, Integer cp_num, Integer cp_pcnum, String cp_email, String cp_content,
-			Date cp_crdate, Date cp_update) {
+			Date cp_crdate, Date cp_update, String cp_nicknm) {
 		this.cp_pnum = cp_pnum;
 		this.cp_num = cp_num;
 		this.cp_pcnum = cp_pcnum;
@@ -29,6 +31,7 @@ public class CommentspDTO {
 		this.cp_content = cp_content;
 		this.cp_crdate = cp_crdate;
 		this.cp_update = cp_update;
+		this.cp_nicknm = cp_nicknm;
 	}
 	
 	public Integer getCp_pnum() {
@@ -141,6 +144,14 @@ public class CommentspDTO {
 		} else if (!cp_pnum.equals(other.cp_pnum))
 			return false;
 		return true;
+	}
+
+	public String getCp_nicknm() {
+		return cp_nicknm;
+	}
+
+	public void setCp_nicknm(String cp_nicknm) {
+		this.cp_nicknm = cp_nicknm;
 	}
 
 	
