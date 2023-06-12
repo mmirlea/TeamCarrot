@@ -178,6 +178,7 @@ a{
 }
 
 .content-wrap .content-top{
+	width: 800px;
 	display: flex;
     justify-content: space-between;
 }
