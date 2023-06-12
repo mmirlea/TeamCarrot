@@ -344,6 +344,7 @@ label[for$="Comments"]>span{
     vertical-align: middle;
     /* background-color: aqua; */
     margin-right: 8px;
+    font-size: 12px;
 
 }
 input[type="radio"]{
