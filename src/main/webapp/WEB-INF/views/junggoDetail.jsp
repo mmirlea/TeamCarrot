@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="<c:url value='/resources/css/junggoDetailStyle.css?a'/>" rel="stylesheet" />
+<link href="<c:url value='/resources/css/junggoDetailStyle.css?afaa'/>" rel="stylesheet" />
 <!-- swiper cdn -->
 <link  rel="stylesheet"  href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
@@ -162,7 +162,6 @@
 			                    <div class="commentsProfile-Text">
 			                        <span class="commentsNickname">블루</span>
 			                        <span>주소1 </span>
-			                        <span>주소2</span>
 			                    </div>
 			                    <div class="comments-textbox">
 			                        안녕하세요 여기는 댓글입니다.
@@ -234,8 +233,8 @@
     <script>
 		//댓글 관련-----------------------------------------------
 
-		//let p_num = Math.max(0,${productDTO.p_num});
-		let cp_pnum=${productDTO.p_num};
+		let cp_pnum = Math.max(0,${productDTO.p_num});
+		//let cp_pnum=${productDTO.p_num};
 
 		
 		//댓글 리스트
@@ -403,7 +402,7 @@
 			let MM = addZero(date.getMinutes());
 			let ss = addZero(date.getSeconds());
 			
-			return yyyy+"년"+mm+"월"+dd+"일"+MM+":"+ss;
+			return yyyy+"년"+mm+"월"+dd+"일"+HH+":"+MM;
 		}
 	</script>
     
