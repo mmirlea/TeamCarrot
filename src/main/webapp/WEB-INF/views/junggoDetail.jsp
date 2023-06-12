@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="<c:url value='/resources/css/junggoDetailStyle.css'/>" rel="stylesheet" />
+<link href="<c:url value='/resources/css/junggoDetailStyle.css?a'/>" rel="stylesheet" />
 <!-- swiper cdn -->
 <link  rel="stylesheet"  href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
@@ -80,6 +80,13 @@
 
             	<div class="content-top">
 	            	<h1 class="contentTitle">${menu == 'board' ? boardDTO.b_title : productDTO.p_title}</h1><!--.contentTitle-->
+            		<c:if test="${login_email != null && (login_email == productDTO.p_email || login_email == boardDTO.b_email)}">
+						<div class="crud-wrap">
+		                    <input type="hidden" value="${boardDTO.b_num} " name="b_num">
+		                    <button type="button" class="btnModify" id="btnModify" value="board">수정</button>
+		                    <button type="button" class="btnDel" id="btnDel">삭제</button>
+		                </div>
+	                </c:if>
             	</div>
 
                 <div class="contentInfo">
@@ -91,7 +98,7 @@
                     <span class="time">${menu == "board" ? boardDTO.b_upDate : productDTO.p_update}</span>
                 </div><!--contentInfo-->
                 <div class="content">
-
+					
                     <c:out value='${menu == "board" ? boardDTO.b_content : productDTO.p_content}'/>
                 </div><!--content-->
                 <div class="countUp">
@@ -116,12 +123,7 @@
 		                        <div class="priceNego">가격 제안 가능</div>
 		                    </div><!--priceInfo-->
             			</c:if>
-						<div class="crud-wrap">
-	                    	<input type="hidden" value="${menu eq 'board' ? boardDTO.b_num : 0}" name="b_num" id="b_num">
-	                    	<input type="hidden" value="${menu eq 'product' ? productDTO.p_num : 0}" name="p_num" id="p_num">
-	                    	<button type="button" class="btnModify" id="btnModify" value="board">수정</button>
-	                    	<button type="button" class="btnDel" id="btnDel">삭제</button>
-		                </div>
+						
 		                <button type="button" class="chatBtn">채팅하기</button>
 	                </div><!--.heartBar-->
 	                <hr>
