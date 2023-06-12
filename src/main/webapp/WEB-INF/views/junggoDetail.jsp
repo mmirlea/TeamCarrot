@@ -7,7 +7,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="<c:url value='/resources/css/junggoDetailStyle.css?afaa'/>" rel="stylesheet" />
+
+<link href="<c:url value='/resources/css/junggoDetailStyle.css?av'/>" rel="stylesheet" />
+
 <!-- swiper cdn -->
 <link  rel="stylesheet"  href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
@@ -146,10 +148,10 @@
 		        
 		        <div class="commentsFilter">
 		            <label for="firstComments">
-		                <input type="radio" id="firstComments" name="orderBtn" value="firstComments" checked="checked"><span>등록순</span>
+		                <input type="radio" id="firstComments" class="orderBtn" name="orderBtn" value="firstComments" checked="checked"><span>등록순</span>
 		            </label>
 		            <label for="lastComments">
-		                <input type="radio" id="lastComments" name="orderBtn" value="lastComments"><span>최신순</span>
+		                <input type="radio" id="lastComments" class="orderBtn" name="orderBtn" value="lastComments"><span>최신순</span>
 		            </label>
 		        </div><!--.commentsFilter-->
 		    </div><!--commentsHeader-->
