@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<link href="<c:url value='/resources/css/junggoDetailStyle.css?av'/>" rel="stylesheet" />
+<link href="<c:url value='/resources/css/junggoDetailStyle.css?aev'/>" rel="stylesheet" />
 
 <!-- swiper cdn -->
 <link  rel="stylesheet"  href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
@@ -142,7 +142,7 @@
 		    <div class="commentsHeader">
 		        <div class="commentsCnt">
 		            <div class="iconComments">
-		                <i class="xi-speech-o xi-2x"></i>
+		                <i class="xi-speech-o xi-x"></i>
 		             </div>
 		            <div class="daetgeul">댓글</div>
 		            <div class="commentsNum">${productDTO.p_comm}</div>
@@ -165,7 +165,8 @@
 			            <div class="comments-box">
 			                    <div class="commentsProfile-Text">
 			                        <span class="commentsNickname">블루</span>
-			                        <span>주소1 </span>
+			                        <span class="commentsAddr">주소1 </span>
+			                        <span class="commentsAddr">주소2 </span>
 			                    </div>
 			                    <div class="comments-textbox">
 			                        안녕하세요 여기는 댓글입니다.
@@ -187,7 +188,8 @@
 			            <div class="comments-box">
 			                    <div class="commentsProfile-Text">
 			                        <span class="commentsNickname">레드</span>
-			                        <span class="commentsAddress">남구 달동</span>
+			                        <span class="commentsAddr">울산광역시 남구</span>
+			                        <span class="commentsAddr">달동 </span>
 			                    </div>
 			                    <div class="comments-textbox">
 			                        안녕하세요 여기는 대댓글입니다.
@@ -204,7 +206,7 @@
 			            <div class="commentsWrite-box">
 			                <div class="commentsProfile-Text">
 			                    <span class="commentsNickname">블루</span>
-			                    <span class="commentsAddress">남구 옥동</span>
+			                    <span class="commentsAddr">남구 옥동</span>
 			                </div>                     
 			                <div class="div-textarea">
 			                    <textarea rows="1" placeholder="댓글을 남겨보세요" class="commentsWrite-textarea"></textarea>

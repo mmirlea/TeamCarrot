@@ -335,6 +335,9 @@ a{
 .daetgeul, .commentsNum{
     margin-right: 4px;
 }
+.daetgeul, commentsNum{
+	font-size: 16px;
+}
 /*commentsFilter*/
 label[for$="Comments"]{
     color: rgb(134,142,150);
@@ -387,19 +390,25 @@ input[type="radio"]:checked+ span {
     
 }
 .commentsProfile-Text .commentsNickname{
-    font-size: 15px;
+    font-size: 16px;
     line-height: 22px;
     font-weight: bold;
     margin-right: 4px;
 }
+.commentsAddr{
+	font-size: 14px;
+}
 .comments-textbox{
-    font-size: 15px;
+    font-size: 16px;
     line-height: 22px;
     margin-bottom: 12px;
 }
 .commentsInfo{
     color: rgb(134,142,150);
     margin-bottom: 12px;
+}
+.commentsInfo-date{
+	font-size: 14px;
 }
 .replyBtn{
     cursor: pointer;
