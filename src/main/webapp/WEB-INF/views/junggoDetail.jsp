@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<link href="<c:url value='/resources/css/junggoDetailStyle.css?a'/>" rel="stylesheet" />
+<link href="<c:url value='/resources/css/junggoDetailStyle.css?ssgas'/>" rel="stylesheet" />
 
 <!-- swiper cdn -->
 <link  rel="stylesheet"  href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
@@ -157,57 +157,9 @@
 		            </label>
 		        </div><!--.commentsFilter-->
 		    </div><!--commentsHeader-->
-                
-			<div class="comments-area">
-			    <ul>
-			        <li class="comments-list">
-			            <div class="commentsProfile-Img"><img src="../resources/img/memberImg.png" alt="회원이미지"></div>
-			            <div class="comments-box">
-			                    <div class="commentsProfile-Text">
-			                        <span class="commentsNickname">블루</span>
-			                        <span class="commentsAddr">주소1 </span>
-			                        <span class="commentsAddr">주소2 </span>
-			                    </div>
-			                    <div class="comments-textbox">
-			                        안녕하세요 여기는 댓글입니다.
-			                        <br>
-			                        안녕하세요 여기는 댓글입니다.
-			                        <br>
-			                        안녕하세요 여기는 댓글입니다.
-			                    </div>
-			                    <div class="commentsInfo">
-			                        <span class="commentsInfo-date">2023-04-05 12:12:12</span>
-			                        <span class="commentsInfo-replyBtn">
-			                            <button type="button" class="replyBtn">답글쓰기</button>
-			                        </span>
-			                    </div>
-			            </div><!-- comments-box -->
-			        </li>
-			        <li class="comments-list reply">
-			            <div class="commentsProfile-Img"><img src="../resources/img/memberImg.png" alt="회원이미지"></div>
-			            <div class="comments-box">
-			                    <div class="commentsProfile-Text">
-			                        <span class="commentsNickname">레드</span>
-			                        <span class="commentsAddr">울산광역시 남구</span>
-			                        <span class="commentsAddr">달동 </span>
-			                    </div>
-			                    <div class="comments-textbox">
-			                        안녕하세요 여기는 대댓글입니다.
-			                    </div>
-			                    <div class="commentsInfo">
-			                        <span class="commentsInfo-date">2023-04-06 15:15:15</span>
-			                        <span class="commentsInfo-replyBtn">
-			                            <button type="button" class="replyBtn">답글쓰기</button>
-			                        </span>
-			                    </div>
-			            </div><!--comments-box-->
-            </li>
-			    </ul>
-			</div><!-- comments-area -->
 		</div><!--.comments-wrap-->
     </form>
-    <div class="">
-		<!-- 댓글 표시 -->
+    <!-- 댓글 표시 -->
 		<div id="commentsList"></div>
 					
 		<div id="replyForm" style="display:none" class="commentsWrite-box">
@@ -246,8 +198,6 @@
 				
 			</div>
 		</c:if>
-    </div>
-    
     	
     	<%@ include file ="./footer.jsp" %>
     <script>
@@ -416,11 +366,11 @@
     				tmp += ' data-cb_pnum=' + commentsb.cb_pnum + '>'
     				
     				if(commentsb.cb_pcnum > 0)
-    					tmp += '&nbsp&nbsp&nbsp&nbsp&nbsp '
-    				/* tmp += ' <span class="m_proimg">' + ${userDTO.m_proimg} + '</span>' */
+    					tmp += '<img src="../resources/img/대댓글.png" alt="회원이미지">'
+    				tmp += ' <p class="m_proimg">' +  '<img src="../resources/img/memberImg.png" alt="회원이미지">' + '</div>'
     				tmp += ' <span class="cb_email">' + commentsb.cb_nicknm + '</span>'
     				tmp += ' <span class="cb_content">' + commentsb.cb_content + '</span>'
-    				tmp += ' ' + dateToString(commentsb.cb_update)
+    				tmp += ' <span class="cb_date">' + dateToString(commentsb.cb_update) + '</span>'
     				tmp += ' <button class="delBtn" id=commDelBtn>삭제</button>'
     				tmp += ' <button class="modBtn" id="commModBtn">수정</button>'
     				tmp += ' <button class="replyBtn">답글쓰기</button>'
@@ -484,7 +434,7 @@
 					type: 'POST',
 					url: '/carrot/commentsp?cp_pnum=' + cp_pnum + '&cp_nicknm=' + cp_nicknm,
 					headers : {"content-type" : "application/json"},
-					data : JSON.stringify({cp_pnum:cp_pnum, cp_content:cp_content}),
+					data : JSON.stringify({cp_pnum:cp_pnum, cp_content:cp_content, cp_nicknm:cp_nicknm}),
 					success : function(result){
 						alert(result);
 						showList(cp_pnum);
@@ -496,7 +446,7 @@
 			})
 			
 			//답글 달기
-			$("#commentsList").on("click", ".replyBtn", function(){
+			$("#commentsList").on("click", "#repBtn", function(){
 				
 				$("#replyForm").appendTo($(this).parent());
 				$("#replyForm").css("display", "block");
@@ -531,14 +481,14 @@
 				$("#replyForm").css("display","none");
 				$("textarea[name=replyContent]").val('');
 				$("#replyForm").appendTo("body");
+				
 			})
-			
 			//답글 달기 취소 클릭 시
-			$(function(){
-				$("#RepBtnHide").click(function(){
-					$("#replyForm").hide();
+				$(function(){
+					$("#RepBtnHide").click(function(){
+						$("#replyForm").hide();
+					})
 				})
-			})
 			
 			//댓글 삭제
 			$("#commentsList").on("click", ".delBtn", function(){
@@ -619,15 +569,16 @@
 				tmp += ' data-cp_pcnum=' + commentsp.cp_pcnum
 				tmp += ' data-cp_pnum=' + commentsp.cp_pnum + '>'
 				
-				if(commentsp.cp_pcnum > 0)
-					tmp += '&nbsp&nbsp&nbsp&nbsp&nbsp '
-				/* tmp += ' <span class="m_proimg">' + ${userDTO.m_proimg} + '</span>' */
+				if(commentsp.cp_pcnum != null)
+					tmp += '<img src="../resources/img/대댓글.png" alt="회원이미지">'
+					/* tmp += '&nbsp&nbsp&nbsp&nbsp&nbsp' */
+				tmp +=  ' <p class="m_proimg">' +  '<img src="../resources/img/memberImg.png" alt="회원이미지">' + '</p>'
 				tmp += ' <span class="cp_email">' + commentsp.cp_nicknm + '</span>'
-				tmp += ' <span class="cp_content">' + commentsp.cp_content + '</span>'
-				tmp += ' ' + dateToString(commentsp.cp_update)
+				tmp += ' <span class="cp_content" id="contentPosi">' + commentsp.cp_content + '</span>'
+				tmp += ' <span class="cp_date">' + dateToString(commentsp.cp_update) + '</span>'
 				tmp += ' <button class="delBtn" id=commDelBtn>삭제</button>'
 				tmp += ' <button class="modBtn" id="commModBtn">수정</button>'
-				tmp += ' <button class="replyBtn">답글쓰기</button>'
+				tmp += ' <button class="replyBtn" id="repBtn">답글쓰기</button>' +'<br><br><hr>'
 				tmp += '</li>'
 			})
 			tmp += "</ul>"
