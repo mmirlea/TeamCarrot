@@ -16,19 +16,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.carrot.board.domain.BoardDTO;
 import com.carrot.board.domain.LikeyDTO;
-import com.carrot.board.domain.PageHandler;
 import com.carrot.board.domain.PageHandlerP;
 import com.carrot.board.domain.ProductDTO;
 import com.carrot.board.domain.SearchConditionP;
 import com.carrot.board.service.LikeyService;
 import com.carrot.board.service.ProductService;
+import com.carrot.user.domain.UserDTO;
+import com.carrot.user.service.UserService;
 
 @Controller
 @RequestMapping("/carrot")
 public class ProductController {
 
+	@Autowired
+	UserService userService;
+	
 	@Autowired
 	ProductService service;
 
@@ -107,8 +110,9 @@ public class ProductController {
 
 	// 중고물풀 게시글 읽기
 	@GetMapping("/read")
-	public String read(Integer p_num, Model m, Integer page, Integer pageSize, HttpSession session) {
+	public String read(Integer p_num, Model m, Integer page, Integer pageSize, HttpSession session, UserDTO userDTO) {
 		String login_email = (String) session.getAttribute("m_email");
+		
 		try {
 			ProductDTO productDTO = new ProductDTO();
 			productDTO.setP_num(p_num);
@@ -121,7 +125,10 @@ public class ProductController {
 			m.addAttribute("menu", "product");
 			m.addAttribute("page", page);
 			m.addAttribute("pageSize", pageSize);
-
+			
+			userDTO = userService.mypageInfo((String)session.getAttribute("m_email"));
+			m.addAttribute("userDTO", userDTO);
+			
 			Instant startOfToday = LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant();
 			m.addAttribute("startOfToday", startOfToday.toEpochMilli());
 

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.carrot.board.domain.CommentspDTO;
 import com.carrot.board.service.CommentspService;
+import com.carrot.user.domain.UserDTO;
 
 @RestController
 public class CommentspController {
@@ -53,12 +54,13 @@ public class CommentspController {
 	
 	//댓글 등록
 	@PostMapping("/commentsp")
-	public ResponseEntity<String> write(@RequestBody CommentspDTO commentspDTO, @RequestParam Integer cp_pnum, @RequestParam(required = false) Integer cp_pcnum, HttpSession session, HttpServletRequest request){
+	public ResponseEntity<String> write(@RequestBody CommentspDTO commentspDTO, @RequestParam Integer cp_pnum, @RequestParam String cp_nicknm, @RequestParam(required = false) Integer cp_pcnum, HttpSession session, HttpServletRequest request, UserDTO userDTO){
 		session = request.getSession();
 		String cp_email = (String)session.getAttribute("m_email");
 		
 		commentspDTO.setCp_email(cp_email);
 		commentspDTO.setCp_pnum(cp_pnum);
+		commentspDTO.setCp_nicknm(cp_nicknm);
 		
 		if (cp_pcnum != null) {
             commentspDTO.setCp_pcnum(cp_pcnum);

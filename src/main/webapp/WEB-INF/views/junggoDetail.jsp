@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<link href="<c:url value='/resources/css/junggoDetailStyle.css?av'/>" rel="stylesheet" />
+<link href="<c:url value='/resources/css/junggoDetailStyle.css?ava'/>" rel="stylesheet" />
 
 <!-- swiper cdn -->
 <link  rel="stylesheet"  href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
@@ -180,7 +180,7 @@
 			                            <button type="button" class="replyBtn">답글쓰기</button>
 			                        </span>
 			                    </div>
-			            </div><!--comments-box-->
+			            </div><!-- comments-box -->
 			        </li>
 			        <li class="comments-list reply">
 			            <div class="commentsProfile-Img"><img src="../resources/img/memberImg.png" alt="회원이미지"></div>
@@ -198,40 +198,53 @@
 			                            <button type="button" class="replyBtn">답글쓰기</button>
 			                        </span>
 			                    </div>
-			            </div><!--comments-box-->
+			            </div><!-- comments-box -->
 			        </li>
-			        <li class="comments-list">
-			            <div class="commentsWrite-box">
-			                <div class="commentsProfile-Text">
-			                    <span class="commentsNickname">블루</span>
-			                    <span class="commentsAddress">남구 옥동</span>
-			                </div>                     
-			                <div class="div-textarea">
-			                    <textarea rows="1" placeholder="댓글을 남겨보세요" class="commentsWrite-textarea"></textarea>
-			                </div>
-			                <div class="commentsWrite-writeBtn">
-			                    <button type="button" class="writeBtn"><i class="fa-solid fa-circle-up"></i></button>
-			                </div>
-			            </div><!--.commentsWrite-box-->
-			        </li>
+			        
 			    </ul>
-			    
-			</div><!--comments-area-->
+			</div><!-- comments-area -->
 		</div><!--.comments-wrap-->
     </form>
-    
-    comment : <input type="text" name="cp_content"> <br>
-	
-		<button id="sendBtn" type="button">SEND</button>
-		<button id="modBtn" type="button">수정확인</button>
-		
+    <div class="">
 		<!-- 댓글 표시 -->
 		<div id="commentsList"></div>
-		
+					
 		<div id="replyForm" style="display:none">
 			<input type="text" name="replyContent">
 			<button type="button" id="wrtRepBtn">등록</button>
+			<button type="button" id="RepBtnHide">취소</button>
 		</div>
+		
+		<div class="commentsWrite-box">
+			<div class="commentsProfile-Img">
+				<c:choose>
+		             <c:when test="${userDTO.m_proimg eq null}">
+		                    <img src="../resources/img/memberImg.png" alt="회원이미지">
+		             </c:when>
+		             <c:otherwise> <img src="/proimg/${userDTO.m_proimg}" lt="프로필 사진"></c:otherwise>
+	            </c:choose>
+			
+			</div>
+			<div class="commentsWrtR">
+				<div class="commentsProfile-Text">
+			    	<span class="commentsNickname" >${userDTO.m_nicknm}</span>
+			        <span class="commentsAddress"> ${userDTO.m_addr2 }</span>
+			        <input type="hidden" name="cp_nicknm" value="${userDTO.m_nicknm}">
+				</div>                     
+				<div class="div-textarea">
+			    	<textarea rows="3" placeholder="댓글을 남겨보세요" class="commentsWrite-textarea" name="cp_content"></textarea>
+				   	<!-- <input type="text" name="cp_content"> <br> -->
+				</div>
+				<div class="commentsWrite-writeBtn">
+					<button id="modBtn" type="button" style="display:none">수정확인</button>
+					<button type="button" class="writeBtn" id="sendBtn"><i class="fa-solid fa-circle-up"></i></button>
+				</div>
+			</div>
+			<!-- <button id="sendBtn" type="button">SEND</button> -->
+			
+		</div>
+    </div>
+    
     	
     	<%@ include file ="./footer.jsp" %>
     <script>
@@ -259,17 +272,17 @@
 			showList(cp_pnum);
 			
 			$("#sendBtn").click(function(){
-				let cp_content = $("input[name=cp_content]").val();
-				
+				let cp_content = $("textarea[name=cp_content]").val();
+				let cp_nicknm = $("input[name=cp_nicknm]").val();
 				if(cp_content.trim() == ''){
 					alert("댓글을 입력하세요!")
-					$("input[name=cp_content]").focus();
+					$("textarea[name=cp_content]").focus();
 					return;
 				}
 				
 				$.ajax({
 					type: 'POST',
-					url: '/carrot/commentsp?cp_pnum=' + cp_pnum + '&cp_pcnum=' + cp_pcnum,
+					url: '/carrot/commentsp?cp_pnum=' + cp_pnum + '&cp_nicknm=' + cp_nicknm,
 					headers : {"content-type" : "application/json"},
 					data : JSON.stringify({cp_pnum:cp_pnum, cp_content:cp_content}),
 					success : function(result){
@@ -278,10 +291,13 @@
 					},
 					error : function(){alert("error")}
 				});
+				
+				$("textarea[name=cp_content]").val("");
 			})
 			
 			//답글 달기
 			$("#commentsList").on("click", ".replyBtn", function(){
+				
 				$("#replyForm").appendTo($(this).parent());
 				$("#replyForm").css("display", "block");
 				
@@ -292,7 +308,8 @@
 			
 			$("#wrtRepBtn").click (function(){
 				let cp_content = $("input[name=replyContent]").val();
-				let cp_pcnum = $("#replyForm").parent().attr("data-cp_pcnum");
+				let cp_pcnum = $("#replyForm").attr("data-cp_pcnum");
+				let cp_nicknm = $("input[name=cp_nicknm]").val();
 				
 				if(cp_content.trim() == ''){
 					alert("댓글을 입력하세요!")
@@ -302,7 +319,7 @@
 				
 				$.ajax({
 					type:'POST',
-					url: '/carrot/commentsp?cp_pnum=' + cp_pnum,
+					url: '/carrot/commentsp?cp_pnum=' + cp_pnum  + '&cp_nicknm=' + cp_nicknm,
 					headers : {"content-type" : "application/json"},
 					data : JSON.stringify({cp_pnum:cp_pnum, cp_pcnum:cp_pcnum, cp_content: cp_content}),
 					success : function(result){
@@ -314,6 +331,13 @@
 				$("#replyForm").css("display","none");
 				$("input[name=replyContent]").val('');
 				$("#replyForm").appendTo("body");
+			})
+			
+			//답글 달기 취소 클릭 시
+			$(function(){
+				$("#RepBtnHide").click(function(){
+					$("#replyForm").hide();
+				})
 			})
 			
 			//댓글 삭제
@@ -334,12 +358,12 @@
 			
 			//수정 확인을 클릭하면
 			$("#modBtn").click(function(){
-				let cp_content = $("input[name=cp_content]").val();
+				let cp_content = $("textarea[name=cp_content]").val();
 				let cp_num = $(this).attr("data-cp_num");
 				
 				if(cp_content.trim() == ''){
 					alert("댓글을 입력하세요!")
-					$("input[name=cp_content]").focus();
+					$("textarea[name=cp_content]").focus();
 					return;
 				}
 				
@@ -354,6 +378,10 @@
 					},
 					error : function(){alert("error")}
 				})
+				
+				$("textarea[name=cp_content]").val("");
+
+				$("#modBtn").hide();
 			})
 			
 			//댓글 수정
@@ -362,12 +390,26 @@
 				
 				let cp_content = $("span.cp_content", $(this).parent()).text();
 				
-				$("input[name=cp_content]").val(cp_content);
+				$("textarea[name=cp_content]").val(cp_content);
 				
 				$("#modBtn").attr("data-cp_num", cp_num);
+				
+				$("#modBtn").show();
+				
 			})
+			
+			
 		})
 		
+		/* if (userDTO.m_email === cp_email) {
+			document.getElementById('#commDelBtn').style.display='block';
+			document.getElementById('#commModBtn').style.display='block';
+		} else{
+			document.getElementById('#commDelBtn').style.display='none';
+			document.getElementById('#commModBtn').style.display='none';
+		}
+		 */
+		 
 		//결과물 출력
 		let toHtml = function(commentsp){
 			let tmp="<ul id='commentsp'>";
@@ -377,20 +419,22 @@
 				tmp += ' data-cp_pcnum=' + commentsp.cp_pcnum
 				tmp += ' data-cp_pnum=' + commentsp.cp_pnum + '>'
 				
-				if(commentsp.cp_num != commentsp.cp_pcnum)
-					tmp += 'ㄴ'
-				tmp += ' commenter=<span class="cp_email">' + commentsp.cp_nicknm + '</span>'
-				tmp += ' comment=<span class="cp_content">' + commentsp.cp_content + '</span>'
-				tmp += ' up_date=' + dateToString(commentsp.cp_update)
-				tmp += ' <button class="delBtn">삭제</button>'
-				tmp += ' <button class="modBtn">수정</button>'
-				tmp += ' <button class="replyBtn">답글</button>'
+				if(commentsp.cp_pcnum > 0)
+					tmp += '&nbsp&nbsp&nbsp&nbsp&nbsp '
+				/* tmp += ' <span class="m_proimg">' + ${userDTO.m_proimg} + '</span>' */
+				tmp += ' <span class="cp_email">' + commentsp.cp_nicknm + '</span>'
+				tmp += ' <span class="cp_content">' + commentsp.cp_content + '</span>'
+				tmp += ' ' + dateToString(commentsp.cp_update)
+				tmp += ' <button class="delBtn" id=commDelBtn>삭제</button>'
+				tmp += ' <button class="modBtn" id="commModBtn">수정</button>'
+				tmp += ' <button class="replyBtn">답글쓰기</button>'
 				tmp += '</li>'
 			})
 			tmp += "</ul>"
 			
 			return tmp;
 		}
+		 
 		let addZero = function(value=1){
 			return value > 9 ? value : "0" + value;
 		}
