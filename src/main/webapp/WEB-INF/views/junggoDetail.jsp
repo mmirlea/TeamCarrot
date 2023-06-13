@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<link href="<c:url value='/resources/css/junggoDetailStyle.css?ava'/>" rel="stylesheet" />
+<link href="<c:url value='/resources/css/junggoDetailStyle.css?a'/>" rel="stylesheet" />
 
 <!-- swiper cdn -->
 <link  rel="stylesheet"  href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
@@ -210,40 +210,42 @@
 		<!-- 댓글 표시 -->
 		<div id="commentsList"></div>
 					
-		<div id="replyForm" style="display:none">
-			<input type="text" name="replyContent">
-			<button type="button" id="wrtRepBtn">등록</button>
-			<button type="button" id="RepBtnHide">취소</button>
+		<div id="replyForm" style="display:none" class="commentsWrite-box">
+			<textarea rows="3" class="commentsWrite-textarea" name="replyContent" placeholder="대댓글을 남겨보세요"></textarea>
+			<button type="button" class="replyBtn" id="wrtRepBtn">등록</button>
+			<button type="button" class="replyBtn" id="RepBtnHide">취소</button>
 		</div>
-		
-		<div class="commentsWrite-box">
-			<div class="commentsProfile-Img">
-				<c:choose>
-		             <c:when test="${userDTO.m_proimg eq null}">
-		                    <img src="../resources/img/memberImg.png" alt="회원이미지">
-		             </c:when>
-		             <c:otherwise> <img src="/proimg/${userDTO.m_proimg}" lt="프로필 사진"></c:otherwise>
-	            </c:choose>
-			
-			</div>
-			<div class="commentsWrtR">
-				<div class="commentsProfile-Text">
-			    	<span class="commentsNickname" >${userDTO.m_nicknm}</span>
-			        <span class="commentsAddress"> ${userDTO.m_addr2 }</span>
-			        <input type="hidden" name="cp_nicknm" value="${userDTO.m_nicknm}">
-				</div>                     
-				<div class="div-textarea">
-			    	<textarea rows="3" placeholder="댓글을 남겨보세요" class="commentsWrite-textarea" name="cp_content"></textarea>
-				   	<!-- <input type="text" name="cp_content"> <br> -->
+		<c:if test="${login_email != null}">
+			<div class="commentsWrite-box">
+				<div class="commentsProfile-Img">
+					<c:choose>
+			             <c:when test="${userDTO.m_proimg eq null}">
+			                    <img src="../resources/img/memberImg.png" alt="회원이미지">
+			             </c:when>
+			             <c:otherwise> <img src="/proimg/${userDTO.m_proimg}" alt="프로필 사진"></c:otherwise>
+		            </c:choose>
+				
 				</div>
-				<div class="commentsWrite-writeBtn">
-					<button id="modBtn" type="button" style="display:none">수정확인</button>
-					<button type="button" class="writeBtn" id="sendBtn"><i class="fa-solid fa-circle-up"></i></button>
+				<div class="commentsWrtR">
+					<div class="commentsProfile-Text">
+				    	<span class="commentsNickname" >${userDTO.m_nicknm}</span>
+				        <span class="commentsAddr"> ${userDTO.m_addr1 }</span>
+				        <span class="commentsAddr"> ${userDTO.m_addr2 }</span>
+				        <input type="hidden" name="cp_nicknm" value="${userDTO.m_nicknm}">
+					</div>                     
+					<div class="div-textarea">
+				    	<textarea rows="3" placeholder="댓글을 남겨보세요" class="commentsWrite-textarea" name="cp_content"></textarea>
+					   	<!-- <input type="text" name="cp_content"> <br> -->
+					</div>
+					<div class="commentsWrite-writeBtn">
+						<button id="modBtn" type="button" style="display:none">수정확인</button>
+						<button type="button" class="writeBtn" id="sendBtn"><i class="fa-solid fa-circle-up"></i></button>
+					</div>
 				</div>
+				<!-- <button id="sendBtn" type="button">SEND</button> -->
+				
 			</div>
-			<!-- <button id="sendBtn" type="button">SEND</button> -->
-			
-		</div>
+		</c:if>
     </div>
     
     	
@@ -308,13 +310,13 @@
 			})
 			
 			$("#wrtRepBtn").click (function(){
-				let cp_content = $("input[name=replyContent]").val();
+				let cp_content = $("textarea[name=replyContent]").val();
 				let cp_pcnum = $("#replyForm").attr("data-cp_pcnum");
 				let cp_nicknm = $("input[name=cp_nicknm]").val();
 				
 				if(cp_content.trim() == ''){
 					alert("댓글을 입력하세요!")
-					$("input[name=replyContent]").focus();
+					$("textarea[name=replyContent]").focus();
 					return ;
 				}
 				
@@ -330,7 +332,7 @@
 					error : function(){alert("error")}
 				});
 				$("#replyForm").css("display","none");
-				$("input[name=replyContent]").val('');
+				$("textarea[name=replyContent]").val('');
 				$("#replyForm").appendTo("body");
 			})
 			

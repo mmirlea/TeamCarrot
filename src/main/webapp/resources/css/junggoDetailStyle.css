@@ -461,6 +461,9 @@ input[type="radio"]:checked+ span {
 /* 샛별 댓글 css */
 .commentsWrite-box{
 	display: flex;
+	width: 800px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .commentsAddress{
