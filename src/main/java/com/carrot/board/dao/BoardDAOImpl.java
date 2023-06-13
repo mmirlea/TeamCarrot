@@ -105,7 +105,7 @@ public class BoardDAOImpl implements BoardDAO {
 		Map map = new HashMap();
 		map.put("cnt", cnt);
 		map.put("b_num", b_num);
-		return session.update(namespace + "updateCommentsCnt", map);
+		return session.update(namespace + "updateCommentsbCnt", map);
 	}
 
 }

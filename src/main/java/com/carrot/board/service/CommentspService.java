@@ -2,8 +2,6 @@ package com.carrot.board.service;
 
 import java.util.List;
 
-import org.springframework.transaction.annotation.Transactional;
-
 import com.carrot.board.domain.CommentspDTO;
 
 public interface CommentspService {
