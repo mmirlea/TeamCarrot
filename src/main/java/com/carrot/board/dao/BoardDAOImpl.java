@@ -101,7 +101,7 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	public int updateCommentsCnt(int cnt, Integer b_num) throws Exception {
+	public int updateCommentsbCnt(int cnt, Integer b_num) throws Exception {
 		Map map = new HashMap();
 		map.put("cnt", cnt);
 		map.put("b_num", b_num);

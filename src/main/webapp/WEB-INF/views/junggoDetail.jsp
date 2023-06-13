@@ -234,7 +234,7 @@
 				        <input type="hidden" name="cp_nicknm" value="${userDTO.m_nicknm}">
 					</div>                     
 					<div class="div-textarea">
-				    	<textarea rows="3" placeholder="댓글을 남겨보세요" class="commentsWrite-textarea" name="cp_content"></textarea>
+				    	<textarea rows="3" placeholder="댓글을 남겨보세요" class="commentsWrite-textarea" name='${menu == "board"? "cb_content" : "cp_content"}'></textarea>
 					   	<!-- <input type="text" name="cp_content"> <br> -->
 					</div>
 					<div class="commentsWrite-writeBtn">
@@ -251,8 +251,205 @@
     	
     	<%@ include file ="./footer.jsp" %>
     <script>
-		//댓글 관련-----------------------------------------------
+    	if(${menu eq 'board'}){
+    		//게시판 댓글 출력
+    		//댓글 관련-----------------------------------------------
 
+    		let cb_pnum = Math.max(0,${boardDTO.b_num});
+    		//let cb_pnum=${productDTO.p_num};
+
+    		
+    		//댓글 리스트
+    		let showList = function(cb_pnum){
+    			$.ajax({
+    				type: 'GET',
+    				url: '/carrot/commentsb?cb_pnum=' + cb_pnum,
+    				success : function(result){
+    					$("#commentsList").html(toHtml(result));
+    				},
+    				error : function(){alert("error")}
+    			});
+    		}
+    		
+    		//댓글 작성
+    		$(document).ready(function(){
+    			//목록 보이기
+    			showList(cb_pnum);
+    			
+    			$("#sendBtn").click(function(){
+    				let cb_content = $("textarea[name=cb_content]").val();
+    				let cb_nicknm = $("input[name=cb_nicknm]").val();
+    				if(cb_content.trim() == ''){
+    					alert("댓글을 입력하세요!")
+    					$("textarea[name=cb_content]").focus();
+    					return;
+    				}
+    				
+    				$.ajax({
+    					type: 'POST',
+    					url: '/carrot/commentsb?cb_pnum=' + cb_pnum + '&cb_nicknm=' + cb_nicknm,
+    					headers : {"content-type" : "application/json"},
+    					data : JSON.stringify({cb_pnum:cb_pnum, cb_content:cb_content, cb_nicknm:cb_nicknk}),
+    					success : function(result){
+    						alert(result);
+    						showList(cb_pnum);
+    					},
+    					error : function(){alert("error")}
+    				});
+    				
+    				$("textarea[name=cb_content]").val("");
+    			})
+    			
+    			//답글 달기
+    			$("#commentsList").on("click", ".replyBtn", function(){
+    				
+    				$("#replyForm").appendTo($(this).parent());
+    				$("#replyForm").css("display", "block");
+    				
+    				let cb_pcnum = $(this).parent().attr("data-cb_num");
+    				cb_pcnum = parseInt(cb_pcnum);
+    			    $("#replyForm").attr("data-cb_pcnum", cb_pcnum);
+    			})
+    			
+    			$("#wrtRepBtn").click (function(){
+    				let cb_content = $("textarea[name=replyContent]").val();
+    				let cb_pcnum = $("#replyForm").attr("data-cb_pcnum");
+    				let cb_nicknm = $("input[name=cb_nicknm]").val();
+    				
+    				if(cb_content.trim() == ''){
+    					alert("댓글을 입력하세요!")
+    					$("textarea[name=replyContent]").focus();
+    					return ;
+    				}
+    				
+    				$.ajax({
+    					type:'POST',
+    					url: '/carrot/commentsb?cb_pnum=' + cb_pnum  + '&cb_nicknm=' + cb_nicknm,
+    					headers : {"content-type" : "application/json"},
+    					data : JSON.stringify({cb_pnum:cb_pnum, cb_pcnum:cb_pcnum, cb_content: cb_content}),
+    					success : function(result){
+    						alert(result);
+    						showList(cb_pnum);
+    					},
+    					error : function(){alert("error")}
+    				});
+    				$("#replyForm").css("display","none");
+    				$("textarea[name=replyContent]").val('');
+    				$("#replyForm").appendTo("body");
+    			})
+    			
+    			//답글 달기 취소 클릭 시
+    			$(function(){
+    				$("#RepBtnHide").click(function(){
+    					$("#replyForm").hide();
+    				})
+    			})
+    			
+    			//댓글 삭제
+    			$("#commentsList").on("click", ".delBtn", function(){
+    				let cb_num=$(this).parent().attr("data-cb_num");
+    				let cb_pnum=$(this).parent().attr("data-cb_pnum");
+    				
+    				$.ajax({
+    					type:"DELETE",
+    					url: '/carrot/commentsb/' + cb_num + '?cb_pnum=' + cb_pnum,
+    					success : function(result){
+    						alert(result);
+    						showList(cb_pnum);
+    					},
+    					error : function(){alert("error")}
+    				});
+    			})
+    			
+    			//수정 확인을 클릭하면
+    			$("#modBtn").click(function(){
+    				let cb_content = $("textarea[name=cb_content]").val();
+    				let cb_num = $(this).attr("data-cb_num");
+    				
+    				if(cb_content.trim() == ''){
+    					alert("댓글을 입력하세요!")
+    					$("textarea[name=cb_content]").focus();
+    					return;
+    				}
+    				
+    				$.ajax({
+    					type:'PATCH',
+    					url: '/carrot/commentsb/' + cb_num,
+    					headers : {"content-type" : "application/json"},
+    					data : JSON.stringify({cb_num:cb_num, cb_content:cb_content}),
+    					success : function(result){
+    						alert(result);
+    						showList(cb_pnum);
+    					},
+    					error : function(){alert("error")}
+    				})
+    				
+    				$("textarea[name=cb_content]").val("");
+
+    				$("#modBtn").hide();
+    			})
+    			
+    			//댓글 수정
+    			$("#commentsList").on("click", ".modBtn", function(){
+    				let cb_num=$(this).parent().attr("data-cb_num");
+    				
+    				let cb_content = $("span.cb_content", $(this).parent()).text();
+    				
+    				$("textarea[name=cb_content]").val(cb_content);
+    				
+    				$("#modBtn").attr("data-cb_num", cb_num);
+    				
+    				$("#modBtn").show();
+    				
+    			})
+    			
+    			
+    		})
+    		 
+    		//결과물 출력
+    		let toHtml = function(commentsb){
+    			let tmp="<ul id='commentsb'>";
+    			
+    			commentsb.forEach(function(commentsb){
+    				tmp += '<li data-cb_num=' + commentsb.cb_num
+    				tmp += ' data-cb_pcnum=' + commentsb.cb_pcnum
+    				tmp += ' data-cb_pnum=' + commentsb.cb_pnum + '>'
+    				
+    				if(commentsb.cb_pcnum > 0)
+    					tmp += '&nbsp&nbsp&nbsp&nbsp&nbsp '
+    				/* tmp += ' <span class="m_proimg">' + ${userDTO.m_proimg} + '</span>' */
+    				tmp += ' <span class="cb_email">' + commentsb.cb_nicknm + '</span>'
+    				tmp += ' <span class="cb_content">' + commentsb.cb_content + '</span>'
+    				tmp += ' ' + dateToString(commentsb.cb_update)
+    				tmp += ' <button class="delBtn" id=commDelBtn>삭제</button>'
+    				tmp += ' <button class="modBtn" id="commModBtn">수정</button>'
+    				tmp += ' <button class="replyBtn">답글쓰기</button>'
+    				tmp += '</li>'
+    			})
+    			tmp += "</ul>"
+    			
+    			return tmp;
+    		}
+    		 
+    		let addZero = function(value=1){
+    			return value > 9 ? value : "0" + value;
+    		}
+    		
+    		let dateToString = function(ms=0){
+    			let date = new Date(ms);
+    			
+    			let yyyy = date.getFullYear();
+    			let mm = addZero(date.getMonth()+1);
+    			let dd = addZero(date.getDate());
+    			
+    			let HH = addZero(date.getHours());
+    			let MM = addZero(date.getMinutes());
+    			let ss = addZero(date.getSeconds());
+    			
+    			return yyyy+"년"+mm+"월"+dd+"일"+HH+":"+MM;
+    		}
+    	} else {
+    	//상품 댓글 관련
 		let cp_pnum = Math.max(0,${productDTO.p_num});
 		//let cp_pnum=${productDTO.p_num};
 
@@ -455,6 +652,10 @@
 			
 			return yyyy+"년"+mm+"월"+dd+"일"+HH+":"+MM;
 		}
+		
+    	}
+		
+		
 	</script>
     
     <script type="text/javascript">

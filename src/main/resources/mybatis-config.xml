@@ -18,5 +18,6 @@
 		<typeAlias alias="SearchCondition" type="com.carrot.board.domain.SearchCondition" />
 		<typeAlias alias="UserDTO" type="com.carrot.user.domain.UserDTO" />
 		<typeAlias alias="CommentspDTO" type="com.carrot.board.domain.CommentspDTO" />
+		<typeAlias alias="CommentsbDTO" type="com.carrot.board.domain.CommentsbDTO" />
 	</typeAliases>
 </configuration>
