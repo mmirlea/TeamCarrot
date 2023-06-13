@@ -231,7 +231,7 @@
 				    	<span class="commentsNickname" >${userDTO.m_nicknm}</span>
 				        <span class="commentsAddr"> ${userDTO.m_addr1 }</span>
 				        <span class="commentsAddr"> ${userDTO.m_addr2 }</span>
-				        <input type="hidden" name="cp_nicknm" value="${userDTO.m_nicknm}">
+				        <input type="hidden" name='${menu == "board"? "cb_nicknm" : "cp_nicknm"}' value="${userDTO.m_nicknm}">
 					</div>                     
 					<div class="div-textarea">
 				    	<textarea rows="3" placeholder="댓글을 남겨보세요" class="commentsWrite-textarea" name='${menu == "board"? "cb_content" : "cp_content"}'></textarea>
@@ -289,7 +289,7 @@
     					type: 'POST',
     					url: '/carrot/commentsb?cb_pnum=' + cb_pnum + '&cb_nicknm=' + cb_nicknm,
     					headers : {"content-type" : "application/json"},
-    					data : JSON.stringify({cb_pnum:cb_pnum, cb_content:cb_content, cb_nicknm:cb_nicknk}),
+    					data : JSON.stringify({cb_pnum:cb_pnum, cb_content:cb_content}),
     					success : function(result){
     						alert(result);
     						showList(cb_pnum);
