@@ -142,7 +142,7 @@
 		    <div class="commentsHeader">
 		        <div class="commentsCnt">
 		            <div class="iconComments">
-		                <i class="xi-speech-o xi-2x"></i>
+		                <i class="xi-speech-o xi-x"></i>
 		             </div>
 		            <div class="daetgeul">댓글</div>
 		            <div class="commentsNum">${productDTO.p_comm}</div>
@@ -165,7 +165,8 @@
 			            <div class="comments-box">
 			                    <div class="commentsProfile-Text">
 			                        <span class="commentsNickname">블루</span>
-			                        <span>주소1 </span>
+			                        <span class="commentsAddr">주소1 </span>
+			                        <span class="commentsAddr">주소2 </span>
 			                    </div>
 			                    <div class="comments-textbox">
 			                        안녕하세요 여기는 댓글입니다.
@@ -187,7 +188,8 @@
 			            <div class="comments-box">
 			                    <div class="commentsProfile-Text">
 			                        <span class="commentsNickname">레드</span>
-			                        <span class="commentsAddress">남구 달동</span>
+			                        <span class="commentsAddr">울산광역시 남구</span>
+			                        <span class="commentsAddr">달동 </span>
 			                    </div>
 			                    <div class="comments-textbox">
 			                        안녕하세요 여기는 대댓글입니다.
@@ -198,9 +200,8 @@
 			                            <button type="button" class="replyBtn">답글쓰기</button>
 			                        </span>
 			                    </div>
-			            </div><!-- comments-box -->
-			        </li>
-			        
+			            </div><!--comments-box-->
+            </li>
 			    </ul>
 			</div><!-- comments-area -->
 		</div><!--.comments-wrap-->
