@@ -22,6 +22,8 @@ import com.carrot.board.domain.PageHandler;
 import com.carrot.board.domain.SearchCondition;
 import com.carrot.board.service.BoardService;
 import com.carrot.board.service.LikeyService;
+import com.carrot.user.domain.UserDTO;
+import com.carrot.user.service.UserService;
 
 @Controller
 @RequestMapping("/board")
@@ -30,6 +32,9 @@ public class BoardController {
 	@Autowired
 	BoardService service;
 
+	@Autowired
+	UserService userService;
+	
 	@Autowired
 	LikeyService likeyService;
 
@@ -139,7 +144,7 @@ public class BoardController {
 
 			m.addAttribute("boardDTO", boardDTO);
 			m.addAttribute("menu", "board");
-
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			m.addAttribute("msg", "LIST_ERR");
@@ -214,7 +219,7 @@ public class BoardController {
 	}
 
 	@GetMapping("/read")
-	public String read(Integer b_num, Integer page, Integer pageSize, Model m, HttpSession session) {
+	public String read(Integer b_num, Integer page, Integer pageSize, Model m, HttpSession session, UserDTO userDTO) {
 
 		try {
 			BoardDTO boardDTO = new BoardDTO();
@@ -228,7 +233,9 @@ public class BoardController {
 			m.addAttribute("menu", "board"); 
 			m.addAttribute("page", page);
 			m.addAttribute("pageSize", pageSize);
-
+			
+			userDTO = userService.mypageInfo((String)session.getAttribute("m_email"));
+			m.addAttribute("userDTO", userDTO);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
