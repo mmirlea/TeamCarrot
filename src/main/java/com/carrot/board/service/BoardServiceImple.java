@@ -98,7 +98,7 @@ public class BoardServiceImple implements BoardService {
 	
 	@Override
 	public int updateCommentsCnt(int cnt, Integer b_num) throws Exception {
-		return boardDAO.updateCommentsCnt(cnt, b_num);
+		return boardDAO.updateCommentsbCnt(cnt, b_num);
 	}
 
 }
