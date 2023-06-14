@@ -373,7 +373,7 @@
     				tmp += ' <span class="cb_date">' + dateToString(commentsb.cb_update) + '</span>'
     				tmp += ' <button class="delBtn" id=commDelBtn>삭제</button>'
     				tmp += ' <button class="modBtn" id="commModBtn">수정</button>'
-    				if(commentsp.cp_pcnum == null)
+    				if(commentsb.cb_pcnum == null)
     					tmp += ' <button class="replyBtn">답글쓰기</button>' +'<br><br>'+ '</div>' 
     				tmp += '</li>'
     			})
