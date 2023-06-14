@@ -62,11 +62,11 @@ public class CommentsbController {
 		commentsbDTO.setCb_pnum(cb_pnum);
 		commentsbDTO.setCb_nicknm(cb_nicknm);
 		
-		if (cb_pcnum != null) {
-            commentsbDTO.setCb_pcnum(cb_pcnum);
-        } else {
-            commentsbDTO.setCb_pcnum(commentsbDTO.getCb_num());
-        }
+//		if (cb_pcnum != null) {
+//            commentsbDTO.setCb_pcnum(cb_pcnum);
+//        } else {
+//            commentsbDTO.setCb_pcnum(0);
+//        }
 		
 		System.out.println("dto : " + commentsbDTO);
 		

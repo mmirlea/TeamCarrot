@@ -512,7 +512,6 @@ input[type="radio"]:checked+ span {
 
 .cp_content{
 	display:block;
-	margin-left: 70px;
 }
 
 .cb_content{
@@ -521,9 +520,20 @@ input[type="radio"]:checked+ span {
 
 .m_proimg{
 	display:inline-block;
+	margin-left: 10px;
 }
 hr{
 	margin-bottom:13px;
 	margin-top:-10px;
 }
 
+#commentspBox{
+	display:flex;
+}
+.repImg{
+	height: 40px;
+	margin-left: 20px;
+}
+#commentsp{
+	
+}
