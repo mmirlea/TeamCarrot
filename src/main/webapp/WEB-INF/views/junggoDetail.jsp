@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<link href="<c:url value='/resources/css/junggoDetailStyle.css?ss'/>" rel="stylesheet" />
+<link href="<c:url value='/resources/css/junggoDetailStyle.css?sss'/>" rel="stylesheet" />
 
 <!-- swiper cdn -->
 <link  rel="stylesheet"  href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
@@ -373,7 +373,8 @@
     				tmp += ' <span class="cb_date">' + dateToString(commentsb.cb_update) + '</span>'
     				tmp += ' <button class="delBtn" id=commDelBtn>삭제</button>'
     				tmp += ' <button class="modBtn" id="commModBtn">수정</button>'
-    				tmp += ' <button class="replyBtn">답글쓰기</button>' +'<br><br>'+ '</div>' 
+    				if(commentsp.cp_pcnum == null)
+    					tmp += ' <button class="replyBtn">답글쓰기</button>' +'<br><br>'+ '</div>' 
     				tmp += '</li>'
     			})
     			tmp += "</ul>"
@@ -578,7 +579,8 @@
 				tmp += ' <span class="cp_date">' + dateToString(commentsp.cp_update) + '</span>'
 				tmp += ' <button class="delBtn" id=commDelBtn>삭제</button>'
 				tmp += ' <button class="modBtn" id="commModBtn">수정</button>'
-				tmp += ' <button class="replyBtn" id="repBtn">답글쓰기</button>' +'<br><br>'+ '</div>' 
+				if(commentsp.cp_pcnum == null)
+					tmp += ' <button class="replyBtn" id="repBtn">답글쓰기</button>' +'<br><br>'+ '</div>' 
 				tmp += '</li>'
 			})
 			tmp += "</ul>"

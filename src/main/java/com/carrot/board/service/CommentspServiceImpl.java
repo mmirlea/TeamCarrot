@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.carrot.board.dao.BoardDAO;
 import com.carrot.board.dao.CommentspDAO;
 import com.carrot.board.dao.ProductDAO;
 import com.carrot.board.domain.CommentspDTO;

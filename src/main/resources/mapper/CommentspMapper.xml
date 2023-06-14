@@ -34,7 +34,7 @@
 		SELECT CP_PNUM, CP_NUM, CP_PCNUM, CP_EMAIL, CP_CONTENT, CP_CRDATE, CP_UPDATE, CP_NICKNM
 		FROM COMMENTS_P
 		WHERE CP_PNUM = #{cp_pnum}
-		ORDER BY CP_PCNUM ASC, CP_NUM ASC
+		ORDER BY NVL(CP_PCNUM, CP_NUM) ASC, CP_NUM ASC
 	</select>
 	
 	<!-- 댓글 번호에 따른 댓글 내용 확인하기 -->
@@ -50,4 +50,9 @@
 		SET CP_CONTENT = #{cp_content}, CP_UPDATE = SYSDATE
 		WHERE CP_NUM = #{cp_num} AND CP_EMAIL = #{cp_email}
 	</update>
+	
+	<!-- 시퀀스 조회 -->
+	<select id="seqSelect" resultType="int">
+		SELECT SEQ_COMMENTSP_NUM.NEXTVAL FROM DUAL
+	</select>
 </mapper>

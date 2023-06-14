@@ -68,6 +68,8 @@ public class CommentspController {
 //            commentspDTO.setCp_pcnum(1);
 //        }
 		
+		
+		
 		System.out.println("dto : " + commentspDTO);
 		
 		try {
