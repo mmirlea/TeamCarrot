@@ -65,7 +65,7 @@ public class CommentspController {
 //		if (cp_pcnum != null) {
 //            commentspDTO.setCp_pcnum(cp_pcnum);
 //        } else {
-//            commentspDTO.setCp_pcnum(commentspDTO.getCp_num());
+//            commentspDTO.setCp_pcnum(1);
 //        }
 		
 		System.out.println("dto : " + commentspDTO);
@@ -80,6 +80,8 @@ public class CommentspController {
 			return new ResponseEntity<String>("WRT_ERR", HttpStatus.BAD_REQUEST);
 		}
 	}
+	
+
 	
 	//댓글 삭제
 	@DeleteMapping("/commentsp/{cp_num}")

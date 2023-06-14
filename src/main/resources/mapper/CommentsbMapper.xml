@@ -25,7 +25,7 @@
 	
 	<!-- 댓글 추가 -->
 	<insert id="insert" parameterType="CommentsbDTO">
-		INSERT INTO comments_p(CB_PNUM, CB_NUM, CB_PCNUM, CB_EMAIL, CB_CONTENT, CB_CRDATE, CB_UPDATE, CB_NICKNM)
+		INSERT INTO comments_b(CB_PNUM, CB_NUM, CB_PCNUM, CB_EMAIL, CB_CONTENT, CB_CRDATE, CB_UPDATE, CB_NICKNM)
 		VALUES (#{cb_pnum}, seq_commentsb_num.nextval, #{cb_pcnum}, #{cb_email}, #{cb_content}, SYSDATE, SYSDATE, #{cb_nicknm})
 	</insert>
 	

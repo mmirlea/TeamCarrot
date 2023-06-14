@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<link href="<c:url value='/resources/css/junggoDetailStyle.css?ssgas'/>" rel="stylesheet" />
+<link href="<c:url value='/resources/css/junggoDetailStyle.css?ss'/>" rel="stylesheet" />
 
 <!-- swiper cdn -->
 <link  rel="stylesheet"  href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
@@ -297,8 +297,8 @@
     			
     			//댓글 삭제
     			$("#commentsList").on("click", ".delBtn", function(){
-    				let cb_num=$(this).parent().attr("data-cb_num");
-    				let cb_pnum=$(this).parent().attr("data-cb_pnum");
+    				let cb_num=$(this).parent().parent().attr("data-cb_num");
+    				let cb_pnum=$(this).parent().parent().attr("data-cb_pnum");
     				
     				$.ajax({
     					type:"DELETE",
@@ -341,7 +341,7 @@
     			
     			//댓글 수정
     			$("#commentsList").on("click", ".modBtn", function(){
-    				let cb_num=$(this).parent().attr("data-cb_num");
+    				let cb_num=$(this).parent().parent().attr("data-cb_num");
     				
     				let cb_content = $("span.cb_content", $(this).parent()).text();
     				
@@ -361,19 +361,19 @@
     			let tmp="<ul id='commentsb'>";
     			
     			commentsb.forEach(function(commentsb){
-    				tmp += '<li data-cb_num=' + commentsb.cb_num
+    				tmp += '<li id="commentspBox" data-cb_num=' + commentsb.cb_num
     				tmp += ' data-cb_pcnum=' + commentsb.cb_pcnum
     				tmp += ' data-cb_pnum=' + commentsb.cb_pnum + '>'
     				
     				if(commentsb.cb_pcnum > 0)
-    					tmp += '<img src="../resources/img/대댓글.png" alt="회원이미지">'
-    				tmp += ' <p class="m_proimg">' +  '<img src="../resources/img/memberImg.png" alt="회원이미지">' + '</div>'
-    				tmp += ' <span class="cb_email">' + commentsb.cb_nicknm + '</span>'
+    					tmp += '<img src="../resources/img/대댓글.png" alt="회원이미지" class="repImg">'
+    				tmp += ' <div class="m_proimg">' +  '<img src="../resources/img/memberImg.png" alt="회원이미지">' + '</div>'
+    				tmp += '<div class="commR">' +' <span class="cb_email">' + commentsb.cb_nicknm + '</span>'
     				tmp += ' <span class="cb_content">' + commentsb.cb_content + '</span>'
     				tmp += ' <span class="cb_date">' + dateToString(commentsb.cb_update) + '</span>'
     				tmp += ' <button class="delBtn" id=commDelBtn>삭제</button>'
     				tmp += ' <button class="modBtn" id="commModBtn">수정</button>'
-    				tmp += ' <button class="replyBtn">답글쓰기</button>'
+    				tmp += ' <button class="replyBtn">답글쓰기</button>' +'<br><br>'+ '</div>' 
     				tmp += '</li>'
     			})
     			tmp += "</ul>"
@@ -451,7 +451,7 @@
 				$("#replyForm").appendTo($(this).parent());
 				$("#replyForm").css("display", "block");
 				
-				let cp_pcnum = $(this).parent().attr("data-cp_num");
+				let cp_pcnum = $(this).parent().parent().attr("data-cp_num");
 				cp_pcnum = parseInt(cp_pcnum);
 			    $("#replyForm").attr("data-cp_pcnum", cp_pcnum);
 			})
@@ -492,8 +492,8 @@
 			
 			//댓글 삭제
 			$("#commentsList").on("click", ".delBtn", function(){
-				let cp_num=$(this).parent().attr("data-cp_num");
-				let cp_pnum=$(this).parent().attr("data-cp_pnum");
+				let cp_num=$(this).parent().parent().attr("data-cp_num");
+				let cp_pnum=$(this).parent().parent().attr("data-cp_pnum");
 				
 				$.ajax({
 					type:"DELETE",
@@ -536,7 +536,7 @@
 			
 			//댓글 수정
 			$("#commentsList").on("click", ".modBtn", function(){
-				let cp_num=$(this).parent().attr("data-cp_num");
+				let cp_num=$(this).parent().parent().attr("data-cp_num");
 				
 				let cp_content = $("span.cp_content", $(this).parent()).text();
 				
@@ -565,20 +565,20 @@
 			let tmp="<ul id='commentsp'>";
 			
 			commentsp.forEach(function(commentsp){
-				tmp += '<li data-cp_num=' + commentsp.cp_num
+				tmp += '<li id="commentspBox" data-cp_num=' + commentsp.cp_num
 				tmp += ' data-cp_pcnum=' + commentsp.cp_pcnum
 				tmp += ' data-cp_pnum=' + commentsp.cp_pnum + '>'
 				
 				if(commentsp.cp_pcnum != null)
-					tmp += '<img src="../resources/img/대댓글.png" alt="회원이미지">'
+					tmp += '<img src="../resources/img/대댓글.png" alt="답글 이미지" class="repImg">'
 					/* tmp += '&nbsp&nbsp&nbsp&nbsp&nbsp' */
-				tmp +=  ' <p class="m_proimg">' +  '<img src="../resources/img/memberImg.png" alt="회원이미지">' + '</p>'
-				tmp += ' <span class="cp_email">' + commentsp.cp_nicknm + '</span>'
+				tmp +=  ' <div class="m_proimg">' +  '<img src="../resources/img/memberImg.png" alt="회원이미지">' + '</div>'
+				tmp += '<div class="commR">' +' <span class="cp_email">' + commentsp.cp_nicknm + '</span>'
 				tmp += ' <span class="cp_content" id="contentPosi">' + commentsp.cp_content + '</span>'
 				tmp += ' <span class="cp_date">' + dateToString(commentsp.cp_update) + '</span>'
 				tmp += ' <button class="delBtn" id=commDelBtn>삭제</button>'
 				tmp += ' <button class="modBtn" id="commModBtn">수정</button>'
-				tmp += ' <button class="replyBtn" id="repBtn">답글쓰기</button>' +'<br><br><hr>'
+				tmp += ' <button class="replyBtn" id="repBtn">답글쓰기</button>' +'<br><br>'+ '</div>' 
 				tmp += '</li>'
 			})
 			tmp += "</ul>"
