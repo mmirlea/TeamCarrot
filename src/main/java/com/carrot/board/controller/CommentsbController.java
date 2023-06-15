@@ -65,8 +65,10 @@ public class CommentsbController {
 //		if (cb_pcnum != null) {
 //            commentsbDTO.setCb_pcnum(cb_pcnum);
 //        } else {
-//            commentsbDTO.setCb_pcnum(0);
+//            commentsbDTO.setCb_pcnum(1);
 //        }
+		
+		
 		
 		System.out.println("dto : " + commentsbDTO);
 		
@@ -80,6 +82,8 @@ public class CommentsbController {
 			return new ResponseEntity<String>("WRT_ERR", HttpStatus.BAD_REQUEST);
 		}
 	}
+	
+
 	
 	//댓글 삭제
 	@DeleteMapping("/commentsb/{cb_num}")
