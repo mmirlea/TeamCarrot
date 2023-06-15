@@ -256,7 +256,7 @@
     				$("#replyForm").appendTo($(this).parent());
     				$("#replyForm").css("display", "block");
     				
-    				let cb_pcnum = $(this).parent().attr("data-cb_num");
+    				let cb_pcnum = $(this).parent().parent().attr("data-cb_num");
     				cb_pcnum = parseInt(cb_pcnum);
     			    $("#replyForm").attr("data-cb_pcnum", cb_pcnum);
     			})
