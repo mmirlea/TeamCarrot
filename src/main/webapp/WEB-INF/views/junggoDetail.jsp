@@ -371,8 +371,10 @@
     				tmp += '<div class="commR">' +' <span class="cb_email">' + commentsb.cb_nicknm + '</span>'
     				tmp += ' <span class="cb_content">' + commentsb.cb_content + '</span>'
     				tmp += ' <span class="cb_date">' + dateToString(commentsb.cb_update) + '</span>'
-    				tmp += ' <button class="delBtn" id=commDelBtn>삭제</button>'
-    				tmp += ' <button class="modBtn" id="commModBtn">수정</button>'
+    				if('${login_email}' == commentsb.cb_email) {
+    					tmp += ' <button class="delBtn" id=commDelBtn>삭제</button>'
+    					tmp += ' <button class="modBtn" id="commModBtn">수정</button>'
+    				}
     				if(commentsb.cb_pcnum == null)
     					tmp += ' <button class="replyBtn">답글쓰기</button>' +'<br><br>'+ '</div>' 
     				tmp += '</li>'
@@ -577,8 +579,10 @@
 				tmp += '<div class="commR">' +' <span class="cp_email">' + commentsp.cp_nicknm + '</span>'
 				tmp += ' <span class="cp_content" id="contentPosi">' + commentsp.cp_content + '</span>'
 				tmp += ' <span class="cp_date">' + dateToString(commentsp.cp_update) + '</span>'
-				tmp += ' <button class="delBtn" id=commDelBtn>삭제</button>'
-				tmp += ' <button class="modBtn" id="commModBtn">수정</button>'
+				if('${login_email}' == commentsp.cp_email) {
+					tmp += ' <button class="delBtn" id=commDelBtn>삭제</button>'
+					tmp += ' <button class="modBtn" id="commModBtn">수정</button>'
+				}
 				if(commentsp.cp_pcnum == null)
 					tmp += ' <button class="replyBtn" id="repBtn">답글쓰기</button>' +'<br><br>'+ '</div>' 
 				tmp += '</li>'
