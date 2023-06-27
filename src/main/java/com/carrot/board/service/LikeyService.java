@@ -11,16 +11,16 @@ public class LikeyService {
 
 	@Autowired
 	LikeyDAO likeyDAO;
-	
-	public int insertLike(LikeyDTO likeyDTO) throws Exception{
+
+	public int insertLike(LikeyDTO likeyDTO) throws Exception {
 		return likeyDAO.insertLike(likeyDTO);
 	}
-	
-	public int deleteLike(LikeyDTO likeyDTO) throws Exception{
+
+	public int deleteLike(LikeyDTO likeyDTO) throws Exception {
 		return likeyDAO.deleteLike(likeyDTO);
 	}
-	
-	public int count(LikeyDTO likeyDTO) throws Exception{
+
+	public int count(LikeyDTO likeyDTO) throws Exception {
 		return likeyDAO.count(likeyDTO);
 	}
 }

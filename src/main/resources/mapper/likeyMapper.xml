@@ -5,11 +5,14 @@
 
 <!-- mapper의 전체 경로 -->
 <mapper namespace="com.carrot.board.dao.LikeyMapper">
+
+	<!-- 좋아요 증가 -->
 	<insert id="insertLike" parameterType="LikeyDTO">
 		INSERT INTO LIKEY (L_MENU, L_PBNUM, L_EMAIL)
 		VALUES (#{l_menu}, #{l_pbnum}, #{l_email})
 	</insert>
 	
+	<!-- 좋아요 감소 -->
 	<delete id="deleteLike" parameterType="LikeyDTO">
 		DELETE LIKEY
 		 WHERE L_MENU = #{l_menu}
@@ -17,6 +20,7 @@
 		   AND L_EMAIL = #{l_email}
 	</delete>
 	
+	<!-- 좋아요 갯수 -->
 	<select id="count" resultType="int">
 		SELECT NVL(COUNT(*), 0) CNT
 		  FROM LIKEY
@@ -24,6 +28,5 @@
 		   AND L_PBNUM = #{l_pbnum}
 		   AND L_EMAIL = #{l_email}
 	  GROUP BY L_MENU, L_PBNUM, L_EMAIL
-	     <!-- WHERE B_MENU = '2' -->
 	</select>
 </mapper>

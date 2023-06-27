@@ -76,9 +76,8 @@ public class SearchCondition {
 	public String getQueryString(Integer page) {
 		// uriComponentsBuilder : components를 생성함
 		return UriComponentsBuilder.newInstance().queryParam("page", page).queryParam("pageSize", pageSize)
-				.queryParam("addr1", addr1)
-				.queryParam("option", option)
-				.queryParam("keyword", keyword).build().toString();
+				.queryParam("addr1", addr1).queryParam("option", option).queryParam("keyword", keyword).build()
+				.toString();
 	}
 
 }

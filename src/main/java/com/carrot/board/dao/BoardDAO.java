@@ -13,7 +13,7 @@ public interface BoardDAO {
 	int count() throws Exception;
 
 	int insert(BoardDTO boardDto) throws Exception;
-	
+
 	int save(BoardDTO boardDto) throws Exception;
 
 	int update(BoardDTO boardDto) throws Exception;
@@ -25,12 +25,10 @@ public interface BoardDAO {
 	List<BoardDTO> selectAll() throws Exception;
 
 	int increaseViewCnt(Integer b_num) throws Exception;
-	
+
 	int increaseLikeCnt(Integer b_num, BoardDTO boardDto) throws Exception;
-	
+
 	int decreaseLikeCnt(Integer b_num, BoardDTO boardDto) throws Exception;
-	
-	String getLikeyEmail(BoardDTO boardDTO) throws Exception;
 
 	List<BoardDTO> selectPage(Map map) throws Exception;
 

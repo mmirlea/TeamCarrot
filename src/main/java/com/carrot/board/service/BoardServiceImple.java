@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.carrot.board.dao.BoardDAO;
 import com.carrot.board.domain.BoardDTO;
-import com.carrot.board.domain.LikeyDTO;
 import com.carrot.board.domain.SearchCondition;
 
 @Service
@@ -16,10 +15,10 @@ public class BoardServiceImple implements BoardService {
 
 	@Autowired
 	BoardDAO boardDAO;
-	
+
 	@Autowired
 	FileService fileService;
-	
+
 	@Override
 	public BoardDTO select(BoardDTO boardDTO) throws Exception {
 		return boardDAO.select(boardDTO);
@@ -30,14 +29,14 @@ public class BoardServiceImple implements BoardService {
 	}
 
 	@Override
-	public int write(BoardDTO boardDTO) throws Exception {	
-		boardDTO.setB_img(fileService.createFile(boardDTO.getFileUpload()));
+	public int write(BoardDTO boardDTO) throws Exception {
+		boardDTO.setB_img(fileService.createFile(boardDTO.getFileUpload())); // 이미지 저장
 		return boardDAO.insert(boardDTO);
 	}
 
 	@Override
 	public int save(BoardDTO boardDTO) throws Exception {
-		boardDTO.setB_img(fileService.createFile(boardDTO.getFileUpload()));
+		boardDTO.setB_img(fileService.createFile(boardDTO.getFileUpload())); // 이미지 저장
 		return boardDAO.save(boardDTO);
 	}
 
@@ -69,7 +68,7 @@ public class BoardServiceImple implements BoardService {
 		boardDAO.increaseViewCnt(boardDTO.getB_num());
 		return boardDTO;
 	}
-	
+
 	@Override
 	public int increaseLikeCnt(Integer b_num, BoardDTO boardDto) throws Exception {
 		return boardDAO.increaseLikeCnt(b_num, boardDto);
@@ -95,7 +94,7 @@ public class BoardServiceImple implements BoardService {
 	public int getSearchResultCnt(SearchCondition sc) throws Exception {
 		return boardDAO.searchResultCnt(sc);
 	}
-	
+
 	@Override
 	public int updateCommentsCnt(int cnt, Integer b_num) throws Exception {
 		return boardDAO.updateCommentsbCnt(cnt, b_num);

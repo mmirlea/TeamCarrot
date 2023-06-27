@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.carrot.board.domain.BoardDTO;
-import com.carrot.board.domain.LikeyDTO;
 import com.carrot.board.domain.SearchCondition;
 
 public interface BoardService {
