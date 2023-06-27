@@ -17,35 +17,35 @@ public class LikeyController {
 	@Autowired
 	LikeyService service;
 
+	// 좋아요
 	@GetMapping("/like")
 	public String insertLike(LikeyDTO likeyDTO, Model m, HttpSession session, HttpServletRequest request) {
 		String l_email = (String) session.getAttribute("m_email");
 		likeyDTO.setL_email(l_email);
-		
+
 		try {
 			if (service.insertLike(likeyDTO) != 1) {
-				System.out.println("좋아요 실패");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return "boardDetail";
 	}
-	
+
+	// 좋아요 취소
 	@GetMapping("/disLike")
 	public String deleteLike(LikeyDTO likeyDTO, Model m, HttpSession session, HttpServletRequest request) {
 		String l_email = (String) session.getAttribute("m_email");
 		likeyDTO.setL_email(l_email);
-		
+
 		try {
 			if (service.deleteLike(likeyDTO) != 1) {
-				System.out.println("좋아요 취소 실패");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return "boardDetail";
 	}
 }
