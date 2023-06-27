@@ -14,19 +14,19 @@ import com.carrot.user.domain.UserDTO;
 public class UserServiceImpl implements UserService {
 	@Autowired
 	UserDAO dao;
-	
+
 	@Override
-	public int register(UserDTO dto) throws Exception{
+	public int register(UserDTO dto) throws Exception {
 		return dao.register(dto);
 	}
-	
+
 	@Override
-	public int emailOverlap(UserDTO dto) throws Exception{
+	public int emailOverlap(UserDTO dto) throws Exception {
 		return dao.emailOverlap(dto);
 	}
-	
+
 	@Override
-	public UserDTO login(UserDTO dto) throws Exception{
+	public UserDTO login(UserDTO dto) throws Exception {
 		return dao.login(dto);
 	}
 
@@ -59,14 +59,14 @@ public class UserServiceImpl implements UserService {
 	public int delUser(UserDTO dto) throws Exception {
 		return dao.delUser(dto);
 	}
-	
+
 	@Override
 	public int getCount() throws Exception {
 		return dao.count();
 	}
-	
-	public List<ProductDTO> getPage(SearchConditionM scm) throws Exception{
+
+	public List<ProductDTO> getPage(SearchConditionM scm) throws Exception {
 		return dao.selectPage(scm);
 	}
-	
+
 }
