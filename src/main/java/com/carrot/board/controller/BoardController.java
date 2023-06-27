@@ -34,10 +34,11 @@ public class BoardController {
 
 	@Autowired
 	UserService userService;
-	
+
 	@Autowired
 	LikeyService likeyService;
 
+	// 좋아요 취소
 	@GetMapping("/dislike")
 	public String downLikeCnt(Integer b_num, BoardDTO boardDto, LikeyDTO likeyDTO, HttpSession session) {
 		String l_email = (String) session.getAttribute("m_email");
@@ -45,9 +46,6 @@ public class BoardController {
 		likeyDTO.setL_menu("2");
 		likeyDTO.setL_pbnum(b_num);
 		likeyDTO.setL_email(l_email);
-
-		System.out.println("downLikeCnt b_num ->" + b_num);
-		System.out.println("downLikeCnt likeyDTO ->" + likeyDTO);
 
 		try {
 			if (likeyService.deleteLike(likeyDTO) != 1)
@@ -60,6 +58,7 @@ public class BoardController {
 		return "redirect:/board/read?menu=board&b_num=" + b_num;
 	}
 
+	// 좋아요
 	@GetMapping("/like")
 	public String upLikeCnt(Integer b_num, BoardDTO boardDto, LikeyDTO likeyDTO, HttpSession session) {
 		String l_email = (String) session.getAttribute("m_email");
@@ -67,9 +66,6 @@ public class BoardController {
 		likeyDTO.setL_menu("2");
 		likeyDTO.setL_pbnum(b_num);
 		likeyDTO.setL_email(l_email);
-
-		System.out.println("upLikeCnt b_num " + b_num);
-		System.out.println("upLikeCnt likeyDTO " + likeyDTO);
 
 		try {
 
@@ -82,6 +78,7 @@ public class BoardController {
 		return "redirect:/board/read?menu=board&b_num=" + b_num;
 	}
 
+	// 게시물 삭제
 	@PostMapping("/remove")
 	public String remove(Integer b_num, Integer page, Integer pageSize, RedirectAttributes rattr, Model m,
 			HttpSession session) {
@@ -107,12 +104,11 @@ public class BoardController {
 		return "redirect:/board/list";
 	}
 
+	// 게시물 수정
 	@PostMapping("/modify")
 	public String modify(BoardDTO boardDTO, RedirectAttributes rattr, Model m, HttpSession session) {
 		String b_email = (String) session.getAttribute("m_email");
 		boardDTO.setB_email(b_email);
-		System.out.println("modify b_email " + b_email);
-		System.out.println("modify boardDTO " + boardDTO);
 		try {
 			if (service.modify(boardDTO) != 1)
 				throw new Exception("Modify failed");
@@ -133,18 +129,18 @@ public class BoardController {
 		}
 	}
 
+	// 수정 시 기존 게시물 읽어오기
 	@GetMapping("/select")
 	public String select(BoardDTO boardDTO, RedirectAttributes rattr, Model m, HttpSession session) {
 		String b_email = (String) session.getAttribute("m_email");
 		boardDTO.setB_email(b_email);
 
 		try {
-			System.out.println("select -> boardDTO : " + boardDTO);
 			boardDTO = service.select(boardDTO);
 
 			m.addAttribute("boardDTO", boardDTO);
 			m.addAttribute("menu", "board");
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			m.addAttribute("msg", "LIST_ERR");
@@ -153,6 +149,7 @@ public class BoardController {
 		return "boardDetail";
 	}
 
+	// 게시물 임시 저장
 	@GetMapping("/save")
 	public String save(Model m) {
 		m.addAttribute("mode", "new");
@@ -160,6 +157,7 @@ public class BoardController {
 		return "boardDetail";
 	}
 
+	// 게시물 임시 저장
 	@PostMapping("/save")
 	public String save(BoardDTO boardDTO, RedirectAttributes rattr, Model m, HttpSession session) {
 		String b_email = (String) session.getAttribute("m_email");
@@ -183,21 +181,23 @@ public class BoardController {
 		return "boardDetail";
 	}
 
+	// 게시물 작성
 	@GetMapping("/write")
 	public String write(Model m, HttpServletRequest request) {
 		// 로그인 확인
 		if (!loginCheck(request))
 			return "redirect:/login/login?toURL=" + request.getRequestURL();
-		
+
 		m.addAttribute("mode", "new");
 		m.addAttribute("menu", "board");
 		return "boardDetail";
 	}
 
+	// 게시물 작성
 	@PostMapping("/write")
 	public String write(BoardDTO boardDTO, RedirectAttributes rattr, Model m, HttpSession session,
 			HttpServletRequest request) {
-		
+
 		String b_email = (String) session.getAttribute("m_email");
 		boardDTO.setB_email(b_email);
 
@@ -218,6 +218,7 @@ public class BoardController {
 		return "boardDetail";
 	}
 
+	// 게시물 상세 읽기
 	@GetMapping("/read")
 	public String read(Integer b_num, Integer page, Integer pageSize, Model m, HttpSession session, UserDTO userDTO) {
 
@@ -227,14 +228,13 @@ public class BoardController {
 			String b_email = (String) session.getAttribute("m_email");
 			boardDTO.setB_email(b_email);
 			boardDTO = service.read(boardDTO);
-			
-			System.out.println("read  boardDTO -> " + boardDTO);
+
 			m.addAttribute("boardDTO", boardDTO);
-			m.addAttribute("menu", "board"); 
+			m.addAttribute("menu", "board");
 			m.addAttribute("page", page);
 			m.addAttribute("pageSize", pageSize);
-			
-			userDTO = userService.mypageInfo((String)session.getAttribute("m_email"));
+
+			userDTO = userService.mypageInfo((String) session.getAttribute("m_email"));
 			m.addAttribute("userDTO", userDTO);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -243,6 +243,7 @@ public class BoardController {
 		return "junggoDetail";
 	}
 
+	// 게시글 리스트
 	@GetMapping("/list")
 	public String list(SearchCondition sc, Model m) {
 		try {
@@ -250,7 +251,6 @@ public class BoardController {
 			PageHandler pageHandler = new PageHandler(totalCnt, sc);
 
 			List<BoardDTO> list = service.getSearchSelectPage(sc);
-			System.out.println("list" + list);
 
 			m.addAttribute("list", list);
 			m.addAttribute("ph", pageHandler);
@@ -267,10 +267,10 @@ public class BoardController {
 		return "boardMain";
 	}
 
+	// 로그인 유무로 권한 확인
 	@GetMapping("/chkLogin")
 	public String chkLogin(Model m, HttpServletRequest request) {
 
-		System.out.println("request.getRequestURL() " + request.getRequestURL());
 		if (!loginCheck(request))
 			return "redirect:/login/login?toURL=" + request.getRequestURL();
 		return "redirect:/login/login?toURL=" + request.getRequestURL();

@@ -10,14 +10,14 @@
 	</settings>
 	<!-- 별칭 -->
 	<typeAliases>
-		<typeAlias alias="LikeyDTO" type="com.carrot.board.domain.LikeyDTO" />
 		<typeAlias alias="BoardDTO" type="com.carrot.board.domain.BoardDTO" />
-      	<typeAlias alias="ProductDTO" type="com.carrot.board.domain.ProductDTO"/>
-    	<typeAlias alias="SearchConditionP" type="com.carrot.board.domain.SearchConditionP" />
-    	<typeAlias alias="SearchConditionM" type="com.carrot.board.domain.SearchConditionM" />
-		<typeAlias alias="SearchCondition" type="com.carrot.board.domain.SearchCondition" />
-		<typeAlias alias="UserDTO" type="com.carrot.user.domain.UserDTO" />
-		<typeAlias alias="CommentspDTO" type="com.carrot.board.domain.CommentspDTO" />
 		<typeAlias alias="CommentsbDTO" type="com.carrot.board.domain.CommentsbDTO" />
+		<typeAlias alias="CommentspDTO" type="com.carrot.board.domain.CommentspDTO" />
+		<typeAlias alias="LikeyDTO" type="com.carrot.board.domain.LikeyDTO" />
+      	<typeAlias alias="ProductDTO" type="com.carrot.board.domain.ProductDTO"/>
+		<typeAlias alias="SearchCondition" type="com.carrot.board.domain.SearchCondition" />
+    	<typeAlias alias="SearchConditionM" type="com.carrot.board.domain.SearchConditionM" />
+    	<typeAlias alias="SearchConditionP" type="com.carrot.board.domain.SearchConditionP" />
+		<typeAlias alias="UserDTO" type="com.carrot.user.domain.UserDTO" />
 	</typeAliases>
 </configuration>
