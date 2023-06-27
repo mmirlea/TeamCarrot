@@ -43,6 +43,12 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
+	public int modNoImg(UserDTO dto) throws Exception {
+		return session.update(namespace + "modNoImg", dto);
+
+	}
+	
+	@Override
 	public int modifyPw(UserDTO dto) throws Exception {
 		return session.update(namespace+"modifyPw", dto);
 	}
@@ -52,6 +58,10 @@ public class UserDAOImpl implements UserDAO {
 		return session.update(namespace+"modifyAddr", dto);
 	}
 
+	@Override
+	public int delUser(UserDTO dto) throws Exception {
+		return session.delete(namespace+"delUser", dto);
+	}
 	
 	@Override
 	public int count() throws Exception{
@@ -62,14 +72,5 @@ public class UserDAOImpl implements UserDAO {
 		return session.selectList(namespace + "selectPage", scm);
 	}
 
-	@Override
-	public int modNoImg(UserDTO dto) throws Exception {
-		return session.update(namespace+"modNoImg", dto);
-
-	}
-
-	@Override
-	public int delUser(UserDTO dto) throws Exception {
-		return session.delete(namespace+"delUser", dto);
-	}
+	
 }

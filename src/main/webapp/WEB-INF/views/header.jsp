@@ -52,11 +52,9 @@
 					<div class="d"></div>
 					<div class="searchLocal">
 						<div class="search">
-							<input type="text" name="keyword" class="txtSearch" id="keyword"
-								value="${param.keyword}" placeholder="찾으실 항목을 입력하세요">
+							<input type="text" name="keyword" class="txtSearch" id="keyword" value="${param.keyword}" placeholder="찾으실 항목을 입력하세요">
 							<button type="submit" class="btnSearch">
 								<i class="fas fa-chevron-circle-right"></i>
-								<!-- <i class="xi-heart"></i> -->
 							</button>
 						</div>
 					</div>
@@ -64,11 +62,7 @@
 
 					<div class="divChat">
 						<button class="btnChat">
-							<!-- <i class="fas fa-comment-dots"></i> -->
 							<i class="far fa-comment-dots"></i>
-
-							<!-- <i class="fas fa-bullhorn"></i> -->
-							<!-- 공지사항 -->
 						</button>
 					</div>
 					<select id="searchMenu" name="searchOption" class="searchOption">
@@ -79,16 +73,11 @@
 
 					<div class="divSetLocal">
 						<select name="addr1" class="region" id="region">
-							<option value="opRegion" ${addr1=='opRegion' ? "selected" : ""}>지역을
-								선택하세요</option>
-							<option value="울산광역시 북구" ${addr1=='울산광역시 북구' ? "selected" : ""}>울산광역시
-								북구</option>
-							<option value="울산광역시 동구" ${addr1=='울산광역시 동구' ? "selected" : ""}>울산광역시
-								동구</option>
-							<option value="울산광역시 남구" ${addr1=='울산광역시 남구' ? "selected" : ""}>울산광역시
-								남구</option>
-							<option value="울산광역시 중구" ${addr1=='울산광역시 중구' ? "selected" : ""}>울산광역시
-								중구</option>
+							<option value="opRegion" ${addr1=='opRegion' ? "selected" : ""}>지역을 선택하세요</option>
+							<option value="울산광역시 북구" ${addr1=='울산광역시 북구' ? "selected" : ""}>울산광역시 북구</option>
+							<option value="울산광역시 동구" ${addr1=='울산광역시 동구' ? "selected" : ""}>울산광역시 동구</option>
+							<option value="울산광역시 남구" ${addr1=='울산광역시 남구' ? "selected" : ""}>울산광역시 남구</option>
+							<option value="울산광역시 중구" ${addr1=='울산광역시 중구' ? "selected" : ""}>울산광역시 중구</option>
 						</select>
 						
 					</div> <!--.divSetLocal-->
