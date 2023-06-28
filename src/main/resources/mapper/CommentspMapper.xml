@@ -4,30 +4,6 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.carrot.board.dao.CommentspMapper">
-	<!-- 게시글 댓글 전체 삭제 -->
-	<delete id="deleteAll" parameterType="int">
-		DELETE FROM COMMENTS_P
-		WHERE CP_PNUM = #{cp_pnum}
-	</delete>
-	
-	<!-- 게시글 댓글 개수 확인 -->
-	<select id="count" parameterType="int" resultType="int">
-		SELECT count(*)
-		FROM COMMENTS_P
-		WHERE CP_PNUM = #{cp_pnum}
-	</select>
-	
-	<!-- 댓글 삭제 -->
-	<delete id="delete" parameterType="map">
-		DELETE FROM COMMENTS_P
-		WHERE CP_NUM = #{cp_num} AND CP_EMAIL = #{cp_email}
-	</delete>
-	
-	<!-- 댓글 추가 -->
-	<insert id="insert" parameterType="CommentspDTO">
-		INSERT INTO comments_p(CP_PNUM, CP_NUM, CP_PCNUM, CP_EMAIL, CP_CONTENT, CP_CRDATE, CP_UPDATE, CP_NICKNM)
-		VALUES (#{cp_pnum}, seq_commentsp_num.nextval, #{cp_pcnum}, #{cp_email}, #{cp_content}, SYSDATE, SYSDATE, #{cp_nicknm})
-	</insert>
 	
 	<!-- 게시글의 댓글 모두 검색 -->
 	<select id="selectAll" parameterType="int" resultType="CommentspDTO">
@@ -44,6 +20,24 @@
 		WHERE CP_NUM = #{cp_num}
 	</select>
 	
+	<!-- 게시글 댓글 개수 확인 -->
+	<select id="count" parameterType="int" resultType="int">
+		SELECT count(*)
+		FROM COMMENTS_P
+		WHERE CP_PNUM = #{cp_pnum}
+	</select>
+	
+	<!-- 시퀀스 조회 -->
+	<select id="seqSelect" resultType="int">
+		SELECT SEQ_COMMENTSP_NUM.NEXTVAL FROM DUAL
+	</select>
+	
+	<!-- 댓글 추가 -->
+	<insert id="insert" parameterType="CommentspDTO">
+		INSERT INTO comments_p(CP_PNUM, CP_NUM, CP_PCNUM, CP_EMAIL, CP_CONTENT, CP_CRDATE, CP_UPDATE, CP_NICKNM)
+		VALUES (#{cp_pnum}, seq_commentsp_num.nextval, #{cp_pcnum}, #{cp_email}, #{cp_content}, SYSDATE, SYSDATE, #{cp_nicknm})
+	</insert>
+	
 	<!-- 댓글 변경하기 -->
 	<update id="update" parameterType="CommentspDTO">
 		UPDATE COMMENTS_P
@@ -51,8 +45,15 @@
 		WHERE CP_NUM = #{cp_num} AND CP_EMAIL = #{cp_email}
 	</update>
 	
-	<!-- 시퀀스 조회 -->
-	<select id="seqSelect" resultType="int">
-		SELECT SEQ_COMMENTSP_NUM.NEXTVAL FROM DUAL
-	</select>
+	<!-- 게시글 댓글 전체 삭제 -->
+	<delete id="deleteAll" parameterType="int">
+		DELETE FROM COMMENTS_P
+		WHERE CP_PNUM = #{cp_pnum}
+	</delete>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="delete" parameterType="map">
+		DELETE FROM COMMENTS_P
+		WHERE CP_NUM = #{cp_num} AND CP_EMAIL = #{cp_email}
+	</delete>
 </mapper>

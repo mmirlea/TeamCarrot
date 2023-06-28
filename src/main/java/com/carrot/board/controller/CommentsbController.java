@@ -26,92 +26,78 @@ public class CommentsbController {
 
 	@Autowired
 	CommentsbService service;
-	
-	//댓글 수정
+
+	// 댓글 수정
 	@PatchMapping("/commentsb/{cb_num}")
-	public ResponseEntity<String> modify(@PathVariable Integer cb_num, @RequestBody CommentsbDTO commentsbDTO, HttpSession session, HttpServletRequest request){
+	public ResponseEntity<String> modify(@PathVariable Integer cb_num, @RequestBody CommentsbDTO commentsbDTO, HttpSession session, HttpServletRequest request) {
 		session = request.getSession();
-		String cb_email = (String)session.getAttribute("m_email");
-		//String cb_nicknm = (String)session.getAttribute("m_nicknm");
-		
+		String cb_email = (String) session.getAttribute("m_email");
+
 		commentsbDTO.setCb_num(cb_num);
 		commentsbDTO.setCb_email(cb_email);
-		//commentsbDTO.setCb_nicknm(cb_nicknm);
-		
-		System.out.println("dto : " + commentsbDTO);
-		
+
+
 		try {
-			if(service.modify(commentsbDTO) != 1) {
+			if (service.modify(commentsbDTO) != 1) {
 				throw new Exception("comment modify Failed");
 			}
-			return new ResponseEntity<String>("MOD_OK",HttpStatus.OK);
-		}catch(Exception e) {
+			return new ResponseEntity<String>("MOD_OK", HttpStatus.OK);
+		} catch (Exception e) {
 			e.printStackTrace();
-			
+
 			return new ResponseEntity<String>("MOD_ERR", HttpStatus.BAD_GATEWAY);
 		}
 	}
-	
-	//댓글 등록
+
+	// 댓글 등록
 	@PostMapping("/commentsb")
-	public ResponseEntity<String> write(@RequestBody CommentsbDTO commentsbDTO, @RequestParam Integer cb_pnum, @RequestParam String cb_nicknm, @RequestParam(required = false) Integer cb_pcnum, HttpSession session, HttpServletRequest request, UserDTO userDTO){
+	public ResponseEntity<String> write(@RequestBody CommentsbDTO commentsbDTO, @RequestParam Integer cb_pnum,
+			@RequestParam String cb_nicknm, @RequestParam(required = false) Integer cb_pcnum, HttpSession session, HttpServletRequest request, UserDTO userDTO) {
 		session = request.getSession();
-		String cb_email = (String)session.getAttribute("m_email");
-		
+		String cb_email = (String) session.getAttribute("m_email");
+
 		commentsbDTO.setCb_email(cb_email);
 		commentsbDTO.setCb_pnum(cb_pnum);
 		commentsbDTO.setCb_nicknm(cb_nicknm);
-		
-//		if (cb_pcnum != null) {
-//            commentsbDTO.setCb_pcnum(cb_pcnum);
-//        } else {
-//            commentsbDTO.setCb_pcnum(1);
-//        }
-		
-		
-		
-		System.out.println("dto : " + commentsbDTO);
-		
+
 		try {
-			if(service.write(commentsbDTO) != 1)
+			if (service.write(commentsbDTO) != 1)
 				throw new Exception("comment write Failed");
 			return new ResponseEntity<String>("WRT_OK", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			
+
 			return new ResponseEntity<String>("WRT_ERR", HttpStatus.BAD_REQUEST);
 		}
 	}
-	
 
-	
-	//댓글 삭제
+	// 댓글 삭제
 	@DeleteMapping("/commentsb/{cb_num}")
-	public ResponseEntity<String> remove(@PathVariable Integer cb_num, Integer cb_pnum, HttpSession session, HttpServletRequest request){
+	public ResponseEntity<String> remove(@PathVariable Integer cb_num, Integer cb_pnum, HttpSession session, HttpServletRequest request) {
 		session = request.getSession();
-		String cb_email = (String)session.getAttribute("m_email");
-		
+		String cb_email = (String) session.getAttribute("m_email");
+
 		try {
 			int rowCnt = service.removep(cb_num, cb_email, cb_pnum);
-			
-			if(rowCnt != 1)
+
+			if (rowCnt != 1)
 				throw new Exception("Comments Delete Failed");
 			return new ResponseEntity<String>("DEL_OK", HttpStatus.OK);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-			
+
 			return new ResponseEntity<String>("DEL_ERR", HttpStatus.BAD_REQUEST);
 		}
 	}
-	
-	//댓글 목록 반환
+
+	// 댓글 목록 반환
 	@GetMapping("/commentsb")
-	public ResponseEntity<List<CommentsbDTO>> list(Integer cb_pnum){
+	public ResponseEntity<List<CommentsbDTO>> list(Integer cb_pnum) {
 		List<CommentsbDTO> list = null;
 		try {
 			list = service.getList(cb_pnum);
 			return new ResponseEntity<List<CommentsbDTO>>(list, HttpStatus.OK);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<List<CommentsbDTO>>(list, HttpStatus.BAD_REQUEST);
 		}
