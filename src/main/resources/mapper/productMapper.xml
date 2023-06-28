@@ -31,125 +31,51 @@
 			<result property="m_ondo" column="m_ondo"/>
 		</association>
 	</resultMap>
+	
+		
+	<!-- 전체 게시물 개수 -->
+	<select id="count" resultType="int">
+		SELECT COUNT(*)
+		FROM PRODUCT
+	</select>
 		
 	<!-- 게시글 목록 조회 -->             
 	<select id="selectAll" resultMap="ProMemJoin">
-		SELECT p.p_menu, p.p_num, p.p_cate, m.m_nicknm, m_addr1, m_addr2, 
-			   p.p_title, p.p_content, p.p_price, p.p_likey, p.p_comm, p.p_img, p.p_update, p.p_crdate
-		FROM product p
-		INNER JOIN member m
-		ON p.p_email = m.m_email
-		WHERE p.p_menu = '1'
-		ORDER BY p.p_crdate DESC, p.p_num DESC
+		SELECT P.P_MENU, P.P_NUM, P.P_CATE, M.M_NICKNM, M_ADDR1, M_ADDR2, 
+			   P.P_TITLE, P.P_CONTENT, P.P_PRICE, P.P_LIKEY, P.P_COMM, P.P_IMG, P.P_UPDATE, P.P_CRDATE
+		FROM PRODUCT P
+		INNER JOIN MEMBER M
+		ON P.P_EMAIL = M.M_EMAIL
+		WHERE P.P_MENU = '1'
+		ORDER BY P.P_CRDATE DESC, P.P_NUM DESC
+
 	</select>
 	
 	<!-- 게시글 읽어오기 -->	
 	<select id="select" parameterType="ProductDTO" resultMap="ProMemJoin">
-		SELECT p.p_menu, p.p_num, p.p_cate, p.p_email, p.p_title, p.p_content, p.p_img, 
-			   p.p_crdate, p.p_update, p.p_tempsaveyn, p.p_price, p.p_negoyn, p.p_img,
-			   p.p_comm, p.p_viewcnt, m.m_nicknm, m.m_addr1, m.m_addr2, m.m_ondo, m.m_proimg,  
-			   (SELECT COUNT(*) CNT FROM LIKEY WHERE P_MENU = L_MENU AND P_NUM= L_PBNUM )AS p_likey,
-			   (SELECT DECODE(L_EMAIL, #{p_email}, 'Y', 'N') FROM LIKEY WHERE P_MENU = L_MENU AND P_NUM= L_PBNUM )AS p_likeYN
-		FROM product p 
-		INNER JOIN member m
-		ON p.p_email = m.m_email
-		WHERE p_menu = '1' AND p_num = #{p_num}
+		SELECT P.P_MENU, P.P_NUM, P.P_CATE, P.P_EMAIL, P.P_TITLE, P.P_CONTENT, P.P_IMG, 
+			   P.P_CRDATE, P.P_UPDATE, P.P_TEMPSAVEYN, P.P_PRICE, P.P_NEGOYN, P.P_IMG,
+			   P.P_COMM, P.P_VIEWCNT, M.M_NICKNM, M.M_ADDR1, M.M_ADDR2, M.M_ONDO, M.M_PROIMG,
+  
+			   (SELECT COUNT(*) CNT FROM LIKEY WHERE P_MENU = L_MENU AND P_NUM= L_PBNUM )AS P_LIKEY,
+			   (SELECT DECODE(L_EMAIL, #{p_email}, 'Y', 'N') FROM LIKEY WHERE P_MENU = L_MENU AND P_NUM= L_PBNUM )AS P_LIKEYN
+		FROM PRODUCT P
+		INNER JOIN MEMBER M
+		ON P.P_EMAIL = M.M_EMAIL
+		WHERE P.P_MENU = '1' AND P.P_NUM = #{p_num}
 	</select>
-	
-	<!-- 전체 게시물 개수 -->
-	<select id="count" resultType="int">
-		SELECT COUNT(*)
-		FROM product
-	</select>
-	
-	<!-- 글 추가하기 -->
-	<insert id="insert" parameterType="ProductDTO">
-		INSERT INTO product(p_menu, p_num, p_cate, p_email, p_title, p_content, p_crdate, p_tempsaveyn, p_price, p_negoyn, p_img)
-		VALUES('1', seq_product_num.nextval, #{p_cate}, #{p_email}, #{p_title}, #{p_content}, SYSDATE, #{p_tempsaveyn}, #{p_price}, #{p_negoyn}, #{p_img})
-	</insert>
-	<!-- 임시저장 추가하기 -->
-	<insert id="save" parameterType="ProductDTO">
-		INSERT INTO PRODUCT (p_num, p_cate, p_email, p_title, p_content, p_tempsaveyn, p_price, p_negoyn, p_img)
-		VALUES (SEQ_PRODUCT_NUM.NEXTVAL, #{p_cate}, #{p_email}, #{p_title}, #{p_content}, 'Y', #{p_price}, #{p_negoyn}, #{p_img})
-	</insert>
-	
-	<!-- 글 수정하기 -->
-	<update id="update" parameterType="ProductDTO">
-		UPDATE product
-		SET p_title = #{p_title}, p_content = #{p_content}, p_update = SYSDATE, 
-			p_price = #{p_price}, p_negoyn = #{p_negoyn}, p_img = #{p_img} 
-		WHERE p_menu = '1' AND p_num = #{p_num} AND p_email = #{p_email} 
-	</update>
-	<!-- 임시저장 작성하기 -->
-	<update id="tempUpdate" parameterType="ProductDTO">
-		UPDATE PRODUCT
-		   SET p_title = #{p_title},
-		       p_content = #{p_content},
-		       p_price = #{p_price},
-		       p_negoyn = #{p_negoyn},
-		       p_img = #{p_img}
-		       AND p_tempsaveyn = 'N'
-		       p_update = SYSDATE
-		 WHERE p_menu = '1'
-		   AND p_num = #{p_num}
-		   AND p_email = #{p_email}
-		   AND p_tempsaveyn = 'Y'
-	</update>
-	
-	<!-- 글 삭제하기 -->
-	<delete id="delete" parameterType="map">
-		DELETE FROM product
-		WHERE p_menu = '1' AND p_num = #{p_num} AND p_email = #{p_email} 
-	</delete>
-	
-	<!-- 게시글 전체 삭제 -->
-	<delete id="deleteAll">
-		DELETE FROM product
-	</delete>
-	
-	<!-- 조회수 증가 -->
-	<update id="increaseViewCnt" parameterType="int">
-		UPDATE product
-		SET p_viewcnt = p_viewcnt + 1
-		WHERE p_menu = '1'
-		AND p_num = #{p_num}
-	</update>
-	
-	<!-- 좋아요 증가 -->
-	<update id="increaseLikeCnt" parameterType="map">
-		UPDATE product
-		   SET p_likey = p_likey + 1,
-		       p_likeyemail = p_likeyemail || #{p_email} || '/'
-		 WHERE p_menu = '1'
-		   AND p_num = #{p_num}
-	</update>
-	
-	<!-- 좋아요 감소 -->
-	<update id="decreaseLikeCnt" parameterType="map">
-		UPDATE product
-		   SET p_likey = p_likey - 1,
-		       p_likeyemail = #{p_likeyemail}
-		 WHERE p_menu = '1'
-		   AND p_num = #{p_num}
-	</update>
-	
-	<select id="getLikeyEmail" parameterType="productDTO" resultType="string">
-		SELECT p_likeyemail FROM product
-		 WHERE p_num = #{p_num}
-		 AND p_likeyemail LIKE LIKE '%'||#{p_email}||'%'
-	</select>
-	
+
 	<!-- 페이징 처리하기 -->
 	<select id="selectPage" parameterType="SearchConditionP" resultMap="ProMemJoin">
 		SELECT *
 		FROM(SELECT ROWNUM rNum, A.*
-			FROM (SELECT p.p_menu, p.p_num, p.p_cate, m.m_nicknm, m_addr1, m_addr2, 
-			  			 p.p_title, p.p_content, p.p_price, p.p_likey, p.p_comm, p.p_viewcnt, p.p_img, p.p_update, p.p_crdate
+			FROM (SELECT P.P_MENU, P.P_NUM, P.P_CATE, M.M_NICKNM, M_ADDR1, M_ADDR2, 
+			  			 P.P_TITLE, P.P_CONTENT, P.P_PRICE, P.P_LIKEY, P.P_COMM, P.P_VIEWCNT, P.P_IMG, P.P_UPDATE, P.P_CRDATE
 				  FROM product p
-				  INNER JOIN member m
-				  ON p.p_email = m.m_email
-				  WHERE p.p_menu = '1'
-				  ORDER BY p.p_crdate DESC, p.p_num DESC) A)
+				  INNER JOIN MEMBER M
+				  ON P.P_EMAIL = M.M_EMAIL
+				  WHERE P.P_MENU = '1'
+				  ORDER BY P.P_CREDATE DESC, P.P_NUM DESC) A)
 		WHERE rNum BETWEEN ((NVL(#{page}, 0)-1) * #{pageSize} +1) AND (NVL(#{page}, 0) * #{pageSize})
 	</select>
 	
@@ -157,40 +83,41 @@
 	<sql id="searchCondition">
 		<choose>
 			<when test='addr1=="opRegion"'>
-				AND p.p_title LIKE '%'||#{keyword}||'%'
+				AND P.P_TITLE LIKE '%'||#{keyword}||'%'
 			</when>
 			<when test='addr1 == null and keyword == null'>
 				AND 1=1
 			</when>
 			<otherwise>
-				ANd p.p_title LIKE '%'||#{keyword}||'%'
-				AND m.m_addr1 LIKE '%'||#{addr1}||'%'
+				ANd P.P_TITLE LIKE '%'||#{keyword}||'%'
+				AND M.M_ADDR1 LIKE '%'||#{addr1}||'%'
 			</otherwise>
 		</choose>
 	</sql>
+	
 	<!-- cate 검색 조건 -->
 	<sql id="searchCondition2">
 		<choose>
 			<when test='cate=="digital"'>
-				AND p.p_cate LIKE '%디지털기기%'		
+				AND P.P_CATE LIKE '%디지털기기%'		
 			</when>
 			<when test='cate=="furniture"'>
-				AND p.p_cate Like '%가구%'
+				AND P.P_CATE LIKE '%가구%'
 			</when>
 			<when test='cate=="kitchen"'>
-				AND p.p_cate Like '%생활%'
+				AND P.P_CATE LIKE '%생활%'
 			</when>
 			<when test='cate=="baby"'>
-				AND p.p_cate Like '%유아용품%'
+				AND P.P_CATE LIKE '%유아용품%'
 			</when>
 			<when test='cate=="clothes"'>
-				AND p.p_cate Like '%의류%'
+				AND P.P_CATE LIKE '%의류%'
 			</when>
 			<when test='cate=="book"'>
-				AND p.p_cate Like '%도서%'
+				AND P.P_CATE LIKE '%도서%'
 			</when>
 			<when test='cate=="ticket"'>
-				AND p.p_cate Like '%티켓%'
+				AND P.P_CATE LIKE '%티켓%'
 			</when>
 			<when test='cate=="etc"'>
 				AND p.p_cate Like '%기타%'
@@ -200,35 +127,81 @@
 			</otherwise>
 		</choose>
 	</sql>
+	
 	<!-- 게시글 검색하기 -->
 	<select id="searchSelectPage" parameterType="SearchConditionP" resultMap="ProMemJoin">
 		SELECT * 
 		FROM(SELECT ROWNUM rNum, A.* 
-			FROM(SELECT p.p_menu, p.p_num, p.p_cate, m.m_nicknm, m.m_addr1, m.m_addr2, 
-			  			 p.p_title, p.p_content, p.p_price, p.p_comm, p.p_viewcnt, p.p_img, p.p_update, p.p_crdate,
-			  			 (SELECT COUNT(*) CNT FROM LIKEY WHERE P_MENU = L_MENU AND P_NUM= L_PBNUM )AS p_likey
-				  FROM product p
-				  INNER JOIN member m
-				  ON p.p_email = m.m_email
-				  WHERE p.p_menu = '1'
+			FROM(SELECT P.P_MENU, P.P_NUM, P.P_CATE, M.M_NICKNM, M.M_ADDR1, M.M_ADDR2, 
+			  			 P.P_TITLE, P.P_CONTENT, P.P_PRICE, P.P_COMM, P.P_VIEWCNT, P.P_IMG, P.P_UPDATE, P.P_CRDATE,
+			  			 (SELECT COUNT(*) CNT FROM LIKEY WHERE P_MENU = L_MENU AND P_NUM= L_PBNUM )AS P_LIKEY
+				  FROM PRODUCT P
+				  INNER JOIN MEMBER M
+				  ON P.P_EMAIL = M.M_EMAIL
+				  WHERE P.P_MENU = '1'
 				  <include refid="searchCondition"></include>
 				  <include refid="searchCondition2"></include>
-				  ORDER BY p.p_crdate DESC, p.p_num DESC) A)
+				  ORDER BY P.P_CRDATE DESC, P.P_NUM DESC) A)
 		WHERE rNum BETWEEN ((NVL(#{page}, 0)-1) * #{pageSize} +1) AND (NVL(#{page}, 0) * #{pageSize})
 	</select>
+	
 	<!-- 검색했을 때의 게시글 개수 -->
 	<select id="searchResultCnt" parameterType="SearchConditionP" resultType="int">
 		SELECT count(*)
-		FROM (SELECT p.p_menu, p.p_num, p.p_cate, m.m_nicknm, m_addr1, m_addr2, 
-			  			 p.p_title, p.p_content, p.p_price, p.p_likey, p.p_comm, p.p_img, p.p_update, p.p_crdate
-				  FROM product p
-				  INNER JOIN member m
-				  ON p.p_email = m.m_email
-				  WHERE p.p_menu = '1'
+		FROM (SELECT P.P_MENU, P.P_NUM, P.P_CATE, M.M_NICKNM, M_ADDR1, M_ADDR2, 
+			  			 P.P_TITLE, P.P_CONTENT, P.P_PRICE, P.P_LIKEY, P.P_COMM, P.P_IMG, P.P_UPDATE, P.P_CRDATE
+				  FROM PRODUCT P
+				  INNER JOIN MEMBER M
+				  ON P.P_EMAIL = M.M_EMAIL
+				  WHERE P.P_MENU = '1'
 		WHERE 1=1
 		<include refid="searchCondition"></include>
 		<include refid="searchCondition2"></include>
 	</select>
+	
+	<!-- 글 추가하기 -->
+	<insert id="insert" parameterType="ProductDTO">
+		INSERT INTO PRODUCT(P_MENU, P_NUM, P_CATE, P_EMAIL, P_TITLE, P_CONTENT, P_CRDATE, P_TEMPSAVEYN, P_PRICE, P_NEGOYN, P_IMG)
+		VALUES('1', seq_product_num.nextval, #{p_cate}, #{p_email}, #{p_title}, #{p_content}, SYSDATE, #{p_tempsaveyn}, #{p_price}, #{p_negoyn}, #{p_img})
+	</insert>
+	
+	<!-- 임시저장 추가하기 -->
+	<insert id="save" parameterType="ProductDTO">
+		INSERT INTO PRODUCT (P_NUM, P_CATE, P_EMAIL, P_TITLE, P_CONTENT, P_TEMPSAVEYN, P_PRICE, P_NEGOYN, P_IMG)
+		VALUES (SEQ_PRODUCT_NUM.NEXTVAL, #{p_cate}, #{p_email}, #{p_title}, #{p_content}, 'Y', #{p_price}, #{p_negoyn}, #{p_img})
+	</insert>
+	
+	<!-- 글 수정하기 -->
+	<update id="update" parameterType="ProductDTO">
+		UPDATE PRODUCT
+		SET P_TITLE = #{p_title}, P_CONTENT = #{p_content}, P_UPDATE = SYSDATE, 
+			P_PRICE = #{p_price}, P_NEGOYN = #{p_negoyn}, P_IMG = #{p_img} 
+		WHERE P_MENU = '1' AND P_NUM = #{p_num} AND P_EMAIL = #{p_email} 
+	</update>
+	
+	<!-- 임시저장 작성하기 -->
+	<update id="tempUpdate" parameterType="ProductDTO">
+		UPDATE PRODUCT
+		   SET P_TITLE = #{p_title},
+		       P_CONTNET = #{p_content},
+		       P_PRICE = #{p_price},
+		       P_NEGOYN = #{p_negoyn},
+		       P_IMG = #{p_img}
+		       AND P_TEMPSAVEYN = 'N'
+		       P_UPDATE = SYSDATE
+		 WHERE P_MENU = '1'
+		   AND P_NUM = #{p_num}
+		   AND P_EMAIL = #{p_email}
+		   AND P_TEMPSAVEYN = 'Y'
+	</update>
+	
+	<!-- 조회수 증가 -->
+	<update id="increaseViewCnt" parameterType="int">
+		UPDATE PRODUCT
+		SET P_VIEWCNT = P_VIEWCNT + 1
+		WHERE P_MENU = '1'
+		AND P_NUM = #{p_num}
+	</update>
 	
 	<!-- 상품 댓글 -->
 	<update id="updateCommentspCnt" parameterType="map">
@@ -236,4 +209,16 @@
 		SET P_COMM = P_COMM + #{cnt}
 		WHERE P_NUM = #{p_num}
 	</update>
+	
+	<!-- 글 삭제하기 -->
+	<delete id="delete" parameterType="map">
+		DELETE FROM PRODUCT
+		WHERE P_MENU = '1' AND P_NUM = #{p_num} AND P_EMAIL = #{p_email} 
+	</delete>
+	
+	<!-- 게시글 전체 삭제 -->
+	<delete id="deleteAll">
+		DELETE FROM PRODUCT
+	</delete>
+
 </mapper>
