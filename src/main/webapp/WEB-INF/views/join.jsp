@@ -5,89 +5,100 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <title>Insert title here</title>
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
-<link href="<c:url value='/resources/css/joinStyle.css'/>" rel="stylesheet" />
+<link rel="stylesheet"
+	href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+<link href="<c:url value='/resources/css/joinStyle.css'/>"
+	rel="stylesheet" />
 </head>
 <body>
-	 <div class="header">
-        <div class="headerIn">
-            <div class="logoImg">
-            	<a href="/carrot">
-                	<img src="../resources/img/DaangnMarket_logo.png" alt="당근마켓로고">
-                </a>
-            </div>
-            <h1 class="title">당근마켓</h1>
-        </div><!--.headerIn-->
-    </div><!--header-->
-    <div class="container">
-        <form  action="<c:url value="/register/save"/>"  method="post" enctype="multipart/form-data"  onsubmit="return formCheck(this)">
-            <table>
-                <tr>
-                    <td class="tdImg" colspan="2">
-                        <div class="profileImg">
-                            <img id="preview" src="" alt="사진 미리보기">
-                        </div>
-                        <!-- <button type="submit" class="uploadImgBtn" >사진 올리기</button> -->
-                        <div class="uploadImgBtn"> <label for="imgUpload">사진 올리기</label><input type="file" id="imgUpload" name="imageFile"></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <div id="msg" class="msg">${URLDecoder.decode(param.msg,"utf-8")}</div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="tdText"><label for="m_email">이메일</label></td>
-                    <td><input type="email" id="m_email" class="inputInfo" name="m_email" onblur="checkEmail()"></td>
-                </tr>
-                <tr>
-                	<td colspan="2" class="emailBtn">
-                        <button type="button" id="emailOverlap" class="emailOverlap" value="N" onclick="fn_emailOverlap()">이메일 중복확인</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="tdText"><label for="m_pw">비밀번호</label></td>
-                    <td>
-                        <input type="password" id="m_pw" class="inputInfo" name="m_pw" onblur="checkPw()">
-                        <div class="warning">영문/숫자/특수문자 8~14자리</div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="tdText"><label for="m_pw2">비밀번호 확인</label></td>
-                    <td>
-                        <input type="password" id="m_pw2" class="inputInfo" name="m_pw2" onblur="checkPw2()">
-                    </td>
-                </tr>
-                <tr>
-                    <td class="tdText"><label for="m_nickname">닉네임</label></td>
-                    <td>
-                    	<input type="text" id="m_nicknm" class="inputInfo" name="m_nicknm" onblur="checkNickname()">
-                    	<div class="warning">한글 초성 및 모음 , 특수문자 불가능</div>
-                    </td>
-                </tr>
-                <tr>
-                	<td class="tdText"> <label for="m_addr1">주소</label> </td>
-                	<td><input type="text" id="m_addr1" class="inputInfo" name="m_addr1"></td>
-                </tr>
-                <tr>
-                	<td class="tdText"><label for="m_addr2">상세주소</label> </td>
-                	<td><input type="text" id="m_addr2" class="inputInfo" name="m_addr2"></td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <button class="joinBtn">회원가입</button>
-                    </td>
-                </tr>
-            </table>
-        </form>
-    </div><!--container-->
-    <script>    
+	<div class="header">
+		<div class="headerIn">
+			<div class="logoImg">
+				<a href="/carrot"> <img
+					src="../resources/img/DaangnMarket_logo.png" alt="당근마켓로고">
+				</a>
+			</div>
+			<h1 class="title">당근마켓</h1>
+		</div>
+		<!--.headerIn-->
+	</div>
+	<!--header-->
+	<div class="container">
+		<form action="<c:url value="/register/save"/>" method="post"
+			enctype="multipart/form-data" onsubmit="return formCheck(this)">
+			<table>
+				<tr>
+					<td class="tdImg" colspan="2">
+						<div class="profileImg">
+							<img id="preview" src="" alt="사진 미리보기">
+						</div> <!-- <button type="submit" class="uploadImgBtn" >사진 올리기</button> -->
+						<div class="uploadImgBtn">
+							<label for="imgUpload">사진 올리기</label><input type="file"
+								id="imgUpload" name="imageFile">
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<div id="msg" class="msg">${URLDecoder.decode(param.msg,"utf-8")}</div>
+					</td>
+				</tr>
+				<tr>
+					<td class="tdText"><label for="m_email">이메일</label></td>
+					<td><input type="email" id="m_email" class="inputInfo"
+						name="m_email" onblur="checkEmail()"></td>
+				</tr>
+				<tr>
+					<td colspan="2" class="emailBtn">
+						<button type="button" id="emailOverlap" class="emailOverlap"
+							value="N" onclick="fn_emailOverlap()">이메일 중복확인</button>
+					</td>
+				</tr>
+				<tr>
+					<td class="tdText"><label for="m_pw">비밀번호</label></td>
+					<td><input type="password" id="m_pw" class="inputInfo"
+						name="m_pw" onblur="checkPw()">
+						<div class="warning">영문/숫자/특수문자 8~14자리</div></td>
+				</tr>
+				<tr>
+					<td class="tdText"><label for="m_pw2">비밀번호 확인</label></td>
+					<td><input type="password" id="m_pw2" class="inputInfo"
+						name="m_pw2" onblur="checkPw2()"></td>
+				</tr>
+				<tr>
+					<td class="tdText"><label for="m_nickname">닉네임</label></td>
+					<td><input type="text" id="m_nicknm" class="inputInfo"
+						name="m_nicknm" onblur="checkNickname()">
+						<div class="warning">한글 초성 및 모음 , 특수문자 불가능</div></td>
+				</tr>
+				<tr>
+					<td class="tdText"><label for="m_addr1">주소</label></td>
+					<td><input type="text" id="m_addr1" class="inputInfo"
+						name="m_addr1"></td>
+				</tr>
+				<tr>
+					<td class="tdText"><label for="m_addr2">상세주소</label></td>
+					<td><input type="text" id="m_addr2" class="inputInfo"
+						name="m_addr2"></td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<button class="joinBtn">회원가입</button>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<!--container-->
+	<script>    
     	//프로필 이미지 미리보기
     	$(document).ready(function() {
         	var imgUpload = $('#imgUpload');

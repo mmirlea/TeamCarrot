@@ -1,227 +1,222 @@
 @charset "UTF-8";
 
-/*#region 전체 적용 속성*/ 
+/*#region 전체 적용 속성*/
 * {
-    margin: 0;
-    padding: 0;
+	margin: 0;
+	padding: 0;
 }
 
 body {
-    font-family: 'Noto Sans KR', sans-serif;
-    color: #333;
+	font-family: 'Noto Sans KR', sans-serif;
+	color: #333;
 }
 
-ul,
-ol {
-    list-style: none;
+ul, ol {
+	list-style: none;
 }
 
 img {
-    vertical-align: top;
+	vertical-align: top;
 }
 
 a {
-    text-decoration: none;
+	text-decoration: none;
 }
 
 i {
-    color: #FF7E36;
+	color: #FF7E36;
 }
 /*#endregion 전체 적용 속성*/
 
 /* 디자인 적용 */
 .wrap {
-    width: 100%;
-    min-width: 1240px;
+	width: 100%;
+	min-width: 1240px;
 }
 
-/*#region 헤더시작*/ 
+/*#region 헤더시작*/
 .header {
-    background-color: white;
-    height: 80px;
-    border-bottom: 1px solid #999;
-    box-shadow: 0 3px 3px -3px #999;
-    position: sticky;
-    top: 0px;
-    z-index: 99;
+	background-color: white;
+	height: 80px;
+	border-bottom: 1px solid #999;
+	box-shadow: 0 3px 3px -3px #999;
+	position: sticky;
+	top: 0px;
+	z-index: 99;
 }
 
 .header .headerIn {
-    width: 1200px;
-    height: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    display: flex;
-    align-items: center;
+	width: 1200px;
+	height: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	display: flex;
+	align-items: center;
 }
 
 .headerIn .divBorad {
-    width: 5%;
-    height: calc(100% - 20px);
-    margin: 10px;
+	width: 5%;
+	height: calc(100% - 20px);
+	margin: 10px;
 }
 
-.divBorad .aTitle{
-    margin-top: 10px;
-    display: inline-block;
+.divBorad .aTitle {
+	margin-top: 10px;
+	display: inline-block;
 }
 
-.divBorad .btnBoard{
-    background-color: transparent;
-    width: 100%;
-    height: 40px;
-    border: none;
-    font-size: 40px;
-    line-height: 40px;
-    text-align: center;
+.divBorad .btnBoard {
+	background-color: transparent;
+	width: 100%;
+	height: 40px;
+	border: none;
+	font-size: 40px;
+	line-height: 40px;
+	text-align: center;
 }
 
 .headerIn .headerTitle {
-    width: 80%;
-    height: calc(100% - 20px);
-    margin: 10px;
+	width: 80%;
+	height: calc(100% - 20px);
+	margin: 10px;
 }
 
 .header h1 {
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    font-size: 40px;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	font-size: 40px;
 }
 
 .headerIn .gnb {
-    width: 15%;
-    height: calc(100% - 20px);
-    margin: 10px;
-    display: flex;
-    align-items: center;
+	width: 15%;
+	height: calc(100% - 20px);
+	margin: 10px;
+	display: flex;
+	align-items: center;
 }
 
 .gnb button {
-    margin: 0 5px;
-    display: block;
-    background-color: transparent;
-    color: #FF7E36;
-    width: 50px;
-    height: 40px;
-    border-radius: 15px;
-    font-size: 20px;
-    border: solid
-    1px rgba(255,126,54,.18);
-    background-color: rgba(255,126,54,.1);
+	margin: 0 5px;
+	display: block;
+	background-color: transparent;
+	color: #FF7E36;
+	width: 50px;
+	height: 40px;
+	border-radius: 15px;
+	font-size: 20px;
+	border: solid 1px rgba(255, 126, 54, .18);
+	background-color: rgba(255, 126, 54, .1);
 }
 
 .gnb i {
-    font-size: 30px;
+	font-size: 30px;
 }
 /*#endregion 헤더시작*/
 
-/*#region 본문시작*/ 
+/*#region 본문시작*/
 .container {
-    width: 1200px;
-    min-height: 100vh;
-    margin-left: auto;
-    margin-right: auto;
-    border: 1px solid #e8e8e8
+	width: 1200px;
+	min-height: 100vh;
+	margin-left: auto;
+	margin-right: auto;
+	border: 1px solid #e8e8e8
 }
 
 .container .divTitle {
-    width: 1160px;
-    /* height: 70px; */
-    /* margin-top: 10px; */
-    /* margin-bottom: 10px; */
-    margin: 20px;
-
-    display: flex;
+	width: 1160px;
+	/* height: 70px; */
+	/* margin-top: 10px; */
+	/* margin-bottom: 10px; */
+	margin: 20px;
+	display: flex;
 }
 
-/*#region*/ 
-.divTitle .hTitle{
-    width: 75%;
-    /* height: 100%; */
-    margin: 10px;
+/*#region*/
+.divTitle .hTitle {
+	width: 75%;
+	/* height: 100%; */
+	margin: 10px;
 }
 
 .divTitle .spanTitle {
-    width: calc(100% - 20px);
-    padding: 10px;
-    /* width: 100%; */
-    /* height: 100%; */
-    line-height: normal;
-    font-size: 50px;
-    color: #999;
-    border: none;
+	width: calc(100% - 20px);
+	padding: 10px;
+	/* width: 100%; */
+	/* height: 100%; */
+	line-height: normal;
+	font-size: 50px;
+	color: #999;
+	border: none;
 }
 
 .divTitle .divPrice {
-    width: 25%;
-    height: 35px;
-    margin: auto;
-    color: #999;
-    font-size: 18px;
+	width: 25%;
+	height: 35px;
+	margin: auto;
+	color: #999;
+	font-size: 18px;
 }
 /*#endregion*/
-
 .divTitle .divCategory {
-    width: calc(25% - 20px);
-    height: 35px;
-    margin: auto;
-    padding: 10px;
+	width: calc(25% - 20px);
+	height: 35px;
+	margin: auto;
+	padding: 10px;
 }
 
 .divCategory .boardCategory {
-   width: 100%;
-    height: 100%;
-    margin: auto;
-    border: 1px solid #FF7E36;
-    border-radius: 15px;
+	width: 100%;
+	height: 100%;
+	margin: auto;
+	border: 1px solid #FF7E36;
+	border-radius: 15px;
 }
 
 .divLine .pLine {
-    background-color: #e5e5e5;
-    width: auto;
-    height: 2px;
-    margin: 30px;
-    border-radius: 20px;
+	background-color: #e5e5e5;
+	width: auto;
+	height: 2px;
+	margin: 30px;
+	border-radius: 20px;
 }
 
 .container .divPhoto {
-    width: 100%;
+	width: 100%;
 }
 
-.divContent .btnImgDel{
+.divContent .btnImgDel {
 	display: none;
 	border: 0;
-	outline:0;
+	outline: 0;
 }
 
-.divContent i{
-	color: rgba(255,126,54,.1);
+.divContent i {
+	color: rgba(255, 126, 54, .1);
 	opacity: 0;
 }
 
-.divContent .img-photo:hover .btnImgDel{
-    opacity: 1;
+.divContent .img-photo:hover .btnImgDel {
+	opacity: 1;
 }
 
-.divContent .img-photo{
-    margin-left: 5px;
-    width: 240px;
-    height: 200px;
-    object-fit: cover;	
+.divContent .img-photo {
+	margin-left: 5px;
+	width: 240px;
+	height: 200px;
+	object-fit: cover;
 }
 
 .container .divContent {
-    width: 100%;
+	width: 100%;
 }
 
 .divContent .spContent {
-    width: calc(100% - 60px);
-    min-height: 100vh;
-    color: #aaa;
-    padding: 30px;
-
-    border: none;
+	width: calc(100% - 60px);
+	min-height: 100vh;
+	color: #aaa;
+	padding: 30px;
+	border: none;
 }
 /*#endregion 본문끝*/

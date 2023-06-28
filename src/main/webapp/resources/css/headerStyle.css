@@ -212,46 +212,50 @@ i {
 
 /* 카테고리 */
 /*.category*/
-.category-wrap{
-    width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 32px;
+.category-wrap {
+	width: 1200px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 32px;
 }
-.category-wrap ul{
-    display: flex;
-    justify-content: space-between;
-}
-.categoryItem{
 
+.category-wrap ul {
+	display: flex;
+	justify-content: space-between;
+}
+
+.categoryItem {
 	width: 120px;
 	height: 85px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    border: none;
-    background-color: #fff;
-    text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	border: none;
+	background-color: #fff;
+	text-align: center;
 }
 
-.categoryBtn{
+.categoryBtn {
 	appearance: none;
 }
-.categoryBtn .fas{
-    font-size: 50px;
-    margin-bottom: 8px;
-    /* color: #A0A0A0; */
+
+.categoryBtn .fas {
+	font-size: 50px;
+	margin-bottom: 8px;
+	/* color: #A0A0A0; */
 }
-.fas:hover{
-	color:#FF7E36;
+
+.fas:hover {
+	color: #FF7E36;
 }
-.categoryText{
-	width:120px;
-    font-size: 16px;
-    line-height: 1.5;
-    font-weight: bold;
-    color: #666;
-    text-align: center;
+
+.categoryText {
+	width: 120px;
+	font-size: 16px;
+	line-height: 1.5;
+	font-weight: bold;
+	color: #666;
+	text-align: center;
 }

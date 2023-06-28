@@ -32,13 +32,9 @@ public class CommentspController {
 	public ResponseEntity<String> modify(@PathVariable Integer cp_num, @RequestBody CommentspDTO commentspDTO, HttpSession session, HttpServletRequest request){
 		session = request.getSession();
 		String cp_email = (String)session.getAttribute("m_email");
-		//String cp_nicknm = (String)session.getAttribute("m_nicknm");
 		
 		commentspDTO.setCp_num(cp_num);
 		commentspDTO.setCp_email(cp_email);
-		//commentspDTO.setCp_nicknm(cp_nicknm);
-		
-		System.out.println("dto : " + commentspDTO);
 		
 		try {
 			if(service.modify(commentspDTO) != 1) {
@@ -61,16 +57,6 @@ public class CommentspController {
 		commentspDTO.setCp_email(cp_email);
 		commentspDTO.setCp_pnum(cp_pnum);
 		commentspDTO.setCp_nicknm(cp_nicknm);
-		
-//		if (cp_pcnum != null) {
-//            commentspDTO.setCp_pcnum(cp_pcnum);
-//        } else {
-//            commentspDTO.setCp_pcnum(1);
-//        }
-		
-		
-		
-		System.out.println("dto : " + commentspDTO);
 		
 		try {
 			if(service.write(commentspDTO) != 1)
@@ -108,6 +94,7 @@ public class CommentspController {
 	@GetMapping("/commentsp")
 	public ResponseEntity<List<CommentspDTO>> list(Integer cp_pnum){
 		List<CommentspDTO> list = null;
+		
 		try {
 			list = service.getList(cp_pnum);
 			return new ResponseEntity<List<CommentspDTO>>(list, HttpStatus.OK);

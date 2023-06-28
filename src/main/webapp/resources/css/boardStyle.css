@@ -126,8 +126,8 @@ i {
 
 .boradList ul {
 	display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 40px;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 40px;
 }
 
 .boradList li {
@@ -144,8 +144,8 @@ i {
 	height: 260px;
 	overflow: hidden;
 	/* border-radius: 20px; */
-	margin-bottom: 16px;	
-    object-fit:cover;
+	margin-bottom: 16px;
+	object-fit: cover;
 }
 
 .areaThumb .pLine {
@@ -220,7 +220,7 @@ i {
 
 .textInfo .divInfo {
 	display: flex;
-    margin-right: 5px;
+	margin-right: 5px;
 }
 
 .textInfo .Atten {
@@ -243,59 +243,67 @@ i {
 /*#endregion 게시글*/
 
 /*#region boardPage*/
-.paging{
-    width: 1200px;
-}
-.paging ul{
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   margin-bottom: 36px;
-}
-.paging li{
-    text-align: center;
-    margin-left: 10px;
-    margin-right: 10px;
-}
-.paging li a{
-    color:#333;
+.paging {
+	width: 1200px;
 }
 
-.paging .num{
-display: flex;
+.paging ul {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 36px;
 }
 
-.paging .num a{ 
-    color:#FF7E36;
-    margin-left: 10px;
-    margin-right: 10px;
+.paging li {
+	text-align: center;
+	margin-left: 10px;
+	margin-right: 10px;
 }
-.paging .num p{
-    width: 48px;
-    font-size: 16px;
-    line-height: 16px;
-    border: 2px solid #FF7E36;
-    border-radius: 100%;
-    padding-top: 16px;
-    padding-bottom: 16px;
+
+.paging li a {
+	color: #333;
 }
-.paging .num a:hover{
-    color: #fff;
+
+.paging .num {
+	display: flex;
 }
-.paging .num p:hover{
-    background-color: #FF7E36;
+
+.paging .num a {
+	color: #FF7E36;
+	margin-left: 10px;
+	margin-right: 10px;
 }
-.firstPage, .prevPage, .nextPage, .lastPage{
-    width: 20px;
-    background-color: #eee;
-    border-radius: 12px;
-    padding-top: 8px;
-    padding-bottom: 8px;
+
+.paging .num p {
+	width: 48px;
+	font-size: 16px;
+	line-height: 16px;
+	border: 2px solid #FF7E36;
+	border-radius: 100%;
+	padding-top: 16px;
+	padding-bottom: 16px;
 }
-.paging hr{
-    background-color:#e9ecef;
-    height: 1px;
-    border: 0;
+
+.paging .num a:hover {
+	color: #fff;
+}
+
+.paging .num p:hover {
+	background-color: #FF7E36;
+}
+
+.firstPage, .prevPage, .nextPage, .lastPage {
+	width: 20px;
+	background-color: #eee;
+	border-radius: 12px;
+	padding-top: 8px;
+	padding-bottom: 8px;
+}
+
+.paging hr {
+	background-color: #e9ecef;
+	height: 1px;
+	border: 0;
 }
 /*#endregion boardPage*/
 

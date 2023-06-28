@@ -45,8 +45,6 @@ public class LoginController {
 			return "redirect:/login/login?msg=" + msg;
 		}
 
-		System.out.println(dto.toString());
-
 		HttpSession session = request.getSession();
 
 		session.setAttribute("m_email", dto.getM_email());
@@ -68,6 +66,7 @@ public class LoginController {
 
 	}
 
+	//로그인 유효성 검사
 	private boolean loginCheck(UserDTO dto) {
 		try {
 			UserDTO check = service.login(dto);
