@@ -38,6 +38,7 @@ public class ProductController {
 	@Autowired
 	LikeyService likeyService;
 
+	//좋아요 취소
 	@GetMapping("/dislike")
 	public String downLikeCnt(Integer p_num, LikeyDTO likeyDTO, HttpSession session) {
 		String l_email = (String) session.getAttribute("m_email");
@@ -45,9 +46,6 @@ public class ProductController {
 		likeyDTO.setL_menu("1");
 		likeyDTO.setL_pbnum(p_num);
 		likeyDTO.setL_email(l_email);
-
-		System.out.println("downLikeCnt p_num" + p_num);
-		System.out.println("downLikeCnt likeyDTO" + likeyDTO);
 
 		try {
 			if (likeyService.deleteLike(likeyDTO) != 1)
@@ -59,6 +57,7 @@ public class ProductController {
 		return "redirect:/carrot/read?menu=product&p_num=" + p_num;
 	}
 
+	//좋아요
 	@GetMapping("/like")
 	public String upLikeCnt(Integer p_num, LikeyDTO likeyDTO, HttpSession session) {
 		String l_email = (String) session.getAttribute("m_email");
@@ -66,9 +65,7 @@ public class ProductController {
 		likeyDTO.setL_menu("1");
 		likeyDTO.setL_pbnum(p_num);
 		likeyDTO.setL_email(l_email);
-		
-		System.out.println("upLikeCnt p_num" + p_num);
-		System.out.println("upLikeCnt likeyDTO" + likeyDTO);
+
 
 		try {
 			if (likeyService.insertLike(likeyDTO) != 1)
@@ -88,11 +85,9 @@ public class ProductController {
 
 			System.out.println("getCount:" + totalCnt);
 			PageHandlerP pageHandlerP = new PageHandlerP(totalCnt, scp);
-			System.out.println(pageHandlerP);
-
+			
 			List<ProductDTO> list = service.getSearchSelectPage(scp);
-			System.out.println("list" + list);
-
+			
 			m.addAttribute("list", list);
 			m.addAttribute("ph", pageHandlerP);
 
@@ -118,8 +113,6 @@ public class ProductController {
 			productDTO.setP_num(p_num);
 			productDTO.setP_email(login_email);
 			productDTO = service.read(productDTO);
-
-			System.out.println(productDTO);
 
 			m.addAttribute(productDTO);
 			m.addAttribute("menu", "product");
@@ -164,8 +157,6 @@ public class ProductController {
 		String p_email = (String) session.getAttribute("m_email");
 		productDTO.setP_email(p_email);
 		
-		System.out.println(p_email);
-		
 		if (request.getParameter("p_negoyn") == null) {
 			productDTO.setP_negoyn("N");
 		}
@@ -187,21 +178,18 @@ public class ProductController {
 		return "boardDetail";
 	}
 
+	//게시글 삭제
 	@PostMapping("/remove")
 	public String remove(Integer p_num, Integer page, Integer pageSize, RedirectAttributes rattr, Model m,
 			HttpSession session) {
 		String p_email = (String) session.getAttribute("m_email");
 
-		System.out.println(p_email);
 		try {
 			m.addAttribute("page", page);
 			m.addAttribute("pageSize", pageSize);
 
-			System.out.println(p_num + ", " + p_email);
-
 			int rowCnt = service.remove(p_num, p_email);
 
-			System.out.println(rowCnt);
 
 			if (rowCnt != 1) {
 				throw new Exception("remove error");
@@ -239,12 +227,11 @@ public class ProductController {
 		return "boardDetail";
 	}
 
+	//게시글 수정하기
 	@PostMapping("/modify")
 	public String modify(ProductDTO productDTO, RedirectAttributes rattr, Model m, HttpSession session,
 			HttpServletRequest request) {
 		String p_email = (String) session.getAttribute("m_email");
-
-		System.out.println(p_email);
 
 		productDTO.setP_email(p_email);
 
@@ -254,7 +241,6 @@ public class ProductController {
 
 		try {
 			if (service.modify(productDTO) != 1) {
-				System.out.println(productDTO);
 				throw new Exception("Modify failed");
 			}
 
@@ -274,7 +260,7 @@ public class ProductController {
 		}
 	}
 
-	// 임시저장??
+	// 임시저장
 	@GetMapping("/save")
 	public String save(Model m) {
 		m.addAttribute("mode", "new");
@@ -282,6 +268,7 @@ public class ProductController {
 		return "boardDetail";
 	}
 
+	//임시저장하기
 	@PostMapping("/save")
 	public String save(ProductDTO productDTO, RedirectAttributes rattr, Model m, HttpSession session,
 			HttpServletRequest request) {

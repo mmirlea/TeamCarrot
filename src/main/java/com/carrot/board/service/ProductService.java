@@ -7,33 +7,40 @@ import com.carrot.board.domain.SearchConditionP;
 
 public interface ProductService {
 
-	ProductDTO read(ProductDTO dto) throws Exception;
-
+	//전체 게시물 개수 조회
 	int getCount() throws Exception;
-
-	int write(ProductDTO dto) throws Exception;
 	
-	int save(ProductDTO dto) throws Exception;
-	
-	int modify(ProductDTO dto) throws Exception;
-
-	int remove(Integer p_num, String p_email) throws Exception;
-
-	int removeAll() throws Exception;
-	
+	//게시글 목록 조회
 	List<ProductDTO> selectAll() throws Exception;
 	
-	int increaseLikeCnt(Integer b_num) throws Exception;
-
-	int decreaseLikeCnt(Integer b_num) throws Exception;
-
-	String getLikeyEmail(ProductDTO productDTO) throws Exception;
-
+	//게시글 읽어오기
+	ProductDTO select(ProductDTO dto) throws Exception;
+	 
+	//게시글 읽어오기 + 게시글 조회수 증가
+	ProductDTO read(ProductDTO dto) throws Exception;
+	
+	//게시글 페이징 처리
 	List<ProductDTO> getPage(SearchConditionP scp) throws Exception;
 	
+	//게시글 검색하기
 	List<ProductDTO> getSearchSelectPage(SearchConditionP scp) throws Exception;
 	
+	//게시글 검색했을 때 게시글 개수 조회
 	int getSearchResultCnt(SearchConditionP scp) throws Exception;
+
+	//게시글 추가하기
+	int write(ProductDTO dto) throws Exception;
 	
-	ProductDTO select(ProductDTO dto) throws Exception;
+	//게시글 임시 저장하기
+	int save(ProductDTO dto) throws Exception;
+	
+	//게시글 수정하기
+	int modify(ProductDTO dto) throws Exception;
+
+	//게시글 삭제하기
+	int remove(Integer p_num, String p_email) throws Exception;
+
+	//게시글 전체 삭제하기
+	int removeAll() throws Exception;
+	
 }
