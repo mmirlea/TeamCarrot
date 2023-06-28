@@ -118,25 +118,27 @@ $(document).ready(function() {
 		form.submit();
 	})
 	
-	// 수정하기 시 파일 가져와 웹에 보이기
-	let fileList = ['${boardDTO.b_img}'];
-	createFileList();
-
 	let fileList_p = ['${productDTO.p_img}'];
-	createFileList_p();	
+	let fileList = ['${boardDTO.b_img}'];
 	
-	// 파일 이벤트핸들러
-	$('#fileUpload').on('change',(e)=>{
-		 const file = $('#fileUpload')[0].files[0];
-		 fileToBase64(file); // 올린파일을 웹에서 볼 수 있게 변환
-	})
-
-	
-	$('#fileUpload_p').on('change',(e)=>{
-		 const file = $('#fileUpload_p')[0].files[0];
-		 fileToBase64(file); // 올린파일을 웹에서 볼 수 있게 변환
-	})
-	
+	if (menu !== 'board') {
+		createFileList_p();	
+		
+		$('#fileUpload_p').on('change',(e)=>{
+			 const file = $('#fileUpload_p')[0].files[0];
+			 fileToBase64(file); // 올린파일을 웹에서 볼 수 있게 변환
+		})
+		
+	} else {
+		// 수정하기 시 파일 가져와 웹에 보이기
+		createFileList();
+		
+		// 파일 이벤트핸들러
+		$('#fileUpload').on('change',(e)=>{
+			 const file = $('#fileUpload')[0].files[0];
+			 fileToBase64(file); // 올린파일을 웹에서 볼 수 있게 변환
+		})
+	}
 	
 	// 파일 변환해서 생성하기
 	function fileToBase64(file){
