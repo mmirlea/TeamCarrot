@@ -153,7 +153,7 @@ String menu = request.getParameter("menu");
 					<c:if test="${menu ne 'board' }">
 						<div class="priceInfo">
 							<div class="price">${productDTO.p_price }원</div>
-							<div class="priceNego">가격 제안 가능</div>
+							<div class="priceNego">${productDTO.p_negoyn == 'Y' || boardDTO.b_negoyn == 'Y' ? '가격 제안 가능' : '가격 제안 불가능'}</div>
 						</div>
 						<!--priceInfo-->
 					</c:if>

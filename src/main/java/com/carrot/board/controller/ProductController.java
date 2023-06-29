@@ -83,7 +83,6 @@ public class ProductController {
 		try {
 			int totalCnt = service.getCount();
 
-			System.out.println("getCount:" + totalCnt);
 			PageHandlerP pageHandlerP = new PageHandlerP(totalCnt, scp);
 			
 			List<ProductDTO> list = service.getSearchSelectPage(scp);
@@ -212,10 +211,9 @@ public class ProductController {
 		productDTO.setP_email(p_email);
 
 		try {
-			System.out.println("select -> productDTO : " + productDTO);
+			
 			productDTO = service.select(productDTO);
 
-			System.out.println(productDTO);
 			m.addAttribute("productDTO", productDTO);
 			m.addAttribute("menu", "product");
 
