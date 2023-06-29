@@ -84,7 +84,7 @@ $(document).ready(function() {
 			if($("input:checkbox[name='p_negoyn']").is(":checked")){
 				
 				$("input:checkbox[name='p_negoyn']").attr("value", "Y");
-				alert($('input:checkbox[name="p_negoyn"]').val());
+				
 					
 			}
 			form.attr("action", "<c:url value='/carrot/write'/>");
@@ -109,7 +109,7 @@ $(document).ready(function() {
 			if($("input:checkbox[name='p_negoyn']").is(":checked")){
 				
 				$("input:checkbox[name='p_negoyn']").attr("value", "Y");
-				alert($('input:checkbox[name="p_negoyn"]').val());
+				
 					
 			}
 			
@@ -128,8 +128,8 @@ $(document).ready(function() {
 	if (menu !== 'board') {
 		createFileList_p();	
 		
-		$('#fileUpload_p').on('change',(e)=>{
-			 const file = $('#fileUpload_p')[0].files[0];
+		$('#fileUpload').on('change',(e)=>{
+			 const file = $('#fileUpload')[0].files[0];
 			 fileToBase64(file); // 올린파일을 웹에서 볼 수 있게 변환
 		})
 		
@@ -277,7 +277,7 @@ $(document).ready(function() {
 					<div class="gnbItem">
 						<button type="button" class="btnPic">
 							<label for="fileUpload"><i class="fa-solid fa-image"></i></label>
-							<input type="file" id="fileUpload" name="${menu == 'board'? 'fileUpload' : 'fileUpload_p'}" style="display: none">
+							<input type="file" id="fileUpload" name="${fileUpload }" style="display: none">
 						</button>
 					</div>
 					<div class="gnbItem">
