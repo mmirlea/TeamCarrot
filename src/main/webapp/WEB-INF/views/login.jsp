@@ -15,7 +15,7 @@
 <body>
 	  <div class="header">
         <div class="headerIn">
-            <div class="logoImg">
+            <div class="logoImg">ㄹ
             	<a href="/carrot">
                 	<img src="../resources/img/DaangnMarket_logo.png" alt="당근마켓로고">
                 </a>

@@ -21,60 +21,63 @@ import com.carrot.user.service.UserService;
 public class LoginController {
 	@Autowired
 	UserService service;
-	
+
+	// 로그인 클릭 시
 	@GetMapping("/login")
 	public String loginForm() {
 		return "login";
 	}
-	
+
+	// 로그아웃 클릭 시
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/";
 	}
-	
+
+	// 로그인 버튼 클릭 시
 	@PostMapping("/login")
-	public String login(UserDTO dto, String toURL, boolean rememberId, HttpServletResponse response, HttpServletRequest request) throws Exception {
-		
-		if(!loginCheck(dto)) {
+	public String login(UserDTO dto, String toURL, boolean rememberId, HttpServletResponse response,
+			HttpServletRequest request) throws Exception {
+
+		if (!loginCheck(dto)) {
 			String msg = URLEncoder.encode("id 또는 pw가 일치하지 않습니다.", "UTF-8");
-			return "redirect:/login/login?msg="+msg;
+			return "redirect:/login/login?msg=" + msg;
 		}
-		
-		System.out.println(dto.toString());
-		
+
 		HttpSession session = request.getSession();
-		
+
 		session.setAttribute("m_email", dto.getM_email());
-		
-		if(rememberId) {
+
+		if (rememberId) {
 			Cookie cookie = new Cookie("m_email", dto.getM_email());
-			
+
 			response.addCookie(cookie);
 		} else {
 			Cookie cookie = new Cookie("m_email", dto.getM_email());
 			cookie.setMaxAge(0);
-			
+
 			response.addCookie(cookie);
 		}
-		
+
 		toURL = toURL == null || toURL.equals("") ? "/" : toURL;
-		
+
 		return "redirect:" + toURL;
-		
+
 	}
-	
+
+	//로그인 유효성 검사
 	private boolean loginCheck(UserDTO dto) {
 		try {
 			UserDTO check = service.login(dto);
-			
-			if(check == null) 
+
+			if (check == null)
 				throw new Exception("login Err");
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
 		}
-		
+
 		return true;
 	}
 }

@@ -3,15 +3,15 @@ package com.carrot.board.domain;
 import java.util.Date;
 
 public class CommentsbDTO {
-	private Integer cb_pnum; //게시글 번호
-	private Integer cb_num; //댓글 번호
-	private Integer cb_pcnum; //부모 댓글 번호
+	private Integer cb_pnum; // 게시글 번호
+	private Integer cb_num; // 댓글 번호
+	private Integer cb_pcnum; // 부모 댓글 번호
 	private String cb_email;
 	private String cb_content;
 	private Date cb_crdate;
 	private Date cb_update;
 	private String cb_nicknm;
-	
+
 	public CommentsbDTO() {}
 
 	public CommentsbDTO(Integer cb_pnum, Integer cb_pcnum, String cb_email, String cb_content, String cb_nicknm) {
@@ -33,7 +33,6 @@ public class CommentsbDTO {
 		this.cb_update = cb_update;
 		this.cb_nicknm = cb_nicknm;
 	}
-	
 
 	public Integer getCb_pnum() {
 		return cb_pnum;
@@ -101,9 +100,9 @@ public class CommentsbDTO {
 
 	@Override
 	public String toString() {
-		return "Comments_PDTO [cb_pnum=" + cb_pnum + ", cb_num=" + cb_num + ", cb_pcnum=" + cb_pcnum
-				+ ", cb_email=" + cb_email + ", cb_content=" + cb_content + ", cb_crdate=" + cb_crdate + ", cb_update="
-				+ cb_update + "]";
+		return "Comments_PDTO [cb_pnum=" + cb_pnum + ", cb_num=" + cb_num + ", cb_pcnum=" + cb_pcnum + ", cb_email="
+				+ cb_email + ", cb_content=" + cb_content + ", cb_crdate=" + cb_crdate + ", cb_update=" + cb_update
+				+ "]";
 	}
 
 	@Override
@@ -155,6 +154,4 @@ public class CommentsbDTO {
 		return true;
 	}
 
-	
-	
 }
