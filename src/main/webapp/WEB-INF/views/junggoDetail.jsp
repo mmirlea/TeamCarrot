@@ -108,6 +108,9 @@
 	            <div class="heartBar-wrap">
 	                <div class="heartBar">
                     	<div class="heartBtn">
+							<input type="hidden" value="${menu eq 'board' ? boardDTO.b_num : 0}" name="b_num" id="b_num">
+		                	<input type="hidden" value="${menu eq 'product' ? productDTO.p_num : 0}" name="p_num" id="p_num">
+		                	
                     		<button type="button" class="likey"  id="btnLikey" name='${menu == "board"? "b_likey" : "p_likey"}'><i class="far fa-heart"></i></button>
                     		<button type="button" class="disLikey" id="btnDisLikey" name='${menu == "board"? "b_likey" : "p_likey"}'><i class="fas fa-heart"></i></button>
 	                     </div>
@@ -118,11 +121,9 @@
 		                        <div class="priceNego">가격 제안 가능</div>
 		                    </div><!--priceInfo-->
             			</c:if>
-						
+		                    	
 						<c:if test="${login_email != null && (login_email == productDTO.p_email || login_email == boardDTO.b_email)}">
 							<div class="crud-wrap">
-		                    	<input type="hidden" value="${menu eq 'board' ? boardDTO.b_num : 0}" name="b_num" id="b_num">
-		                    	<input type="hidden" value="${menu eq 'product' ? productDTO.p_num : 0}" name="p_num" id="p_num">
 		                    	<button type="button" class="btnModify" id="btnModify" value="board">수정</button>
 		                    	<button type="button" class="btnDel" id="btnDel">삭제</button>
 			                </div>
