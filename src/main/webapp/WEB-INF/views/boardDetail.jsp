@@ -128,8 +128,8 @@ $(document).ready(function() {
 	if (menu !== 'board') {
 		createFileList_p();	
 		
-		$('#fileUpload').on('change',(e)=>{
-			 const file = $('#fileUpload')[0].files[0];
+		$('#fileUpload_p').on('change',(e)=>{
+			 const file = $('#fileUpload_p')[0].files[0];
 			 fileToBase64(file); // 올린파일을 웹에서 볼 수 있게 변환
 		})
 		
@@ -228,7 +228,7 @@ $(document).ready(function() {
 						url: '/carrot/delFile/'+fileName,
 					})
 				}else{
-					$('#fileUploa_p')[0].value = "";
+					$('#fileUpload_p')[0].value = "";
 				}
 				fileList_p = [];
 				createFileList_p();
@@ -276,8 +276,8 @@ $(document).ready(function() {
 				<div class="gnb">
 					<div class="gnbItem">
 						<button type="button" class="btnPic">
-							<label for="fileUpload"><i class="fa-solid fa-image"></i></label>
-							<input type="file" id="fileUpload" name="${fileUpload }" style="display: none">
+							<label for="${menu == 'board'? 'fileUpload' : 'fileUpload_p'}"><i class="fa-solid fa-image"></i></label>
+							<input type="file" id="${menu == 'board'? 'fileUpload' : 'fileUpload_p'}" name="${menu == 'board'? 'fileUpload' : 'fileUpload_p'}" style="display: none">
 						</button>
 					</div>
 					<div class="gnbItem">
