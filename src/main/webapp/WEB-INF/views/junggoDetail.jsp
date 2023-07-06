@@ -1,267 +1,207 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<link href="<c:url value='/resources/css/junggoDetailStyle.css?sss'/>"
-	rel="stylesheet" />
+<link href="<c:url value='/resources/css/junggoDetailStyle.css?sss'/>" rel="stylesheet" />
 
 <!-- swiper cdn -->
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+<link  rel="stylesheet"  href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-<script src="https://kit.fontawesome.com/c0e3b26a7d.js"
-	crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/c0e3b26a7d.js" crossorigin="anonymous"></script>
 
-<link rel="stylesheet"
-	href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 
 </head>
-<%
-String menu = request.getParameter("menu");
-%>
+<% String menu = request.getParameter("menu"); %>
 <script type="text/javascript">
-	let menu = '<%=request.getParameter("menu")%>'
+	let menu = '<%= request.getParameter("menu") %>'
 	let msg="${msg}"
 	//if(msg == "MOD_ERR") alert("게시글 수정에 실패하였습니다.")
 	if(msg == "DEL_ERR") alert("게시글 삭제에 실패하였습니다.")
 </script>
 <body>
 	<form class="wrap" id="form">
-
-		<jsp:include page="./header.jsp" flush="false">
+	
+		<jsp:include page ="./header.jsp" flush="false">
 			<jsp:param name="detail" value="detail" />
 		</jsp:include>
-		<%@ include file="./tabRigth.jsp"%>
-		<div class="container">
-			<div class="swiper-modify">
-				<div class="swiper mySwiper">
-					<div class="swiper-wrapper">
-						<div class="swiper-slide">
-							<a href="#"><img
-								src="${menu == 'board' ? boardDTO.b_img : productDTO.p_img}"
-								alt="" class="thumb"
-								onerror="this.src='/carrot/resources/img/이사가느라 가전 팔아요1.jpg'"></a>
-						</div>
-						<div class="swiper-slide">
-							<a href="#"><img src="../resources/img/이사가느라 가전 팔아요1.jpg"
-								alt="이사가느라 가전 팔아요1"></a>
-						</div>
-						<div class="swiper-slide">
-							<a href="#"><img src="../resources/img/이사가느라 가전 팔아요2.jpg"
-								alt="이사가느라 가전 팔아요2"></a>
-						</div>
-						<div class="swiper-slide">
-							<a href="#"><img src="../resources/img/이사가느라 가전 팔아요3.jpg"
-								alt="이사가느라 가전 팔아요3"></a>
-						</div>
-					</div>
-					<!--swiper-wrapper-->
-					<div class="swiper-pagination"></div>
-				</div>
-				<!--swiper mySwiper-->
-				<div class="swiper-button-next"></div>
-				<div class="swiper-button-prev"></div>
-			</div>
-			<!--.swiper-modify-->
-			<div class="memberAll">
-				<div class="member-wrap">
-					<div class="memberInfo-wrap">
-						<div class="memberInfo-Img">
-							<img src="../resources/img/memberImg.png" alt="회원이미지">
-						</div>
-						<div class="memberInfo-Text">
+		<%@ include file ="./tabRigth.jsp" %>
+        <div class="container">
+            <div class="swiper-modify">
+                <div class="swiper mySwiper">
+                    <div class="swiper-wrapper">
+	                <div class="swiper-slide"><a href="#"><img src="${menu == 'board' ? boardDTO.b_img : productDTO.p_img}" alt="" class="thumb" onerror="this.src='/carrot/resources/img/이사가느라 가전 팔아요1.jpg'"></a></div>
+	                <div class="swiper-slide"><a href="#"><img src="../resources/img/이사가느라 가전 팔아요1.jpg" alt="이사가느라 가전 팔아요1"></a></div>
+                    <div class="swiper-slide"><a href="#"><img src="../resources/img/이사가느라 가전 팔아요2.jpg" alt="이사가느라 가전 팔아요2"></a></div>
+                    <div class="swiper-slide"><a href="#"><img src="../resources/img/이사가느라 가전 팔아요3.jpg" alt="이사가느라 가전 팔아요3"></a></div>
+                    </div><!--swiper-wrapper-->
+                    <div class="swiper-pagination"></div>
+                </div><!--swiper mySwiper-->  
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div><!--.swiper-modify-->
+            <div class="memberAll">
+                <div class="member-wrap">
+                    <div class="memberInfo-wrap">
+                        <div class="memberInfo-Img"><img src="../resources/img/memberImg.png" alt="회원이미지"></div>
+                        <div class="memberInfo-Text">
 
-							<div class="nickname">${menu == "board" ? boardDTO.userDTO.m_nicknm : productDTO.userDTO.m_nicknm}</div>
-							<div class="memberAddress">
-								<span>${menu == "board" ? boardDTO.userDTO.m_addr1 : productDTO.userDTO.m_addr1}</span>
-								<span>${menu == "board" ? boardDTO.userDTO.m_addr2 : productDTO.userDTO.m_addr2}</span>
-							</div>
+                            <div class="nickname">${menu == "board" ? boardDTO.userDTO.m_nicknm : productDTO.userDTO.m_nicknm}</div>
+                            <div class="memberAddress">
+                              <span>${menu == "board" ? boardDTO.userDTO.m_addr1 : productDTO.userDTO.m_addr1}</span>
+                              <span>${menu == "board" ? boardDTO.userDTO.m_addr2 : productDTO.userDTO.m_addr2}</span>
+                            </div>
 
-						</div>
-						<!--memberInfo-Text-->
-					</div>
-					<!--memberInfo-wrap-->
-					<div class="memberOndo-wrap">
-						<div class="memberOndo-Text">
-							<div class="ondo">
-								<span class="ondoNum">${productDTO.userDTO.m_ondo }</span> <span
-									class="celsius">°C</span> <span class="celsius"></span>
-							</div>
-							<!--ondo-->
-							<div class="ondoBar"></div>
-						</div>
-						<div class="memberOndo-right">
-							<div class="ondoFace"></div>
-						</div>
-					</div>
-					<!--memberOndo-wrap-->
-				</div>
-				<!--member-wrap-->
-				<div class="mannerOndo">매너온도</div>
-				<hr>
-			</div>
-			<!--memberAll-->
-			<div class="content-wrap">
+                        </div><!--memberInfo-Text-->
+                    </div><!--memberInfo-wrap-->                    
+                    <div class="memberOndo-wrap">
+                        <div class="memberOndo-Text">
+                            <div class="ondo">
+                                <span class="ondoNum">${productDTO.userDTO.m_ondo }</span>
+                                <span class="celsius">°C</span>
+                                <span class="celsius"></span>
+                            </div><!--ondo-->
+                            <div class="ondoBar"></div>
+                        </div>
+                        <div class="memberOndo-right">
+                            <div class="ondoFace"></div>
+                        </div>
+                    </div><!--memberOndo-wrap-->
+                </div><!--member-wrap--> 
+                <div class="mannerOndo">매너온도</div>   
+                <hr>
+            </div><!--memberAll-->  
+            <div class="content-wrap">
 
-				<div class="content-top">
-					<h1 class="contentTitle">${menu == 'board' ? boardDTO.b_title : productDTO.p_title}</h1>
-					<!--.contentTitle-->
-				</div>
+            	<div class="content-top">
+	            	<h1 class="contentTitle">${menu == 'board' ? boardDTO.b_title : productDTO.p_title}</h1><!--.contentTitle-->
+            	</div>
 
-				<div class="contentInfo">
-					<span class="categry">${menu == "board" ? boardDTO.b_cate : productDTO.p_cate}</span>
-					&nbsp;•&nbsp; <span class="pullUp">끌올</span> &nbsp;•&nbsp; <span
-						class="time">${menu == "board" ? boardDTO.b_upDate : productDTO.p_update}</span>
-				</div>
-				<!--contentInfo-->
-				<div class="content">
+                <div class="contentInfo">
+                    <span class="categry">${menu == "board" ? boardDTO.b_cate : productDTO.p_cate}</span>
+                    &nbsp;•&nbsp;
 
-					<c:out
-						value='${menu == "board" ? boardDTO.b_content : productDTO.p_content}' />
-				</div>
-				<!--content-->
-				<div class="countUp">
-					<span class="itemAttention">관심 ${menu == "board" ? boardDTO.b_likey : productDTO.p_likey}</span>
-					&nbsp;•&nbsp; <span class="itemChat">채팅 ${menu == "board" ? boardDTO.b_comm : productDTO.p_comm}</span>
-					&nbsp;•&nbsp; <span class="itemCheck">조회 ${menu == "board" ? boardDTO.b_viewCnt : productDTO.p_viewcnt}</span>
-				</div>
-				<!--.countUp-->
-				<hr>
-			</div>
-			<!--.content-wrap-->
-			<div class="heartBar-wrap">
-				<div class="heartBar">
-					<div class="heartBtn">
-						<button type="button" class="likey" id="btnLikey"
-							name='${menu == "board"? "b_likey" : "p_likey"}'>
-							<i class="far fa-heart"></i>
-						</button>
-						<button type="button" class="disLikey" id="btnDisLikey"
-							name='${menu == "board"? "b_likey" : "p_likey"}'>
-							<i class="fas fa-heart"></i>
-						</button>
-					</div>
-					<!--heartBtn-->
-					<c:if test="${menu ne 'board' }">
-						<div class="priceInfo">
-							<div class="price">${productDTO.p_price }원</div>
-							<div class="priceNego">${productDTO.p_negoyn == 'Y' || boardDTO.b_negoyn == 'Y' ? '가격 제안 가능' : '가격 제안 불가능'}</div>
-						</div>
-						<!--priceInfo-->
-					</c:if>
-
-					<c:if
-						test="${login_email != null && (login_email == productDTO.p_email || login_email == boardDTO.b_email)}">
-						<div class="crud-wrap">
-							<input type="hidden"
-								value="${menu eq 'board' ? boardDTO.b_num : 0}" name="b_num"
-								id="b_num"> <input type="hidden"
-								value="${menu eq 'product' ? productDTO.p_num : 0}" name="p_num"
-								id="p_num">
-							<button type="button" class="btnModify" id="btnModify"
-								value="board">수정</button>
-							<button type="button" class="btnDel" id="btnDel">삭제</button>
-						</div>
-					</c:if>
-
-					<button type="button" class="chatBtn">채팅하기</button>
-				</div>
-				<!--.heartBar-->
-				<hr>
-			</div>
-			<!--.heartBar-wrap-->
-		</div>
-		<!-- .container -->
-
-	</form>
-	<!--.wrap-->
-
-
-	<form class="wrap" id="commFrm">
+                    <span class="pullUp">끌올</span>
+                    &nbsp;•&nbsp;
+                    <span class="time">${menu == "board" ? boardDTO.b_upDate : productDTO.p_update}</span>
+                </div><!--contentInfo-->
+                <div class="content">
+					
+                    <c:out value='${menu == "board" ? boardDTO.b_content : productDTO.p_content}'/>
+                </div><!--content-->
+                <div class="countUp">
+                    <span class="itemAttention">관심 ${menu == "board" ? boardDTO.b_likey : productDTO.p_likey}</span>
+                    &nbsp;•&nbsp;
+                    <span class="itemChat">채팅 ${menu == "board" ? boardDTO.b_comm : productDTO.p_comm}</span>
+                    &nbsp;•&nbsp;
+                    <span class="itemCheck">조회 ${menu == "board" ? boardDTO.b_viewCnt : productDTO.p_viewcnt}</span>
+                </div><!--.countUp-->
+                <hr>
+            </div><!--.content-wrap-->
+	            <div class="heartBar-wrap">
+	                <div class="heartBar">
+                    	<div class="heartBtn">
+							<input type="hidden" value="${menu eq 'board' ? boardDTO.b_num : 0}" name="b_num" id="b_num">
+		                	<input type="hidden" value="${menu eq 'product' ? productDTO.p_num : 0}" name="p_num" id="p_num">
+		                	
+                    		<button type="button" class="likey"  id="btnLikey" name='${menu == "board"? "b_likey" : "p_likey"}'><i class="far fa-heart"></i></button>
+                    		<button type="button" class="disLikey" id="btnDisLikey" name='${menu == "board"? "b_likey" : "p_likey"}'><i class="fas fa-heart"></i></button>
+	                     </div>
+	                     <!--heartBtn-->
+						<c:if test="${menu ne 'board' }">
+		                    <div class="priceInfo">
+		                        <div class="price">${productDTO.p_price } 원</div>
+		                        <div class="priceNego">가격 제안 가능</div>
+		                    </div><!--priceInfo-->
+            			</c:if>
+		                    	
+						<c:if test="${login_email != null && (login_email == productDTO.p_email || login_email == boardDTO.b_email)}">
+							<div class="crud-wrap">
+		                    	<button type="button" class="btnModify" id="btnModify" value="board">수정</button>
+		                    	<button type="button" class="btnDel" id="btnDel">삭제</button>
+			                </div>
+		                </c:if>
+		                
+		                <button type="button" class="chatBtn">채팅하기</button>
+	                </div><!--.heartBar-->
+	                <hr>
+	            </div><!--.heartBar-wrap-->
+    	</div> <!-- .container -->
+    	
+    </form><!--.wrap-->
+  
+    
+    <form class="wrap" id="commFrm">
 		<div class="comments-wrap">
-			<div class="commentsHeader">
-				<div class="commentsCnt">
-					<div class="iconComments">
-						<i class="xi-speech-o xi-x"></i>
+		    <div class="commentsHeader">
+		        <div class="commentsCnt">
+		            <div class="iconComments">
+		                <i class="xi-speech-o xi-x"></i>
+		             </div>
+		            <div class="daetgeul">댓글</div>
+		            <div class="commentsNum">${productDTO.p_comm}</div>
+		        </div><!--commentsCnt-->
+		        
+		        <div class="commentsFilter">
+		            <label for="firstComments">
+		                <input type="radio" id="firstComments" class="orderBtn" name="orderBtn" value="firstComments" checked="checked"><span>등록순</span>
+		            </label>
+		            <label for="lastComments">
+		                <input type="radio" id="lastComments" class="orderBtn" name="orderBtn" value="lastComments"><span>최신순</span>
+		            </label>
+		        </div><!--.commentsFilter-->
+		    </div><!--commentsHeader-->
+		</div><!--.comments-wrap-->
+    </form>
+    <!-- 댓글 표시 -->
+		<div id="commentsList"></div>
+					
+		<div id="replyForm" style="display:none" class="commentsWrite-box">
+			<textarea rows="3" class="commentsWrite-textarea" name="replyContent" placeholder="대댓글을 남겨보세요"></textarea>
+			<button type="button" class="replyBtn" id="wrtRepBtn">등록</button>
+			<button type="button" class="replyBtn" id="RepBtnHide">취소</button>
+		</div>
+		<c:if test="${login_email != null}">
+			<div class="commentsWrite-box">
+				<div class="commentsProfile-Img">
+					<c:choose>
+			             <c:when test="${userDTO.m_proimg eq null}">
+			                    <img src="../resources/img/memberImg.png" alt="회원이미지">
+			             </c:when>
+			             <c:otherwise> <img src="/proimg/${userDTO.m_proimg}" alt="프로필 사진"></c:otherwise>
+		            </c:choose>
+				
+				</div>
+				<div class="commentsWrtR">
+					<div class="commentsProfile-Text">
+				    	<span class="commentsNickname" >${userDTO.m_nicknm}</span>
+				        <span class="commentsAddr"> ${userDTO.m_addr1 }</span>
+				        <span class="commentsAddr"> ${userDTO.m_addr2 }</span>
+				        <input type="hidden" name='${menu == "board"? "cb_nicknm" : "cp_nicknm"}' value="${userDTO.m_nicknm}">
+					</div>                     
+					<div class="div-textarea">
+				    	<textarea rows="3" placeholder="댓글을 남겨보세요" class="commentsWrite-textarea" name='${menu == "board"? "cb_content" : "cp_content"}'></textarea>
+					   	<!-- <input type="text" name="cp_content"> <br> -->
 					</div>
-					<div class="daetgeul">댓글</div>
-					<div class="commentsNum">${productDTO.p_comm}</div>
+					<div class="commentsWrite-writeBtn">
+						<button id="modBtn" type="button" style="display:none">수정확인</button>
+						<button type="button" class="writeBtn" id="sendBtn"><i class="fa-solid fa-circle-up"></i></button>
+					</div>
 				</div>
-				<!--commentsCnt-->
-
-				<div class="commentsFilter">
-					<label for="firstComments"> <input type="radio"
-						id="firstComments" class="orderBtn" name="orderBtn"
-						value="firstComments" checked="checked"><span>등록순</span>
-					</label> <label for="lastComments"> <input type="radio"
-						id="lastComments" class="orderBtn" name="orderBtn"
-						value="lastComments"><span>최신순</span>
-					</label>
-				</div>
-				<!--.commentsFilter-->
+				<!-- <button id="sendBtn" type="button">SEND</button> -->
+				
 			</div>
-			<!--commentsHeader-->
-		</div>
-		<!--.comments-wrap-->
-	</form>
-	<!-- 댓글 표시 -->
-	<div id="commentsList"></div>
-
-	<div id="replyForm" style="display: none" class="commentsWrite-box">
-		<textarea rows="3" class="commentsWrite-textarea" name="replyContent"
-			placeholder="대댓글을 남겨보세요"></textarea>
-		<button type="button" class="replyBtn" id="wrtRepBtn">등록</button>
-		<button type="button" class="replyBtn" id="RepBtnHide">취소</button>
-	</div>
-	<c:if test="${login_email != null}">
-		<div class="commentsWrite-box">
-			<div class="commentsProfile-Img">
-				<c:choose>
-					<c:when test="${userDTO.m_proimg eq null}">
-						<img src="../resources/img/memberImg.png" alt="회원이미지">
-					</c:when>
-					<c:otherwise>
-						<img src="/proimg/${userDTO.m_proimg}" alt="프로필 사진">
-					</c:otherwise>
-				</c:choose>
-
-			</div>
-			<div class="commentsWrtR">
-				<div class="commentsProfile-Text">
-					<span class="commentsNickname">${userDTO.m_nicknm}</span> <span
-						class="commentsAddr"> ${userDTO.m_addr1 }</span> <span
-						class="commentsAddr"> ${userDTO.m_addr2 }</span> <input
-						type="hidden" name='${menu == "board"? "cb_nicknm" : "cp_nicknm"}'
-						value="${userDTO.m_nicknm}">
-				</div>
-				<div class="div-textarea">
-					<textarea rows="3" placeholder="댓글을 남겨보세요"
-						class="commentsWrite-textarea"
-						name='${menu == "board"? "cb_content" : "cp_content"}'></textarea>
-					<!-- <input type="text" name="cp_content"> <br> -->
-				</div>
-				<div class="commentsWrite-writeBtn">
-					<button id="modBtn" type="button" style="display: none">수정확인</button>
-					<button type="button" class="writeBtn" id="sendBtn">
-						<i class="fa-solid fa-circle-up"></i>
-					</button>
-				</div>
-			</div>
-			<!-- <button id="sendBtn" type="button">SEND</button> -->
-
-		</div>
-	</c:if>
-
-	<%@ include file="./footer.jsp"%>
-	<script>
+		</c:if>
+    	
+    	<%@ include file ="./footer.jsp" %>
+    <script>
     	if(${menu eq 'board'}){
     		//게시판 댓글 출력
     		//댓글 관련-----------------------------------------------
@@ -675,8 +615,8 @@ String menu = request.getParameter("menu");
 		
 		
 	</script>
-
-	<script type="text/javascript">
+    
+    <script type="text/javascript">
     $(document).ready(function() {
     	
     	let bNum = $('#b_num').val();
@@ -751,8 +691,8 @@ String menu = request.getParameter("menu");
 		})
 	})
     </script>
-
-	<script type="text/javascript">
+    
+    <script type="text/javascript">
 			 $(document).ready(function() {
 				 document.querySelectorAll('.time').forEach(($time)=>{
 					 const time = $time.innerText
@@ -782,6 +722,6 @@ String menu = request.getParameter("menu");
 		
 		        return Math.floor(betweenTimeDay / 365) + '년전';
 		 	}
-    </script>
+    </script> 
 </body>
 </html>
