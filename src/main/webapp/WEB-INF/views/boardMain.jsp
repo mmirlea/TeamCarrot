@@ -31,6 +31,8 @@
 				alert("성공적으로 등록되었습니다.");
 			if (msg == "MOD_OK")
 				alert("게시글 수정을 성공하였습니다.");
+			if (msg == "MOD_ERR")
+				alert("게시글 수정에 실패하였습니다.");
 		</script>
 	
 		<div class="container">
